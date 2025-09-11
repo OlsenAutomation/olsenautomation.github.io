@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cassette.mp4 | Olsen Automation LLC</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <meta name="description" content="Cassette.mp4 — a portable context envelope for assistants. Condense transcripts, summarize videos, and package drift-resistant knowledge into a single portable file."/>
+</head>
+<body>
+  <header>
+    <h1>Cassette.mp4</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="cassette-mp4.html" aria-current="page">Cassette.mp4</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+      <h2>What Cassette.mp4 Is</h2>
+      <p><strong>Cassette.mp4</strong> is a portable, self-describing context envelope for AI assistants. It packages transcripts, summaries, and instructions into a single file that any assistant can consume on drop. The format ensures <em>repeatability, low drift, and portability</em> by shrinking conversations or media into a predictable JSON schema that always plays back the same way.</p>
+      <ul>
+        <li><strong>Condenses:</strong> Long transcripts and videos can be semantically chunked and summarized into compact payloads.</li>
+        <li><strong>Faithful:</strong> Using an 80/20 approach, the small cassette file can reproduce the original content close enough for accurate reasoning.</li>
+        <li><strong>Portable:</strong> Travels cleanly through email, chat, or uploads without corruption.</li>
+        <li><strong>Universal:</strong> Encapsulated in an MP4 container for compatibility across platforms.</li>
+      </ul>
+      <p class="note">Some mobile environments still treat novel hybrid payloads inconsistently; support will improve as adoption grows.</p>
+    </section>
+
+    <section>
+      <h2>Why Cassette.mp4 Works</h2>
+      <p>Most AI drift comes from feeding models raw, oversized transcripts or data. Cassette.mp4 reduces this risk by:</p>
+      <ul>
+        <li><strong>Semantic chunking</strong> — slices transcripts or videos into meaning-rich segments.</li>
+        <li><strong>Summarization</strong> — creates a compressed but faithful retelling.</li>
+        <li><strong>JSON schema</strong> — enforces a predictable order and layout, so assistants always know how to read it.</li>
+      </ul>
+      <p>This turns hours of dialogue or gigabytes of video into a slim, replayable context file.</p>
+    </section>
+
+    <section>
+      <h2>File Anatomy</h2>
+      <p>A typical project bundle includes:</p>
+      <ul>
+        <li><code>&lt;ClientName&gt;.mp4</code> — primary drag-and-drop cassette file</li>
+        <li><code>cassette.json</code> — same payload in JSON for editing/auditing</li>
+        <li><code>schema.json</code> / <code>schema.min.json</code> — optional JSON-LD for SEO</li>
+        <li><code>script_tag.txt</code> — ready-to-paste <code>&lt;script type="application/ld+json"&gt;…&lt;/script&gt;</code></li>
+        <li><code>README.txt</code> — one-minute install + validation pointers</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Minimum Payload</h2>
+      <p>This illustrative skeleton shows the <em>shape</em> of a cassette without exposing orchestration logic. Field names are representative and may vary by project.</p>
+<pre><code>{
+  "cassette_version": "1.0.0",
+  "name": "...",
+  "description": "...",
+  "envelope": {
+    "meta": { "...": "..." },
+    "modules": [
+      { "type": "summary", "ref": "kb://..." },
+      { "type": "schema",  "ref": "schema://..." },
+      { "type": "instructions", "ref": "prompt://..." }
+    ]
+  },
+  "recipient": { "...": "..." },
+  "signals": {
+    "on_upload": "post:onboarding",
+    "read_order": ["onboarding","context","install","faq"]
+  },
+  "content": {
+    "placeholders": true,
+    "notes": "Exact field names and execution details are provided to clients during implementation."
+  }
+}</code></pre>
+      <p><strong>Guided read order:</strong> onboarding → context payload → install steps → FAQ → appendix.</p>
+    </section>
+
+    <section>
+      <h2>Memory Model (High-Level)</h2>
+      <p>Cassette.mp4 supports a simple memory taxonomy to improve retrieval and repeatability:</p>
+      <ul>
+        <li><strong>Episodic</strong> — references to past interactions/actions contained in the cassette</li>
+        <li><strong>Semantic</strong> — stable knowledge extracted or linked (e.g., summaries, schemas)</li>
+        <li><strong>Procedural</strong> — prompts, tools, and guardrails that shape assistant behavior</li>
+        <li><strong>Working</strong> — per-task scratchpad for what matters “right now”</li>
+      </ul>
+      <p>These are references to existing or linked content—<em>not</em> duplicated data.</p>
+    </section>
+
+    <section>
+      <h2>Example Uses</h2>
+      <ul>
+        <li><strong>Transcription archives:</strong> Meeting recordings distilled into portable cassettes.</li>
+        <li><strong>Video condensation:</strong> Long-form video compressed into semantic summaries and structured JSON (80/20 fidelity).</li>
+        <li><strong>Business onboarding:</strong> Schema delivery for client websites (e.g., JW Photographics).</li>
+        <li><strong>Knowledge bundles:</strong> Playlists, tutorials, or thematic libraries packaged for consistent assistant recall.</li>
+      </ul>
+      <p>The business case is just one example. The broader innovation is <em>condensed, drift-resistant context transfer</em>.</p>
+    </section>
+
+    <section>
+      <h2>Roadmap</h2>
+      <ul>
+        <li>Optional encryption and signed manifests</li>
+        <li>Multi-module bundles (schema + images + billing)</li>
+        <li>Web demo player that renders onboarding UI directly from the cassette</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Contact</h2>
+      <p><strong>Olsen Automation</strong> — Cassette.mp4 format inquiries</p>
+    </section>
+
+    <section aria-label="Developer Notes" style="opacity:0.85;">
+      <h3>Developer Notes (Optional)</h3>
+      <p>This page intentionally abstracts packaging and extraction specifics to preserve IP while communicating the concept and benefits. For pilots or custom integrations, contact Olsen Automation.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Olsen Automation LLC</p>
+  </footer>
+</body>
+</html>
