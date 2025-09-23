@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Docs | Olsen Automation LLC</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <meta name="description" content="Cassette.mp4 documentation — high-level overview, quick start, and safe usage commands."/>
+</head>
+<body>
+  <header>
+    <h1>Docs</h1>
+  <nav>
+  <a href="index.html">Home</a>
+  <a href="cassette-mp4.html">Cassette.mp4</a>
+  <a href="docs.html" aria-current="page">Docs</a>
+  <a href="support.html">Support</a>
+  <a href="verify.html">Verify</a>
+  <a href="contact.html">Contact</a>
+</nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h2>Cassette.mp4 — Quick Start</h2>
+      <p>Portable, drift-resistant context you can hand to any assistant without exposing internal orchestration.</p>
+    </section>
+
+    <section>
+      <h3>What You Get</h3>
+      <ul>
+        <li><strong>Portable file:</strong> a single MP4 (plus optional sidecars) that travels anywhere.</li>
+        <li><strong>Predictable schema:</strong> a compact JSON payload assistants can read consistently.</li>
+        <li><strong>Repeatability:</strong> semantic chunking + summaries for faithful recall.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h3>Quick Start</h3>
+      <ol>
+        <li>Download your cassette (e.g., <code>ClientName.mp4</code>).</li>
+        <li>Drop it into your assistant or upload alongside <code>cassette.json</code> when requested.</li>
+        <li>Use the commands below to index and retrieve context.</li>
+      </ol>
+    </section>
+
+    <section>
+      <h3>Commands (safe surface)</h3>
+      <ul>
+        <li><code>BUILD INDEX</code> — Build/refresh a retrieval sidecar (no vectors printed inline).</li>
+        <li><code>RETRIEVE "your query"</code> — Get top-K small summaries relevant to your question.</li>
+        <li><code>RETRIEVE JSON "your query"</code> — Structured hits only (machine-friendly).</li>
+        <li><code>EXPORT</code> — Manifest-first export (prevents giant inline dumps).</li>
+        <li><code>PRINT &lt;path&gt;</code> — Peek at a tiny subsection for debugging.</li>
+      </ul>
+      <p><em>Note:</em> Internal logic (stitching, dedupe thresholds, etc.) is intentionally <strong>not</strong> documented here to protect IP.</p>
+    </section>
+
+    <section>
+      <h3>Bundle Anatomy (public view)</h3>
+<pre><code>&lt;Project&gt;.mp4               # Primary portable cassette
+cassette.json              # Same payload in JSON (optional)
+MAIN.retrieval_index.json  # Optional retrieval sidecar
+snapshots/                 # Optional versioned exports (ops profile)
+catalog.json               # Checksums/manifest for snapshots</code></pre>
+    </section>
+
+    <section>
+      <h3>FAQ</h3>
+      <details>
+        <summary>Can I verify this cassette came from Olsen Automation?</summary>
+        <p>Yes. See <a href="verify.html">Verify</a> for the public-key and verification steps.</p>
+      </details>
+      <details>
+        <summary>Does this include raw transcripts?</summary>
+        <p>By default, no—only compact summaries and structured context. Full transcripts may be gated/licensed.</p>
+      </details>
+      <details>
+        <summary>Will this work offline?</summary>
+        <p>Yes. Core reading and basic retrieval do; dense embeddings are optional.</p>
+      </details>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Olsen Automation LLC</p>
+  </footer>
+</body>
+</html>

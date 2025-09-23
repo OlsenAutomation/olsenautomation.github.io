@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Verify | Olsen Automation LLC</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <meta name="description" content="Verify Olsen Automation’s signed cassette exports using the published public key."/>
+</head>
+<body>
+  <header>
+    <h1>Verify</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="cassette-mp4.html">Cassette.mp4</a>
+      <a href="docs.html">Docs</a>
+      <a href="support.html">Support</a>
+      <a href="verify.html" aria-current="page">Verify</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+      <h2>Olsen Automation Public Key (Ed25519)</h2>
+      <p><strong>Key ID:</strong> 634B4BD7E1DFB951</p>
+<pre><code>untrusted comment: minisign public key D28C263CF6796AF1
+RWTxann2PCaM0pfpJL9pcWqTvv3eCnAaUe/aZQytEFHT/it/LWY6UMI0
+</code></pre>
+    </section>
+
+    <section>
+      <h2>Verify a Release</h2>
+<pre><code># Using the published public key (inline -P form)
+minisign -Vm MAIN.json -P "RWTxann2PCaM0pfpJL9pcWqTvv3eCnAaUe/aZQytEFHT/it/LWY6UMI0"
+
+# Or using the public key file (recommended)
+minisign -Vm MAIN.json -p pubkey.txt
+
+# If verifying a manifest:
+minisign -Vm hash_manifest.txt -x hash_manifest.txt.minisig -p pubkey.txt
+# then check the referenced file's hash matches the manifest:
+shasum -a 256 jwp.mp4
+</code></pre>
+      <p>This proves the file came from Olsen Automation and wasn’t tampered with.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Olsen Automation LLC</p>
+  </footer>
+</body>
+</html>
