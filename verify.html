@@ -1,53 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Verify | Olsen Automation LLC</title>
-  <link rel="stylesheet" href="styles.css"/>
-  <meta name="description" content="Verify Olsen Automation’s signed cassette exports using the published public key."/>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Description" content="Verify Olsen Automation’s signed cassette exports using the published public key.">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.7">
+  <style type="text/css">
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times; color: #0000e9; -webkit-text-stroke: #0000e9}
+    p.p4 {margin: 0.0px 0.0px 12.0px 0.0px; font: 14.0px Menlo; color: #000000}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #000000}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Menlo; -webkit-text-stroke: #000000}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Menlo; -webkit-text-stroke: #000000; min-height: 15.0px}
+    p.p8 {margin: 0.0px 0.0px 12.0px 0.0px; font: 12.0px Times; -webkit-text-stroke: #000000}
+    span.s1 {font-kerning: none}
+    span.s2 {text-decoration: underline ; font-kerning: none}
+    span.s3 {font-kerning: none; color: #000000; -webkit-text-stroke: 0px #000000}
+    span.s4 {text-decoration: underline ; font-kerning: none; -webkit-text-stroke: 0px #0000e9}
+    span.s5 {font: 12.0px Times; font-kerning: none; color: #000000; -webkit-text-stroke: 0px #000000}
+    span.s6 {font-variant-ligatures: no-common-ligatures}
+    span.s7 {font: 13.0px Menlo; font-kerning: none; color: #000000; -webkit-text-stroke: 0px #000000}
+  </style>
 </head>
 <body>
-  <header>
-    <h1>Verify</h1>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="cassette-mp4.html">Cassette.mp4</a>
-      <a href="docs.html">Docs</a>
-      <a href="support.html">Support</a>
-      <a href="verify.html" aria-current="page">Verify</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-  </header>
-
-  <main>
-    <section>
-      <h2>Olsen Automation Public Key (Ed25519)</h2>
-      <p><strong>Key ID:</strong> D28C263CF6796AF1</p>
-<pre><code>untrusted comment: minisign public key D28C263CF6796AF1
-RWTxann2PCaM0pfpJL9pcWqTvv3eCnAaUe/aZQytEFHT/it/LWY6UMI0
-</code></pre>
-    </section>
-
-    <section>
-      <h2>Verify a Release</h2>
-<pre><code># Using the published public key (inline -P form)
-minisign -Vm MAIN.json -P "RWTxann2PCaM0pfpJL9pcWqTvv3eCnAaUe/aZQytEFHT/it/LWY6UMI0"
-
-# Or using the public key file (recommended)
-minisign -Vm MAIN.json -p pubkey.txt
-
-# If verifying a manifest:
-minisign -Vm hash_manifest.txt -x hash_manifest.txt.minisig -p pubkey.txt
-# then check the referenced file's hash matches the manifest:
-shasum -a 256 jwp.mp4
-</code></pre>
-      <p>This proves the file came from Olsen Automation and wasn’t tampered with.</p>
-    </section>
-  </main>
-
-  <footer>
-    <p>© 2025 Olsen Automation LLC</p>
-  </footer>
+<h1 style="margin: 0.0px 0.0px 16.1px 0.0px; font: 24.0px Times; -webkit-text-stroke: #000000"><span class="s1"><b>Verify</b></span></h1>
+<p class="p2"><span class="s2"><a href="file:///Users/olsenautomation/olsenautomation.github.io/index.html">Home</a></span><span class="s3"> <a href="file:///Users/olsenautomation/olsenautomation.github.io/cassette-mp4.html"><span class="s4">Cassette.mp4</span></a> <a href="file:///Users/olsenautomation/olsenautomation.github.io/docs.html"><span class="s4">Docs</span></a> <a href="file:///Users/olsenautomation/olsenautomation.github.io/support.html"><span class="s4">Support</span></a> <a href="file:///Users/olsenautomation/olsenautomation.github.io/verify.html"><span class="s4">Verify</span></a> <a href="file:///Users/olsenautomation/olsenautomation.github.io/contact.html"><span class="s4">Contact</span></a></span></p>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Times; -webkit-text-stroke: #000000"><span class="s1"><b>Olsen Automation Public Key (Ed25519)</b></span></h2>
+<p class="p4"><span class="s5"><b>Key ID:</b> </span><span class="s6">634B4BD7E1DFB951</span></p>
+<p class="p5"><span class="s6">untrusted comment: minisign public key 634B4BD7E1DFB951</span></p>
+<p class="p5"><span class="s6">RWRRud/h10tLY/tq1TOly33agV47Pg59+bPKQIZeT3+4BXcpaIYm28R4</span></p>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Times; -webkit-text-stroke: #000000"><span class="s1"><b>Verify a Release</b></span></h2>
+<p class="p6"><span class="s1"># Using the published public key (inline -P form)</span></p>
+<p class="p5"><span class="s7">minisign -Vm MAIN.json -P "</span><span class="s6">RWRRud/h10tLY/tq1TOly33agV47Pg59+bPKQIZeT3+4BXcpaIYm28R4</span><span class="s7">"</span></p>
+<p class="p7"><span class="s1"></span><br></p>
+<p class="p6"><span class="s1"># Or using the public key file (recommended)</span></p>
+<p class="p6"><span class="s1">minisign -Vm MAIN.json -p pubkey.txt</span></p>
+<p class="p7"><span class="s1"></span><br></p>
+<p class="p6"><span class="s1"># If verifying a manifest:</span></p>
+<p class="p6"><span class="s1">minisign -Vm hash_manifest.txt -x hash_manifest.txt.minisig -p pubkey.txt</span></p>
+<p class="p6"><span class="s1"># then check the referenced file's hash matches the manifest:</span></p>
+<p class="p6"><span class="s1">shasum -a 256 *.mp4</span></p>
+<p class="p8"><span class="s1">This proves the file came from Olsen Automation and wasn’t tampered with.</span></p>
+<p class="p8"><span class="s1">© 2025 Olsen Automation LLC</span></p>
 </body>
 </html>
