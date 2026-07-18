@@ -1,0 +1,1706 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Living Lights / Firefly System | Olsen Automation</title>
+  <meta name="description" content="Living Lights is an active ESP32-based outdoor low-voltage lighting prototype designed to imitate the calm, organic behavior of living fireflies.">
+  <meta name="theme-color" content="#f6f3ef">
+  <link rel="canonical" href="https://olsenautomation.com/firefly-living-lights.html">
+  <style>
+    :root {
+      --ink: #151619;
+      --ink-soft: rgba(21, 22, 25, 0.76);
+      --muted: #66615c;
+      --soft: #f6f3ef;
+      --panel: rgba(255, 255, 255, 0.78);
+      --panel-solid: #fffdf9;
+      --line: rgba(21, 22, 25, 0.13);
+      --line-strong: rgba(21, 22, 25, 0.22);
+      --accent: #8b3f2b;
+      --accent-soft: rgba(139, 63, 43, 0.10);
+      --olive: #5d6849;
+      --olive-soft: rgba(93, 104, 73, 0.11);
+      --blue: #30455e;
+      --blue-soft: rgba(48, 69, 94, 0.10);
+      --amber: #94621d;
+      --amber-soft: rgba(148, 98, 29, 0.11);
+      --max: 1160px;
+      --radius: 24px;
+      --radius-lg: 32px;
+      --shadow: 0 22px 70px rgba(21, 22, 25, 0.10);
+      --shadow-soft: 0 12px 34px rgba(21, 22, 25, 0.06);
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 88px;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 18% 8%, rgba(255,255,255,.95), rgba(255,255,255,0) 42%),
+        radial-gradient(circle at 84% 20%, rgba(139,63,43,.07), rgba(139,63,43,0) 32%),
+        linear-gradient(135deg, #fbfaf8 0%, #f5f0ea 46%, #ebe5dc 100%);
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      text-rendering: optimizeLegibility;
+    }
+
+    img { max-width: 100%; }
+
+    a {
+      color: inherit;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 0.18em;
+    }
+
+    a:focus-visible,
+    button:focus-visible {
+      outline: 3px solid rgba(139, 63, 43, 0.35);
+      outline-offset: 3px;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: 16px;
+      top: -80px;
+      z-index: 100;
+      padding: 10px 14px;
+      border-radius: 999px;
+      color: #fff;
+      background: var(--ink);
+      transition: top .2s ease;
+    }
+
+    .skip-link:focus { top: 12px; }
+
+    .wrap {
+      width: min(var(--max), calc(100% - 36px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid var(--line);
+      background: rgba(246, 243, 239, 0.84);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+
+    .topbar-inner {
+      width: min(var(--max), calc(100% - 36px));
+      min-height: 66px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+      color: var(--ink);
+      font-weight: 760;
+      letter-spacing: -0.02em;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .mark {
+      width: 38px;
+      height: 38px;
+      flex: 0 0 38px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      color: #fff;
+      background: var(--ink);
+      box-shadow: 0 10px 24px rgba(21,22,25,.16);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .03em;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 6px;
+      color: rgba(21,22,25,.72);
+      font-size: 14px;
+    }
+
+    nav a {
+      padding: 8px 10px;
+      border-radius: 999px;
+      text-decoration: none;
+    }
+
+    nav a:hover {
+      color: var(--ink);
+      background: rgba(255,255,255,.74);
+    }
+
+    main { overflow: hidden; }
+
+    .hero {
+      padding: 88px 0 48px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 18px;
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 30px;
+      height: 1px;
+      background: currentColor;
+      opacity: .55;
+    }
+
+    h1, h2, h3, h4 {
+      text-wrap: balance;
+    }
+
+    h1 {
+      max-width: 980px;
+      margin: 0;
+      font-size: clamp(48px, 8.5vw, 98px);
+      line-height: .94;
+      letter-spacing: -.072em;
+    }
+
+    .hero-subtitle {
+      max-width: 800px;
+      margin: 28px 0 0;
+      color: var(--ink-soft);
+      font-size: clamp(20px, 2.5vw, 28px);
+      line-height: 1.28;
+      letter-spacing: -.025em;
+    }
+
+    .hero-copy {
+      max-width: 790px;
+      margin: 18px 0 0;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 12px 18px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: #fff;
+      box-shadow: 0 12px 30px rgba(21,22,25,.06);
+      font-weight: 750;
+      text-decoration: none;
+    }
+
+    .btn.primary {
+      color: #fff;
+      border-color: var(--ink);
+      background: var(--ink);
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+
+    .status-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 34px;
+    }
+
+    .chip,
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      width: fit-content;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 790;
+      letter-spacing: .045em;
+      text-transform: uppercase;
+    }
+
+    .chip {
+      padding: 8px 11px;
+      color: rgba(21,22,25,.75);
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.66);
+    }
+
+    .chip::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px var(--accent-soft);
+    }
+
+    .signal-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 40px;
+    }
+
+    .signal {
+      min-height: 150px;
+      padding: 21px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.66);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .signal strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 17px;
+      letter-spacing: -.02em;
+    }
+
+    .signal span {
+      display: block;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    section { padding: 58px 0; }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 24px;
+      padding-top: 34px;
+      border-top: 1px solid var(--line);
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(36px, 5vw, 60px);
+      line-height: .98;
+      letter-spacing: -.058em;
+    }
+
+    .section-head p {
+      max-width: 540px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .panel,
+    .card,
+    .build-entry,
+    .roadmap-item,
+    .gallery-card,
+    .doc-card,
+    .disclosure {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .panel {
+      padding: clamp(26px, 5vw, 48px);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+    }
+
+    .panel p {
+      color: var(--muted);
+    }
+
+    .panel p:first-child { margin-top: 0; }
+    .panel p:last-child { margin-bottom: 0; }
+
+    .vision-lead {
+      max-width: 850px;
+      margin: 0 0 30px;
+      color: var(--ink) !important;
+      font-size: clamp(26px, 4vw, 44px);
+      line-height: 1.08;
+      letter-spacing: -.045em;
+    }
+
+    .principles {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin: 28px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .principles li {
+      position: relative;
+      min-height: 76px;
+      padding: 18px 18px 18px 48px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      color: var(--ink-soft);
+      background: rgba(255,255,255,.58);
+    }
+
+    .principles li::before {
+      content: "";
+      position: absolute;
+      left: 19px;
+      top: 24px;
+      width: 13px;
+      height: 13px;
+      border: 2px solid var(--accent);
+      border-radius: 50%;
+      box-shadow: inset 0 0 0 3px rgba(255,255,255,.9);
+      background: var(--accent);
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      position: relative;
+      min-height: 270px;
+      padding: 26px;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .card::after {
+      content: "";
+      position: absolute;
+      inset: auto -30% -48% 20%;
+      height: 190px;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(139,63,43,.14), rgba(139,63,43,0) 68%);
+      pointer-events: none;
+    }
+
+    .card > * { position: relative; z-index: 1; }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      color: rgba(21,22,25,.70);
+      background: rgba(21,22,25,.06);
+      font-size: 12px;
+      font-weight: 760;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    h3 {
+      margin: 22px 0 12px;
+      font-size: 27px;
+      line-height: 1.04;
+      letter-spacing: -.045em;
+    }
+
+    h4 {
+      margin: 0 0 8px;
+      font-size: 17px;
+      letter-spacing: -.02em;
+    }
+
+    .card p,
+    .card li,
+    .small-copy {
+      color: var(--muted);
+    }
+
+    .card p { margin: 0; }
+
+    .plain-list {
+      margin: 15px 0 0;
+      padding-left: 20px;
+    }
+
+    .plain-list li + li { margin-top: 7px; }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 18px;
+    }
+
+    .fact-stack {
+      display: grid;
+      gap: 12px;
+    }
+
+    .fact {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(255,255,255,.58);
+    }
+
+    .fact strong {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 15px;
+    }
+
+    .fact span {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .callout {
+      padding: 22px;
+      border: 1px solid rgba(139,63,43,.22);
+      border-radius: 20px;
+      color: #5f3024;
+      background: var(--accent-soft);
+    }
+
+    .callout strong { display: block; margin-bottom: 7px; }
+
+    .build-log {
+      display: grid;
+      gap: 16px;
+    }
+
+    .build-entry {
+      display: grid;
+      grid-template-columns: 190px minmax(0, 1fr);
+      gap: 22px;
+      padding: 26px;
+      border-radius: var(--radius);
+    }
+
+    .entry-date {
+      align-self: start;
+      color: var(--accent);
+      font-size: 14px;
+      font-weight: 850;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+    }
+
+    .entry-title {
+      margin: 0 0 18px;
+      font-size: 25px;
+      line-height: 1.1;
+      letter-spacing: -.035em;
+    }
+
+    .entry-fields {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px 20px;
+      margin: 0;
+    }
+
+    .entry-fields div {
+      padding-top: 12px;
+      border-top: 1px solid var(--line);
+    }
+
+    .entry-fields dt {
+      margin-bottom: 4px;
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    .entry-fields dd {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .business-grid {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 18px;
+    }
+
+    .business-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .business-direction {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(255,255,255,.58);
+    }
+
+    .business-direction strong {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .business-direction span {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .record-note {
+      padding: 26px;
+      border: 1px solid rgba(48,69,94,.22);
+      border-radius: var(--radius-lg);
+      color: #26394e;
+      background: var(--blue-soft);
+    }
+
+    .record-note strong {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 18px;
+    }
+
+    .record-note p { margin: 0; }
+
+    .roadmap {
+      display: grid;
+      gap: 12px;
+      counter-reset: roadmap;
+    }
+
+    .roadmap-item {
+      counter-increment: roadmap;
+      display: grid;
+      grid-template-columns: 58px minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 18px;
+      padding: 20px 22px;
+      border-radius: 20px;
+    }
+
+    .roadmap-item::before {
+      content: counter(roadmap, decimal-leading-zero);
+      display: grid;
+      place-items: center;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      color: #fff;
+      background: var(--ink);
+      font-size: 13px;
+      font-weight: 850;
+      letter-spacing: .05em;
+    }
+
+    .roadmap-item h3 {
+      margin: 0 0 5px;
+      font-size: 21px;
+    }
+
+    .roadmap-item p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .status {
+      padding: 8px 11px;
+      border: 1px solid transparent;
+      white-space: nowrap;
+    }
+
+    .status.done {
+      color: #425034;
+      border-color: rgba(93,104,73,.2);
+      background: var(--olive-soft);
+    }
+
+    .status.progress {
+      color: #754b12;
+      border-color: rgba(148,98,29,.2);
+      background: var(--amber-soft);
+    }
+
+    .status.planned {
+      color: #30455e;
+      border-color: rgba(48,69,94,.2);
+      background: var(--blue-soft);
+    }
+
+    .status.future {
+      color: rgba(21,22,25,.65);
+      border-color: var(--line);
+      background: rgba(21,22,25,.05);
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .gallery-card {
+      min-height: 235px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 22px;
+      border-radius: var(--radius);
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 78% 18%, rgba(139,63,43,.17), rgba(139,63,43,0) 34%),
+        linear-gradient(145deg, rgba(255,255,255,.92), rgba(236,230,222,.82));
+    }
+
+    .gallery-placeholder {
+      min-height: 122px;
+      display: grid;
+      place-items: center;
+      border: 1px dashed var(--line-strong);
+      border-radius: 18px;
+      color: rgba(21,22,25,.48);
+      background: rgba(255,255,255,.46);
+      font-size: 12px;
+      font-weight: 760;
+      letter-spacing: .08em;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .gallery-card h3 {
+      margin: 18px 0 6px;
+      font-size: 21px;
+    }
+
+    .gallery-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .docs-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .doc-card {
+      min-height: 160px;
+      padding: 22px;
+      border-radius: 20px;
+    }
+
+    .doc-card.link-card {
+      text-decoration: none;
+      transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+    }
+
+    .doc-card.link-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--line-strong);
+      box-shadow: var(--shadow);
+    }
+
+    .doc-card h3 {
+      margin: 12px 0 8px;
+      font-size: 21px;
+    }
+
+    .doc-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .doc-state {
+      color: var(--accent);
+      font-size: 11px;
+      font-weight: 820;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .doc-path {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 5px 8px;
+      border-radius: 8px;
+      color: rgba(21,22,25,.68);
+      background: rgba(21,22,25,.055);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 11px;
+      overflow-wrap: anywhere;
+    }
+
+    .disclosure {
+      padding: clamp(26px, 5vw, 44px);
+      border-radius: var(--radius-lg);
+      color: #513124;
+      border-color: rgba(139,63,43,.24);
+      background: linear-gradient(145deg, rgba(255,255,255,.74), rgba(139,63,43,.10));
+      box-shadow: var(--shadow);
+    }
+
+    .disclosure h2 {
+      max-width: 740px;
+      margin-bottom: 20px;
+    }
+
+    .disclosure p {
+      max-width: 900px;
+      margin: 0;
+      font-size: 18px;
+    }
+
+    .contact-panel {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: end;
+      gap: 28px;
+    }
+
+    .contact-panel h2 { margin-bottom: 18px; }
+
+    .contact-details {
+      display: grid;
+      gap: 6px;
+      color: var(--muted);
+    }
+
+    .contact-details strong {
+      color: var(--ink);
+      font-size: 20px;
+    }
+
+    footer {
+      padding: 24px 0 44px;
+      color: rgba(21,22,25,.62);
+      font-size: 14px;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding-top: 24px;
+      border-top: 1px solid var(--line);
+    }
+
+    .footer-inner a { text-decoration: none; }
+
+    @media (max-width: 980px) {
+      .signal-grid,
+      .cards,
+      .gallery-grid,
+      .docs-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .two-col,
+      .business-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section-head {
+        align-items: start;
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 760px) {
+      html { scroll-padding-top: 72px; }
+
+      .topbar-inner {
+        min-height: 58px;
+      }
+
+      nav a:not(.home-link) { display: none; }
+
+      .hero { padding-top: 62px; }
+
+      .signal-grid,
+      .cards,
+      .gallery-grid,
+      .docs-grid,
+      .principles,
+      .business-list,
+      .entry-fields {
+        grid-template-columns: 1fr;
+      }
+
+      .build-entry {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .roadmap-item {
+        grid-template-columns: 48px minmax(0, 1fr);
+        align-items: start;
+      }
+
+      .roadmap-item::before {
+        width: 42px;
+        height: 42px;
+      }
+
+      .roadmap-item .status {
+        grid-column: 2;
+        margin-top: 4px;
+      }
+
+      .contact-panel {
+        grid-template-columns: 1fr;
+        align-items: start;
+      }
+
+      .contact-panel .actions { margin-top: 0; }
+
+      .footer-inner {
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .wrap,
+      .topbar-inner {
+        width: min(100% - 24px, var(--max));
+      }
+
+      .brand-label { display: none; }
+
+      h1 { font-size: clamp(46px, 16vw, 68px); }
+
+      .hero-subtitle { font-size: 20px; }
+
+      section { padding: 44px 0; }
+
+      .panel,
+      .card,
+      .build-entry,
+      .record-note,
+      .disclosure {
+        border-radius: 22px;
+      }
+
+      .actions .btn { width: 100%; }
+
+      .roadmap-item {
+        padding: 18px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition: none !important; }
+    }
+
+    .hero-visual {
+      margin: 36px 0 0;
+      overflow: hidden;
+      border: 1px solid rgba(21,22,25,.11);
+      border-radius: 30px;
+      background: #111315;
+      box-shadow: 0 28px 70px rgba(21,22,25,.16);
+    }
+
+    .hero-visual a {
+      position: relative;
+      display: block;
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .hero-visual img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      object-position: center 52%;
+    }
+
+    .hero-visual a::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(180deg, rgba(7,8,9,0) 48%, rgba(7,8,9,.54) 100%);
+    }
+
+    .image-badge {
+      position: absolute;
+      z-index: 1;
+      left: 20px;
+      bottom: 18px;
+      padding: 8px 11px;
+      border: 1px solid rgba(255,255,255,.24);
+      border-radius: 999px;
+      color: #fff;
+      background: rgba(10,11,12,.58);
+      backdrop-filter: blur(8px);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+    }
+
+    .hero-visual figcaption {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 16px 20px 18px;
+      color: rgba(255,255,255,.76);
+      background: #111315;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .hero-visual figcaption strong {
+      color: #fff;
+      white-space: nowrap;
+    }
+
+    .gallery-card.has-image {
+      padding-top: 0;
+    }
+
+    .gallery-media {
+      position: relative;
+      margin: 0 -22px;
+      overflow: hidden;
+      aspect-ratio: 4 / 3;
+      border-bottom: 1px solid var(--line);
+      background: #d8d3cc;
+    }
+
+    .gallery-media a {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .gallery-media img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .35s ease;
+    }
+
+    .gallery-card:hover .gallery-media img {
+      transform: scale(1.018);
+    }
+
+    .gallery-card .evidence-label {
+      position: absolute;
+      left: 14px;
+      bottom: 14px;
+      padding: 7px 9px;
+      border: 1px solid rgba(255,255,255,.22);
+      border-radius: 999px;
+      color: #fff;
+      background: rgba(15,16,18,.63);
+      backdrop-filter: blur(7px);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+    }
+
+    .gallery-card .gallery-copy {
+      padding-top: 2px;
+    }
+
+    .gallery-card .evidence-note {
+      display: block;
+      margin-top: 12px;
+      color: rgba(21,22,25,.5);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .045em;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 760px) {
+      .hero-visual {
+        margin-top: 28px;
+        border-radius: 24px;
+      }
+
+      .hero-visual img {
+        aspect-ratio: 4 / 3;
+      }
+
+      .hero-visual figcaption {
+        flex-direction: column;
+        gap: 5px;
+      }
+
+      .hero-visual figcaption strong {
+        white-space: normal;
+      }
+    }
+
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="index.html" aria-label="Olsen Automation home">
+        <span class="mark" aria-hidden="true">OA</span>
+        <span class="brand-label">Olsen Automation</span>
+      </a>
+      <nav aria-label="Project navigation">
+        <a class="home-link" href="index.html">Home</a>
+        <a href="#vision">Vision</a>
+        <a href="#prototype">Prototype</a>
+        <a href="#build-log">Build log</a>
+        <a href="#roadmap">Roadmap</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="hero" aria-labelledby="page-title">
+      <div class="wrap">
+        <div class="eyebrow">Active invention record</div>
+        <h1 id="page-title">Living Lights / Firefly System</h1>
+        <p class="hero-subtitle">Outdoor low-voltage lighting designed to imitate living fireflies.</p>
+        <p class="hero-copy">
+          Living Lights is an active prototype combining embedded firmware, electronics, organic behavior design, modular outdoor hardware, and a careful path toward future event, rental, and product use. It is not a Christmas light controller. The goal is to create the quiet illusion that the lights are alive.
+        </p>
+        <div class="actions" aria-label="Primary page links">
+          <a class="btn primary" href="#prototype">See the current prototype</a>
+          <a class="btn" href="#build-log">Read the development record</a>
+        </div>
+        <div class="status-row" aria-label="Project status">
+          <span class="chip">Prototype in development</span>
+          <span class="chip">ESP32-based</span>
+          <span class="chip">Low-voltage outdoor lighting</span>
+          <span class="chip">Organic behavior engine</span>
+          <span class="chip">OTA firmware roadmap</span>
+          <span class="chip">Wedding/event rental potential</span>
+        </div>
+
+        <figure class="hero-visual">
+          <a href="images/living-lights/living-lights-outdoor-habitat.jpg" aria-label="Open a larger view of the close-up Living Lights prototype test">
+            <img src="images/living-lights/living-lights-outdoor-habitat.jpg" width="1536" height="864" alt="Close-up nighttime Living Lights prototype showing several small warm LED points glowing among tomato plants" decoding="async" fetchpriority="high">
+            <span class="image-badge">Early behavior prototype</span>
+          </a>
+          <figcaption>
+            <strong>Real project evidence—not a rendering.</strong>
+            <span>A close-up field test used to judge brightness, spacing, visible wiring, and whether several independent nodes read as living points of light rather than a decorative string.</span>
+          </figcaption>
+        </figure>
+
+        <div class="signal-grid" aria-label="Project priorities">
+          <div class="signal">
+            <strong>Independent behavior</strong>
+            <span>Each firefly develops and expresses its own timing rather than following a single show sequence.</span>
+          </div>
+          <div class="signal">
+            <strong>No obvious loop</strong>
+            <span>Long observation should not reveal a repeating pattern, synchronized flash cycle, or mechanical rhythm.</span>
+          </div>
+          <div class="signal">
+            <strong>Modular hardware</strong>
+            <span>Control pods, drivers, harnesses, branches, and future node types are designed as serviceable building blocks.</span>
+          </div>
+          <div class="signal">
+            <strong>Measured product path</strong>
+            <span>Bench work comes first, followed by outdoor reliability, event testing, and only then productization research.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="vision" aria-labelledby="vision-title">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="vision-title">The vision</h2>
+          <p>Create the feeling of real fireflies—not decorative blinking lights.</p>
+        </div>
+        <div class="panel">
+          <p class="vision-lead">The observer should stop thinking about LEDs and begin wondering whether the lights are making their own decisions.</p>
+          <p>
+            The project is evaluated by perceived realism rather than by how many effects it can perform. Natural fireflies are not a synchronized display. They pause, wake, fade, interact, disappear, return, and vary in intensity. Living Lights is being built around that kind of restrained, believable behavior.
+          </p>
+          <ul class="principles">
+            <li>No synchronized flashing across the habitat.</li>
+            <li>No obvious loops or repeated show sequences.</li>
+            <li>No easy pattern recognition after minutes of watching.</li>
+            <li>Each visible firefly behaves independently.</li>
+            <li>Fades, pauses, wake-ups, and quiet periods should feel intentional.</li>
+            <li>The overall habitat should feel alive, calm, subtle, and natural.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="prototype" aria-labelledby="prototype-title">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="prototype-title">Current prototype</h2>
+          <p>Confirmed source state, separated from ideas that remain planned or unproven.</p>
+        </div>
+
+        <div class="two-col">
+          <article class="panel">
+            <span class="tag">Working baseline</span>
+            <h3>Three-pod ESP32 habitat architecture</h3>
+            <p>
+              The current system uses ESP32 development boards as control pods. Each production pod currently drives eight independent firefly outputs through GPIO and ULN2803A driver hardware. Pod 1 acts as the Habitat Host. Pod 2 is the proven guarded one-pod satellite OTA target. Pod 3 remains an intentionally protected control pod.
+            </p>
+            <div class="fact-stack" style="margin-top: 24px;">
+              <div class="fact">
+                <strong>Production renderer</strong>
+                <span>GPIO / ULN, eight independent outputs per pod, standard F1–F8 to 1C–8C mapping.</span>
+              </div>
+              <div class="fact">
+                <strong>Lighting and power direction</strong>
+                <span>Current prototype notes specify 12V firefly strings and a waterproof 12V supply goal, with regulated low-voltage rails used where required.</span>
+              </div>
+              <div class="fact">
+                <strong>Modular wiring</strong>
+                <span>Branches and controller hardware are separated by documented harnesses and connectors so assemblies can be serviced or replaced.</span>
+              </div>
+              <div class="fact">
+                <strong>Optional sensing</strong>
+                <span>Photoresistor and PIR inputs are reserved in the firmware architecture but can remain unconnected during prototype testing.</span>
+              </div>
+            </div>
+          </article>
+
+          <aside class="panel">
+            <span class="tag">Addressable test path</span>
+            <h3>Ten-node Pod 1 bench calibration</h3>
+            <p>
+              A separate Pod 1 addressable bench environment exists for controlled pixel calibration. It uses GPIO4, an SN74AHCT125N level shifter, a dedicated data conductor, externally regulated 5V power, shared ground, GRBW color order, and a conservative brightness cap.
+            </p>
+            <div class="callout" style="margin-top: 22px;">
+              <strong>Important status distinction</strong>
+              The source contains the V2.7.9c ten-node bench build, but controlled communication with physical Pixels 1–10 is still pending field confirmation. The existing GPIO / ULN renderer remains the production baseline.
+            </div>
+            <div class="fact-stack" style="margin-top: 18px;">
+              <div class="fact">
+                <strong>OTA today</strong>
+                <span>Host-local browser OTA is available for Pod 1. Guarded one-pod OTA to Pod 2 has been field-confirmed twice.</span>
+              </div>
+              <div class="fact">
+                <strong>OTA still deferred</strong>
+                <span>Pod 3 real writes, Update All Pods, auto-update, auto-reboot, and multi-target satellite OTA remain disabled.</span>
+              </div>
+              <div class="fact">
+                <strong>Future interface</strong>
+                <span>Smartphone configuration and broader wireless habitat management remain part of the long-term roadmap, not the current product claim.</span>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section id="hardware" aria-labelledby="hardware-title">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="hardware-title">Hardware architecture</h2>
+          <p>A human-readable map of what each physical layer is responsible for.</p>
+        </div>
+        <div class="cards">
+          <article class="card">
+            <span class="tag">Control</span>
+            <h3>Control pod</h3>
+            <p>An ESP32 runs the behavior system, controls outputs, reports pod identity and firmware state, and provides the local Firefly Lab control surface.</p>
+          </article>
+          <article class="card">
+            <span class="tag">Visible habitat</span>
+            <h3>LED branches and nodes</h3>
+            <p>Each current branch presents independently controlled firefly points. The physical hardware is meant to disappear into the environment so the observer sees only the glow.</p>
+          </article>
+          <article class="card">
+            <span class="tag">Electrical</span>
+            <h3>Power system</h3>
+            <p>The project uses low-voltage DC architecture. Production direction favors a fixed-output, enclosed, mechanically mounted supply rather than exposed adjustable bench modules.</p>
+          </article>
+          <article class="card">
+            <span class="tag">Switching</span>
+            <h3>Driver stage</h3>
+            <p>ULN2803A driver hardware sinks current for the eight standard output channels, keeping the ESP32 from directly carrying the LED load.</p>
+          </article>
+          <article class="card">
+            <span class="tag">Serviceability</span>
+            <h3>Harnesses and connectors</h3>
+            <p>Documented wiring, modular connectors, strain relief, and branch separation are being used to reduce clutter and make future replacement or repair practical.</p>
+          </article>
+          <article class="card">
+            <span class="tag">Calibration</span>
+            <h3>Addressable test path</h3>
+            <p>A separate level-shifted GPIO4 path supports ten low-brightness addressable nodes for Pixel 1–10 calibration without replacing the proven eight-output renderer.</p>
+          </article>
+          <article class="card">
+            <span class="tag">Environment</span>
+            <h3>Outdoor enclosure</h3>
+            <p>Weatherproofing, cable entry, condensation control, mounting, fuse access, and serviceability are active design considerations. No certification claim is made.</p>
+          </article>
+          <article class="card">
+            <span class="tag">Future input</span>
+            <h3>Sensors</h3>
+            <p>Reserved photoresistor and PIR inputs create a path toward darkness awareness and motion-aware habitat behavior after the core system is stable.</p>
+          </article>
+          <article class="card">
+            <span class="tag">Expansion</span>
+            <h3>Modular pods</h3>
+            <p>Multiple pods can form one larger habitat while preserving local pod identity, independent outputs, and controlled firmware deployment boundaries.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="firmware" aria-labelledby="firmware-title">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="firmware-title">Firmware architecture</h2>
+          <p>The software is built around organisms and habitats rather than a global lighting effect.</p>
+        </div>
+        <div class="two-col">
+          <article class="panel">
+            <span class="tag">Behavior system</span>
+            <h3>Each firefly carries its own state</h3>
+            <p>
+              The firmware models individual fireflies with separate activity, energy, personality, timing, and interaction state. Their visible behavior emerges through constrained decisions, fades, waiting periods, and weak social influence rather than through one master looped pattern.
+            </p>
+            <ul class="plain-list">
+              <li>Independent state and decision timing per firefly.</li>
+              <li>Organic fade, wait, wake, and quiet behavior.</li>
+              <li>Randomized variation bounded by rules and internal state.</li>
+              <li>No global show sequence controlling every light.</li>
+              <li>Scalable separation between simulated organisms and physical outputs.</li>
+              <li>Calibration and test modes kept separate from natural behavior.</li>
+            </ul>
+          </article>
+          <article class="panel">
+            <span class="tag">Identity and deployment</span>
+            <h3>Versioned pods with guarded updates</h3>
+            <p>
+              The system tracks pod identity and firmware identity so source builds are not confused with what the live hardware actually reports. This matters especially during OTA work, where transferred firmware is not considered applied until the target pod reboots and reports the expected live identity.
+            </p>
+            <div class="fact-stack" style="margin-top: 24px;">
+              <div class="fact">
+                <strong>Current Host source identity</strong>
+                <span>V2.7.9-satellite-ota-baseline-stabilization for the normal Pod 1 build.</span>
+              </div>
+              <div class="fact">
+                <strong>Current addressable bench source identity</strong>
+                <span>V2.7.9c-pod1-addressable-10-node-bench for the explicit Pod 1 bench environment only.</span>
+              </div>
+              <div class="fact">
+                <strong>Guarded satellite milestone</strong>
+                <span>Pod 2 has twice completed the one-pod transfer, verification, manual reboot, and exact live-identity confirmation path.</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="build-log" aria-labelledby="build-log-title">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="build-log-title">Build log</h2>
+          <p>A public development record designed to be extended as hardware, testing, and product direction mature.</p>
+        </div>
+
+        <div class="build-log">
+          <article class="build-entry">
+            <div class="entry-date">June 27, 2026</div>
+            <div>
+              <h3 class="entry-title">First ESP32 hardware bring-up</h3>
+              <dl class="entry-fields">
+                <div><dt>What changed</dt><dd>The PlatformIO project compiled, uploaded, booted, and reached firmware setup on physical hardware.</dd></div>
+                <div><dt>Problem being solved</dt><dd>Prove that the development toolchain and first controller could execute the project firmware outside simulation.</dd></div>
+                <div><dt>Materials/components used</dt><dd>ESP32 development board, PlatformIO firmware project, USB connection, serial monitor.</dd></div>
+                <div><dt>Business or product-development purpose</dt><dd>Established a working embedded foundation before investing further in branches, enclosures, and field hardware.</dd></div>
+                <div><dt>Next step</dt><dd>Connect the driver hardware and verify each firefly output individually.</dd></div>
+              </dl>
+            </div>
+          </article>
+
+          <article class="build-entry">
+            <div class="entry-date">June 28, 2026</div>
+            <div>
+              <h3 class="entry-title">Eight-firefly modular branch completed</h3>
+              <dl class="entry-fields">
+                <div><dt>What changed</dt><dd>The first fully wired branch was completed with eight independently controlled fireflies and modular connectors.</dd></div>
+                <div><dt>Problem being solved</dt><dd>Move beyond loose breadboard wiring while preserving independent control and replaceable branch hardware.</dd></div>
+                <div><dt>Materials/components used</dt><dd>LED firefly branch, ULN2803 driver, JST-XH connectors, magnet wire, lacing wire, documented harness pinout.</dd></div>
+                <div><dt>Business or product-development purpose</dt><dd>Created a repeatable branch-construction baseline that can reduce future assembly time and improve serviceability.</dd></div>
+                <div><dt>Next step</dt><dd>Run full behavioral firmware and observe whether the hardware disappears behind the firefly illusion.</dd></div>
+              </dl>
+            </div>
+          </article>
+
+          <article class="build-entry">
+            <div class="entry-date">June 28, 2026</div>
+            <div>
+              <h3 class="entry-title">First organic colony behavior observed</h3>
+              <dl class="entry-fields">
+                <div><dt>What changed</dt><dd>Hardware bring-up mode was disabled and the complete behavior system ran on the first eight-firefly branch.</dd></div>
+                <div><dt>Problem being solved</dt><dd>Determine whether the system behaved like an emergent colony rather than a deterministic sequence.</dd></div>
+                <div><dt>Materials/components used</dt><dd>Completed branch, ESP32, ULN2803 driver, natural behavior firmware, serial and visual observation.</dd></div>
+                <div><dt>Business or product-development purpose</dt><dd>Validated the central product premise: independent lights could create irregular, watchable behavior without an obvious loop.</dd></div>
+                <div><dt>Next step</dt><dd>Run longer observation sessions and confirm that every firefly can participate without making the habitat feel busy.</dd></div>
+              </dl>
+            </div>
+          </article>
+
+          <article class="build-entry">
+            <div class="entry-date">June 29, 2026</div>
+            <div>
+              <h3 class="entry-title">Behavior baseline and connected-habitat direction</h3>
+              <dl class="entry-fields">
+                <div><dt>What changed</dt><dd>Observation notes recorded distinct personalities, non-deterministic behavior, small conversational exchanges, and a calmer overall habitat.</dd></div>
+                <div><dt>Problem being solved</dt><dd>Refine participation without turning the system into frequent blinking or a visible animation routine.</dd></div>
+                <div><dt>Materials/components used</dt><dd>Firefly Lab live controls, behavior firmware, battery-powered observation setup, repeated resets and long viewing sessions.</dd></div>
+                <div><dt>Business or product-development purpose</dt><dd>Moved the project from a simple electronics prototype toward an ambient object worth observing for extended periods.</dd></div>
+                <div><dt>Next step</dt><dd>Preserve the believable baseline while expanding habitat architecture, deployment reliability, and documentation.</dd></div>
+              </dl>
+            </div>
+          </article>
+
+          <article class="build-entry">
+            <div class="entry-date">July 16, 2026</div>
+            <div>
+              <h3 class="entry-title">Guarded OTA baseline and ten-node addressable bench path</h3>
+              <dl class="entry-fields">
+                <div><dt>What changed</dt><dd>The project recorded two confirmed guarded Pod 2 OTA successes and prepared a distinct Pod 1 ten-node addressable calibration build.</dd></div>
+                <div><dt>Problem being solved</dt><dd>Update remote hardware safely while keeping a control pod untouched, and test addressable nodes without disturbing the proven renderer.</dd></div>
+                <div><dt>Materials/components used</dt><dd>ESP32 pods, ESP-NOW relay path, Pod 1 Host UI, SN74AHCT125N level shifter, 220-ohm series resistors, GPIO4 addressable data path.</dd></div>
+                <div><dt>Business or product-development purpose</dt><dd>Improved maintainability and created a controlled path toward richer branch behavior without overstating unproven field results.</dd></div>
+                <div><dt>Next step</dt><dd>Flash only the explicit Pod 1 addressable bench build, confirm its live identity, and test Pixels 1–10 individually at the existing brightness cap.</dd></div>
+              </dl>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="problems" aria-labelledby="problems-title">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="problems-title">Problems being solved</h2>
+          <p>The work is not only making lights turn on. It is solving the practical gaps between an effect, an installation, and a believable product.</p>
+        </div>
+        <div class="cards">
+          <article class="card"><span class="tag">Behavior</span><h3>Making the light feel organic</h3><p>Balancing individuality, quiet periods, fades, delayed activation, and weak interaction without making the habitat feel random or chaotic.</p></article>
+          <article class="card"><span class="tag">Perception</span><h3>Avoiding repeating patterns</h3><p>Preventing a viewer from recognizing a loop, synchronized pulse, or fixed sequence after watching for several minutes.</p></article>
+          <article class="card"><span class="tag">Scale</span><h3>More lights without one global show</h3><p>Keeping behavior independent as the habitat grows from eight-output pods toward larger multi-pod and future addressable systems.</p></article>
+          <article class="card"><span class="tag">Field hardware</span><h3>Low-voltage outdoor wiring</h3><p>Managing shared power, grounding, connectors, cable protection, enclosure entry, strain relief, and service access in a practical installation.</p></article>
+          <article class="card"><span class="tag">Truth</span><h3>Pod identity and version tracking</h3><p>Separating source build identity, expected update identity, and actual live hardware identity so the system never claims an update that did not boot.</p></article>
+          <article class="card"><span class="tag">Safety</span><h3>Guarded OTA updates</h3><p>Proving one satellite at a time while preserving manual apply, exact identity confirmation, and an untouched control pod.</p></article>
+          <article class="card"><span class="tag">Assembly</span><h3>Cleaner, serviceable harnesses</h3><p>Replacing fragile loose wiring with documented branches, modular connectors, mechanical support, and repeatable construction methods.</p></article>
+          <article class="card"><span class="tag">Calibration</span><h3>Addressable node testing</h3><p>Validating direction, color order, skipped nodes, duplicated nodes, flicker, and data integrity before addressable hardware is connected to natural behavior.</p></article>
+          <article class="card"><span class="tag">Product discipline</span><h3>Separating prototype from promise</h3><p>Documenting what is proven, what is in progress, and what remains future work before commercial testing or customer-facing claims.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="business" aria-labelledby="business-title">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="business-title">Business purpose</h2>
+          <p>A careful commercial direction, not a claim that the prototype is already a finished product.</p>
+        </div>
+        <div class="business-grid">
+          <article class="panel">
+            <span class="tag">Commercial exploration</span>
+            <h3>Potential directions</h3>
+            <p>
+              Living Lights is being developed with possible commercial use in mind. The immediate purpose of that direction is to guide durability, modularity, documentation, transport, setup, repair, and repeatable deployment decisions while the prototype is still being tested.
+            </p>
+            <div class="business-list">
+              <div class="business-direction"><strong>Wedding and event rentals</strong><span>Temporary ambient installations where setup speed, serviceability, and repeatable presentation matter.</span></div>
+              <div class="business-direction"><strong>Ambient outdoor installations</strong><span>Longer-running decorative habitats for patios, venues, hospitality spaces, or private outdoor environments.</span></div>
+              <div class="business-direction"><strong>Garden and pathway lighting</strong><span>Subtle low-voltage decorative placement that prioritizes atmosphere over illumination output.</span></div>
+              <div class="business-direction"><strong>Prototype product development</strong><span>A documented platform for testing enclosure, branch, control, interface, and deployment decisions.</span></div>
+              <div class="business-direction"><strong>Future small-batch sales</strong><span>A possible later direction only after reliability, safety, assembly, support, and market questions are better understood.</span></div>
+            </div>
+          </article>
+
+          <aside class="record-note">
+            <strong>Public development record</strong>
+            <p>
+              This page is a public project record. It supports documentation of development activity, but receipts, bookkeeping, invoices, and formal records remain the primary business/tax documentation.
+            </p>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section id="roadmap" aria-labelledby="roadmap-title">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="roadmap-title">Roadmap</h2>
+          <p>Progress is intentionally staged so expansion does not outrun reliability or evidence.</p>
+        </div>
+        <div class="roadmap">
+          <article class="roadmap-item">
+            <div><h3>Stage 1 — Bench prototype</h3><p>Compile and run firmware, switch eight independent outputs, validate driver hardware, and establish a repeatable branch.</p></div>
+            <span class="status done">Done</span>
+          </article>
+          <article class="roadmap-item">
+            <div><h3>Stage 2 — Outdoor pod prototype</h3><p>Package the controller, power, harnesses, and branches into modular hardware suitable for controlled outdoor observation.</p></div>
+            <span class="status progress">In progress</span>
+          </article>
+          <article class="roadmap-item">
+            <div><h3>Stage 3 — Organic behavior refinement</h3><p>Continue long observation, preserve distinct personalities, improve participation, and avoid visible repetition or excessive activity.</p></div>
+            <span class="status progress">In progress</span>
+          </article>
+          <article class="roadmap-item">
+            <div><h3>Stage 4 — Addressable node testing</h3><p>Calibrate a separate ten-node chain, verify direction and color behavior, and record physical data integrity before natural routing.</p></div>
+            <span class="status progress">In progress</span>
+          </article>
+          <article class="roadmap-item">
+            <div><h3>Stage 5 — Waterproofing / deployment testing</h3><p>Evaluate enclosure sealing, condensation, cable entry, strain relief, mounting, fuse access, runtime, and repeat outdoor setup.</p></div>
+            <span class="status planned">Planned</span>
+          </article>
+          <article class="roadmap-item">
+            <div><h3>Stage 6 — Event demo / rental test</h3><p>Run a limited real-world demonstration to study transport, setup time, viewing distance, guest response, and operational support needs.</p></div>
+            <span class="status planned">Planned</span>
+          </article>
+          <article class="roadmap-item">
+            <div><h3>Stage 7 — Productization research</h3><p>Study manufacturing, enclosure standards, certification needs, documentation, pricing, liability, support, and small-batch feasibility.</p></div>
+            <span class="status future">Future</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="gallery" aria-labelledby="gallery-title">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="gallery-title">Gallery / evidence</h2>
+          <p>These are original project photographs documenting actual hardware, wiring, firmware, and outdoor observation. The final public demonstration remains intentionally unclaimed until it exists.</p>
+        </div>
+        <div class="gallery-grid">
+          <article class="gallery-card has-image">
+            <div class="gallery-media">
+              <a href="images/living-lights/pod-wiring.jpg" aria-label="Open larger pod wiring photograph">
+                <img src="images/living-lights/pod-wiring.jpg" width="1152" height="1536" alt="Open Living Lights control enclosure showing power conversion hardware, circuit board, and multiple labeled branch wires" loading="lazy" decoding="async">
+                <span class="evidence-label">Working enclosure</span>
+              </a>
+            </div>
+            <div class="gallery-copy"><h3>Pod wiring</h3><p>A working enclosure prototype with power conversion, controller hardware, and branch wiring being organized for safer service and repeatable assembly.</p><span class="evidence-note">Prototype evidence</span></div>
+          </article>
+
+          <article class="gallery-card has-image">
+            <div class="gallery-media">
+              <a href="images/living-lights/control-board.jpg" aria-label="Open larger control board photograph">
+                <img src="images/living-lights/control-board.jpg" width="1152" height="1536" alt="ESP32 development board mounted on a blue screw-terminal carrier board" loading="lazy" decoding="async" style="object-position:center 58%;">
+                <span class="evidence-label">Controller assembly</span>
+              </a>
+            </div>
+            <div class="gallery-copy"><h3>Control board</h3><p>An ESP32 development board on a screw-terminal carrier, part of the move from temporary breadboard work toward cleaner bench and enclosure connections.</p><span class="evidence-note">Hardware development</span></div>
+          </article>
+
+          <article class="gallery-card has-image">
+            <div class="gallery-media">
+              <a href="images/living-lights/led-branch-node.jpg" aria-label="Open larger LED branch node photograph">
+                <img src="images/living-lights/led-branch-node.jpg" width="1152" height="1536" alt="Tiny round LED node attached to thin twisted brown wire and held between a builder's fingers" loading="lazy" decoding="async" style="object-position:center 48%;">
+                <span class="evidence-label">Low-visibility node</span>
+              </a>
+            </div>
+            <div class="gallery-copy"><h3>LED branches</h3><p>A small light node on thin twisted wire, built so the physical branch can recede from view while the glow appears to float among plants.</p><span class="evidence-note">Branch construction</span></div>
+          </article>
+
+          <article class="gallery-card has-image">
+            <div class="gallery-media">
+              <a href="images/living-lights/outdoor-test.jpg" aria-label="Open larger outdoor Living Lights test photograph">
+                <img src="images/living-lights/outdoor-test.jpg" width="1152" height="1536" alt="Nighttime backyard prototype test with small warm glowing points positioned at different heights among plants" loading="lazy" decoding="async" style="object-position:center 62%;">
+                <span class="evidence-label">Backyard observation</span>
+              </a>
+            </div>
+            <div class="gallery-copy"><h3>Outdoor test</h3><p>An early low-light observation used to judge placement, scale, viewing distance, environmental distraction, and whether the light points feel independent.</p><span class="evidence-note">Not a final installation</span></div>
+          </article>
+
+          <article class="gallery-card has-image">
+            <div class="gallery-media">
+              <a href="images/living-lights/outdoor-habitat-context.jpg" aria-label="Open larger wide habitat observation photograph">
+                <img src="images/living-lights/outdoor-habitat-context.jpg" width="1536" height="864" alt="Wide nighttime view of the backyard habitat with subtle warm prototype light points distributed among garden beds" loading="lazy" decoding="async">
+                <span class="evidence-label">Habitat context</span>
+              </a>
+            </div>
+            <div class="gallery-copy"><h3>Wider habitat view</h3><p>A broader observation frame showing the prototype in its real surroundings. It records viewing distance, competing landscape lights, placement density, and the need for the firefly effect to remain subtle without disappearing.</p><span class="evidence-note">Field observation</span></div>
+          </article>
+
+          <article class="gallery-card has-image">
+            <div class="gallery-media">
+              <a href="images/living-lights/addressable-level-shifter.jpg" aria-label="Open larger addressable level-shifter board photograph">
+                <img src="images/living-lights/addressable-level-shifter.jpg" width="1200" height="1600" alt="Hand-built perfboard for an addressable LED level-shifter path with handwritten GPIO4, 5 volt, ground, capacitor, and resistor annotations" loading="lazy" decoding="async" style="object-position:center 50%;">
+                <span class="evidence-label">Dedicated test path</span>
+              </a>
+            </div>
+            <div class="gallery-copy"><h3>Addressable bench test</h3><p>The separate level-shifter path prepared for GPIO4, regulated 5V, shared ground, and controlled ten-node calibration without replacing the proven GPIO/ULN system.</p><span class="evidence-note">Calibration hardware</span></div>
+          </article>
+
+          <article class="gallery-card has-image">
+            <div class="gallery-media">
+              <a href="images/living-lights/firefly-lab-ui.jpg" aria-label="Open larger Firefly Lab interface photograph">
+                <img src="images/living-lights/firefly-lab-ui.jpg" width="1536" height="1152" alt="Firefly Lab browser dashboard displayed on a computer monitor during firmware development" loading="lazy" decoding="async" style="object-position:center 42%;">
+                <span class="evidence-label">Firefly Lab</span>
+              </a>
+            </div>
+            <div class="gallery-copy"><h3>Firmware UI</h3><p>The browser-based Firefly Lab control surface used during development to inspect habitat behavior, pod state, diagnostics, and guarded firmware workflows.</p><span class="evidence-note">Development interface</span></div>
+          </article>
+
+          <article class="gallery-card has-image">
+            <div class="gallery-media">
+              <a href="images/living-lights/service-harness.jpg" aria-label="Open larger labeled service harness photograph">
+                <img src="images/living-lights/service-harness.jpg" width="1152" height="1536" alt="Open enclosure with color-tagged and labeled wire terminals arranged beside a power converter" loading="lazy" decoding="async" style="object-position:center 40%;">
+                <span class="evidence-label">Labeled harness</span>
+              </a>
+            </div>
+            <div class="gallery-copy"><h3>Harness serviceability</h3><p>Color tags, branch labels, and separated conductors support troubleshooting and repeatable field connections as the prototype becomes more modular.</p><span class="evidence-note">Assembly refinement</span></div>
+          </article>
+
+          <article class="gallery-card">
+            <div class="gallery-placeholder">Future installation evidence</div>
+            <div><h3>Final demo</h3><p>A polished three-pod installation or limited event demonstration will be added only after the hardware, deployment process, and behavior remain stable.</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="documentation" aria-labelledby="documentation-title">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="documentation-title">Documentation</h2>
+          <p>The current technical truth lives in the private/source project documents. Public subpages can be added later without restructuring this hub.</p>
+        </div>
+        <div class="docs-grid">
+          <article class="doc-card">
+            <span class="doc-state">Internal project document</span>
+            <h3>Current State</h3>
+            <p>Confirmed live hardware, source identities, OTA posture, renderer state, known cautions, and next recommended step.</p>
+            <span class="doc-path">docs/CURRENT_STATE.md</span>
+          </article>
+          <article class="doc-card">
+            <span class="doc-state">Internal project documents</span>
+            <h3>Hardware Notes</h3>
+            <p>Power, driver, mapping, branch, connector, addressable bench, and future enclosure architecture.</p>
+            <span class="doc-path">docs/HARDWARE.md + HARDWARE_ARCHITECTURE.md</span>
+          </article>
+          <article class="doc-card">
+            <span class="doc-state">Internal project documents</span>
+            <h3>Firmware Notes</h3>
+            <p>Behavior philosophy, renderer boundaries, pod identity, OTA safeguards, and versioned implementation history.</p>
+            <span class="doc-path">README.md + docs/NOTES.md</span>
+          </article>
+          <article class="doc-card">
+            <span class="doc-state">Internal project document</span>
+            <h3>Testing Notes</h3>
+            <p>Bench procedures, OTA confirmation rules, renderer diagnostics, and field-observation checks.</p>
+            <span class="doc-path">docs/TESTING.md</span>
+          </article>
+          <a class="doc-card link-card" href="#build-log">
+            <span class="doc-state">On this page</span>
+            <h3>Build Log</h3>
+            <p>Dated public entries covering hardware bring-up, behavior milestones, modular branches, OTA, and addressable testing.</p>
+          </a>
+          <article class="doc-card">
+            <span class="doc-state">Internal project document</span>
+            <h3>Changelog</h3>
+            <p>Version-by-version record of firmware identities, behavior-preserving changes, deployment rules, and confirmed milestones.</p>
+            <span class="doc-path">docs/CHANGELOG.md</span>
+          </article>
+          <a class="doc-card link-card" href="#contact">
+            <span class="doc-state">Public link</span>
+            <h3>Contact</h3>
+            <p>Project questions, collaboration, practical deployment discussion, or future rental/product interest.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="status" aria-labelledby="status-title">
+      <div class="wrap">
+        <div class="disclosure">
+          <h2 id="status-title">Prototype disclosure</h2>
+          <p>
+            Living Lights is an active prototype project. It is not yet a finished consumer product, certified outdoor electrical product, or official commercial offering. Specifications, firmware, hardware layout, and product direction may change as testing continues.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" aria-labelledby="contact-title">
+      <div class="wrap">
+        <div class="panel contact-panel">
+          <div>
+            <span class="tag">Contact</span>
+            <h2 id="contact-title">Brian Olsen</h2>
+            <div class="contact-details">
+              <span>Oxnard, California</span>
+              <a href="mailto:brian@olsenautomation.com">brian@olsenautomation.com</a>
+              <a href="tel:+16265248156">(626) 524-8156</a>
+              <a href="https://www.linkedin.com/in/brian-olsen-0668108b" rel="me">LinkedIn profile</a>
+            </div>
+          </div>
+          <div class="actions">
+            <a class="btn primary" href="mailto:brian@olsenautomation.com?subject=Living%20Lights%20Project">Email about Living Lights</a>
+            <a class="btn" href="index.html">Back to Olsen Automation</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <span>© 2026 Olsen Automation LLC. Living Lights / Firefly System project record.</span>
+      <span><a href="mailto:brian@olsenautomation.com">brian@olsenautomation.com</a> · <a href="tel:+16265248156">(626) 524-8156</a></span>
+    </div>
+  </footer>
+</body>
+</html>
