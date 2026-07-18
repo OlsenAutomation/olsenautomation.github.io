@@ -1,30 +1,106 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Contact | Olsen Automation LLC</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta name="description" content="Contact Brian Olsen for product image production, AI-assisted workflows, and Olsen Automation inquiries." />
+  <style>
+:root {
+  --ink: #151619;
+  --muted: #636363;
+  --soft: #f6f3ef;
+  --panel: #ffffff;
+  --line: rgba(21, 22, 25, 0.13);
+  --accent: #8b3f2b;
+  --accent-2: #233348;
+  --max: 1040px;
+  --radius: 24px;
+  --shadow: 0 22px 70px rgba(21,22,25,.10);
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 18% 8%, rgba(255,255,255,.95), rgba(255,255,255,0) 42%),
+    linear-gradient(135deg, #fbfaf8 0%, #f5f0ea 46%, #ebe5dc 100%);
+  line-height: 1.58;
+}
+a { color: inherit; }
+.wrap { width: min(var(--max), calc(100% - 36px)); margin: 0 auto; }
+.topbar {
+  position: sticky; top: 0; z-index: 5;
+  backdrop-filter: blur(16px);
+  background: rgba(246, 243, 239, .84);
+  border-bottom: 1px solid var(--line);
+}
+.topbar-inner {
+  width: min(var(--max), calc(100% - 36px)); margin: 0 auto;
+  min-height: 66px; display: flex; align-items: center; justify-content: space-between; gap: 18px;
+}
+.brand { display: flex; align-items: center; gap: 12px; font-weight: 760; letter-spacing: -.02em; text-decoration: none; white-space: nowrap; }
+.mark { width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; color: #fff; background: var(--ink); font-size: 13px; font-weight: 800; }
+.nav { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; font-size: 14px; }
+.nav a { text-decoration: none; border: 1px solid var(--line); padding: 8px 10px; border-radius: 999px; background: rgba(255,255,255,.48); }
+.nav a:hover { background: #fff; box-shadow: 0 10px 30px rgba(21,22,25,.08); }
+.hero { padding: 76px 0 38px; }
+.eyebrow { color: var(--accent); font-weight: 800; text-transform: uppercase; letter-spacing: .16em; font-size: 12px; margin-bottom: 14px; }
+h1 { font-size: clamp(44px, 8vw, 88px); line-height: .92; letter-spacing: -.075em; margin: 0; max-width: 900px; }
+.lede { font-size: clamp(18px, 2.8vw, 26px); color: #343434; margin: 24px 0 0; max-width: 850px; }
+.grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 18px; margin: 30px 0; }
+.card { grid-column: span 12; background: rgba(255,255,255,.82); border: 1px solid var(--line); border-radius: var(--radius); padding: clamp(24px, 4vw, 42px); box-shadow: var(--shadow); }
+.card.small { grid-column: span 6; }
+h2 { font-size: clamp(28px, 4vw, 46px); line-height: 1; letter-spacing: -.055em; margin: 0 0 18px; }
+h3 { font-size: 20px; margin: 26px 0 8px; letter-spacing: -.025em; }
+p { margin: 0 0 14px; color: #3f3f3f; }
+ul, ol { margin: 0; padding-left: 1.2rem; color: #3f3f3f; }
+li { margin: 8px 0; }
+pre { margin: 14px 0 0; padding: 18px; border-radius: 18px; background: #151619; color: #f6f3ef; overflow-x: auto; font-size: 14px; line-height: 1.45; }
+code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+.cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px; }
+.btn { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 0 18px; border-radius: 999px; text-decoration: none; font-weight: 760; border: 1px solid var(--ink); }
+.btn.primary { background: var(--ink); color: #fff; }
+.btn.secondary { background: rgba(255,255,255,.62); color: var(--ink); border-color: var(--line); }
+.footer { padding: 44px 0 54px; color: #696969; font-size: 14px; border-top: 1px solid var(--line); margin-top: 40px; }
+.kicker { color: var(--muted); font-size: 14px; text-transform: uppercase; letter-spacing: .14em; font-weight: 800; margin-bottom: 10px; }
+.notice { background: rgba(139,63,43,.08); border-color: rgba(139,63,43,.22); }
+@media (max-width: 760px) {
+  .topbar-inner { align-items: flex-start; flex-direction: column; padding: 14px 0; }
+  .nav { justify-content: flex-start; }
+  .hero { padding-top: 50px; }
+  .card.small { grid-column: span 12; }
+}
+</style>
 </head>
 <body>
-  <header>
-    <h1>Contact Us</h1>
-    <nav>
-  <a href="index.html">Home</a>
-  <a href="cassette-mp4.html">Cassette.mp4</a>
-  <a href="docs.html">Docs</a>
-  <a href="support.html">Support</a>
-  <a href="verify.html">Verify</a>
-  <a href="contact.html" aria-current="page">Contact</a>
-</nav>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="index.html"><span class="mark">OA</span><span>Olsen Automation</span></a>
+      <nav class="nav" aria-label="Main navigation"><a href="index.html">Home</a><a href="product-photo-production.html#work">Product Photo</a><a href="cassette-mp4.html">Cassette.mp4</a><a href="docs.html">Docs</a><a href="support.html">Support</a><a href="verify.html">Verify</a><a href="contact.html" aria-current="page">Contact</a></nav>
+    </div>
   </header>
-  <section>
-    <p>Email: <a href="mailto:brian@olsenautomation.com">brian@olsenautomation.com</a></p>
-    <p>Phone: (optional)</p>
-    <p>Follow us: <a href="#">LinkedIn</a> | <a href="#">GitHub</a></p>
-  </section>
-  <footer>
-    <p>© 2025 Olsen Automation LLC</p>
+
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <div class="eyebrow">Contact</div>
+        <h1>Let’s connect.</h1>
+        <p class="lede">For product image production, AI-assisted workflow questions, or Olsen Automation inquiries, use the contact details below.</p>
+      </div>
+    </section>
+    <section class="wrap grid">
+      <article class="card"><h2>Contact</h2><p><strong>Brian Olsen</strong><br>Oxnard, California</p><p><strong>Email:</strong> <a href="mailto:brian@olsenautomation.com">brian@olsenautomation.com</a></p><p><strong>Phone:</strong> <a href="tel:+16265248156">(626) 524-8156</a></p><p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/brian-olsen-0668108b">linkedin.com/in/brian-olsen-0668108b</a></p><div class="cta-row"><a class="btn primary" href="product-photo-production.html#work">View product image portfolio</a><a class="btn secondary" href="index.html">Back to home</a></div></article>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <p>© Brian Olsen / Olsen Automation LLC</p>
+      <p>Oxnard, California · <a href="mailto:brian@olsenautomation.com">brian@olsenautomation.com</a> · <a href="tel:+16265248156">(626) 524-8156</a></p>
+    </div>
   </footer>
 </body>
 </html>
