@@ -1,29 +1,510 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Olsen Automation LLC</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta name="description" content="Olsen Automation LLC builds practical AI systems, automation workflows, context tools, and AI-assisted production systems for creators and businesses." />
+  <style>
+    :root {
+      --ink: #151619;
+      --muted: #636363;
+      --soft: #f6f3ef;
+      --panel: #ffffff;
+      --line: rgba(21, 22, 25, 0.13);
+      --accent: #8b3f2b;
+      --accent-2: #233348;
+      --max: 1160px;
+      --radius: 24px;
+      --shadow: 0 22px 70px rgba(21,22,25,.10);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 18% 8%, rgba(255,255,255,.95), rgba(255,255,255,0) 42%),
+        linear-gradient(135deg, #fbfaf8 0%, #f5f0ea 46%, #ebe5dc 100%);
+      line-height: 1.55;
+    }
+
+    a { color: inherit; }
+
+    .wrap {
+      width: min(var(--max), calc(100% - 36px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      backdrop-filter: blur(16px);
+      background: rgba(246, 243, 239, .80);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .topbar-inner {
+      width: min(var(--max), calc(100% - 36px));
+      margin: 0 auto;
+      min-height: 66px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 760;
+      letter-spacing: -.02em;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .mark {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      background: var(--ink);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .03em;
+      box-shadow: 0 10px 24px rgba(21,22,25,.16);
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 8px;
+      font-size: 14px;
+      color: rgba(21,22,25,.72);
+    }
+
+    nav a {
+      text-decoration: none;
+      padding: 8px 10px;
+      border-radius: 999px;
+    }
+
+    nav a:hover {
+      background: rgba(255,255,255,.72);
+      color: var(--ink);
+    }
+
+    .hero {
+      padding: 86px 0 42px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 30px;
+      height: 1px;
+      background: currentColor;
+      opacity: .55;
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 940px;
+      font-size: clamp(46px, 8vw, 94px);
+      line-height: .94;
+      letter-spacing: -.07em;
+    }
+
+    .lead {
+      max-width: 750px;
+      margin: 28px 0 0;
+      font-size: clamp(18px, 2.2vw, 23px);
+      color: rgba(21,22,25,.72);
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 12px 18px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 750;
+      border: 1px solid var(--line);
+      background: #fff;
+      box-shadow: 0 12px 30px rgba(21,22,25,.06);
+    }
+
+    .btn.primary {
+      background: var(--ink);
+      color: #fff;
+      border-color: var(--ink);
+    }
+
+    .signal-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 38px;
+    }
+
+    .signal {
+      min-height: 142px;
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.65);
+      box-shadow: 0 10px 34px rgba(21,22,25,.05);
+    }
+
+    .signal strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 17px;
+      letter-spacing: -.02em;
+    }
+
+    .signal span {
+      display: block;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    section { padding: 58px 0; }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 24px;
+      border-top: 1px solid var(--line);
+      padding-top: 34px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(34px, 5vw, 58px);
+      line-height: .98;
+      letter-spacing: -.055em;
+    }
+
+    .section-head p {
+      max-width: 520px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      position: relative;
+      padding: 26px;
+      min-height: 300px;
+      border-radius: calc(var(--radius) + 8px);
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.74);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .card::after {
+      content: "";
+      position: absolute;
+      inset: auto -30% -48% 20%;
+      height: 190px;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(139,63,43,.15), rgba(139,63,43,0) 68%);
+      pointer-events: none;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(21,22,25,.06);
+      color: rgba(21,22,25,.70);
+      font-size: 12px;
+      font-weight: 760;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    h3 {
+      margin: 22px 0 12px;
+      font-size: 27px;
+      line-height: 1.04;
+      letter-spacing: -.045em;
+    }
+
+    .card p, .panel p {
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .card-link {
+      display: inline-flex;
+      margin-top: 22px;
+      font-weight: 800;
+      text-decoration: none;
+      border-bottom: 1px solid currentColor;
+      position: relative;
+      z-index: 1;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: calc(var(--radius) + 8px);
+      background: rgba(255,255,255,.72);
+      box-shadow: var(--shadow);
+      padding: 30px;
+    }
+
+    .panel.dark {
+      background: var(--ink);
+      color: #fff;
+    }
+
+    .panel.dark p, .panel.dark li { color: rgba(255,255,255,.74); }
+
+    .steps {
+      list-style: none;
+      padding: 0;
+      margin: 18px 0 0;
+      display: grid;
+      gap: 12px;
+    }
+
+    .steps li {
+      display: grid;
+      grid-template-columns: 34px 1fr;
+      gap: 12px;
+      align-items: start;
+      color: var(--muted);
+    }
+
+    .num {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: rgba(139,63,43,.12);
+      color: var(--accent);
+      font-weight: 850;
+    }
+
+    .panel.dark .num {
+      background: rgba(255,255,255,.13);
+      color: #fff;
+    }
+
+    .list {
+      margin: 18px 0 0;
+      padding-left: 20px;
+      color: var(--muted);
+    }
+
+    .list li { margin: 8px 0; }
+
+    .contact-card {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 22px;
+      align-items: center;
+      padding: 30px;
+      border-radius: calc(var(--radius) + 8px);
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.78);
+      box-shadow: var(--shadow);
+    }
+
+    .contact-card h2 { margin-bottom: 10px; }
+    .contact-links { display: grid; gap: 10px; font-weight: 760; }
+
+    footer {
+      padding: 34px 0 54px;
+      border-top: 1px solid var(--line);
+      color: rgba(21,22,25,.54);
+      font-size: 14px;
+    }
+
+    @media (max-width: 860px) {
+      .topbar-inner { align-items: flex-start; flex-direction: column; padding: 14px 0; }
+      nav { justify-content: flex-start; }
+      .hero { padding-top: 54px; }
+      .signal-grid, .cards, .two-col, .contact-card { grid-template-columns: 1fr; }
+      .section-head { display: block; }
+      .section-head p { margin-top: 12px; }
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <h1>Olsen Automation LLC</h1>
-    <nav>
-  <a href="index.html" aria-current="page">Home</a>
-  <a href="cassette-mp4.html">Cassette.mp4</a>
-  <a href="docs.html">Docs</a>
-  <a href="support.html">Support</a>
-  <a href="verify.html">Verify</a>
-  <a href="contact.html">Contact</a>
-</nav>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="index.html" aria-label="Olsen Automation home">
+        <span class="mark">OA</span>
+        <span>Olsen Automation</span>
+      </a>
+      <nav aria-label="Primary navigation">
+        <a href="index.html">Home</a>
+        <a href="product-photo-production.html#work">Product Work</a>
+        <a href="cassette-mp4.html">Cassette.mp4</a>
+        <a href="docs.html">Docs</a>
+        <a href="support.html">Support</a>
+        <a href="verify.html">Verify</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
   </header>
-  <section class="hero">
-    <h2>Automation, AI, and Innovation</h2>
-    <p>We design cutting-edge AI systems, schema automation tools, and software solutions tailored for creators and businesses.</p>
-  </section>
+
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <div class="eyebrow">Olsen Automation LLC</div>
+        <h1>Practical AI systems, automation, and production workflows.</h1>
+        <p class="lead">I build usable tools and workflows for creators, businesses, and operators: context systems, documentation, verification, product-image production, and practical AI-assisted execution.</p>
+        <div class="actions">
+          <a class="btn primary" href="product-photo-production.html#work">View product image work</a>
+          <a class="btn" href="cassette-mp4.html">Explore Cassette.mp4</a>
+        </div>
+        <div class="signal-grid" aria-label="Core work areas">
+          <div class="signal"><strong>AI-assisted production</strong><span>Human-directed image, content, and workflow creation with quality control.</span></div>
+          <div class="signal"><strong>Context systems</strong><span>Portable, drift-resistant project knowledge built for repeatable AI use.</span></div>
+          <div class="signal"><strong>Automation</strong><span>Small-business systems, schema workflows, documentation, and delivery tools.</span></div>
+          <div class="signal"><strong>Verification</strong><span>Public-key thinking, release integrity, and clear operating notes.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="work">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Current work</h2>
+          <p>Focused projects that combine hands-on production, AI leverage, documentation, and practical business use.</p>
+        </div>
+
+        <div class="cards">
+          <article class="card">
+            <span class="tag">Portfolio</span>
+            <h3>AI-assisted product image production</h3>
+            <p>Before/after case studies showing product photography, Photoshop retouching, AI-assisted reconstruction, and creative-director QA for ecommerce and campaign-ready visuals.</p>
+            <a class="card-link" href="product-photo-production.html#work">Open portfolio</a>
+          </article>
+
+          <article class="card">
+            <span class="tag">Format</span>
+            <h3>Cassette.mp4</h3>
+            <p>A portable, self-describing context envelope for AI assistants. It condenses transcripts, summaries, and instructions into a consistent package that can travel between tools.</p>
+            <a class="card-link" href="cassette-mp4.html">Read overview</a>
+          </article>
+
+          <article class="card">
+            <span class="tag">Docs</span>
+            <h3>Implementation notes and verification</h3>
+            <p>Quick-start guidance, public verification details, support notes, and safe-surface documentation for projects released through Olsen Automation.</p>
+            <a class="card-link" href="docs.html">View docs</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="approach">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Approach</h2>
+          <p>The work is strongest when AI handles the heavy lift and a human remains responsible for truth, usefulness, and delivery quality.</p>
+        </div>
+
+        <div class="two-col">
+          <div class="panel dark">
+            <span class="tag">Operating philosophy</span>
+            <h3>AI is leverage, not autopilot.</h3>
+            <p>Good automation still needs clear intent, accurate inputs, tight constraints, and review. The goal is to ship useful systems and assets without letting speed replace judgment.</p>
+            <ol class="steps">
+              <li><span class="num">1</span><span>Define the real job the output needs to do.</span></li>
+              <li><span class="num">2</span><span>Separate source truth from noise, damage, or accidental artifacts.</span></li>
+              <li><span class="num">3</span><span>Use AI to accelerate exploration, reconstruction, drafting, and production.</span></li>
+              <li><span class="num">4</span><span>Review, correct, document, and ship with clear limitations.</span></li>
+            </ol>
+          </div>
+
+          <div class="panel">
+            <span class="tag">Capabilities</span>
+            <h3>Built around practical execution.</h3>
+            <ul class="list">
+              <li>AI-assisted workflows and prompt systems</li>
+              <li>Product image production and Photoshop finishing</li>
+              <li>Context packaging and reusable project memory</li>
+              <li>Schema, documentation, and release notes</li>
+              <li>Small-business operations and customer-facing delivery</li>
+              <li>Verification-minded publishing and support surfaces</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="wrap">
+        <div class="contact-card">
+          <div>
+            <h2>Contact</h2>
+            <p>For product image work, AI-assisted workflows, documentation, or practical automation projects.</p>
+          </div>
+          <div class="contact-links">
+            <a href="mailto:brian@olsenautomation.com">brian@olsenautomation.com</a>
+            <a href="tel:+16265248156">(626) 524-8156</a>
+            <a href="https://www.linkedin.com/in/brian-olsen-0668108b">LinkedIn Profile</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
   <footer>
-    <p>© 2025 Olsen Automation LLC</p>
+    <div class="wrap">© 2026 Olsen Automation LLC. Practical AI systems, automation, and production workflows.</div>
   </footer>
 </body>
 </html>
