@@ -1,89 +1,110 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Docs | Olsen Automation LLC</title>
-  <link rel="stylesheet" href="styles.css"/>
-  <meta name="description" content="Cassette.mp4 documentation — high-level overview, quick start, and safe usage commands."/>
+  <meta name="description" content="Quick-start documentation for Cassette.mp4 and Olsen Automation context tools." />
+  <style>
+:root {
+  --ink: #151619;
+  --muted: #636363;
+  --soft: #f6f3ef;
+  --panel: #ffffff;
+  --line: rgba(21, 22, 25, 0.13);
+  --accent: #8b3f2b;
+  --accent-2: #233348;
+  --max: 1040px;
+  --radius: 24px;
+  --shadow: 0 22px 70px rgba(21,22,25,.10);
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 18% 8%, rgba(255,255,255,.95), rgba(255,255,255,0) 42%),
+    linear-gradient(135deg, #fbfaf8 0%, #f5f0ea 46%, #ebe5dc 100%);
+  line-height: 1.58;
+}
+a { color: inherit; }
+.wrap { width: min(var(--max), calc(100% - 36px)); margin: 0 auto; }
+.topbar {
+  position: sticky; top: 0; z-index: 5;
+  backdrop-filter: blur(16px);
+  background: rgba(246, 243, 239, .84);
+  border-bottom: 1px solid var(--line);
+}
+.topbar-inner {
+  width: min(var(--max), calc(100% - 36px)); margin: 0 auto;
+  min-height: 66px; display: flex; align-items: center; justify-content: space-between; gap: 18px;
+}
+.brand { display: flex; align-items: center; gap: 12px; font-weight: 760; letter-spacing: -.02em; text-decoration: none; white-space: nowrap; }
+.mark { width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; color: #fff; background: var(--ink); font-size: 13px; font-weight: 800; }
+.nav { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; font-size: 14px; }
+.nav a { text-decoration: none; border: 1px solid var(--line); padding: 8px 10px; border-radius: 999px; background: rgba(255,255,255,.48); }
+.nav a:hover { background: #fff; box-shadow: 0 10px 30px rgba(21,22,25,.08); }
+.hero { padding: 76px 0 38px; }
+.eyebrow { color: var(--accent); font-weight: 800; text-transform: uppercase; letter-spacing: .16em; font-size: 12px; margin-bottom: 14px; }
+h1 { font-size: clamp(44px, 8vw, 88px); line-height: .92; letter-spacing: -.075em; margin: 0; max-width: 900px; }
+.lede { font-size: clamp(18px, 2.8vw, 26px); color: #343434; margin: 24px 0 0; max-width: 850px; }
+.grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 18px; margin: 30px 0; }
+.card { grid-column: span 12; background: rgba(255,255,255,.82); border: 1px solid var(--line); border-radius: var(--radius); padding: clamp(24px, 4vw, 42px); box-shadow: var(--shadow); }
+.card.small { grid-column: span 6; }
+h2 { font-size: clamp(28px, 4vw, 46px); line-height: 1; letter-spacing: -.055em; margin: 0 0 18px; }
+h3 { font-size: 20px; margin: 26px 0 8px; letter-spacing: -.025em; }
+p { margin: 0 0 14px; color: #3f3f3f; }
+ul, ol { margin: 0; padding-left: 1.2rem; color: #3f3f3f; }
+li { margin: 8px 0; }
+pre { margin: 14px 0 0; padding: 18px; border-radius: 18px; background: #151619; color: #f6f3ef; overflow-x: auto; font-size: 14px; line-height: 1.45; }
+code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+.cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px; }
+.btn { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 0 18px; border-radius: 999px; text-decoration: none; font-weight: 760; border: 1px solid var(--ink); }
+.btn.primary { background: var(--ink); color: #fff; }
+.btn.secondary { background: rgba(255,255,255,.62); color: var(--ink); border-color: var(--line); }
+.footer { padding: 44px 0 54px; color: #696969; font-size: 14px; border-top: 1px solid var(--line); margin-top: 40px; }
+.kicker { color: var(--muted); font-size: 14px; text-transform: uppercase; letter-spacing: .14em; font-weight: 800; margin-bottom: 10px; }
+.notice { background: rgba(139,63,43,.08); border-color: rgba(139,63,43,.22); }
+@media (max-width: 760px) {
+  .topbar-inner { align-items: flex-start; flex-direction: column; padding: 14px 0; }
+  .nav { justify-content: flex-start; }
+  .hero { padding-top: 50px; }
+  .card.small { grid-column: span 12; }
+}
+</style>
 </head>
 <body>
-  <header>
-    <h1>Docs</h1>
-  <nav>
-  <a href="index.html">Home</a>
-  <a href="cassette-mp4.html">Cassette.mp4</a>
-  <a href="docs.html" aria-current="page">Docs</a>
-  <a href="support.html">Support</a>
-  <a href="verify.html">Verify</a>
-  <a href="contact.html">Contact</a>
-</nav>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="index.html"><span class="mark">OA</span><span>Olsen Automation</span></a>
+      <nav class="nav" aria-label="Main navigation"><a href="index.html">Home</a><a href="product-photo-production.html#work">Product Photo</a><a href="cassette-mp4.html">Cassette.mp4</a><a href="docs.html" aria-current="page">Docs</a><a href="support.html">Support</a><a href="verify.html">Verify</a><a href="contact.html">Contact</a></nav>
+    </div>
   </header>
 
   <main>
     <section class="hero">
-      <h2>Cassette.mp4 — Quick Start</h2>
-      <p>Portable, drift-resistant context you can hand to any assistant without exposing internal orchestration.</p>
+      <div class="wrap">
+        <div class="eyebrow">Docs</div>
+        <h1>Cassette.mp4 quick start.</h1>
+        <p class="lede">Portable, drift-resistant context you can hand to an assistant without exposing internal orchestration.</p>
+      </div>
     </section>
-
-    <section>
-      <h3>What You Get</h3>
-      <ul>
-        <li><strong>Portable file:</strong> a single MP4 (plus optional sidecars) that travels anywhere.</li>
-        <li><strong>Predictable schema:</strong> a compact JSON payload assistants can read consistently.</li>
-        <li><strong>Repeatability:</strong> semantic chunking + summaries for faithful recall.</li>
-      </ul>
-    </section>
-
-    <section>
-      <h3>Quick Start</h3>
-      <ol>
-        <li>Download your cassette (e.g., <code>ClientName.mp4</code>).</li>
-        <li>Drop it into your assistant or upload alongside <code>cassette.json</code> when requested.</li>
-        <li>Use the commands below to index and retrieve context.</li>
-      </ol>
-    </section>
-
-    <section>
-      <h3>Commands (safe surface)</h3>
-      <ul>
-        <li><code>BUILD INDEX</code> — Build/refresh a retrieval sidecar (no vectors printed inline).</li>
-        <li><code>RETRIEVE "your query"</code> — Get top-K small summaries relevant to your question.</li>
-        <li><code>RETRIEVE JSON "your query"</code> — Structured hits only (machine-friendly).</li>
-        <li><code>EXPORT</code> — Manifest-first export (prevents giant inline dumps).</li>
-        <li><code>PRINT &lt;path&gt;</code> — Peek at a tiny subsection for debugging.</li>
-      </ul>
-      <p><em>Note:</em> Internal logic (stitching, dedupe thresholds, etc.) is intentionally <strong>not</strong> documented here to protect IP.</p>
-    </section>
-
-    <section>
-      <h3>Bundle Anatomy (public view)</h3>
-<pre><code>&lt;Project&gt;.mp4               # Primary portable cassette
-cassette.json              # Same payload in JSON (optional)
+    <section class="wrap grid">
+      <article class="card"><h2>What you get</h2><ul><li><strong>Portable file:</strong> a single MP4 plus optional sidecars that travels anywhere.</li><li><strong>Predictable schema:</strong> a compact JSON payload assistants can read consistently.</li><li><strong>Repeatability:</strong> semantic chunking and summaries for faithful recall.</li></ul><h3>Quick start</h3><ol><li>Download your cassette, for example <code>ClientName.mp4</code>.</li><li>Drop it into your assistant or upload it alongside <code>cassette.json</code> when requested.</li><li>Use the safe commands below to index and retrieve context.</li></ol><h3>Commands</h3><ul><li><code>BUILD INDEX</code> — build or refresh a retrieval sidecar.</li><li><code>RETRIEVE "your query"</code> — get top-K small summaries relevant to your question.</li><li><code>RETRIEVE JSON "your query"</code> — structured hits only.</li><li><code>EXPORT</code> — manifest-first export.</li><li><code>PRINT &lt;path&gt;</code> — peek at a tiny subsection for debugging.</li></ul><p>Internal stitching, deduplication thresholds, and orchestration details are intentionally not documented publicly.</p></article><article class="card"><h2>Bundle anatomy</h2><pre><code>&lt;Project&gt;.mp4               # Primary portable cassette
+cassette.json              # Same payload in JSON, optional
 MAIN.retrieval_index.json  # Optional retrieval sidecar
-snapshots/                 # Optional versioned exports (ops profile)
-catalog.json               # Checksums/manifest for snapshots</code></pre>
-    </section>
-
-    <section>
-      <h3>FAQ</h3>
-      <details>
-        <summary>Can I verify this cassette came from Olsen Automation?</summary>
-        <p>Yes. See <a href="verify.html">Verify</a> for the public-key and verification steps.</p>
-      </details>
-      <details>
-        <summary>Does this include raw transcripts?</summary>
-        <p>By default, no—only compact summaries and structured context. Full transcripts may be gated/licensed.</p>
-      </details>
-      <details>
-        <summary>Will this work offline?</summary>
-        <p>Yes. Core reading and basic retrieval do; dense embeddings are optional.</p>
-      </details>
+snapshots/                 # Optional versioned exports
+catalog.json               # Checksums / manifest</code></pre><h3>FAQ</h3><p><strong>Can I verify this cassette came from Olsen Automation?</strong><br>Yes. See the Verify page for public-key and verification steps.</p><p><strong>Does this include raw transcripts?</strong><br>By default, no. The public surface is focused on compact summaries and structured context. Full transcripts may be gated or licensed.</p><p><strong>Will this work offline?</strong><br>Core reading and basic retrieval can. Dense embeddings are optional.</p></article>
     </section>
   </main>
 
-  <footer>
-    <p>© 2025 Olsen Automation LLC</p>
+  <footer class="footer">
+    <div class="wrap">
+      <p>© Brian Olsen / Olsen Automation LLC</p>
+      <p>Oxnard, California · <a href="mailto:brian@olsenautomation.com">brian@olsenautomation.com</a> · <a href="tel:+16265248156">(626) 524-8156</a></p>
+    </div>
   </footer>
 </body>
 </html>
