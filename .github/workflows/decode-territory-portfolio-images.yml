@@ -1,34 +1,31 @@
-name: Decode territory portfolio images
+name: Publish native territory portfolio images
 
 on:
-  pull_request_target:
-    types: [opened, synchronize, reopened]
+  push:
+    branches: [main]
     paths:
-      - 'territory-sales-execution.html'
       - '.github/workflows/decode-territory-portfolio-images.yml'
   workflow_dispatch:
 
 permissions:
   contents: write
-  pull-requests: read
 
 concurrency:
-  group: decode-territory-${{ github.event.pull_request.number || github.ref }}
+  group: publish-native-territory-images
   cancel-in-progress: false
 
 jobs:
-  decode-and-publish:
-    if: github.event_name == 'workflow_dispatch' || github.event.pull_request.head.repo.full_name == github.repository
+  publish:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out the pull-request branch
+      - name: Check out main
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.pull_request.head.ref || github.ref_name }}
+          ref: main
           fetch-depth: 0
           token: ${{ github.token }}
 
-      - name: Decode and validate native JPEG assets
+      - name: Decode validated JPEGs and restore normal image tags
         shell: python
         run: |
           import base64
@@ -38,6 +35,8 @@ jobs:
           root = pathlib.Path.cwd()
           asset_dir = root / 'assets' / 'territory-execution'
           data_dir = asset_dir / 'data'
+          page = root / 'territory-sales-execution.html'
+
           assets = {
               'jack-daniels-holiday-coca-cola.jpg': 'jack-daniels-holiday-coca-cola.b64',
               'jack-daniels-patriotic.jpg': 'jack-daniels-patriotic.b64',
@@ -91,16 +90,36 @@ jobs:
               (asset_dir / output_name).write_bytes(data)
               print(f'decoded {output_name}: {width}x{height}, {len(data)} bytes')
 
-          page = root / 'territory-sales-execution.html'
           html = page.read_text(encoding='utf-8')
-          if 'data-b64=' in html or 'decodeBase64Image' in html:
-              raise ValueError('Browser-side Base64 loader must not be present')
-          for output_name in assets:
-              expected = f'assets/territory-execution/{output_name}?v=20260726-native'
-              if expected not in html:
-                  raise ValueError(f'HTML is missing native image path: {expected}')
+          placeholder = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=='
+          for output_name, source_name in assets.items():
+              old = f'src="{placeholder}" data-b64="assets/territory-execution/data/{source_name}" decoding="async"'
+              new = f'src="assets/territory-execution/{output_name}?v=20260726-native-final" decoding="async"'
+              if old not in html:
+                  raise ValueError(f'Expected image placeholder not found for {source_name}')
+              html = html.replace(old, new)
 
-      - name: Verify native JPEG files
+          html = re.sub(
+              r'\.photo img\[data-b64\]\{[^}]*\}\.photo img\[data-b64\]\.is-loaded\{[^}]*\}\.photo\.image-error\{[^}]*\}\.photo\.image-error:after\{[^}]*\}',
+              '',
+              html,
+          )
+          html = re.sub(
+              r'\n\s*<script>\s*\(\(\) => \{.*?</script>',
+              '',
+              html,
+              flags=re.DOTALL,
+          )
+
+          if 'data-b64=' in html or 'decodeBase64Image' in html or 'Image temporarily unavailable' in html:
+              raise ValueError('Browser-side image loader was not fully removed')
+          for output_name in assets:
+              expected = f'assets/territory-execution/{output_name}?v=20260726-native-final'
+              if expected not in html:
+                  raise ValueError(f'HTML missing native image path: {expected}')
+          page.write_text(html, encoding='utf-8')
+
+      - name: Verify native image files
         run: |
           set -euo pipefail
           for image in \
@@ -111,8 +130,10 @@ jobs:
             cutwater-stadium.jpg; do
             file "assets/territory-execution/$image" | grep -q 'JPEG image data'
           done
+          ! grep -q 'data-b64=' territory-sales-execution.html
+          ! grep -q 'decodeBase64Image' territory-sales-execution.html
 
-      - name: Commit native JPEGs to the pull-request branch
+      - name: Commit repaired page and native JPEG files
         run: |
           set -euo pipefail
           git config user.name 'github-actions[bot]'
@@ -127,5 +148,5 @@ jobs:
             echo 'No changes to commit.'
             exit 0
           fi
-          git commit -m 'Decode and publish native spirit portfolio images'
-          git push origin HEAD:${{ github.event.pull_request.head.ref || github.ref_name }}
+          git commit -m 'Publish five native territory portfolio JPEGs'
+          git push origin HEAD:main
