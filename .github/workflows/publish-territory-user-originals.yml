@@ -1,0 +1,540 @@
+name: Publish and verify six territory portfolio JPEGs
+
+on:
+  push:
+    branches:
+      - verification/territory-production-aa113034
+    paths:
+      - .github/workflows/publish-territory-user-originals.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: territory-user-originals-final
+  cancel-in-progress: false
+
+env:
+  EXPECTED_MAIN: aa113034d0ab8ba3de064cbe181d665796ab94aa
+  VERSION_TOKEN: 20260726-user-originals-final
+  PRODUCTION_BASE: https://olsenautomation.com
+
+jobs:
+  publish-and-verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Check out transfer branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download registered user-original bundle
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/transfer /tmp/source /tmp/prepared/assets/territory-execution /tmp/evidence
+          urls=(
+            'https://sdmntprcentralus.oaiusercontent.com/files/00000000-9360-81f5-ad1d-5a7c8c6a10ef/raw'
+            'https://files.oaiusercontent.com/files/00000000-9360-81f5-ad1d-5a7c8c6a10ef/raw'
+            'https://chatgpt.com/backend-api/files/file_00000000936081f5ad1d5a7c8c6a10ef/download'
+          )
+          selected=''
+          n=0
+          for url in "${urls[@]}"; do
+            n=$((n + 1))
+            echo "Trying registered bundle endpoint ${n}"
+            if curl --fail --location --silent --show-error \
+              --connect-timeout 20 --max-time 120 \
+              --retry 3 --retry-delay 3 --retry-all-errors \
+              -A 'Mozilla/5.0' \
+              -D "/tmp/evidence/source-${n}.headers" \
+              -o "/tmp/transfer/candidate-${n}.zip" \
+              "$url" && unzip -t "/tmp/transfer/candidate-${n}.zip"; then
+              selected="/tmp/transfer/candidate-${n}.zip"
+              break
+            fi
+          done
+          if [[ -z "$selected" ]]; then
+            echo 'No registered endpoint returned the validated ZIP bundle.' >&2
+            exit 1
+          fi
+          cp "$selected" /tmp/evidence/source-bundle.zip
+          sha256sum /tmp/evidence/source-bundle.zip | tee /tmp/evidence/source-bundle.sha256
+          unzip -q /tmp/evidence/source-bundle.zip -d /tmp/source
+          find /tmp/source -type f -printf '%P %s bytes\n' | sort | tee /tmp/evidence/source-inventory.txt
+
+      - name: Decode and freshly encode six baseline JPEGs
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check --quiet 'Pillow==11.3.0'
+          python - <<'PY'
+          from __future__ import annotations
+
+          import hashlib
+          import json
+          from pathlib import Path
+          from PIL import Image, ImageOps
+
+          source_root = Path('/tmp/source')
+          output_root = Path('/tmp/prepared/assets/territory-execution')
+          evidence_root = Path('/tmp/evidence')
+          output_root.mkdir(parents=True, exist_ok=True)
+
+          targets = [
+              'jack-daniels-holiday-coca-cola.jpg',
+              'jack-daniels-patriotic.jpg',
+              'jack-daniels-flavor-portfolio.jpg',
+              'titos-mule-mug.jpg',
+              'jack-daniels-football-feature.jpg',
+              'cutwater-stadium.jpg',
+          ]
+
+          records: list[dict[str, object]] = []
+          for name in targets:
+              matches = list(source_root.rglob(name))
+              if len(matches) != 1:
+                  raise SystemExit(f'{name}: expected one source, found {len(matches)}')
+              source = matches[0]
+              source_bytes = source.read_bytes()
+              if not source_bytes.startswith(b'\xff\xd8') or not source_bytes.endswith(b'\xff\xd9'):
+                  raise SystemExit(f'{name}: source lacks complete JPEG boundary markers')
+
+              with Image.open(source) as opened:
+                  if opened.format != 'JPEG':
+                      raise SystemExit(f'{name}: source format is {opened.format}, not JPEG')
+                  opened.verify()
+              with Image.open(source) as opened:
+                  image = ImageOps.exif_transpose(opened).convert('RGB')
+                  image.load()
+
+              if image.size != (600, 800):
+                  raise SystemExit(f'{name}: expected 600x800 user-original derivative, got {image.size}')
+
+              output = output_root / name
+              image.save(
+                  output,
+                  format='JPEG',
+                  quality=82,
+                  optimize=True,
+                  progressive=False,
+                  subsampling=2,
+                  exif=b'',
+              )
+
+              data = output.read_bytes()
+              if not data.startswith(b'\xff\xd8') or not data.endswith(b'\xff\xd9'):
+                  raise SystemExit(f'{name}: encoded output lacks complete JPEG markers')
+              with Image.open(output) as checked:
+                  if checked.format != 'JPEG' or checked.size != (600, 800):
+                      raise SystemExit(f'{name}: encoded output metadata invalid')
+                  if checked.info.get('progressive') or checked.info.get('progression'):
+                      raise SystemExit(f'{name}: encoded output unexpectedly progressive')
+                  checked.verify()
+              with Image.open(output) as checked:
+                  checked.load()
+                  if checked.size != (600, 800):
+                      raise SystemExit(f'{name}: full decode returned wrong dimensions')
+
+              records.append({
+                  'name': name,
+                  'source_path': str(source.relative_to(source_root)),
+                  'source_sha256': hashlib.sha256(source_bytes).hexdigest(),
+                  'source_bytes': len(source_bytes),
+                  'output_sha256': hashlib.sha256(data).hexdigest(),
+                  'output_bytes': len(data),
+                  'width': 600,
+                  'height': 800,
+                  'format': 'JPEG',
+                  'progressive': False,
+                  'full_decode': 'PASS',
+              })
+              print(f'PASS {name}: 600x800, {len(data)} bytes, {records[-1]["output_sha256"]}')
+
+          (evidence_root / 'prepared-images.json').write_text(
+              json.dumps(records, indent=2) + '\n', encoding='utf-8'
+          )
+          PY
+
+      - name: Guard exact main and prepare standard HTML
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --no-tags origin main
+          actual_main="$(git rev-parse origin/main)"
+          echo "Expected main: ${EXPECTED_MAIN}"
+          echo "Observed main: ${actual_main}"
+          if [[ "$actual_main" != "$EXPECTED_MAIN" ]]; then
+            echo 'Main moved; refusing to publish from a stale guard.' >&2
+            exit 1
+          fi
+          git show origin/main:territory-sales-execution.html > /tmp/main-territory-sales-execution.html
+          python - <<'PY'
+          from pathlib import Path
+          from textwrap import dedent
+
+          version = '20260726-user-originals-final'
+          source = Path('/tmp/main-territory-sales-execution.html')
+          output = Path('/tmp/prepared/territory-sales-execution.html')
+          html = source.read_text(encoding='utf-8')
+
+          if '<meta name="robots" content="noindex,nofollow,noarchive">' not in html:
+              raise SystemExit('The guarded page lost its noindex metadata.')
+
+          html = html.replace(
+              'Five spirit-forward examples demonstrating large-format case construction, portfolio blocking, seasonal activation, cross-brand programs, promotional signage, and custom focal elements.',
+              'Six spirit-forward examples demonstrating large-format case construction, portfolio blocking, seasonal activation, cross-brand programs, promotional signage, and custom focal elements.',
+              1,
+          )
+
+          start_marker = '      <div class="gallery spirits-gallery">'
+          end_marker = '      </div>\n    </section>'
+          start = html.index(start_marker)
+          end = html.index(end_marker, start) + len('      </div>')
+
+          gallery = dedent(f'''\
+                <div class="gallery spirits-gallery">
+                  <article class="work">
+                    <figure>
+                      <div class="photo"><img loading="lazy" decoding="async" width="600" height="800" src="assets/territory-execution/jack-daniels-holiday-coca-cola.jpg?v={version}" alt="Large Jack Daniel's and Coca-Cola holiday display"></div>
+                      <figcaption class="work-copy"><span class="tag">Large-format spirits</span><h3>Jack Daniel’s holiday cross-brand feature</h3><p>Cross-brand holiday storytelling, stable case construction, visible pricing, seasonal theatre, and a strong floor presence.</p></figcaption>
+                    </figure>
+                  </article>
+                  <article class="work">
+                    <figure>
+                      <div class="photo"><img loading="lazy" decoding="async" width="600" height="800" src="assets/territory-execution/jack-daniels-patriotic.jpg?v={version}" alt="Patriotic Jack Daniel's retail display with balloons and red, white, and blue decorations"></div>
+                      <figcaption class="work-copy"><span class="tag">Seasonal adaptation</span><h3>Patriotic Jack Daniel’s feature</h3><p>Clean symmetry, substantial case mass, visible pricing, and occasion-based finishing create a compact but commanding execution.</p></figcaption>
+                    </figure>
+                  </article>
+                  <article class="work">
+                    <figure>
+                      <div class="photo"><img loading="lazy" decoding="async" width="600" height="800" src="assets/territory-execution/jack-daniels-flavor-portfolio.jpg?v={version}" alt="Jack Daniel's Apple, Fire, Honey, and Old No. 7 portfolio display"></div>
+                      <figcaption class="work-copy"><span class="tag">Portfolio segmentation</span><h3>Jack Daniel’s flavor portfolio wall</h3><p>Color-coded case blocking separates Apple, Fire, Honey, and Old No. 7 while preserving one coherent brand statement.</p></figcaption>
+                    </figure>
+                  </article>
+                  <article class="work">
+                    <figure>
+                      <div class="photo"><img loading="lazy" decoding="async" width="600" height="800" src="assets/territory-execution/titos-mule-mug.jpg?v={version}" alt="Tito's Handmade Vodka display beneath an oversized copper mule mug"></div>
+                      <figcaption class="work-copy"><span class="tag">Cocktail occasion</span><h3>Tito’s mule-mug feature</h3><p>An oversized branded focal element turns a high-volume case stack into a recognizable cocktail occasion supported by multiple bottle sizes and promotional pricing.</p></figcaption>
+                    </figure>
+                  </article>
+                  <article class="work">
+                    <figure>
+                      <div class="photo"><img loading="lazy" decoding="async" width="600" height="800" src="assets/territory-execution/jack-daniels-football-feature.jpg?v={version}" alt="Jack Daniel's football-themed retail display with goalpost and football decorations"></div>
+                      <figcaption class="work-copy"><span class="tag">Seasonal activation</span><h3>Jack Daniel’s football feature</h3><p>Game-day storytelling combines a clear vertical focal point, balanced case mass, visible pricing, and portfolio breadth in one shoppable feature.</p></figcaption>
+                    </figure>
+                  </article>
+                  <article class="work">
+                    <figure>
+                      <div class="photo"><img loading="lazy" decoding="async" width="600" height="800" src="assets/territory-execution/cutwater-stadium.jpg?v={version}" alt="Cutwater canned cocktail stadium-shaped retail display"></div>
+                      <figcaption class="work-copy"><span class="tag">RTD structural execution</span><h3>Cutwater stadium display</h3><p>A circular, tiered build uses package color, repeated facings, sports theming, and a custom header to turn RTD inventory into a destination feature.</p></figcaption>
+                    </figure>
+                  </article>
+                </div>''')
+
+          html = html[:start] + gallery + html[end:]
+
+          forbidden = [
+              'data-b64', 'decodeBase64Image', 'Image temporarily unavailable',
+              'data:image', '.webp', 'sprite', '<script'
+          ]
+          found = [token for token in forbidden if token in html]
+          if found:
+              raise SystemExit(f'Forbidden workaround tokens remain: {found}')
+          if html.count(version) != 6:
+              raise SystemExit(f'Expected six cache-key references, got {html.count(version)}')
+          if html.count('width="600" height="800"') != 6:
+              raise SystemExit('Expected six explicit 600x800 image dimensions.')
+          if html.count('<div class="gallery spirits-gallery">') != 1:
+              raise SystemExit('The spirits gallery structure is not singular.')
+          if '<meta name="robots" content="noindex,nofollow,noarchive">' not in html:
+              raise SystemExit('Noindex metadata was not preserved.')
+
+          output.write_text(html, encoding='utf-8')
+          print(f'PASS HTML: {len(html.encode("utf-8"))} bytes, six standard image references')
+          PY
+          cp /tmp/prepared/territory-sales-execution.html /tmp/evidence/prepared-page.html
+
+      - name: Create one guarded seven-path commit and push once
+        id: publish
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/publish-worktree
+          git worktree add --detach /tmp/publish-worktree origin/main
+          cd /tmp/publish-worktree
+
+          cp /tmp/prepared/territory-sales-execution.html territory-sales-execution.html
+          for name in \
+            jack-daniels-holiday-coca-cola.jpg \
+            jack-daniels-patriotic.jpg \
+            jack-daniels-flavor-portfolio.jpg \
+            titos-mule-mug.jpg \
+            jack-daniels-football-feature.jpg \
+            cutwater-stadium.jpg; do
+            cp "/tmp/prepared/assets/territory-execution/${name}" \
+               "assets/territory-execution/${name}"
+          done
+
+          expected_paths=/tmp/evidence/expected-paths.txt
+          cat > "$expected_paths" <<'EOF'
+          assets/territory-execution/cutwater-stadium.jpg
+          assets/territory-execution/jack-daniels-flavor-portfolio.jpg
+          assets/territory-execution/jack-daniels-football-feature.jpg
+          assets/territory-execution/jack-daniels-holiday-coca-cola.jpg
+          assets/territory-execution/jack-daniels-patriotic.jpg
+          assets/territory-execution/titos-mule-mug.jpg
+          territory-sales-execution.html
+          EOF
+          sed -i 's/^          //' "$expected_paths"
+          sort -o "$expected_paths" "$expected_paths"
+
+          git add -- \
+            territory-sales-execution.html \
+            assets/territory-execution/jack-daniels-holiday-coca-cola.jpg \
+            assets/territory-execution/jack-daniels-patriotic.jpg \
+            assets/territory-execution/jack-daniels-flavor-portfolio.jpg \
+            assets/territory-execution/titos-mule-mug.jpg \
+            assets/territory-execution/jack-daniels-football-feature.jpg \
+            assets/territory-execution/cutwater-stadium.jpg
+
+          git diff --cached --name-only | sort > /tmp/evidence/staged-paths.txt
+          diff -u "$expected_paths" /tmp/evidence/staged-paths.txt
+          test "$(git diff --cached --name-only | wc -l)" -eq 7
+          git diff --cached --check
+
+          git config user.name 'Olsen Automation Repair Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git commit -m 'Replace six territory portfolio images from user originals'
+
+          commit_sha="$(git rev-parse HEAD)"
+          parent_sha="$(git rev-parse HEAD^)"
+          if [[ "$parent_sha" != "$EXPECTED_MAIN" ]]; then
+            echo "Unexpected commit parent: $parent_sha" >&2
+            exit 1
+          fi
+          git show --format=fuller --stat --oneline HEAD | tee /tmp/evidence/commit-summary.txt
+          git diff-tree --no-commit-id --name-only -r HEAD | sort > /tmp/evidence/committed-paths.txt
+          diff -u "$expected_paths" /tmp/evidence/committed-paths.txt
+
+          git push origin HEAD:main
+          echo "$commit_sha" | tee /tmp/evidence/commit-sha.txt
+          echo "$parent_sha" | tee /tmp/evidence/parent-sha.txt
+          echo "commit_sha=$commit_sha" >> "$GITHUB_OUTPUT"
+          echo "parent_sha=$parent_sha" >> "$GITHUB_OUTPUT"
+
+      - name: Wait for the custom domain to publish the exact page
+        shell: bash
+        run: |
+          set -euo pipefail
+          commit='${{ steps.publish.outputs.commit_sha }}'
+          ready=false
+          for attempt in $(seq 1 90); do
+            echo "Production convergence check ${attempt}/90"
+            status="$(curl --location --silent --show-error \
+              --connect-timeout 20 --max-time 90 \
+              --retry 2 --retry-delay 2 --retry-all-errors \
+              -H 'Cache-Control: no-cache, no-store, max-age=0' \
+              -H 'Pragma: no-cache' \
+              -o /tmp/evidence/production-page.html \
+              -D /tmp/evidence/production-page.headers \
+              -w '%{http_code}' \
+              "${PRODUCTION_BASE}/territory-sales-execution.html?verify=${commit}-${attempt}")"
+            if [[ "$status" == '200' ]] && \
+               [[ "$(grep -Fo "$VERSION_TOKEN" /tmp/evidence/production-page.html | wc -l)" -eq 6 ]]; then
+              ready=true
+              break
+            fi
+            sleep 10
+          done
+          if [[ "$ready" != true ]]; then
+            echo 'The custom domain did not converge to the exact committed page.' >&2
+            exit 1
+          fi
+
+      - name: Directly download and fully decode every live URL
+        shell: bash
+        run: |
+          set -euo pipefail
+          commit='${{ steps.publish.outputs.commit_sha }}'
+          mkdir -p /tmp/evidence/live
+          images=(
+            jack-daniels-holiday-coca-cola.jpg
+            jack-daniels-patriotic.jpg
+            jack-daniels-flavor-portfolio.jpg
+            titos-mule-mug.jpg
+            jack-daniels-football-feature.jpg
+            cutwater-stadium.jpg
+          )
+
+          for name in "${images[@]}"; do
+            url="${PRODUCTION_BASE}/assets/territory-execution/${name}?verify=${commit}"
+            status="$(curl --fail --location --silent --show-error \
+              --connect-timeout 20 --max-time 120 \
+              --retry 4 --retry-delay 3 --retry-all-errors \
+              -H 'Cache-Control: no-cache, no-store, max-age=0' \
+              -H 'Pragma: no-cache' \
+              -D "/tmp/evidence/live/${name}.headers" \
+              -o "/tmp/evidence/live/${name}" \
+              -w '%{http_code}' \
+              "$url")"
+            if [[ "$status" != '200' ]]; then
+              echo "$name returned HTTP $status" >&2
+              exit 1
+            fi
+            content_type="$(awk 'BEGIN{IGNORECASE=1} /^content-type:/{gsub("\\r",""); value=$0} END{sub(/^[^:]+:[[:space:]]*/,"",value); print value}' "/tmp/evidence/live/${name}.headers")"
+            if [[ "$content_type" != image/jpeg* ]]; then
+              echo "$name returned unexpected content type: $content_type" >&2
+              exit 1
+            fi
+            cmp --silent "/tmp/evidence/live/${name}" "/tmp/publish-worktree/assets/territory-execution/${name}"
+          done
+
+          python - <<'PY'
+          from __future__ import annotations
+
+          import hashlib
+          import json
+          from pathlib import Path
+          from PIL import Image
+
+          commit = Path('/tmp/evidence/commit-sha.txt').read_text().strip()
+          parent = Path('/tmp/evidence/parent-sha.txt').read_text().strip()
+          base = 'https://olsenautomation.com'
+          version = '20260726-user-originals-final'
+          page = Path('/tmp/evidence/production-page.html')
+          page_text = page.read_text(encoding='utf-8')
+
+          names = [
+              'jack-daniels-holiday-coca-cola.jpg',
+              'jack-daniels-patriotic.jpg',
+              'jack-daniels-flavor-portfolio.jpg',
+              'titos-mule-mug.jpg',
+              'jack-daniels-football-feature.jpg',
+              'cutwater-stadium.jpg',
+          ]
+
+          if page_text.count(version) != 6:
+              raise SystemExit('Production HTML does not contain six exact cache keys.')
+          if page_text.count('width="600" height="800"') != 6:
+              raise SystemExit('Production HTML lacks six explicit dimensions.')
+          if '<meta name="robots" content="noindex,nofollow,noarchive">' not in page_text:
+              raise SystemExit('Production HTML lost noindex metadata.')
+          forbidden = [
+              'data-b64', 'decodeBase64Image', 'Image temporarily unavailable',
+              'data:image', '.webp', 'sprite', '<script'
+          ]
+          found = [token for token in forbidden if token in page_text]
+          if found:
+              raise SystemExit(f'Production HTML contains forbidden workarounds: {found}')
+
+          records = []
+          for name in names:
+              live = Path('/tmp/evidence/live') / name
+              committed = Path('/tmp/publish-worktree/assets/territory-execution') / name
+              live_bytes = live.read_bytes()
+              committed_bytes = committed.read_bytes()
+              if live_bytes != committed_bytes:
+                  raise SystemExit(f'{name}: live bytes differ from committed bytes')
+              if not live_bytes.startswith(b'\xff\xd8') or not live_bytes.endswith(b'\xff\xd9'):
+                  raise SystemExit(f'{name}: live JPEG markers are incomplete')
+              with Image.open(live) as image:
+                  if image.format != 'JPEG' or image.size != (600, 800):
+                      raise SystemExit(f'{name}: live metadata invalid: {image.format} {image.size}')
+                  if image.info.get('progressive') or image.info.get('progression'):
+                      raise SystemExit(f'{name}: live image is unexpectedly progressive')
+                  image.verify()
+              with Image.open(live) as image:
+                  image.load()
+                  if image.size != (600, 800):
+                      raise SystemExit(f'{name}: full live decode returned {image.size}')
+              headers = (Path('/tmp/evidence/live') / f'{name}.headers').read_text(
+                  encoding='utf-8', errors='replace'
+              )
+              records.append({
+                  'name': name,
+                  'url': f'{base}/assets/territory-execution/{name}?verify={commit}',
+                  'http_status': 200,
+                  'content_type': 'image/jpeg',
+                  'bytes': len(live_bytes),
+                  'sha256': hashlib.sha256(live_bytes).hexdigest(),
+                  'width': 600,
+                  'height': 800,
+                  'format': 'JPEG',
+                  'progressive': False,
+                  'byte_for_byte_match_to_commit': True,
+                  'verify': 'PASS',
+                  'full_pixel_decode': 'PASS',
+                  'response_headers_captured': bool(headers),
+              })
+              print(f'LIVE PASS {name}: 600x800, {records[-1]["sha256"]}')
+
+          changed_paths = Path('/tmp/evidence/committed-paths.txt').read_text().splitlines()
+          expected_paths = Path('/tmp/evidence/expected-paths.txt').read_text().splitlines()
+          if changed_paths != expected_paths or len(changed_paths) != 7:
+              raise SystemExit('The committed path set is not the exact seven-path set.')
+
+          report = {
+              'result': 'PASS',
+              'repository': 'OlsenAutomation/olsenautomation.github.io',
+              'commit_sha': commit,
+              'parent_sha': parent,
+              'atomic_commit_count': 1,
+              'changed_paths': changed_paths,
+              'production_page': {
+                  'url': f'{base}/territory-sales-execution.html?verify={commit}',
+                  'http_status': 200,
+                  'noindex_nofollow_noarchive': True,
+                  'standard_img_src_references': 6,
+                  'workaround_tokens_present': [],
+              },
+              'images': records,
+          }
+          Path('/tmp/evidence/production-verification.json').write_text(
+              json.dumps(report, indent=2) + '\n', encoding='utf-8'
+          )
+          Path('/tmp/evidence/production-verification.txt').write_text(
+              'PASS\n'
+              f'commit={commit}\n'
+              f'parent={parent}\n'
+              'changed_paths=7\n'
+              'live_jpegs=6\n'
+              'dimensions=600x800\n'
+              'full_decode=PASS\n',
+              encoding='utf-8',
+          )
+          PY
+
+      - name: Publish verification summary
+        if: success()
+        shell: bash
+        run: |
+          {
+            echo '## Territory portfolio production verification: PASS'
+            echo
+            echo "- Commit: \`${{ steps.publish.outputs.commit_sha }}\`"
+            echo "- Parent: \`${{ steps.publish.outputs.parent_sha }}\`"
+            echo '- One atomic commit; exactly seven changed paths.'
+            echo '- Six freshly encoded baseline JPEGs.'
+            echo '- Every live URL returned HTTP 200 and image/jpeg.'
+            echo '- Every live file matched the committed bytes.'
+            echo '- Pillow verify and full pixel decode passed at 600x800.'
+            echo '- Production HTML contains six standard img src references and no workaround code.'
+            echo
+            echo '### Live SHA-256 values'
+            echo '```text'
+            sha256sum /tmp/evidence/live/*.jpg
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload direct production evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: territory-six-jpeg-production-verification
+          path: |
+            /tmp/evidence/
+          if-no-files-found: error
+          retention-days: 14
