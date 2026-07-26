@@ -1,4 +1,4 @@
-name: Recover complete territory portfolio images
+name: Inventory territory image assets
 
 on:
   pull_request:
@@ -11,207 +11,75 @@ permissions:
   contents: read
 
 jobs:
-  recover-history:
+  inventory:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 10
     steps:
-      - name: Clone complete repository history
-        shell: bash
-        run: |
-          set -euo pipefail
-          git clone --quiet --no-checkout https://github.com/OlsenAutomation/olsenautomation.github.io.git history
-          cd history
-          git fetch --quiet --all --tags --prune
-          echo "Historical commits: $(git rev-list --all --count)"
+      - name: Check out main repository state
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
 
-      - name: Inspect native, Base64, and chunked historical candidates
+      - name: Build JPEG inventory and contact sheet
         shell: bash
         run: |
           set -euo pipefail
           python -m pip install --disable-pip-version-check --quiet 'Pillow>=11,<12'
           python - <<'PY'
-          import base64
-          import hashlib
-          import io
-          import json
-          import re
-          import subprocess
           from pathlib import Path
-          from PIL import Image
+          from PIL import Image, ImageDraw, ImageFont
+          import hashlib
 
-          repo = Path('history')
-          out = Path('recovery')
-          out.mkdir(exist_ok=True)
-          candidate_dir = out / 'candidates'
-          candidate_dir.mkdir(exist_ok=True)
+          root = Path('assets/territory-execution')
+          paths = sorted(p for p in root.rglob('*') if p.is_file() and p.suffix.lower() in {'.jpg', '.jpeg', '.png', '.webp'})
+          report = []
+          cards = []
+          for path in paths:
+              rel = str(path)
+              try:
+                  with Image.open(path) as im:
+                      fmt = im.format
+                      size = im.size
+                      im.load()
+                      rgb = im.convert('RGB')
+                  status = 'VALID'
+                  thumb = rgb.copy()
+                  thumb.thumbnail((280, 300))
+              except Exception as exc:
+                  fmt = 'ERROR'
+                  size = (0, 0)
+                  status = f'{type(exc).__name__}: {exc}'
+                  thumb = Image.new('RGB', (280, 300), '#dddddd')
+              digest = hashlib.sha256(path.read_bytes()).hexdigest()
+              report.append(f'{rel}\t{path.stat().st_size}\t{fmt}\t{size[0]}x{size[1]}\t{digest}\t{status}')
+              card = Image.new('RGB', (320, 380), 'white')
+              card.paste(thumb, ((320-thumb.width)//2, 8))
+              draw = ImageDraw.Draw(card)
+              label = rel.replace('assets/territory-execution/', '')
+              lines = [label[i:i+42] for i in range(0, len(label), 42)]
+              y = 315
+              for line in lines[:2]:
+                  draw.text((8, y), line, fill='black')
+                  y += 15
+              draw.text((8, 350), f'{fmt} {size[0]}x{size[1]} {path.stat().st_size} B', fill='black')
+              cards.append(card)
 
-          targets = [
-              'jack-daniels-holiday-coca-cola.jpg',
-              'jack-daniels-patriotic.jpg',
-              'jack-daniels-flavor-portfolio.jpg',
-              'titos-mule-mug.jpg',
-              'cutwater-stadium.jpg',
-          ]
-
-          def git(*args: str):
-              return subprocess.run(
-                  ['git', '-C', str(repo), *args],
-                  check=True,
-                  stdout=subprocess.PIPE,
-                  stderr=subprocess.DEVNULL,
-              ).stdout.decode('utf-8', errors='replace')
-
-          commits = git('rev-list', '--all').splitlines()
-          tree_cache = {}
-
-          def paths_at(commit):
-              if commit not in tree_cache:
-                  tree_cache[commit] = git('ls-tree', '-r', '--name-only', commit).splitlines()
-              return tree_cache[commit]
-
-          def read_path(commit, path):
-              proc = subprocess.run(
-                  ['git', '-C', str(repo), 'show', f'{commit}:{path}'],
-                  stdout=subprocess.PIPE,
-                  stderr=subprocess.DEVNULL,
-              )
-              return proc.stdout if proc.returncode == 0 else None
-
-          def decode_text(raw):
-              encoded = re.sub(rb'\s+', b'', raw)
-              return base64.b64decode(encoded, validate=True)
-
-          def inspect_jpeg(data):
-              if not data.startswith(b'\xff\xd8'):
-                  raise ValueError('missing SOI')
-              if not data.endswith(b'\xff\xd9'):
-                  raise ValueError('missing EOI')
-              with Image.open(io.BytesIO(data)) as image:
-                  if image.format != 'JPEG':
-                      raise ValueError(f'format={image.format}')
-                  size = image.size
-                  image.verify()
-              with Image.open(io.BytesIO(data)) as image:
-                  image.load()
-              return size
-
-          all_results = []
-          best_by_target = {}
-          seen_by_target = {name: set() for name in targets}
-
-          for commit in commits:
-              paths = paths_at(commit)
-              path_set = set(paths)
-              for name in targets:
-                  stem = name[:-4]
-                  sources = []
-
-                  native_path = f'assets/territory-execution/{name}'
-                  if native_path in path_set:
-                      data = read_path(commit, native_path)
-                      if data is not None:
-                          blob = git('rev-parse', f'{commit}:{native_path}').strip()
-                          sources.append((f'native:{native_path}', data, blob))
-
-                  b64_path = f'assets/territory-execution/data/{stem}.b64'
-                  if b64_path in path_set:
-                      raw = read_path(commit, b64_path)
-                      if raw is not None:
-                          try:
-                              sources.append((f'base64:{b64_path}', decode_text(raw), None))
-                          except Exception:
-                              pass
-
-                  for prefix in (
-                      f'assets/territory-execution/data/{stem}/',
-                      f'assets/territory-execution/chunks/{stem}/',
-                  ):
-                      chunks = sorted(p for p in paths if p.startswith(prefix) and p.endswith('.txt'))
-                      if chunks:
-                          joined = b''.join(read_path(commit, p) or b'' for p in chunks)
-                          try:
-                              sources.append((f'chunks:{prefix} ({len(chunks)})', decode_text(joined), None))
-                          except Exception:
-                              pass
-
-                  for source, data, blob in sources:
-                      digest = hashlib.sha256(data).hexdigest()
-                      if digest in seen_by_target[name]:
-                          continue
-                      seen_by_target[name].add(digest)
-                      try:
-                          width, height = inspect_jpeg(data)
-                          valid = True
-                          error = None
-                      except Exception as exc:
-                          width = height = 0
-                          valid = False
-                          error = f'{type(exc).__name__}: {exc}'
-
-                      record = {
-                          'target': name,
-                          'commit': commit,
-                          'commit_short': commit[:12],
-                          'source': source,
-                          'blob_sha': blob,
-                          'sha256': digest,
-                          'bytes': len(data),
-                          'width': width,
-                          'height': height,
-                          'valid': valid,
-                          'error': error,
-                      }
-                      all_results.append(record)
-
-                      if valid:
-                          safe_source = re.sub(r'[^a-zA-Z0-9_.-]+', '-', source)[:80]
-                          path = candidate_dir / name / f'{width}x{height}-{len(data)}-{digest[:12]}-{commit[:10]}-{safe_source}.jpg'
-                          path.parent.mkdir(parents=True, exist_ok=True)
-                          path.write_bytes(data)
-                          score = (width * height, min(width, height), len(data))
-                          current = best_by_target.get(name)
-                          if current is None or score > current['score']:
-                              best_by_target[name] = {'score': score, 'record': record, 'path': str(path)}
-
-          report_lines = ['# Historical JPEG recovery report', '']
-          for name in targets:
-              report_lines.append(f'## {name}')
-              best = best_by_target.get(name)
-              if best is None:
-                  report_lines.append('NO VALID CANDIDATE')
-              else:
-                  r = best['record']
-                  report_lines.extend([
-                      f"BEST: {r['width']}x{r['height']}, {r['bytes']} bytes",
-                      f"commit: {r['commit']}",
-                      f"source: {r['source']}",
-                      f"blob_sha: {r['blob_sha']}",
-                      f"sha256: {r['sha256']}",
-                      f"artifact: {best['path']}",
-                  ])
-              report_lines.append('')
-
-          valid_records = [r for r in all_results if r['valid']]
-          valid_records.sort(key=lambda r: (r['target'], -(r['width'] * r['height']), -r['bytes']))
-          report_lines.extend(['# All unique valid candidates', ''])
-          for r in valid_records:
-              report_lines.append(
-                  f"{r['target']} | {r['width']}x{r['height']} | {r['bytes']} bytes | "
-                  f"{r['commit_short']} | {r['source']} | blob={r['blob_sha']} | sha256={r['sha256']}"
-              )
-
-          missing = [name for name in targets if name not in best_by_target]
-          report_lines.extend(['', 'MISSING: ' + (', '.join(missing) if missing else 'none')])
-          (out / 'report.txt').write_text('\n'.join(report_lines) + '\n', encoding='utf-8')
-          (out / 'records.json').write_text(json.dumps(all_results, indent=2), encoding='utf-8')
-          print('\n'.join(report_lines[:70]))
+          cols = 4
+          rows = (len(cards) + cols - 1) // cols
+          sheet = Image.new('RGB', (cols*320, max(1, rows)*380), '#cccccc')
+          for i, card in enumerate(cards):
+              sheet.paste(card, ((i%cols)*320, (i//cols)*380))
+          Path('inventory').mkdir()
+          Path('inventory/report.tsv').write_text('\n'.join(report) + '\n', encoding='utf-8')
+          sheet.save('inventory/contact-sheet.jpg', quality=90)
+          print('\n'.join(report))
           PY
 
-      - name: Upload recovered candidates and report
-        if: always()
+      - name: Upload inventory
         uses: actions/upload-artifact@v4
         with:
-          name: territory-historical-image-recovery
-          path: recovery/
+          name: territory-image-inventory
+          path: inventory/
           if-no-files-found: error
-          retention-days: 14
+          retention-days: 7
