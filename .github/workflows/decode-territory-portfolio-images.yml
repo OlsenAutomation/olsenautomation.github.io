@@ -4,7 +4,6 @@ on:
   pull_request_target:
     types: [opened, synchronize, reopened]
     paths:
-      - 'assets/territory-execution/chunks/**'
       - 'territory-sales-execution.html'
       - '.github/workflows/decode-territory-portfolio-images.yml'
   workflow_dispatch:
@@ -29,7 +28,7 @@ jobs:
           fetch-depth: 0
           token: ${{ github.token }}
 
-      - name: Reassemble, decode, and validate JPEG assets
+      - name: Decode and validate native JPEG assets
         shell: python
         run: |
           import base64
@@ -37,15 +36,15 @@ jobs:
           import re
 
           root = pathlib.Path.cwd()
-          assets = {
-              'jack-daniels-holiday-coca-cola.jpg': 'jack-daniels-holiday-coca-cola',
-              'jack-daniels-patriotic.jpg': 'jack-daniels-patriotic',
-              'jack-daniels-flavor-portfolio.jpg': 'jack-daniels-flavor-portfolio',
-              'titos-mule-mug.jpg': 'titos-mule-mug',
-              'cutwater-stadium.jpg': 'cutwater-stadium',
-          }
           asset_dir = root / 'assets' / 'territory-execution'
-          chunks_root = asset_dir / 'chunks'
+          data_dir = asset_dir / 'data'
+          assets = {
+              'jack-daniels-holiday-coca-cola.jpg': 'jack-daniels-holiday-coca-cola.b64',
+              'jack-daniels-patriotic.jpg': 'jack-daniels-patriotic.b64',
+              'jack-daniels-flavor-portfolio.jpg': 'jack-daniels-flavor-portfolio.b64',
+              'titos-mule-mug.jpg': 'titos-mule-mug.b64',
+              'cutwater-stadium.jpg': 'cutwater-stadium.b64',
+          }
 
           sof_markers = {
               0xC0, 0xC1, 0xC2, 0xC3, 0xC5, 0xC6, 0xC7,
@@ -80,19 +79,15 @@ jobs:
                   i += segment_length
               raise ValueError('JPEG dimensions not found')
 
-          for output_name, slug in assets.items():
-              chunk_dir = chunks_root / slug
-              chunks = sorted(chunk_dir.glob('*.txt'))
-              if not chunks:
-                  raise FileNotFoundError(f'No chunks found for {slug}')
-              encoded = ''.join(p.read_text(encoding='utf-8').strip() for p in chunks)
-              encoded = re.sub(r'\s+', '', encoded)
+          for output_name, source_name in assets.items():
+              source = data_dir / source_name
+              encoded = re.sub(r'\s+', '', source.read_text(encoding='utf-8'))
               data = base64.b64decode(encoded, validate=True)
               if not data.endswith(b'\xff\xd9'):
-                  raise ValueError(f'{slug}: missing JPEG EOI marker')
+                  raise ValueError(f'{source_name}: missing JPEG EOI marker')
               width, height = jpeg_dimensions(data)
               if width < 180 or height < 240 or len(data) < 7000:
-                  raise ValueError(f'{slug}: invalid {width}x{height}, {len(data)} bytes')
+                  raise ValueError(f'{source_name}: invalid {width}x{height}, {len(data)} bytes')
               (asset_dir / output_name).write_bytes(data)
               print(f'decoded {output_name}: {width}x{height}, {len(data)} bytes')
 
@@ -120,10 +115,14 @@ jobs:
       - name: Commit native JPEGs to the pull-request branch
         run: |
           set -euo pipefail
-          rm -rf assets/territory-execution/chunks
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add territory-sales-execution.html assets/territory-execution
+          git add territory-sales-execution.html \
+            assets/territory-execution/jack-daniels-holiday-coca-cola.jpg \
+            assets/territory-execution/jack-daniels-patriotic.jpg \
+            assets/territory-execution/jack-daniels-flavor-portfolio.jpg \
+            assets/territory-execution/titos-mule-mug.jpg \
+            assets/territory-execution/cutwater-stadium.jpg
           if git diff --cached --quiet; then
             echo 'No changes to commit.'
             exit 0
