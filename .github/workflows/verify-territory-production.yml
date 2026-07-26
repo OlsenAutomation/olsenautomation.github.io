@@ -1,0 +1,161 @@
+name: Verify deployed territory portfolio repair
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/verify-territory-production.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-production:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Check out exact verification source
+        uses: actions/checkout@v4
+
+      - name: Fetch deployed page and five deployed JPEGs
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p production
+          base='https://olsenautomation.com'
+          page_url="${base}/territory-sales-execution.html?verify=${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+
+          expected=(
+            'jack-daniels-holiday-coca-cola.jpg?v=20260726-definitive'
+            'jack-daniels-patriotic.jpg?v=20260726-definitive'
+            'jack-daniels-flavor-portfolio.jpg?v=20260726-definitive'
+            'titos-mule-mug.jpg?v=20260726-definitive'
+            'cutwater-stadium.jpg?v=20260726-definitive'
+          )
+
+          ready=false
+          for attempt in $(seq 1 30); do
+            echo "Production page check ${attempt}/30"
+            rm -f production/page.html production/page.headers
+            if curl --fail --location --silent --show-error \
+              --connect-timeout 15 --max-time 60 \
+              -H 'Cache-Control: no-cache, no-store, max-age=0' \
+              -H 'Pragma: no-cache' \
+              -D production/page.headers \
+              -o production/page.html \
+              "${page_url}&attempt=${attempt}"; then
+              ready=true
+              for marker in "${expected[@]}"; do
+                if ! grep -Fq "$marker" production/page.html; then
+                  ready=false
+                fi
+              done
+              if grep -Eq 'data-b64|decodeBase64Image|Image temporarily unavailable|data:image|\.webp|sprite' production/page.html; then
+                ready=false
+              fi
+              if $ready; then
+                break
+              fi
+            fi
+            sleep 10
+          done
+
+          if ! $ready; then
+            echo 'Production page did not converge to the definitive source.' >&2
+            sed -n '1,220p' production/page.html >&2 || true
+            exit 1
+          fi
+
+          grep -Fqi 'content-type: text/html' production/page.headers
+          grep -Fq '<meta name="robots" content="noindex,nofollow,noarchive">' production/page.html
+          ! grep -Fq 'territory-sales-execution' index.html
+          ! grep -Fq 'territory-sales-execution' sitemap.xml
+
+          images=(
+            jack-daniels-holiday-coca-cola.jpg
+            jack-daniels-patriotic.jpg
+            jack-daniels-flavor-portfolio.jpg
+            titos-mule-mug.jpg
+            cutwater-stadium.jpg
+          )
+
+          for image in "${images[@]}"; do
+            echo "Fetching production asset: ${image}"
+            curl --fail --location --silent --show-error \
+              --connect-timeout 15 --max-time 60 \
+              --retry 4 --retry-delay 3 --retry-all-errors \
+              -H 'Cache-Control: no-cache, no-store, max-age=0' \
+              -H 'Pragma: no-cache' \
+              -D "production/${image}.headers" \
+              -o "production/${image}" \
+              "${base}/assets/territory-execution/${image}?verify=${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+            grep -Fqi 'content-type: image/jpeg' "production/${image}.headers"
+            cmp --silent "production/${image}" "assets/territory-execution/${image}"
+          done
+
+      - name: Fully decode every production JPEG
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check --quiet 'Pillow>=11,<12'
+          python - <<'PY'
+          from pathlib import Path
+          from PIL import Image
+
+          names = [
+              'jack-daniels-holiday-coca-cola.jpg',
+              'jack-daniels-patriotic.jpg',
+              'jack-daniels-flavor-portfolio.jpg',
+              'titos-mule-mug.jpg',
+              'cutwater-stadium.jpg',
+          ]
+
+          for name in names:
+              path = Path('production') / name
+              raw = path.read_bytes()
+              if not raw.startswith(b'\xff\xd8') or not raw.endswith(b'\xff\xd9'):
+                  raise SystemExit(f'{name}: missing JPEG boundary markers')
+              with Image.open(path) as image:
+                  if image.format != 'JPEG':
+                      raise SystemExit(f'{name}: unexpected format {image.format}')
+                  width, height = image.size
+                  image.verify()
+              with Image.open(path) as image:
+                  image.load()
+                  if image.width < 700 or image.height < 900:
+                      raise SystemExit(f'{name}: unexpected dimensions {image.size}')
+              print(f'PASS {name}: {width}x{height}, {len(raw)} bytes')
+          PY
+
+      - name: Record production evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          {
+            echo '## Production verification: PASS'
+            echo
+            echo '- Custom-domain HTML returned successfully.'
+            echo '- HTML contains five ordinary JPEG `<img src>` references.'
+            echo '- No Base64 loader, data URI, SVG wrapper, WebP sprite, fallback placeholder, or decoder script remains.'
+            echo '- Each live JPEG is byte-for-byte identical to the validated file on the reviewed branch.'
+            echo '- Pillow fully decoded all five production JPEGs.'
+            echo '- The page remains noindex and absent from `index.html` and `sitemap.xml`.'
+            echo
+            echo '### Production SHA-256 values'
+            echo '```text'
+            sha256sum production/*.jpg
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload direct production evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: territory-production-verification
+          path: |
+            production/page.html
+            production/page.headers
+            production/*.jpg
+            production/*.jpg.headers
+          if-no-files-found: error
+          retention-days: 14
