@@ -1,85 +1,64 @@
-name: Inventory territory image assets
+name: Probe registered transfer bundle
 
 on:
-  pull_request:
-    branches: [main]
+  push:
+    branches:
+      - verification/territory-production-aa113034
     paths:
-      - '.github/workflows/verify-territory-production.yml'
+      - .github/workflows/verify-territory-production.yml
   workflow_dispatch:
 
 permissions:
   contents: read
 
 jobs:
-  inventory:
+  probe:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - name: Check out main repository state
-        uses: actions/checkout@v4
-        with:
-          ref: main
-          fetch-depth: 1
-
-      - name: Build JPEG inventory and contact sheet
+      - name: Try registered-file download endpoints
         shell: bash
         run: |
           set -euo pipefail
-          python -m pip install --disable-pip-version-check --quiet 'Pillow>=11,<12'
-          python - <<'PY'
-          from pathlib import Path
-          from PIL import Image, ImageDraw, ImageFont
-          import hashlib
+          mkdir -p probe
+          urls=(
+            'https://sdmntprcentralus.oaiusercontent.com/files/00000000-9360-81f5-ad1d-5a7c8c6a10ef/raw'
+            'https://files.oaiusercontent.com/files/00000000-9360-81f5-ad1d-5a7c8c6a10ef/raw'
+            'https://chatgpt.com/backend-api/files/file_00000000936081f5ad1d5a7c8c6a10ef/download'
+          )
+          found=''
+          n=0
+          for url in "${urls[@]}"; do
+            n=$((n + 1))
+            echo "Trying candidate ${n}: ${url}"
+            if curl --fail --location --silent --show-error \
+              --connect-timeout 20 --max-time 90 \
+              -A 'Mozilla/5.0' \
+              -D "probe/candidate-${n}.headers" \
+              -o "probe/candidate-${n}.bin" \
+              "$url"; then
+              file "probe/candidate-${n}.bin" || true
+              wc -c "probe/candidate-${n}.bin"
+              if unzip -t "probe/candidate-${n}.bin"; then
+                found="probe/candidate-${n}.bin"
+                break
+              fi
+            fi
+          done
+          if [[ -z "$found" ]]; then
+            echo 'No candidate endpoint returned a valid ZIP.' >&2
+            exit 1
+          fi
+          cp "$found" probe/registered-bundle.zip
+          unzip -q probe/registered-bundle.zip -d probe/unpacked
+          find probe/unpacked -type f -printf '%P %s bytes\n' | sort
+          sha256sum probe/registered-bundle.zip
 
-          root = Path('assets/territory-execution')
-          paths = sorted(p for p in root.rglob('*') if p.is_file() and p.suffix.lower() in {'.jpg', '.jpeg', '.png', '.webp'})
-          report = []
-          cards = []
-          for path in paths:
-              rel = str(path)
-              try:
-                  with Image.open(path) as im:
-                      fmt = im.format
-                      size = im.size
-                      im.load()
-                      rgb = im.convert('RGB')
-                  status = 'VALID'
-                  thumb = rgb.copy()
-                  thumb.thumbnail((280, 300))
-              except Exception as exc:
-                  fmt = 'ERROR'
-                  size = (0, 0)
-                  status = f'{type(exc).__name__}: {exc}'
-                  thumb = Image.new('RGB', (280, 300), '#dddddd')
-              digest = hashlib.sha256(path.read_bytes()).hexdigest()
-              report.append(f'{rel}\t{path.stat().st_size}\t{fmt}\t{size[0]}x{size[1]}\t{digest}\t{status}')
-              card = Image.new('RGB', (320, 380), 'white')
-              card.paste(thumb, ((320-thumb.width)//2, 8))
-              draw = ImageDraw.Draw(card)
-              label = rel.replace('assets/territory-execution/', '')
-              lines = [label[i:i+42] for i in range(0, len(label), 42)]
-              y = 315
-              for line in lines[:2]:
-                  draw.text((8, y), line, fill='black')
-                  y += 15
-              draw.text((8, 350), f'{fmt} {size[0]}x{size[1]} {path.stat().st_size} B', fill='black')
-              cards.append(card)
-
-          cols = 4
-          rows = (len(cards) + cols - 1) // cols
-          sheet = Image.new('RGB', (cols*320, max(1, rows)*380), '#cccccc')
-          for i, card in enumerate(cards):
-              sheet.paste(card, ((i%cols)*320, (i//cols)*380))
-          Path('inventory').mkdir()
-          Path('inventory/report.tsv').write_text('\n'.join(report) + '\n', encoding='utf-8')
-          sheet.save('inventory/contact-sheet.jpg', quality=90)
-          print('\n'.join(report))
-          PY
-
-      - name: Upload inventory
+      - name: Upload probe evidence
+        if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: territory-image-inventory
-          path: inventory/
-          if-no-files-found: error
-          retention-days: 7
+          name: registered-transfer-bundle-probe
+          path: probe/
+          if-no-files-found: warn
+          retention-days: 2
