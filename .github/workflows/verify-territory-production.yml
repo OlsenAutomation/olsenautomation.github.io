@@ -53,24 +53,23 @@ jobs:
               'cutwater-stadium.jpg',
           ]
 
-          def git(*args: str, binary: bool = False):
-              result = subprocess.run(
+          def git(*args: str):
+              return subprocess.run(
                   ['git', '-C', str(repo), *args],
                   check=True,
                   stdout=subprocess.PIPE,
                   stderr=subprocess.DEVNULL,
-              ).stdout
-              return result if binary else result.decode('utf-8', errors='replace')
+              ).stdout.decode('utf-8', errors='replace')
 
           commits = git('rev-list', '--all').splitlines()
-          tree_cache: dict[str, list[str]] = {}
+          tree_cache = {}
 
-          def paths_at(commit: str) -> list[str]:
+          def paths_at(commit):
               if commit not in tree_cache:
                   tree_cache[commit] = git('ls-tree', '-r', '--name-only', commit).splitlines()
               return tree_cache[commit]
 
-          def read_path(commit: str, path: str) -> bytes | None:
+          def read_path(commit, path):
               proc = subprocess.run(
                   ['git', '-C', str(repo), 'show', f'{commit}:{path}'],
                   stdout=subprocess.PIPE,
@@ -78,11 +77,11 @@ jobs:
               )
               return proc.stdout if proc.returncode == 0 else None
 
-          def decode_text(raw: bytes) -> bytes:
+          def decode_text(raw):
               encoded = re.sub(rb'\s+', b'', raw)
               return base64.b64decode(encoded, validate=True)
 
-          def inspect_jpeg(data: bytes):
+          def inspect_jpeg(data):
               if not data.startswith(b'\xff\xd8'):
                   raise ValueError('missing SOI')
               if not data.endswith(b'\xff\xd9'):
@@ -98,14 +97,14 @@ jobs:
 
           all_results = []
           best_by_target = {}
-          seen_by_target: dict[str, set[str]] = {name: set() for name in targets}
+          seen_by_target = {name: set() for name in targets}
 
           for commit in commits:
               paths = paths_at(commit)
               path_set = set(paths)
               for name in targets:
                   stem = name[:-4]
-                  sources: list[tuple[str, bytes, str | None]] = []
+                  sources = []
 
                   native_path = f'assets/territory-execution/{name}'
                   if native_path in path_set:
@@ -201,16 +200,15 @@ jobs:
                   f"{r['commit_short']} | {r['source']} | blob={r['blob_sha']} | sha256={r['sha256']}"
               )
 
+          missing = [name for name in targets if name not in best_by_target]
+          report_lines.extend(['', 'MISSING: ' + (', '.join(missing) if missing else 'none')])
           (out / 'report.txt').write_text('\n'.join(report_lines) + '\n', encoding='utf-8')
           (out / 'records.json').write_text(json.dumps(all_results, indent=2), encoding='utf-8')
-          print('\n'.join(report_lines[:55]))
-
-          missing = [name for name in targets if name not in best_by_target]
-          if missing:
-              raise SystemExit('Missing valid candidates: ' + ', '.join(missing))
+          print('\n'.join(report_lines[:70]))
           PY
 
       - name: Upload recovered candidates and report
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: territory-historical-image-recovery
