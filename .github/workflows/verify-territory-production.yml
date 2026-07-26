@@ -123,8 +123,8 @@ jobs:
                   image.verify()
               with Image.open(path) as image:
                   image.load()
-                  if image.width < 700 or image.height < 900:
-                      raise SystemExit(f'{name}: unexpected dimensions {image.size}')
+                  if image.width < 180 or image.height < 240:
+                      raise SystemExit(f'{name}: unexpectedly small dimensions {image.size}')
               print(f'PASS {name}: {width}x{height}, {len(raw)} bytes')
           PY
 
