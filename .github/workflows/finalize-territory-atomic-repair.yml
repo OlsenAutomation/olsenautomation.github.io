@@ -1,0 +1,425 @@
+name: Finalize atomic territory image repair
+
+on:
+  push:
+    branches:
+      - automation/territory-blob-inspection-20260726
+    paths:
+      - .github/workflows/finalize-territory-atomic-repair.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: territory-atomic-repair-finalizer
+  cancel-in-progress: false
+
+jobs:
+  finalize:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out exact production parent
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+          token: ${{ github.token }}
+
+      - name: Guard unchanged production head
+        run: |
+          set -euo pipefail
+          expected='aa113034d0ab8ba3de064cbe181d665796ab94aa'
+          git fetch origin main
+          actual="$(git rev-parse origin/main)"
+          test "$actual" = "$expected" || {
+            echo "Main changed: expected $expected, found $actual" >&2
+            exit 40
+          }
+          test "$(git rev-parse HEAD)" = "$expected"
+
+      - name: Install validation tools
+        run: |
+          python -m pip install --disable-pip-version-check pillow requests
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq tesseract-ocr
+
+      - name: Recover, classify, and fully decode six source JPEGs
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python - <<'PY'
+          import base64
+          import hashlib
+          import json
+          import os
+          import pathlib
+          import re
+          import subprocess
+
+          import requests
+          from PIL import Image, ImageStat
+
+          repo = os.environ['GITHUB_REPOSITORY']
+          token = os.environ['GH_TOKEN']
+          source_blob_shas = [
+              'ce6a856d8514fbf39e1b87da5944b6ab0c0dd41e',
+              '5c3b30319506c463ffbdd70b1d030911413f6b57',
+              'f68e7bdb15d503f26b2c8ca90297a974250523ff',
+              '31d3d1c309f51167ac22e8229e72bfc8c46eaede',
+              'c3903a94904d1ded6b1d651f771d818a05b12349',
+              'c3721b2a6c38b2847f439c110344e7e24c1c8f0c',
+              '01626896a09194adc6ac6534a9211310c50cbde2',
+          ]
+          target_paths = {
+              'holiday': 'assets/territory-execution/jack-daniels-holiday-coca-cola.jpg',
+              'patriotic': 'assets/territory-execution/jack-daniels-patriotic.jpg',
+              'flavor': 'assets/territory-execution/jack-daniels-flavor-portfolio.jpg',
+              'titos': 'assets/territory-execution/titos-mule-mug.jpg',
+              'football': 'assets/territory-execution/jack-daniels-football-feature.jpg',
+              'cutwater': 'assets/territory-execution/cutwater-stadium.jpg',
+          }
+          headers = {
+              'Authorization': f'Bearer {token}',
+              'Accept': 'application/vnd.github+json',
+              'X-GitHub-Api-Version': '2022-11-28',
+          }
+          work = pathlib.Path('/tmp/territory-finalizer')
+          work.mkdir(parents=True, exist_ok=True)
+          records = []
+          html_blob_count = 0
+
+          def ratios(image):
+              im = image.convert('RGB').resize((180, 240))
+              total = im.width * im.height
+              counts = {'red': 0, 'green': 0, 'blue': 0, 'yellow': 0, 'copper': 0}
+              top_yellow = 0
+              top_total = im.width * (im.height // 2)
+              for y in range(im.height):
+                  for r, g, b in [im.getpixel((0, y))]:
+                      pass
+                  for x in range(im.width):
+                      r, g, b = im.getpixel((x, y))
+                      mx, mn = max(r, g, b), min(r, g, b)
+                      sat = 0 if mx == 0 else (mx - mn) / mx
+                      if r > 115 and r > g * 1.25 and r > b * 1.25 and sat > .28:
+                          counts['red'] += 1
+                      if g > 80 and g > r * 1.12 and g > b * 1.10 and sat > .24:
+                          counts['green'] += 1
+                      if b > 85 and b > r * 1.15 and b > g * 1.08 and sat > .25:
+                          counts['blue'] += 1
+                      yellow = r > 125 and g > 95 and b < min(r, g) * .70 and sat > .32
+                      if yellow:
+                          counts['yellow'] += 1
+                          if y < im.height // 2:
+                              top_yellow += 1
+                      if r > 105 and 45 < g < r * .82 and b < g * .85 and sat > .28:
+                          counts['copper'] += 1
+              result = {k: round(v / total, 6) for k, v in counts.items()}
+              result['top_yellow'] = round(top_yellow / top_total, 6)
+              result['mean_rgb'] = [round(v, 2) for v in ImageStat.Stat(im).mean[:3]]
+              return result
+
+          for index, blob_sha in enumerate(source_blob_shas):
+              response = requests.get(
+                  f'https://api.github.com/repos/{repo}/git/blobs/{blob_sha}',
+                  headers=headers,
+                  timeout=60,
+              )
+              response.raise_for_status()
+              raw = base64.b64decode(response.json()['content'])
+              recomputed = hashlib.sha1(b'blob ' + str(len(raw)).encode() + b'\0' + raw).hexdigest()
+              if recomputed != blob_sha:
+                  raise RuntimeError(f'Git blob integrity mismatch for {blob_sha}')
+
+              try:
+                  text = raw.decode('utf-8')
+              except UnicodeDecodeError:
+                  text = None
+              if text and ('<!doctype html' in text.lower() or '<html' in text.lower()):
+                  html_blob_count += 1
+                  continue
+
+              source = work / f'{index}-{blob_sha}.jpg'
+              source.write_bytes(raw)
+              with Image.open(source) as probe:
+                  probe.verify()
+              with Image.open(source) as image:
+                  image.load()
+                  if image.format != 'JPEG':
+                      raise RuntimeError(f'{blob_sha} is {image.format}, not JPEG')
+                  if image.width < 600 or image.height < 700:
+                      raise RuntimeError(f'{blob_sha} is undersized: {image.width}x{image.height}')
+                  rgb = image.convert('RGB')
+                  png = work / f'{index}-{blob_sha}.png'
+                  rgb.save(png)
+                  feature = ratios(rgb)
+                  width, height = rgb.size
+
+              ocr_parts = []
+              for psm in ('6', '11'):
+                  result = subprocess.run(
+                      ['tesseract', str(png), 'stdout', '--psm', psm],
+                      check=False,
+                      stdout=subprocess.PIPE,
+                      stderr=subprocess.DEVNULL,
+                      text=True,
+                      timeout=120,
+                  )
+                  ocr_parts.append(result.stdout)
+              ocr = re.sub(r'\s+', ' ', ' '.join(ocr_parts)).strip().upper()
+              records.append({
+                  'blob_sha': blob_sha,
+                  'source': source,
+                  'width': width,
+                  'height': height,
+                  'ocr': ocr,
+                  **feature,
+              })
+
+          if html_blob_count != 1:
+              raise RuntimeError(f'Expected one HTML blob and found {html_blob_count}')
+          if len(records) != 6:
+              raise RuntimeError(f'Expected six image blobs and found {len(records)}')
+
+          assigned = {}
+          remaining = []
+          for rec in records:
+              text = rec['ocr']
+              label = None
+              if 'CUTWATER' in text or ('VODKA MULE' in text and 'LIME' in text):
+                  label = 'cutwater'
+              elif "TITO" in text or 'AMERICAN MULE' in text:
+                  label = 'titos'
+              elif 'COCA' in text or 'COKE' in text:
+                  label = 'holiday'
+              elif sum(word in text for word in ('APPLE', 'FIRE', 'HONEY')) >= 2:
+                  label = 'flavor'
+              elif re.search(r'\bU\s*\.?\s*S\s*\.?\s*A\b', text) or 'PATRIOT' in text:
+                  label = 'patriotic'
+              elif any(word in text for word in ('FOOTBALL', 'GO TEAM', 'PLAY ZONE', 'FAN ZONE', 'PAC 12')):
+                  label = 'football'
+
+              if label and label not in assigned:
+                  assigned[label] = rec
+              else:
+                  rec['suggested'] = label
+                  remaining.append(rec)
+
+          # Deterministic visual fallbacks, used only for labels OCR did not resolve.
+          missing = [name for name in target_paths if name not in assigned]
+
+          def take_best(label, score):
+              nonlocal_remaining = remaining
+              if label not in missing or not nonlocal_remaining:
+                  return
+              best = max(nonlocal_remaining, key=score)
+              assigned[label] = best
+              nonlocal_remaining.remove(best)
+              missing.remove(label)
+
+          take_best('cutwater', lambda r: r['green'] + r['blue'] * .8)
+          take_best('titos', lambda r: r['copper'] * 2 + r['red'] * .25)
+          take_best('holiday', lambda r: r['red'] - r['green'] * .35)
+          take_best('flavor', lambda r: r['green'] + r['red'] * .35)
+
+          if set(missing) == {'patriotic', 'football'} and len(remaining) == 2:
+              football = max(remaining, key=lambda r: r['top_yellow'])
+              patriotic = remaining[0] if remaining[1] is football else remaining[1]
+              assigned['football'] = football
+              assigned['patriotic'] = patriotic
+              remaining.clear()
+              missing.clear()
+
+          if missing or remaining or set(assigned) != set(target_paths):
+              diagnostic = [{k: v for k, v in r.items() if k != 'source'} for r in records]
+              print(json.dumps({'assigned': {k: v['blob_sha'] for k, v in assigned.items()}, 'missing': missing, 'remaining': diagnostic}, indent=2))
+              raise RuntimeError('Could not uniquely classify all six source images')
+
+          out_manifest = {}
+          for label, target in target_paths.items():
+              rec = assigned[label]
+              target_path = pathlib.Path(target)
+              target_path.parent.mkdir(parents=True, exist_ok=True)
+              with Image.open(rec['source']) as image:
+                  image.load()
+                  rgb = image.convert('RGB')
+                  # Preserve complete composition while normalizing to a web-ready 3:4 canvas.
+                  if rgb.size != (900, 1200):
+                      rgb.thumbnail((900, 1200), Image.Resampling.LANCZOS)
+                      canvas = Image.new('RGB', (900, 1200), (238, 235, 228))
+                      x = (900 - rgb.width) // 2
+                      y = (1200 - rgb.height) // 2
+                      canvas.paste(rgb, (x, y))
+                      rgb = canvas
+                  rgb.save(
+                      target_path,
+                      format='JPEG',
+                      quality=88,
+                      optimize=True,
+                      progressive=False,
+                      subsampling=1,
+                  )
+
+              data = target_path.read_bytes()
+              if not data.startswith(b'\xff\xd8') or not data.endswith(b'\xff\xd9'):
+                  raise RuntimeError(f'{target}: incomplete JPEG boundaries')
+              with Image.open(target_path) as probe:
+                  probe.verify()
+              with Image.open(target_path) as verified:
+                  verified.load()
+                  if verified.format != 'JPEG' or verified.size != (900, 1200):
+                      raise RuntimeError(f'{target}: invalid decoded output')
+                  if verified.info.get('progressive') or verified.info.get('progression'):
+                      raise RuntimeError(f'{target}: progressive JPEG is not permitted')
+              if len(data) < 50000:
+                  raise RuntimeError(f'{target}: suspiciously small output ({len(data)} bytes)')
+              out_manifest[label] = {
+                  'path': target,
+                  'source_blob_sha': rec['blob_sha'],
+                  'size_bytes': len(data),
+                  'sha256': hashlib.sha256(data).hexdigest(),
+                  'ocr': rec['ocr'][:300],
+                  'top_yellow': rec['top_yellow'],
+              }
+
+          pathlib.Path('/tmp/territory-final-output-manifest.json').write_text(
+              json.dumps(out_manifest, indent=2), encoding='utf-8'
+          )
+          print(json.dumps(out_manifest, indent=2))
+          PY
+
+      - name: Restore ordinary image markup and add sixth card
+        run: |
+          python - <<'PY'
+          import pathlib
+          import re
+
+          page = pathlib.Path('territory-sales-execution.html')
+          html = page.read_text(encoding='utf-8')
+          cache = '20260726-source-reupload-final-v5'
+
+          html = html.replace(
+              'Five spirit-forward examples demonstrating',
+              'Six spirit-forward examples demonstrating',
+          )
+
+          start_marker = '      <div class="gallery spirits-gallery">'
+          end_marker = '      </div>\n    </section>'
+          start = html.index(start_marker, html.index('<section id="spirits"'))
+          end = html.index(end_marker, start) + len('      </div>')
+
+          cards = f'''      <div class="gallery spirits-gallery">
+        <article class="work">
+          <figure>
+            <div class="photo"><img loading="lazy" src="assets/territory-execution/jack-daniels-holiday-coca-cola.jpg?v={cache}" alt="Large Jack Daniel's and Coca-Cola holiday display"></div>
+            <figcaption class="work-copy"><span class="tag">Large-format spirits</span><h3>Jack Daniel’s holiday cross-brand feature</h3><p>Cross-brand holiday storytelling, stable case construction, visible pricing, seasonal theatre, and a strong floor presence.</p></figcaption>
+          </figure>
+        </article>
+        <article class="work">
+          <figure>
+            <div class="photo"><img loading="lazy" src="assets/territory-execution/jack-daniels-patriotic.jpg?v={cache}" alt="Patriotic Jack Daniel's retail display with balloons and red white and blue decorations"></div>
+            <figcaption class="work-copy"><span class="tag">Seasonal adaptation</span><h3>Patriotic Jack Daniel’s feature</h3><p>Clean symmetry, substantial case mass, visible pricing, and occasion-based finishing create a compact but commanding execution.</p></figcaption>
+          </figure>
+        </article>
+        <article class="work">
+          <figure>
+            <div class="photo"><img loading="lazy" src="assets/territory-execution/jack-daniels-flavor-portfolio.jpg?v={cache}" alt="Jack Daniel's Apple Fire Honey and Old No. 7 portfolio display"></div>
+            <figcaption class="work-copy"><span class="tag">Portfolio segmentation</span><h3>Jack Daniel’s flavor portfolio wall</h3><p>Color-coded case blocking separates Apple, Fire, Honey, and Old No. 7 while preserving one coherent brand statement.</p></figcaption>
+          </figure>
+        </article>
+        <article class="work">
+          <figure>
+            <div class="photo"><img loading="lazy" src="assets/territory-execution/titos-mule-mug.jpg?v={cache}" alt="Tito's Handmade Vodka display beneath an oversized copper mule mug"></div>
+            <figcaption class="work-copy"><span class="tag">Cocktail occasion</span><h3>Tito’s mule-mug feature</h3><p>An oversized branded focal element turns a high-volume case stack into a recognizable cocktail occasion supported by multiple bottle sizes and promotional pricing.</p></figcaption>
+          </figure>
+        </article>
+        <article class="work">
+          <figure>
+            <div class="photo"><img loading="lazy" src="assets/territory-execution/jack-daniels-football-feature.jpg?v={cache}" alt="Jack Daniel's football-themed retail display with goalpost balloons and branded football"></div>
+            <figcaption class="work-copy"><span class="tag">Seasonal sports execution</span><h3>Jack Daniel’s football feature</h3><p>A custom goalpost, oversized branded football, occasion signage, and disciplined case mass translate a sports program into a high-visibility floor feature.</p></figcaption>
+          </figure>
+        </article>
+        <article class="work">
+          <figure>
+            <div class="photo"><img loading="lazy" src="assets/territory-execution/cutwater-stadium.jpg?v={cache}" alt="Cutwater canned cocktail stadium-shaped retail display"></div>
+            <figcaption class="work-copy"><span class="tag">RTD structural execution</span><h3>Cutwater stadium display</h3><p>A circular, tiered build uses package color, repeated facings, sports theming, and a custom header to turn RTD inventory into a destination feature.</p></figcaption>
+          </figure>
+        </article>
+      </div>'''
+          html = html[:start] + cards + html[end:]
+
+          forbidden = ('data-b64=', 'decodeBase64Image', 'Image temporarily unavailable')
+          for value in forbidden:
+              if value in html:
+                  raise RuntimeError(f'Legacy workaround remains: {value}')
+
+          expected = [
+              'jack-daniels-holiday-coca-cola.jpg',
+              'jack-daniels-patriotic.jpg',
+              'jack-daniels-flavor-portfolio.jpg',
+              'titos-mule-mug.jpg',
+              'jack-daniels-football-feature.jpg',
+              'cutwater-stadium.jpg',
+          ]
+          spirit_section = html[html.index('<section id="spirits"'):html.index('<section id="wine"')]
+          for name in expected:
+              path = f'assets/territory-execution/{name}?v={cache}'
+              if spirit_section.count(path) != 1:
+                  raise RuntimeError(f'Expected one standard image reference for {path}')
+          if len(re.findall(r'<img\b[^>]*src="assets/territory-execution/[^\"]+\.jpg\?v=' + re.escape(cache), spirit_section)) != 6:
+              raise RuntimeError('Spirit gallery does not contain exactly six ordinary JPEG image tags')
+
+          page.write_text(html, encoding='utf-8')
+          PY
+
+      - name: Validate the exact atomic change set
+        run: |
+          set -euo pipefail
+          expected_paths="$({
+            printf '%s\n' \
+              assets/territory-execution/cutwater-stadium.jpg \
+              assets/territory-execution/jack-daniels-flavor-portfolio.jpg \
+              assets/territory-execution/jack-daniels-football-feature.jpg \
+              assets/territory-execution/jack-daniels-holiday-coca-cola.jpg \
+              assets/territory-execution/jack-daniels-patriotic.jpg \
+              assets/territory-execution/titos-mule-mug.jpg \
+              territory-sales-execution.html
+          } | sort)"
+          actual_paths="$(git status --short | awk '{print $2}' | sort)"
+          test "$actual_paths" = "$expected_paths" || {
+            echo 'Unexpected working-tree change set:' >&2
+            git status --short >&2
+            exit 50
+          }
+
+          git add \
+            assets/territory-execution/cutwater-stadium.jpg \
+            assets/territory-execution/jack-daniels-flavor-portfolio.jpg \
+            assets/territory-execution/jack-daniels-football-feature.jpg \
+            assets/territory-execution/jack-daniels-holiday-coca-cola.jpg \
+            assets/territory-execution/jack-daniels-patriotic.jpg \
+            assets/territory-execution/titos-mule-mug.jpg \
+            territory-sales-execution.html
+
+          staged="$(git diff --cached --name-only | sort)"
+          test "$staged" = "$expected_paths"
+          test "$(git diff --cached --name-only | wc -l | tr -d ' ')" = '7'
+
+      - name: Create and push one atomic production commit
+        run: |
+          set -euo pipefail
+          expected_parent='aa113034d0ab8ba3de064cbe181d665796ab94aa'
+          git fetch origin main
+          test "$(git rev-parse origin/main)" = "$expected_parent"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'Replace territory portfolio images from validated originals'
+          test "$(git rev-list --count "$expected_parent"..HEAD)" = '1'
+          test "$(git diff-tree --no-commit-id --name-only -r HEAD | wc -l | tr -d ' ')" = '7'
+          git push origin HEAD:main
+          echo "ATOMIC_COMMIT=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
+
+      - name: Record final commit evidence
+        run: |
+          echo "Atomic production commit: $ATOMIC_COMMIT"
+          cat /tmp/territory-final-output-manifest.json
