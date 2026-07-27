@@ -1,0 +1,482 @@
+name: Guarded atomic territory image repair
+
+on:
+  push:
+    branches:
+      - automation/territory-atomic-repair-final-20260726
+    paths:
+      - .github/workflows/territory-atomic-repair-final.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: territory-atomic-repair-final-20260726
+  cancel-in-progress: false
+
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      EXPECTED_PARENT: aa113034d0ab8ba3de064cbe181d665796ab94aa
+      CACHE_KEY: 20260726-source-reupload-final
+      REPO: ${{ github.repository }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Check out guarded workflow branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install image verification dependencies
+        run: python -m pip install --disable-pip-version-check pillow numpy
+
+      - name: Recover, fully decode, and identify six validated JPEG blobs
+        shell: python
+        run: |
+          import base64
+          import hashlib
+          import io
+          import json
+          import os
+          import pathlib
+          import urllib.request
+
+          import numpy as np
+          from PIL import Image
+
+          repo = os.environ["REPO"]
+          token = os.environ["GH_TOKEN"]
+          output = pathlib.Path("/tmp/territory-replacements")
+          output.mkdir(parents=True, exist_ok=True)
+
+          # These are the seven immutable Git objects created from the locally
+          # validated repair package. Six are JPEGs; one is the prepared HTML.
+          # The workflow identifies the JPEGs by full decode rather than trusting
+          # an extension, then identifies each scene before assigning a filename.
+          blob_shas = [
+              "ce6a856d8514fbf39e1b87da5944b6ab0c0dd41e",
+              "5c3b30319506c463ffbdd70b1d030911413f6b57",
+              "f68e7bdb15d503f26b2c8ca90297a974250523ff",
+              "31d3d1c309f51167ac22e8229e72bfc8c46eaede",
+              "c3903a94904d1ded6b1d651f771d818a05b12349",
+              "c3721b2a6c38b2847f439c110344e7e24c1c8f0c",
+              "01626896a09194adc6ac6534a9211310c50cbde2",
+          ]
+
+          def fetch_blob(sha: str) -> bytes:
+              url = f"https://api.github.com/repos/{repo}/git/blobs/{sha}"
+              request = urllib.request.Request(
+                  url,
+                  headers={
+                      "Authorization": f"Bearer {token}",
+                      "Accept": "application/vnd.github+json",
+                      "X-GitHub-Api-Version": "2022-11-28",
+                      "User-Agent": "territory-atomic-repair",
+                  },
+              )
+              with urllib.request.urlopen(request, timeout=30) as response:
+                  payload = json.load(response)
+              raw = base64.b64decode(payload["content"], validate=True)
+              if len(raw) != payload["size"]:
+                  raise RuntimeError(f"{sha}: API size mismatch")
+              return raw
+
+          def image_metrics(image: Image.Image) -> dict[str, float]:
+              sample = image.convert("RGB").resize((180, 240), Image.Resampling.LANCZOS)
+              hsv = np.asarray(sample.convert("HSV"), dtype=np.float32) / 255.0
+              h, s, v = hsv[:, :, 0], hsv[:, :, 1], hsv[:, :, 2]
+              top = np.zeros_like(h, dtype=bool)
+              top[:145, :] = True
+              lower = np.zeros_like(h, dtype=bool)
+              lower[100:, :] = True
+
+              def fraction(mask, region=None):
+                  if region is not None:
+                      mask = mask & region
+                      denominator = int(region.sum())
+                  else:
+                      denominator = mask.size
+                  return float(mask.sum()) / max(1, denominator)
+
+              red = (((h < 0.055) | (h > 0.965)) & (s > 0.43) & (v > 0.22))
+              orange = ((h >= 0.035) & (h < 0.125) & (s > 0.34) & (v > 0.25))
+              yellow = ((h >= 0.125) & (h < 0.205) & (s > 0.43) & (v > 0.42))
+              green = ((h >= 0.205) & (h < 0.455) & (s > 0.30) & (v > 0.20))
+              teal = ((h >= 0.43) & (h < 0.59) & (s > 0.28) & (v > 0.22))
+              blue = ((h >= 0.56) & (h < 0.76) & (s > 0.32) & (v > 0.24))
+              neutral = ((s < 0.24) & (v > 0.30) & (v < 0.92))
+              white = ((s < 0.20) & (v > 0.72))
+              dark = v < 0.28
+              return {
+                  "red": fraction(red),
+                  "red_lower": fraction(red, lower),
+                  "orange": fraction(orange),
+                  "orange_top": fraction(orange, top),
+                  "yellow": fraction(yellow),
+                  "yellow_top": fraction(yellow, top),
+                  "green": fraction(green),
+                  "green_lower": fraction(green, lower),
+                  "teal": fraction(teal),
+                  "blue": fraction(blue),
+                  "blue_top": fraction(blue, top),
+                  "neutral_top": fraction(neutral, top),
+                  "white_lower": fraction(white, lower),
+                  "dark_top": fraction(dark, top),
+              }
+
+          records = []
+          for position, sha in enumerate(blob_shas):
+              raw = fetch_blob(sha)
+              try:
+                  with Image.open(io.BytesIO(raw)) as check:
+                      if check.format != "JPEG":
+                          continue
+                      check.verify()
+                  with Image.open(io.BytesIO(raw)) as image:
+                      image.load()  # full pixel-level decode, not just header validation
+                      if image.size != (900, 1200):
+                          raise RuntimeError(f"{sha}: expected 900x1200, got {image.size}")
+                      if image.mode not in {"RGB", "L"}:
+                          image = image.convert("RGB")
+                      if image.info.get("progressive") or image.info.get("progression"):
+                          raise RuntimeError(f"{sha}: progressive JPEG is not allowed")
+                      metrics = image_metrics(image)
+              except Exception as error:
+                  # The seventh object is the prepared text page. Any object that
+                  # begins as JPEG but fails verification is fatal, not ignored.
+                  if raw.startswith(b"\xff\xd8"):
+                      raise RuntimeError(f"{sha}: incomplete or invalid JPEG: {error}") from error
+                  continue
+
+              if not raw.startswith(b"\xff\xd8") or not raw.endswith(b"\xff\xd9"):
+                  raise RuntimeError(f"{sha}: missing JPEG boundary markers")
+              if len(raw) < 25_000:
+                  raise RuntimeError(f"{sha}: suspiciously small JPEG ({len(raw)} bytes)")
+              records.append(
+                  {
+                      "position": position,
+                      "sha": sha,
+                      "raw": raw,
+                      "sha256": hashlib.sha256(raw).hexdigest(),
+                      "bytes": len(raw),
+                      "metrics": metrics,
+                  }
+              )
+
+          if len(records) != 6:
+              raise RuntimeError(f"Expected exactly six fully decoded JPEGs, found {len(records)}")
+
+          remaining = list(records)
+
+          def take(label, scorer):
+              selected = max(remaining, key=scorer)
+              remaining.remove(selected)
+              selected["label"] = label
+              return selected
+
+          # Identify the scenes by visual structure and color distribution. This
+          # prevents an image from being silently attached to the wrong caption.
+          football = take(
+              "jack-daniels-football-feature.jpg",
+              lambda r: 2.2 * r["metrics"]["yellow_top"] + r["metrics"]["yellow"],
+          )
+          holiday = take(
+              "jack-daniels-holiday-coca-cola.jpg",
+              lambda r: 1.5 * r["metrics"]["red"] + 0.45 * r["metrics"]["red_lower"],
+          )
+          titos = take(
+              "titos-mule-mug.jpg",
+              lambda r: 1.8 * r["metrics"]["orange_top"]
+              + 0.35 * r["metrics"]["white_lower"]
+              + 0.15 * r["metrics"]["dark_top"],
+          )
+          cutwater = take(
+              "cutwater-stadium.jpg",
+              lambda r: 1.8 * r["metrics"]["teal"] + 0.25 * r["metrics"]["orange"],
+          )
+          flavor = take(
+              "jack-daniels-flavor-portfolio.jpg",
+              lambda r: 1.5 * r["metrics"]["green_lower"]
+              + 0.35 * r["metrics"]["red_lower"]
+              + 0.15 * r["metrics"]["yellow"],
+          )
+          patriotic = remaining.pop()
+          patriotic["label"] = "jack-daniels-patriotic.jpg"
+
+          assignments = [holiday, patriotic, flavor, titos, football, cutwater]
+
+          # Conservative scene checks. A failure stops before main is touched.
+          checks = {
+              "football yellow focal element": football["metrics"]["yellow_top"] > 0.006,
+              "holiday red Coca-Cola mass": holiday["metrics"]["red"] > 0.025,
+              "Tito's copper focal element": titos["metrics"]["orange_top"] > 0.025,
+              "Cutwater teal package tower": cutwater["metrics"]["teal"] > 0.018,
+              "flavor portfolio green blocking": flavor["metrics"]["green_lower"] > 0.025,
+              "patriotic neutral wall": patriotic["metrics"]["neutral_top"] > 0.20,
+              "patriotic blue accents": patriotic["metrics"]["blue"] > 0.004,
+          }
+          failed = [name for name, passed in checks.items() if not passed]
+          if failed:
+              raise RuntimeError("Scene identification checks failed: " + ", ".join(failed))
+
+          manifest = {}
+          for record in assignments:
+              destination = output / record["label"]
+              destination.write_bytes(record["raw"])
+              manifest[record["label"]] = {
+                  "source_blob": record["sha"],
+                  "sha256": record["sha256"],
+                  "bytes": record["bytes"],
+                  "dimensions": [900, 1200],
+                  "metrics": record["metrics"],
+              }
+              print(record["label"], record["sha"], record["sha256"], record["metrics"])
+
+          (output / "manifest.json").write_text(
+              json.dumps(manifest, indent=2, sort_keys=True), encoding="utf-8"
+          )
+
+      - name: Reconfirm immutable parent and prepare exactly seven paths
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --no-tags origin main
+          test "$(git rev-parse origin/main)" = "$EXPECTED_PARENT"
+          git checkout --detach "$EXPECTED_PARENT"
+          mkdir -p assets/territory-execution
+          cp /tmp/territory-replacements/*.jpg assets/territory-execution/
+
+          python - <<'PY'
+          import os
+          import pathlib
+          import re
+
+          page = pathlib.Path("territory-sales-execution.html")
+          html = page.read_text(encoding="utf-8")
+          key = os.environ["CACHE_KEY"]
+
+          filenames = [
+              "jack-daniels-holiday-coca-cola.jpg",
+              "jack-daniels-patriotic.jpg",
+              "jack-daniels-flavor-portfolio.jpg",
+              "titos-mule-mug.jpg",
+              "jack-daniels-football-feature.jpg",
+              "cutwater-stadium.jpg",
+          ]
+
+          html = html.replace(
+              "Five spirit-forward examples demonstrating",
+              "Six spirit-forward examples demonstrating",
+          )
+
+          for filename in filenames:
+              if filename == "jack-daniels-football-feature.jpg" and filename not in html:
+                  continue
+              pattern = rf"assets/territory-execution/{re.escape(filename)}(?:\?v=[^\"\s]+)?"
+              html, count = re.subn(
+                  pattern,
+                  f"assets/territory-execution/{filename}?v={key}",
+                  html,
+              )
+              if count != 1:
+                  raise RuntimeError(f"Expected one existing reference for {filename}, found {count}")
+
+          if "jack-daniels-football-feature.jpg" not in html:
+              cutwater_image = '<div class="photo"><img loading="lazy" src="assets/territory-execution/cutwater-stadium.jpg'
+              image_index = html.find(cutwater_image)
+              if image_index < 0:
+                  raise RuntimeError("Could not locate Cutwater card insertion point")
+              article_index = html.rfind('        <article class="work">', 0, image_index)
+              if article_index < 0:
+                  raise RuntimeError("Could not locate Cutwater article boundary")
+              football_card = f'''        <article class="work">
+          <figure>
+            <div class="photo"><img loading="lazy" src="assets/territory-execution/jack-daniels-football-feature.jpg?v={key}" alt="Jack Daniel's football-themed retail display with a custom goalpost and branded football"></div>
+            <figcaption class="work-copy"><span class="tag">Sports occasion</span><h3>Jack Daniel’s football feature</h3><p>A custom goalpost, oversized branded football, seasonal balloons, disciplined case mass, and visible pricing turn a game-day program into a high-impact destination.</p></figcaption>
+          </figure>
+        </article>
+'''
+              html = html[:article_index] + football_card + html[article_index:]
+
+          spirits_start = html.index('<section id="spirits"')
+          wine_start = html.index('<section id="wine"')
+          spirits = html[spirits_start:wine_start]
+          for filename in filenames:
+              expected = f"assets/territory-execution/{filename}?v={key}"
+              if spirits.count(expected) != 1:
+                  raise RuntimeError(f"Spirits section must contain exactly one standard reference: {expected}")
+
+          forbidden = [
+              "data-b64=",
+              "decodeBase64Image",
+              "Image temporarily unavailable",
+              "territory-execution/data/",
+              ".b64",
+              "data:image/",
+          ]
+          found = [token for token in forbidden if token in html]
+          if found:
+              raise RuntimeError("Legacy image workaround remains: " + ", ".join(found))
+
+          if spirits.count('<article class="work">') != 6:
+              raise RuntimeError("Spirits gallery must contain exactly six cards")
+
+          page.write_text(html, encoding="utf-8")
+          PY
+
+          python - <<'PY'
+          import hashlib
+          import json
+          import pathlib
+          from PIL import Image
+
+          root = pathlib.Path("assets/territory-execution")
+          manifest = json.loads(pathlib.Path("/tmp/territory-replacements/manifest.json").read_text())
+          for filename, expected in manifest.items():
+              path = root / filename
+              raw = path.read_bytes()
+              if hashlib.sha256(raw).hexdigest() != expected["sha256"]:
+                  raise RuntimeError(f"{filename}: working-tree hash mismatch")
+              with Image.open(path) as check:
+                  check.verify()
+              with Image.open(path) as image:
+                  image.load()
+                  if image.format != "JPEG" or image.size != (900, 1200):
+                      raise RuntimeError(f"{filename}: invalid decoded image {image.format} {image.size}")
+                  if image.info.get("progressive") or image.info.get("progression"):
+                      raise RuntimeError(f"{filename}: progressive JPEG is not allowed")
+          PY
+
+          expected_paths=$(cat <<'EOF'
+          assets/territory-execution/cutwater-stadium.jpg
+          assets/territory-execution/jack-daniels-flavor-portfolio.jpg
+          assets/territory-execution/jack-daniels-football-feature.jpg
+          assets/territory-execution/jack-daniels-holiday-coca-cola.jpg
+          assets/territory-execution/jack-daniels-patriotic.jpg
+          assets/territory-execution/titos-mule-mug.jpg
+          territory-sales-execution.html
+          EOF
+          )
+          actual_paths=$(git status --porcelain=v1 | sed 's/^...//' | LC_ALL=C sort)
+          test "$actual_paths" = "$(printf '%s\n' "$expected_paths" | sed 's/^          //' | LC_ALL=C sort)"
+
+      - name: Create and publish the single atomic main commit
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add \
+            assets/territory-execution/cutwater-stadium.jpg \
+            assets/territory-execution/jack-daniels-flavor-portfolio.jpg \
+            assets/territory-execution/jack-daniels-football-feature.jpg \
+            assets/territory-execution/jack-daniels-holiday-coca-cola.jpg \
+            assets/territory-execution/jack-daniels-patriotic.jpg \
+            assets/territory-execution/titos-mule-mug.jpg \
+            territory-sales-execution.html
+          test "$(git diff --cached --name-only | wc -l | tr -d ' ')" = "7"
+          git commit -m "Replace territory portfolio images with validated JPEGs"
+          test "$(git rev-parse HEAD^)" = "$EXPECTED_PARENT"
+          final_sha=$(git rev-parse HEAD)
+          echo "FINAL_SHA=$final_sha" >> "$GITHUB_ENV"
+          git push origin HEAD:main
+
+      - name: Verify direct production downloads and complete JPEG decoding
+        shell: python
+        run: |
+          import hashlib
+          import io
+          import json
+          import os
+          import pathlib
+          import time
+          import urllib.error
+          import urllib.request
+
+          from PIL import Image
+
+          key = os.environ["CACHE_KEY"]
+          final_sha = os.environ["FINAL_SHA"]
+          manifest = json.loads(pathlib.Path("/tmp/territory-replacements/manifest.json").read_text())
+          page_url = f"https://olsenautomation.com/territory-sales-execution.html?verify={final_sha}"
+
+          def download(url: str) -> tuple[bytes, str]:
+              request = urllib.request.Request(
+                  url,
+                  headers={
+                      "Cache-Control": "no-cache",
+                      "Pragma": "no-cache",
+                      "User-Agent": "territory-production-verifier",
+                  },
+              )
+              with urllib.request.urlopen(request, timeout=30) as response:
+                  return response.read(), response.headers.get("Content-Type", "")
+
+          html = None
+          last_error = None
+          for attempt in range(40):
+              try:
+                  raw, content_type = download(page_url + f"&attempt={attempt}")
+                  candidate = raw.decode("utf-8")
+                  if key in candidate and "jack-daniels-football-feature.jpg" in candidate:
+                      html = candidate
+                      break
+                  last_error = RuntimeError("new cache key not visible yet")
+              except Exception as error:
+                  last_error = error
+              time.sleep(15)
+          if html is None:
+              raise RuntimeError(f"Production page did not publish the atomic commit: {last_error}")
+
+          verification = {
+              "commit": final_sha,
+              "cache_key": key,
+              "page": page_url,
+              "images": {},
+          }
+          for filename, expected in manifest.items():
+              url = (
+                  "https://olsenautomation.com/assets/territory-execution/"
+                  f"{filename}?v={key}&verify={final_sha}"
+              )
+              raw, content_type = download(url)
+              digest = hashlib.sha256(raw).hexdigest()
+              if digest != expected["sha256"]:
+                  raise RuntimeError(
+                      f"{filename}: production SHA-256 mismatch; expected {expected['sha256']}, got {digest}"
+                  )
+              if "image/jpeg" not in content_type.lower():
+                  raise RuntimeError(f"{filename}: unexpected production content type {content_type!r}")
+              with Image.open(io.BytesIO(raw)) as check:
+                  check.verify()
+              with Image.open(io.BytesIO(raw)) as image:
+                  image.load()
+                  if image.format != "JPEG" or image.size != (900, 1200):
+                      raise RuntimeError(
+                          f"{filename}: production decode mismatch {image.format} {image.size}"
+                      )
+                  if image.info.get("progressive") or image.info.get("progression"):
+                      raise RuntimeError(f"{filename}: production JPEG is progressive")
+              verification["images"][filename] = {
+                  "url": url,
+                  "sha256": digest,
+                  "bytes": len(raw),
+                  "content_type": content_type,
+                  "dimensions": [900, 1200],
+                  "full_decode": True,
+              }
+
+          pathlib.Path("production-verification.json").write_text(
+              json.dumps(verification, indent=2, sort_keys=True), encoding="utf-8"
+          )
+          print(json.dumps(verification, indent=2, sort_keys=True))
+
+      - name: Upload production verification evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: territory-production-verification-${{ env.FINAL_SHA }}
+          path: production-verification.json
+          if-no-files-found: error
+          retention-days: 30
