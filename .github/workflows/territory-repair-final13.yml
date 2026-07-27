@@ -1,0 +1,79 @@
+name: Guarded territory repair final13
+on:
+  push:
+    branches: [territory-repair-final13]
+    paths: [.github/workflows/territory-repair-final13.yml]
+permissions:
+  contents: write
+concurrency:
+  group: territory-repair-final13
+  cancel-in-progress: false
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      BRANCH: territory-repair-final13
+      REPO: ${{ github.repository }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: territory-repair-final13
+          fetch-depth: 0
+      - name: Gate the two isolated bootstrap commits
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          base=$(git rev-parse HEAD^^)
+          expected=$(printf '%s\n' .github/workflows/territory-repair-final13.yml tools/territory_repair_final13.py | sort)
+          actual=$(git diff --name-only "$base" HEAD | sort)
+          test "$actual" = "$expected"
+          git fetch --no-tags origin main
+          test "$(git rev-parse origin/main)" = "$base"
+          cp tools/territory_repair_final13.py /tmp/territory_repair.py
+          echo "BASE=$base" >> "$GITHUB_ENV"
+      - run: python -m pip install --disable-pip-version-check pillow
+      - name: Prepare and fully validate the seven-file change
+        shell: bash
+        run: |
+          set -euo pipefail
+          git checkout --detach "$BASE"
+          python /tmp/territory_repair.py prepare
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add territory-sales-execution.html assets/territory-execution/{cutwater-stadium,jack-daniels-flavor-portfolio,jack-daniels-football-feature,jack-daniels-holiday-coca-cola,jack-daniels-patriotic,titos-mule-mug}.jpg
+          test "$(git diff --cached --name-only | wc -l | tr -d ' ')" = 7
+          git commit -m 'Replace territory portfolio images with validated JPEGs'
+          test "$(git rev-parse HEAD^)" = "$BASE"
+          final=$(git rev-parse HEAD)
+          echo "FINAL=$final" >> "$GITHUB_ENV"
+      - name: Reconfirm and fast-forward main once
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --no-tags origin main
+          test "$(git rev-parse origin/main)" = "$BASE"
+          git push origin HEAD:main
+      - name: Verify direct production bytes and full JPEG decode
+        run: python /tmp/territory_repair.py verify
+      - uses: actions/upload-artifact@v4
+        with:
+          name: territory-production-verification-${{ env.FINAL }}
+          path: production-verification.json
+          retention-days: 30
+          if-no-files-found: error
+      - name: Remove guard branch after verified production
+        if: success()
+        run: git push origin --delete "$BRANCH" || true
+      - name: Roll main back if production verification fails
+        if: failure()
+        shell: bash
+        run: |
+          set +e
+          if [ -n "${FINAL:-}" ]; then
+            git fetch --no-tags origin main
+            current=$(git rev-parse origin/main 2>/dev/null)
+            if [ "$current" = "$FINAL" ]; then git push --force-with-lease=refs/heads/main:$FINAL origin "$BASE":main; fi
+          fi
