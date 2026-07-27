@@ -1,0 +1,196 @@
+name: Confirm territory repair independently
+
+on:
+  push:
+    branches:
+      - automation/territory-blob-inspection-20260726
+    paths:
+      - .github/workflows/confirm-territory-repair.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: territory-independent-confirmation
+  cancel-in-progress: false
+
+jobs:
+  confirm:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: automation/territory-blob-inspection-20260726
+          fetch-depth: 0
+          token: ${{ github.token }}
+
+      - run: python -m pip install --disable-pip-version-check pillow requests
+
+      - name: Independently verify commit, markup, and production bytes
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python - <<'PY'
+          import base64, hashlib, io, json, os, pathlib, time
+          import requests
+          from PIL import Image
+
+          repo = os.environ['GITHUB_REPOSITORY']
+          token = os.environ['GH_TOKEN']
+          parent = 'aa113034d0ab8ba3de064cbe181d665796ab94aa'
+          message = 'Replace territory portfolio images from validated originals'
+          cache = '20260726-source-reupload-final-v5'
+          page_path = 'territory-sales-execution.html'
+          images = [
+              'assets/territory-execution/jack-daniels-holiday-coca-cola.jpg',
+              'assets/territory-execution/jack-daniels-patriotic.jpg',
+              'assets/territory-execution/jack-daniels-flavor-portfolio.jpg',
+              'assets/territory-execution/titos-mule-mug.jpg',
+              'assets/territory-execution/jack-daniels-football-feature.jpg',
+              'assets/territory-execution/cutwater-stadium.jpg',
+          ]
+          expected_paths = sorted(images + [page_path])
+          gh_headers = {
+              'Authorization': f'Bearer {token}',
+              'Accept': 'application/vnd.github+json',
+              'X-GitHub-Api-Version': '2022-11-28',
+          }
+
+          def get_json(url):
+              r = requests.get(url, headers=gh_headers, timeout=60)
+              r.raise_for_status()
+              return r.json()
+
+          commit = None
+          for _ in range(90):
+              candidate = get_json(f'https://api.github.com/repos/{repo}/commits/main')
+              if candidate['commit']['message'].splitlines()[0] == message:
+                  commit = candidate
+                  break
+              time.sleep(10)
+          if commit is None:
+              raise SystemExit('FAIL: guarded atomic commit is not main')
+
+          sha = commit['sha']
+          parents = [p['sha'] for p in commit['parents']]
+          paths = sorted(f['filename'] for f in commit.get('files', []))
+          assert parents == [parent], (parents, parent)
+          assert paths == expected_paths, (paths, expected_paths)
+          assert len(paths) == 7
+
+          canonical = {}
+          for path in images:
+              obj = get_json(f'https://api.github.com/repos/{repo}/contents/{path}?ref={sha}')
+              data = base64.b64decode(obj['content'])
+              with Image.open(io.BytesIO(data)) as check:
+                  check.verify()
+              with Image.open(io.BytesIO(data)) as check:
+                  check.load()
+                  assert check.format == 'JPEG'
+                  assert check.size == (900, 1200)
+                  assert not (check.info.get('progressive') or check.info.get('progression'))
+              canonical[path] = {
+                  'bytes': data,
+                  'sha256': hashlib.sha256(data).hexdigest(),
+                  'size_bytes': len(data),
+              }
+
+          page_url = f'https://olsenautomation.com/{page_path}?confirm={cache}'
+          html_response = None
+          for attempt in range(120):
+              html_response = requests.get(
+                  page_url + f'&attempt={attempt}&t={int(time.time())}',
+                  headers={'Cache-Control': 'no-cache', 'Pragma': 'no-cache'},
+                  timeout=60,
+              )
+              if html_response.status_code == 200 and html_response.text.count(cache) == 6:
+                  break
+              time.sleep(10)
+          else:
+              raise SystemExit('FAIL: production HTML did not reach the exact six-image revision')
+
+          html = html_response.text
+          assert 'jack-daniels-football-feature.jpg' in html
+          assert 'Six spirit-forward examples demonstrating' in html
+          assert 'data-b64=' not in html
+          assert 'decodeBase64Image' not in html
+          assert 'Image temporarily unavailable' not in html
+
+          checks = {}
+          for path in images:
+              url = f'https://olsenautomation.com/{path}?v={cache}&commit={sha}'
+              response = requests.get(
+                  url,
+                  headers={'Cache-Control': 'no-cache', 'Pragma': 'no-cache'},
+                  timeout=90,
+              )
+              assert response.status_code == 200, (path, response.status_code)
+              assert 'image/jpeg' in response.headers.get('content-type', '').lower()
+              live = response.content
+              live_sha = hashlib.sha256(live).hexdigest()
+              assert live_sha == canonical[path]['sha256'], (path, live_sha, canonical[path]['sha256'])
+              with Image.open(io.BytesIO(live)) as check:
+                  check.verify()
+              with Image.open(io.BytesIO(live)) as check:
+                  check.load()
+                  assert check.format == 'JPEG'
+                  assert check.size == (900, 1200)
+                  assert not (check.info.get('progressive') or check.info.get('progression'))
+              checks[path] = {
+                  'url': url,
+                  'http_status': 200,
+                  'content_type': response.headers.get('content-type'),
+                  'size_bytes': len(live),
+                  'sha256': live_sha,
+                  'decoded_format': 'JPEG',
+                  'dimensions': [900, 1200],
+                  'full_pixel_decode': True,
+                  'byte_for_byte_match_to_commit': True,
+              }
+
+          report = {
+              'status': 'PASS',
+              'atomic_commit': sha,
+              'parent': parent,
+              'commit_message': message,
+              'changed_file_count': 7,
+              'changed_paths': paths,
+              'production_page': {
+                  'url': page_url,
+                  'http_status': html_response.status_code,
+                  'cache_key': cache,
+                  'cache_key_occurrences': html.count(cache),
+                  'football_card_present': True,
+                  'legacy_workarounds_absent': True,
+              },
+              'image_checks': checks,
+              'verified_at_utc': time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()),
+          }
+          pathlib.Path('territory-production-verification-final.json').write_text(
+              json.dumps(report, indent=2), encoding='utf-8'
+          )
+          print(json.dumps(report, indent=2))
+          PY
+
+      - name: Rebase and publish verification evidence safely
+        run: |
+          set -euo pipefail
+          branch='automation/territory-blob-inspection-20260726'
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git fetch origin "$branch"
+          git rebase "origin/$branch"
+          git add territory-production-verification-final.json
+          if git diff --cached --quiet; then
+            echo 'Verification report already current.'
+          else
+            git commit -m 'Record final passing territory production verification'
+            git push origin HEAD:"$branch"
+          fi
+
+      - name: Publish immutable verification tag
+        run: |
+          set -euo pipefail
+          commit="$(python -c "import json; print(json.load(open('territory-production-verification-final.json'))['atomic_commit'])")"
+          git tag -f territory-repair-verified-20260726-v5 "$commit"
+          git push origin refs/tags/territory-repair-verified-20260726-v5 --force
