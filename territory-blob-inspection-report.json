@@ -1,0 +1,83 @@
+{
+  "source_parent": "aa113034d0ab8ba3de064cbe181d665796ab94aa",
+  "count": 7,
+  "items": [
+    {
+      "index": 0,
+      "blob_sha": "ce6a856d8514fbf39e1b87da5944b6ab0c0dd41e",
+      "git_sha_recomputed": "ce6a856d8514fbf39e1b87da5944b6ab0c0dd41e",
+      "size_bytes": 11136,
+      "sha256": "1a30558b60d80fb685771923492bb0052ae1ca20b982bae7665e61a6de4ddf23",
+      "kind": "unknown",
+      "error": "OSError: broken data stream when reading image file"
+    },
+    {
+      "index": 1,
+      "blob_sha": "5c3b30319506c463ffbdd70b1d030911413f6b57",
+      "git_sha_recomputed": "5c3b30319506c463ffbdd70b1d030911413f6b57",
+      "size_bytes": 17979,
+      "sha256": "b1903c0e4a3fdd2d46da6ef8da0580d4ceba43a34f94a0bf244b2fc34ad92335",
+      "kind": "unknown",
+      "error": "OSError: broken data stream when reading image file"
+    },
+    {
+      "index": 2,
+      "blob_sha": "f68e7bdb15d503f26b2c8ca90297a974250523ff",
+      "git_sha_recomputed": "f68e7bdb15d503f26b2c8ca90297a974250523ff",
+      "size_bytes": 11547,
+      "sha256": "ae4f8bb70427079c3d69f1b90db1127c8259b5df28aa01162eed6bfc394ce3b6",
+      "kind": "unknown",
+      "error": "OSError: broken data stream when reading image file"
+    },
+    {
+      "index": 3,
+      "blob_sha": "31d3d1c309f51167ac22e8229e72bfc8c46eaede",
+      "git_sha_recomputed": "31d3d1c309f51167ac22e8229e72bfc8c46eaede",
+      "size_bytes": 17067,
+      "sha256": "ecc5f34ba12085ff1b6689c1115750ddcfaf34407ef8cc04711c4ceaeed7df8e",
+      "kind": "unknown",
+      "error": "OSError: broken data stream when reading image file"
+    },
+    {
+      "index": 4,
+      "blob_sha": "c3903a94904d1ded6b1d651f771d818a05b12349",
+      "git_sha_recomputed": "c3903a94904d1ded6b1d651f771d818a05b12349",
+      "size_bytes": 22319,
+      "sha256": "0c0b9a471310c861faeb1c36307f1c21fbd3275b1e81cb1278fd3dfade610343",
+      "kind": "unknown",
+      "error": "OSError: broken data stream when reading image file"
+    },
+    {
+      "index": 5,
+      "blob_sha": "c3721b2a6c38b2847f439c110344e7e24c1c8f0c",
+      "git_sha_recomputed": "c3721b2a6c38b2847f439c110344e7e24c1c8f0c",
+      "size_bytes": 26500,
+      "sha256": "129c498a41c4e2337d878c55eedc107f9cf77c0a20bc85fb556a2f3c30cd7789",
+      "kind": "unknown",
+      "error": "OSError: broken data stream when reading image file"
+    },
+    {
+      "index": 6,
+      "blob_sha": "01626896a09194adc6ac6534a9211310c50cbde2",
+      "git_sha_recomputed": "01626896a09194adc6ac6534a9211310c50cbde2",
+      "size_bytes": 16886,
+      "sha256": "ab2425120a669b018ffb6c29269f4a9ea4cefb8260017af3f7f126c57cb39b64",
+      "kind": "html",
+      "preview": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">\n  <meta name=\"robots\" content=\"noindex,nofollow,noarchive\">\n  <meta name=\"description\" content=\"Brian Olsen's territory sales and retail execution portfolio: spirits, RTD, wine, off-premise merchandising, promotional displays, distributor coordination, route management, and field reporting.\">\n  <title>Territory Sales &amp; Retail Execution | Brian Olsen</title>\n ",
+      "image_paths_found": [
+        "assets/territory-execution/Brian_Olsen_Sazerac_Market_Development_Resume.pdf",
+        "assets/territory-execution/cutwater-stadium.jpg?v=20260727-atomic-six-jpegs",
+        "assets/territory-execution/jack-daniels-flavor-portfolio.jpg?v=20260727-atomic-six-jpegs",
+        "assets/territory-execution/jack-daniels-football-feature.jpg?v=20260727-atomic-six-jpegs",
+        "assets/territory-execution/jack-daniels-holiday-coca-cola.jpg?v=20260727-atomic-six-jpegs",
+        "assets/territory-execution/jack-daniels-patriotic.jpg?v=20260727-atomic-six-jpegs",
+        "assets/territory-execution/korbel-seasonal-tower.jpg",
+        "assets/territory-execution/lighthouse-multi-brand-display.jpg",
+        "assets/territory-execution/nineteen-crimes-feature.jpg",
+        "assets/territory-execution/spring-wine-arch-display.jpg",
+        "assets/territory-execution/titos-golf-feature.jpg",
+        "assets/territory-execution/titos-mule-mug.jpg?v=20260727-atomic-six-jpegs"
+      ]
+    }
+  ]
+}
