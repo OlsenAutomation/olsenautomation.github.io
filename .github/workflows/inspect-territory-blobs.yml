@@ -1,0 +1,135 @@
+name: Inspect territory repair blobs
+
+on:
+  push:
+    branches:
+      - automation/territory-blob-inspection-20260726
+    paths:
+      - .github/workflows/inspect-territory-blobs.yml
+
+permissions:
+  contents: write
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: automation/territory-blob-inspection-20260726
+          fetch-depth: 0
+
+      - name: Install image inspection tools
+        run: |
+          python -m pip install --disable-pip-version-check pillow requests
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq tesseract-ocr
+
+      - name: Inspect unreachable Git blobs
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python - <<'PY'
+          import base64, hashlib, json, os, pathlib, subprocess
+          import requests
+          from PIL import Image, ImageStat
+
+          repo = os.environ['GITHUB_REPOSITORY']
+          token = os.environ['GH_TOKEN']
+          shas = [
+              'ce6a856d8514fbf39e1b87da5944b6ab0c0dd41e',
+              '5c3b30319506c463ffbdd70b1d030911413f6b57',
+              'f68e7bdb15d503f26b2c8ca90297a974250523ff',
+              '31d3d1c309f51167ac22e8229e72bfc8c46eaede',
+              'c3903a94904d1ded6b1d651f771d818a05b12349',
+              'c3721b2a6c38b2847f439c110344e7e24c1c8f0c',
+              '01626896a09194adc6ac6534a9211310c50cbde2',
+          ]
+          headers = {
+              'Authorization': f'Bearer {token}',
+              'Accept': 'application/vnd.github+json',
+              'X-GitHub-Api-Version': '2022-11-28',
+          }
+          out = []
+          work = pathlib.Path('/tmp/territory-blob-inspection')
+          work.mkdir(parents=True, exist_ok=True)
+
+          for index, sha in enumerate(shas):
+              url = f'https://api.github.com/repos/{repo}/git/blobs/{sha}'
+              response = requests.get(url, headers=headers, timeout=60)
+              response.raise_for_status()
+              payload = response.json()
+              data = base64.b64decode(payload['content'])
+              expected_git_sha = hashlib.sha1(b'blob ' + str(len(data)).encode() + b'\0' + data).hexdigest()
+              item = {
+                  'index': index,
+                  'blob_sha': sha,
+                  'git_sha_recomputed': expected_git_sha,
+                  'size_bytes': len(data),
+                  'sha256': hashlib.sha256(data).hexdigest(),
+              }
+              if expected_git_sha != sha:
+                  item['error'] = 'git_sha_mismatch'
+                  out.append(item)
+                  continue
+
+              try:
+                  text = data.decode('utf-8')
+              except UnicodeDecodeError:
+                  text = None
+
+              if text and ('<!doctype html' in text.lower() or '<html' in text.lower()):
+                  item['kind'] = 'html'
+                  item['preview'] = text[:500]
+                  item['image_paths_found'] = sorted(set(__import__('re').findall(r'assets/territory-execution/[A-Za-z0-9._?=-]+', text)))
+                  out.append(item)
+                  continue
+
+              blob_path = work / f'{index}-{sha}.jpg'
+              blob_path.write_bytes(data)
+              try:
+                  with Image.open(blob_path) as probe:
+                      probe.verify()
+                  with Image.open(blob_path) as image:
+                      image.load()
+                      item['kind'] = 'image'
+                      item['format'] = image.format
+                      item['width'] = image.width
+                      item['height'] = image.height
+                      item['mode'] = image.mode
+                      item['progressive'] = bool(image.info.get('progressive') or image.info.get('progression'))
+                      thumb = image.convert('RGB').copy()
+                      thumb.thumbnail((180, 180))
+                      item['mean_rgb'] = [round(v, 2) for v in ImageStat.Stat(thumb).mean[:3]]
+                      png_path = work / f'{index}-{sha}.png'
+                      image.convert('RGB').save(png_path)
+                  ocr = subprocess.run(
+                      ['tesseract', str(png_path), 'stdout', '--psm', '6'],
+                      check=False,
+                      stdout=subprocess.PIPE,
+                      stderr=subprocess.DEVNULL,
+                      text=True,
+                      timeout=120,
+                  ).stdout
+                  item['ocr'] = ' '.join(ocr.split())[:1000]
+              except Exception as exc:
+                  item['kind'] = 'unknown'
+                  item['error'] = f'{type(exc).__name__}: {exc}'
+              out.append(item)
+
+          report = {
+              'source_parent': 'aa113034d0ab8ba3de064cbe181d665796ab94aa',
+              'count': len(out),
+              'items': out,
+          }
+          pathlib.Path('territory-blob-inspection-report.json').write_text(json.dumps(report, indent=2), encoding='utf-8')
+          print(json.dumps(report, indent=2))
+          PY
+
+      - name: Commit inspection report to staging branch
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add territory-blob-inspection-report.json
+          git commit -m 'Record territory blob inspection report'
+          git push origin HEAD:automation/territory-blob-inspection-20260726
