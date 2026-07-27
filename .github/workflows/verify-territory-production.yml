@@ -1,0 +1,216 @@
+name: Verify atomic territory repair in production
+
+on:
+  push:
+    branches:
+      - automation/territory-blob-inspection-20260726
+    paths:
+      - .github/workflows/verify-territory-production.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: territory-production-verification
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: automation/territory-blob-inspection-20260726
+          fetch-depth: 0
+          token: ${{ github.token }}
+
+      - name: Install verification dependencies
+        run: python -m pip install --disable-pip-version-check pillow requests
+
+      - name: Verify exact commit and all live image bytes
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python - <<'PY'
+          import base64
+          import hashlib
+          import io
+          import json
+          import os
+          import pathlib
+          import time
+
+          import requests
+          from PIL import Image
+
+          repo = os.environ['GITHUB_REPOSITORY']
+          token = os.environ['GH_TOKEN']
+          parent = 'aa113034d0ab8ba3de064cbe181d665796ab94aa'
+          expected_message = 'Replace territory portfolio images from validated originals'
+          cache = '20260726-source-reupload-final-v5'
+          page_path = 'territory-sales-execution.html'
+          image_paths = [
+              'assets/territory-execution/jack-daniels-holiday-coca-cola.jpg',
+              'assets/territory-execution/jack-daniels-patriotic.jpg',
+              'assets/territory-execution/jack-daniels-flavor-portfolio.jpg',
+              'assets/territory-execution/titos-mule-mug.jpg',
+              'assets/territory-execution/jack-daniels-football-feature.jpg',
+              'assets/territory-execution/cutwater-stadium.jpg',
+          ]
+          expected_changed = sorted(image_paths + [page_path])
+          headers = {
+              'Authorization': f'Bearer {token}',
+              'Accept': 'application/vnd.github+json',
+              'X-GitHub-Api-Version': '2022-11-28',
+          }
+          report = {
+              'status': 'IN_PROGRESS',
+              'expected_parent': parent,
+              'expected_commit_message': expected_message,
+              'expected_changed_paths': expected_changed,
+              'cache_key': cache,
+              'checks': {},
+          }
+
+          def gh_json(url):
+              response = requests.get(url, headers=headers, timeout=60)
+              response.raise_for_status()
+              return response.json()
+
+          # Wait for the atomic main commit produced by the guarded finalizer.
+          commit = None
+          for attempt in range(60):
+              candidate = gh_json(f'https://api.github.com/repos/{repo}/commits/main')
+              message = candidate['commit']['message'].splitlines()[0]
+              if message == expected_message:
+                  commit = candidate
+                  break
+              time.sleep(10)
+          if commit is None:
+              raise RuntimeError('Atomic repair commit did not become main within ten minutes')
+
+          commit_sha = commit['sha']
+          parents = [item['sha'] for item in commit.get('parents', [])]
+          changed = sorted(item['filename'] for item in commit.get('files', []))
+          if parents != [parent]:
+              raise RuntimeError(f'Unexpected parent list: {parents}')
+          if changed != expected_changed:
+              raise RuntimeError(f'Unexpected changed paths: {changed}')
+          if len(changed) != 7:
+              raise RuntimeError(f'Expected seven changed paths, got {len(changed)}')
+          report['atomic_commit'] = commit_sha
+          report['actual_parent'] = parents[0]
+          report['actual_changed_paths'] = changed
+
+          # Read canonical bytes from the exact Git commit, not a moving branch.
+          canonical = {}
+          for path in image_paths:
+              payload = gh_json(f'https://api.github.com/repos/{repo}/contents/{path}?ref={commit_sha}')
+              data = base64.b64decode(payload['content'])
+              with Image.open(io.BytesIO(data)) as probe:
+                  probe.verify()
+              with Image.open(io.BytesIO(data)) as image:
+                  image.load()
+                  if image.format != 'JPEG' or image.size != (900, 1200):
+                      raise RuntimeError(f'{path}: invalid canonical image {image.format} {image.size}')
+                  if image.info.get('progressive') or image.info.get('progression'):
+                      raise RuntimeError(f'{path}: canonical image is progressive')
+              canonical[path] = {
+                  'bytes': data,
+                  'sha256': hashlib.sha256(data).hexdigest(),
+                  'size_bytes': len(data),
+              }
+
+          # Wait until the custom-domain HTML advertises the exact new cache key.
+          page_url = f'https://olsenautomation.com/{page_path}?repair={cache}'
+          page_text = None
+          page_response = None
+          for attempt in range(90):
+              page_response = requests.get(
+                  page_url + f'&attempt={attempt}&ts={int(time.time())}',
+                  headers={'Cache-Control': 'no-cache', 'Pragma': 'no-cache'},
+                  timeout=60,
+              )
+              if page_response.status_code == 200 and cache in page_response.text:
+                  page_text = page_response.text
+                  break
+              time.sleep(10)
+          if page_text is None:
+              status = None if page_response is None else page_response.status_code
+              raise RuntimeError(f'Production HTML never exposed cache key {cache}; last status {status}')
+          if page_text.count(cache) != 6:
+              raise RuntimeError(f'Production HTML contains cache key {page_text.count(cache)} times, expected 6')
+          if 'jack-daniels-football-feature.jpg' not in page_text:
+              raise RuntimeError('Production HTML is missing the sixth football card')
+          for forbidden in ('data-b64=', 'decodeBase64Image', 'Image temporarily unavailable'):
+              if forbidden in page_text:
+                  raise RuntimeError(f'Production HTML still contains workaround: {forbidden}')
+          report['production_page'] = {
+              'url': page_url,
+              'status_code': page_response.status_code,
+              'content_length': len(page_response.content),
+              'cache_key_occurrences': page_text.count(cache),
+          }
+
+          # Download every live JPEG directly and require byte-for-byte equality.
+          for path in image_paths:
+              url = f'https://olsenautomation.com/{path}?v={cache}&verify={commit_sha}'
+              response = requests.get(
+                  url,
+                  headers={'Cache-Control': 'no-cache', 'Pragma': 'no-cache'},
+                  timeout=90,
+              )
+              if response.status_code != 200:
+                  raise RuntimeError(f'{path}: production HTTP {response.status_code}')
+              live = response.content
+              live_sha = hashlib.sha256(live).hexdigest()
+              expected_sha = canonical[path]['sha256']
+              if live_sha != expected_sha:
+                  raise RuntimeError(f'{path}: production hash {live_sha} != canonical {expected_sha}')
+              with Image.open(io.BytesIO(live)) as probe:
+                  probe.verify()
+              with Image.open(io.BytesIO(live)) as image:
+                  image.load()
+                  if image.format != 'JPEG' or image.size != (900, 1200):
+                      raise RuntimeError(f'{path}: production decode {image.format} {image.size}')
+                  if image.info.get('progressive') or image.info.get('progression'):
+                      raise RuntimeError(f'{path}: production image is progressive')
+              content_type = response.headers.get('content-type', '')
+              if 'image/jpeg' not in content_type.lower():
+                  raise RuntimeError(f'{path}: production content-type {content_type!r}')
+              report['checks'][path] = {
+                  'url': url,
+                  'status_code': response.status_code,
+                  'content_type': content_type,
+                  'size_bytes': len(live),
+                  'sha256': live_sha,
+                  'decoded_format': 'JPEG',
+                  'decoded_width': 900,
+                  'decoded_height': 1200,
+                  'full_pixel_load': True,
+                  'matches_exact_commit': True,
+              }
+
+          report['status'] = 'PASS'
+          report['verified_at_utc'] = time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())
+          pathlib.Path('territory-production-verification.json').write_text(
+              json.dumps(report, indent=2), encoding='utf-8'
+          )
+          print(json.dumps(report, indent=2))
+          PY
+
+      - name: Commit public verification evidence to staging branch
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add territory-production-verification.json
+          git commit -m 'Record passing territory production verification'
+          git push origin HEAD:automation/territory-blob-inspection-20260726
+
+      - name: Tag the exact verified production commit
+        run: |
+          set -euo pipefail
+          commit="$(python -c "import json; print(json.load(open('territory-production-verification.json'))['atomic_commit'])")"
+          git tag -f territory-repair-verified-20260726-v5 "$commit"
+          git push origin refs/tags/territory-repair-verified-20260726-v5 --force
