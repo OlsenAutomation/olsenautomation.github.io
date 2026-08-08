@@ -1,0 +1,583 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI Visibility Monitoring & Improvement | Olsen Automation</title>
+  <meta name="description" content="A practical AI visibility service for local businesses: answer-engine monitoring, evidence, safe improvements, and a guided intake that creates one reusable setup file." />
+  <meta name="theme-color" content="#f6f3ef" />
+  <style>
+    :root {
+      --ink: #151619;
+      --muted: #636363;
+      --soft: #f6f3ef;
+      --panel: #ffffff;
+      --line: rgba(21, 22, 25, 0.13);
+      --accent: #8b3f2b;
+      --accent-2: #233348;
+      --success: #315c48;
+      --max: 1160px;
+      --radius: 24px;
+      --shadow: 0 22px 70px rgba(21,22,25,.10);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 18% 8%, rgba(255,255,255,.95), rgba(255,255,255,0) 42%),
+        linear-gradient(135deg, #fbfaf8 0%, #f5f0ea 46%, #ebe5dc 100%);
+      line-height: 1.55;
+    }
+
+    a { color: inherit; }
+    button, input, select, textarea { font: inherit; }
+    button { cursor: pointer; }
+    .wrap { width: min(var(--max), calc(100% - 36px)); margin: 0 auto; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(16px);
+      background: rgba(246, 243, 239, .86);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .topbar-inner {
+      width: min(var(--max), calc(100% - 36px));
+      min-height: 66px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 760;
+      letter-spacing: -.02em;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .mark {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      background: var(--ink);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .03em;
+      box-shadow: 0 10px 24px rgba(21,22,25,.16);
+    }
+
+    nav { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; font-size: 14px; color: rgba(21,22,25,.72); }
+    nav a { text-decoration: none; padding: 8px 10px; border-radius: 999px; }
+    nav a:hover, nav a[aria-current="page"] { background: rgba(255,255,255,.78); color: var(--ink); }
+
+    .hero { padding: 86px 0 44px; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 9px; color: var(--accent); font-size: 13px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 18px; }
+    .eyebrow::before { content: ""; width: 30px; height: 1px; background: currentColor; opacity: .55; }
+    h1, h2, h3 { margin-top: 0; }
+    h1 { margin-bottom: 0; max-width: 980px; font-size: clamp(48px, 8vw, 94px); line-height: .94; letter-spacing: -.07em; }
+    h2 { margin-bottom: 0; font-size: clamp(34px, 5vw, 58px); line-height: .98; letter-spacing: -.055em; }
+    h3 { margin-bottom: 10px; font-size: 23px; line-height: 1.08; letter-spacing: -.035em; }
+    .lead { max-width: 790px; margin: 28px 0 0; font-size: clamp(18px, 2.2vw, 23px); color: rgba(21,22,25,.72); }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 12px 18px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 750;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--ink);
+      box-shadow: 0 12px 30px rgba(21,22,25,.06);
+    }
+
+    .btn.primary { background: var(--ink); color: #fff; border-color: var(--ink); }
+    .btn:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, summary:focus-visible { outline: 3px solid rgba(139,63,43,.34); outline-offset: 2px; }
+    section { padding: 58px 0; }
+
+    .signal-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin-top: 38px; }
+    .signal { min-height: 142px; padding: 20px; border: 1px solid var(--line); border-radius: var(--radius); background: rgba(255,255,255,.65); box-shadow: 0 10px 34px rgba(21,22,25,.05); }
+    .signal strong { display: block; margin-bottom: 8px; font-size: 17px; letter-spacing: -.02em; }
+    .signal span { display: block; color: var(--muted); font-size: 14px; }
+
+    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 24px; border-top: 1px solid var(--line); padding-top: 34px; }
+    .section-head p { max-width: 540px; margin: 0; color: var(--muted); font-size: 17px; }
+    .process-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+    .process-card { padding: 24px; min-height: 230px; border-radius: calc(var(--radius) + 4px); border: 1px solid var(--line); background: rgba(255,255,255,.72); box-shadow: var(--shadow); }
+    .step-number { width: 36px; height: 36px; display: grid; place-items: center; border-radius: 50%; background: rgba(139,63,43,.12); color: var(--accent); font-weight: 850; }
+    .process-card h3 { margin-top: 24px; }
+    .process-card p { margin: 0; color: var(--muted); }
+
+    .intake-shell { display: grid; grid-template-columns: minmax(0, .64fr) minmax(0, 1.36fr); gap: 18px; align-items: start; }
+    .intake-aside, .form-card { border: 1px solid var(--line); border-radius: calc(var(--radius) + 8px); box-shadow: var(--shadow); }
+    .intake-aside { position: sticky; top: 88px; padding: 28px; background: var(--ink); color: #fff; }
+    .intake-aside p, .intake-aside li { color: rgba(255,255,255,.72); }
+    .intake-aside ul { padding-left: 20px; }
+    .intake-aside li { margin: 9px 0; }
+    .privacy-note { margin-top: 24px; padding: 16px; border: 1px solid rgba(255,255,255,.15); border-radius: 18px; background: rgba(255,255,255,.07); font-size: 14px; }
+    .form-card { padding: clamp(22px, 4vw, 40px); background: rgba(255,255,255,.82); }
+
+    .progress-wrap { margin-bottom: 34px; }
+    .progress-meta { display: flex; justify-content: space-between; gap: 18px; margin-bottom: 9px; color: var(--muted); font-size: 13px; font-weight: 720; }
+    .progress-track { height: 8px; overflow: hidden; border-radius: 999px; background: rgba(21,22,25,.08); }
+    .progress-bar { width: 0; height: 100%; border-radius: inherit; background: var(--accent); transition: width .2s ease; }
+
+    fieldset { min-width: 0; margin: 0; padding: 0 0 34px; border: 0; }
+    fieldset + fieldset { padding-top: 34px; border-top: 1px solid var(--line); }
+    legend { width: 100%; padding: 0; margin-bottom: 7px; font-size: clamp(27px, 3.3vw, 39px); font-weight: 800; line-height: 1; letter-spacing: -.045em; }
+    .section-copy { margin: 0 0 24px; color: var(--muted); }
+    .form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+    .field { display: grid; align-content: start; gap: 8px; }
+    .field.full { grid-column: 1 / -1; }
+    label, .label { font-weight: 760; letter-spacing: -.01em; }
+    .optional { color: var(--muted); font-size: 12px; font-weight: 600; }
+    .hint { margin: -2px 0 0; color: var(--muted); font-size: 13px; }
+
+    input[type="text"], input[type="url"], input[type="email"], input[type="tel"], select, textarea {
+      width: 100%;
+      border: 1px solid rgba(21,22,25,.20);
+      border-radius: 15px;
+      background: rgba(255,255,255,.88);
+      color: var(--ink);
+      padding: 13px 14px;
+    }
+
+    textarea { min-height: 112px; resize: vertical; }
+    input::placeholder, textarea::placeholder { color: #8a8a8a; }
+    .choice-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    .choice { display: flex; gap: 11px; align-items: flex-start; padding: 13px; border: 1px solid var(--line); border-radius: 15px; background: rgba(255,255,255,.62); }
+    .choice input { margin-top: 4px; accent-color: var(--accent); }
+    .choice span { display: block; }
+    .choice small { display: block; margin-top: 3px; color: var(--muted); line-height: 1.35; }
+
+    details.help { margin-top: 1px; border: 1px solid var(--line); border-radius: 14px; background: rgba(35,51,72,.045); }
+    details.help summary { cursor: pointer; padding: 11px 13px; font-size: 13px; font-weight: 760; color: var(--accent-2); }
+    details.help > div { padding: 0 13px 13px; color: var(--muted); font-size: 13px; }
+    details.help p { margin: 0 0 8px; }
+    details.help a { color: var(--accent-2); font-weight: 720; }
+    .safety { padding: 16px; border: 1px solid rgba(139,63,43,.25); border-radius: 18px; background: rgba(139,63,43,.07); color: #4b2b23; }
+    .safety strong { display: block; margin-bottom: 5px; }
+    .safety p { margin: 0; }
+
+    .form-actions { padding-top: 28px; border-top: 1px solid var(--line); }
+    .form-actions .btn { appearance: none; }
+    .status { min-height: 24px; margin: 14px 0 0; color: var(--muted); font-size: 14px; }
+    .status.error { color: #8a2f24; font-weight: 700; }
+    .success-panel { display: none; margin-top: 18px; padding: 22px; border: 1px solid rgba(49,92,72,.25); border-radius: 20px; background: rgba(49,92,72,.08); }
+    .success-panel.visible { display: block; }
+    .success-panel h3 { color: var(--success); }
+    .success-panel p { color: #3e5549; }
+
+    .faq-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+    .faq-grid details { border: 1px solid var(--line); border-radius: 20px; background: rgba(255,255,255,.66); box-shadow: 0 12px 34px rgba(21,22,25,.04); }
+    .faq-grid summary { cursor: pointer; padding: 20px; font-weight: 800; }
+    .faq-grid p { margin: 0; padding: 0 20px 20px; color: var(--muted); }
+
+    footer { padding: 34px 0 54px; border-top: 1px solid var(--line); color: rgba(21,22,25,.54); font-size: 14px; }
+
+    @media (max-width: 900px) {
+      .topbar-inner { align-items: flex-start; flex-direction: column; padding: 14px 0; }
+      nav { justify-content: flex-start; }
+      .hero { padding-top: 54px; }
+      .signal-grid, .process-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .section-head { display: block; }
+      .section-head p { margin-top: 12px; }
+      .intake-shell { grid-template-columns: 1fr; }
+      .intake-aside { position: static; }
+    }
+
+    @media (max-width: 620px) {
+      .signal-grid, .process-grid, .form-grid, .choice-grid, .faq-grid { grid-template-columns: 1fr; }
+      .field.full { grid-column: auto; }
+      h1 { font-size: clamp(44px, 15vw, 68px); }
+      .form-card { padding: 22px 18px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="index.html" aria-label="Olsen Automation home"><span class="mark">OA</span><span>Olsen Automation</span></a>
+      <nav aria-label="Primary navigation">
+        <a href="index.html">Home</a>
+        <a href="ai-visibility.html" aria-current="page">AI Visibility</a>
+        <a href="product-photo-production.html#work">Product Work</a>
+        <a href="firefly-living-lights.html">Living Lights</a>
+        <a href="cassette-mp4.html">Cassette.mp4</a>
+        <a href="docs.html">Docs</a>
+        <a href="support.html">Support</a>
+        <a href="verify.html">Verify</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <div class="eyebrow">AI Visibility</div>
+        <h1>Help answer engines find your business.</h1>
+        <p class="lead">We measure whether Grok, Perplexity, and Copilot recommend your business, preserve the evidence, and turn what we learn into careful, trackable improvements.</p>
+        <div class="actions">
+          <a class="btn primary" href="#intake">Start the guided intake</a>
+          <a class="btn" href="#how-it-works">See how it works</a>
+        </div>
+        <div class="signal-grid" aria-label="Service highlights">
+          <div class="signal"><strong>Real answer checks</strong><span>We open each configured engine and record only what it actually returns.</span></div>
+          <div class="signal"><strong>Evidence, not guesses</strong><span>Every result is timestamped and saved so changes can be compared honestly.</span></div>
+          <div class="signal"><strong>Safe improvements</strong><span>Only pre-authorized updates run automatically. Sensitive changes pause.</span></div>
+          <div class="signal"><strong>One reusable file</strong><span>Your intake becomes a structured setup file for a dedicated ChatGPT Work session.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="how-it-works">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>From intake to ongoing visibility.</h2>
+          <p>One guided setup creates the source of truth. The recurring workflow handles collection, evidence, reporting, and only the improvements you authorize.</p>
+        </div>
+        <div class="process-grid">
+          <article class="process-card"><span class="step-number">1</span><h3>Tell us the truth</h3><p>Enter your official business details, services, locations, public profiles, and the searches customers use.</p></article>
+          <article class="process-card"><span class="step-number">2</span><h3>Choose boundaries</h3><p>Decide what may happen automatically and what must always wait for your approval.</p></article>
+          <article class="process-card"><span class="step-number">3</span><h3>Create one file</h3><p>The page downloads a structured JSON intake file. No passwords or secret keys are included.</p></article>
+          <article class="process-card"><span class="step-number">4</span><h3>Start monitoring</h3><p>Olsen Automation uses that file to create a dedicated local workflow, weekly checks, and evidence-backed reports.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="intake">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Create your intake file.</h2>
+          <p>Plain-language help is included beside the unfamiliar items. You can save the file without creating an account.</p>
+        </div>
+
+        <div class="intake-shell">
+          <aside class="intake-aside">
+            <div class="eyebrow">Before you start</div>
+            <h3>What you may want nearby</h3>
+            <ul>
+              <li>Your website and public business contact information</li>
+              <li>A list of services and locations you actually serve</li>
+              <li>Links to Google, Apple, Yelp, and social profiles</li>
+              <li>The name of your website platform</li>
+              <li>Three searches a customer might type</li>
+            </ul>
+            <div class="privacy-note"><strong>Keep secrets out.</strong><br />Never enter passwords, one-time codes, API keys, payment information, customer lists, or private client details. Access is granted later through official invitations.</div>
+          </aside>
+
+          <form id="visibility-intake" class="form-card" novalidate>
+            <div class="progress-wrap" aria-hidden="true">
+              <div class="progress-meta"><span>Required information completed</span><span id="progress-label">0%</span></div>
+              <div class="progress-track"><div id="progress-bar" class="progress-bar"></div></div>
+            </div>
+
+            <fieldset>
+              <legend>1. Your business</legend>
+              <p class="section-copy">This becomes the canonical record used to catch conflicting names, phone numbers, locations, and links.</p>
+              <div class="form-grid">
+                <div class="field"><label for="business-name">Official business name</label><input id="business-name" name="business_name" type="text" autocomplete="organization" required placeholder="Example: Harbor Family Photography" /></div>
+                <div class="field"><label for="website">Website</label><input id="website" name="website" type="url" required placeholder="https://example.com" /></div>
+                <div class="field"><label for="contact-name">Primary contact name</label><input id="contact-name" name="contact_name" type="text" autocomplete="name" required /></div>
+                <div class="field"><label for="contact-email">Primary contact email</label><input id="contact-email" name="contact_email" type="email" autocomplete="email" required /></div>
+                <div class="field"><label for="public-email">Public business email <span class="optional">optional</span></label><input id="public-email" name="public_email" type="email" autocomplete="email" /></div>
+                <div class="field"><label for="public-phone">Public business phone <span class="optional">optional</span></label><input id="public-phone" name="public_phone" type="tel" autocomplete="tel" /></div>
+                <div class="field"><label for="location">Main city and state</label><input id="location" name="location" type="text" required placeholder="Oxnard, California" /></div>
+                <div class="field"><label for="timezone">Time zone</label><select id="timezone" name="timezone" required><option value="">Choose one</option><option>America/Los_Angeles</option><option>America/Denver</option><option>America/Chicago</option><option>America/New_York</option><option>America/Phoenix</option><option>Pacific/Honolulu</option><option>America/Anchorage</option><option value="other">Other / not listed</option></select></div>
+                <div class="field full">
+                  <span class="label">How do customers reach you?</span>
+                  <div class="choice-grid">
+                    <label class="choice"><input type="radio" name="business_model" value="storefront" required /><span><strong>At my location</strong><small>Customers visit a public storefront or office during stated hours.</small></span></label>
+                    <label class="choice"><input type="radio" name="business_model" value="service_area" required /><span><strong>I travel to them</strong><small>You serve customers in an area and may keep your home address private.</small></span></label>
+                    <label class="choice"><input type="radio" name="business_model" value="hybrid" required /><span><strong>Both</strong><small>You have a public location and also travel to customers.</small></span></label>
+                    <label class="choice"><input type="radio" name="business_model" value="online" required /><span><strong>Online only</strong><small>Your work is not tied to a customer-facing physical location.</small></span></label>
+                  </div>
+                  <details class="help"><summary>ELI5: Why does this matter?</summary><div>Search platforms treat storefronts, service-area businesses, and online-only businesses differently. We need the truthful choice so we do not accidentally publish a private address or create an ineligible local listing.</div></details>
+                </div>
+                <div class="field full"><label for="public-address">Public address <span class="optional">only if customers may visit it</span></label><input id="public-address" name="public_address" type="text" autocomplete="street-address" placeholder="Leave blank if your address should stay private" /></div>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend>2. Services and searches</legend>
+              <p class="section-copy">Use one item per line. We use this section to create buyer-intent checks without inserting your business name into the question.</p>
+              <div class="form-grid">
+                <div class="field"><label for="primary-service">Primary service or category</label><input id="primary-service" name="primary_service" type="text" required placeholder="Family photographer" /></div>
+                <div class="field"><label for="service-areas">Cities or areas served</label><textarea id="service-areas" name="service_areas" required placeholder="Oxnard, California&#10;Ventura, California"></textarea></div>
+                <div class="field full"><label for="services">Services offered</label><textarea id="services" name="services" required placeholder="Family photography&#10;Maternity photography&#10;Mini sessions"></textarea></div>
+                <div class="field full"><label for="queries">Search phrases to monitor</label><textarea id="queries" name="queries" required placeholder="family photographer Oxnard&#10;Oxnard family photography&#10;Ventura family photographer"></textarea><p class="hint">Start with three to six phrases a ready-to-buy customer would naturally use.</p><details class="help"><summary>ELI5: What is a search phrase?</summary><div><p>It is the exact question or short phrase we type into an AI answer engine. Good examples combine a real service with a location or buying need.</p><p>Use “emergency plumber Ventura” or “family photographer Oxnard,” not your company name.</p></div></details></div>
+                <div class="field"><label for="brand-variants">Other names for your business <span class="optional">optional</span></label><textarea id="brand-variants" name="brand_variants" placeholder="Short name&#10;Owner's professional name&#10;example.com"></textarea></div>
+                <div class="field"><label for="competitors">Known competitors <span class="optional">optional</span></label><textarea id="competitors" name="competitors" placeholder="One business per line"></textarea></div>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend>3. Your public footprint</legend>
+              <p class="section-copy">Paste links when you have them. “Not sure” is a useful answer—the first audit can locate and reconcile the profiles.</p>
+              <div class="form-grid">
+                <div class="field"><label for="google-profile">Google Business Profile link <span class="optional">optional</span></label><input id="google-profile" name="google_business_profile" type="url" placeholder="https://maps.google.com/..." /><details class="help"><summary>ELI5: What is this and where is it?</summary><div><p>This is the business card that appears in Google Search and Maps. Open your business in Google Maps, choose Share, and copy the link.</p><a href="https://support.google.com/business/answer/3403100" target="_blank" rel="noopener">Google's owner and manager guide</a></div></details></div>
+                <div class="field"><label for="apple-profile">Apple Maps link <span class="optional">optional</span></label><input id="apple-profile" name="apple_business_connect" type="url" placeholder="https://maps.apple.com/..." /><details class="help"><summary>ELI5: What is this and where is it?</summary><div><p>This is how your business appears in Apple Maps, Siri, and other Apple experiences. Find the business in Apple Maps, choose Share, and copy the link.</p><a href="https://businessconnect.apple.com/" target="_blank" rel="noopener">Open Apple Business Connect</a></div></details></div>
+                <div class="field"><label for="yelp-profile">Yelp link <span class="optional">optional</span></label><input id="yelp-profile" name="yelp" type="url" placeholder="https://www.yelp.com/biz/..." /></div>
+                <div class="field"><label for="booking-link">Booking or contact link <span class="optional">optional</span></label><input id="booking-link" name="booking_url" type="url" placeholder="https://example.com/book" /></div>
+                <div class="field full"><label for="other-profiles">Other directory and social links <span class="optional">optional</span></label><textarea id="other-profiles" name="other_profiles" placeholder="https://www.instagram.com/example&#10;https://www.facebook.com/example&#10;https://directory.example/profile"></textarea></div>
+                <div class="field"><label for="cms">Website platform</label><select id="cms" name="cms_platform" required><option value="">Choose one</option><option>WordPress</option><option>Squarespace</option><option>Wix</option><option>Shopify</option><option>Pixieset</option><option>Webflow</option><option>GoDaddy Website Builder</option><option>GitHub Pages</option><option>Custom / developer managed</option><option>I do not know</option><option>I do not have a website</option></select><details class="help"><summary>ELI5: What is a website platform?</summary><div>It is the tool used to edit your website. If you sign in somewhere to change photos or text, that company's name is usually the answer. Your latest website invoice may also show it.</div></details></div>
+                <div class="field"><label for="cms-login">Website sign-in page <span class="optional">link only</span></label><input id="cms-login" name="cms_login_url" type="url" placeholder="https://example.com/admin" /><p class="hint">Do not enter your username or password.</p></div>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend>4. Access readiness</legend>
+              <p class="section-copy">This does not grant access. It tells us what exists so we can send the correct official invitation instructions later.</p>
+              <div class="safety"><strong>Never paste credentials here.</strong><p>The safe pattern is: you keep ownership, and invite Olsen Automation as a manager or user. You can remove that access later.</p></div>
+              <div class="form-grid" style="margin-top:18px">
+                <div class="field"><label for="gbp-status">Google Business Profile</label><select id="gbp-status" name="google_business_status" required><option value="">Choose one</option><option value="verified_owner">Verified and I am an owner</option><option value="verified_not_owner">Verified but someone else owns it</option><option value="unverified">Exists but is not verified</option><option value="missing">I do not think one exists</option><option value="unknown">I am not sure</option></select><details class="help"><summary>ELI5: How would I grant access?</summary><div><p>On your Google Business Profile: More → Business Profile settings → People and access → Add. Invite the operations email as a Manager, not an Owner.</p><a href="https://support.google.com/business/answer/3403100" target="_blank" rel="noopener">Official Google instructions</a></div></details></div>
+                <div class="field"><label for="search-console-status">Google Search Console</label><select id="search-console-status" name="search_console_status" required><option value="">Choose one</option><option value="owner">Set up and I am an owner</option><option value="user">Set up but I am only a user</option><option value="missing">Not set up</option><option value="unknown">I am not sure</option></select><details class="help"><summary>ELI5: What is it and where is access?</summary><div><p>Search Console is Google's dashboard for how it reads your website. An owner opens Settings → Users and permissions → Add user and grants Full access.</p><a href="https://support.google.com/webmasters/answer/7687615" target="_blank" rel="noopener">Official Search Console instructions</a></div></details></div>
+                <div class="field"><label for="bing-status">Bing Webmaster Tools</label><select id="bing-status" name="bing_webmaster_status" required><option value="">Choose one</option><option value="administrator">Set up and I am an administrator</option><option value="user">Set up but I am not an administrator</option><option value="missing">Not set up</option><option value="unknown">I am not sure</option></select><details class="help"><summary>ELI5: What is it and where is access?</summary><div><p>It is Bing's version of Search Console and helps Bing and Copilot find site updates. In Bing Webmaster Tools, open User management and add a user with Read/Write access.</p><a href="https://www2.bing.com/webmasters/help/how-to-add-users-to-your-site-account-d5d00364" target="_blank" rel="noopener">Official Bing instructions</a></div></details></div>
+                <div class="field"><label for="apple-status">Apple Business Connect</label><select id="apple-status" name="apple_business_status" required><option value="">Choose one</option><option value="administrator">Set up and I manage it</option><option value="user">Set up but someone else manages it</option><option value="missing">Not set up</option><option value="unknown">I am not sure</option></select><details class="help"><summary>ELI5: What is it?</summary><div><p>Apple Business Connect controls how eligible businesses appear across Apple services, including Maps. The business owner should retain control and delegate access when available.</p><a href="https://businessconnect.apple.com/" target="_blank" rel="noopener">Open Apple Business Connect</a></div></details></div>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend>5. Standing permissions</legend>
+              <p class="section-copy">These are operating preferences, not a contract. Actual access and the final work agreement are confirmed separately.</p>
+              <div class="field full">
+                <span class="label">Actions that may run automatically</span>
+                <div class="choice-grid">
+                  <label class="choice"><input type="checkbox" name="automatic_actions" value="monitor_answer_engines" checked /><span><strong>Monitor AI answers</strong><small>Run configured searches and preserve evidence.</small></span></label>
+                  <label class="choice"><input type="checkbox" name="automatic_actions" value="generate_reports" checked /><span><strong>Generate reports</strong><small>Create periodic visibility summaries.</small></span></label>
+                  <label class="choice"><input type="checkbox" name="automatic_actions" value="submit_indexing" /><span><strong>Submit updated pages</strong><small>Notify search tools after an authorized page change.</small></span></label>
+                  <label class="choice"><input type="checkbox" name="automatic_actions" value="correct_profile_consistency" /><span><strong>Correct profile consistency</strong><small>Match approved public facts across existing profiles.</small></span></label>
+                  <label class="choice"><input type="checkbox" name="automatic_actions" value="update_site_content" /><span><strong>Improve website content</strong><small>Use verified facts and approved page templates.</small></span></label>
+                  <label class="choice"><input type="checkbox" name="automatic_actions" value="publish_approved_photos" /><span><strong>Publish approved photos</strong><small>Only images that have documented publication permission.</small></span></label>
+                </div>
+              </div>
+              <div class="field full" style="margin-top:20px">
+                <span class="label">Always pause for approval</span>
+                <div class="choice-grid">
+                  <label class="choice"><input type="checkbox" name="approval_actions" value="pricing_offers" checked disabled /><span><strong>Pricing or offers</strong><small>Required safeguard.</small></span></label>
+                  <label class="choice"><input type="checkbox" name="approval_actions" value="negative_review_response" checked disabled /><span><strong>Negative-review responses</strong><small>Required safeguard.</small></span></label>
+                  <label class="choice"><input type="checkbox" name="approval_actions" value="business_identity" checked disabled /><span><strong>Name, address, phone, or category</strong><small>Required safeguard.</small></span></label>
+                  <label class="choice"><input type="checkbox" name="approval_actions" value="deletions" checked disabled /><span><strong>Deleting pages or profiles</strong><small>Required safeguard.</small></span></label>
+                  <label class="choice"><input type="checkbox" name="approval_actions" value="paid_services" checked disabled /><span><strong>Paid tools or advertising</strong><small>Required safeguard.</small></span></label>
+                  <label class="choice"><input type="checkbox" name="approval_actions" value="unverified_client_content" checked disabled /><span><strong>Client names, stories, or images</strong><small>Unless publication permission is documented.</small></span></label>
+                </div>
+              </div>
+              <div class="form-grid" style="margin-top:20px">
+                <div class="field"><label for="photo-consent">Photo and client-content policy</label><select id="photo-consent" name="photo_consent_policy" required><option value="">Choose one</option><option value="none_without_approval">Do not publish anything without case-by-case approval</option><option value="approved_library_only">Use only a separately approved media library</option><option value="website_public_only">Reuse only material already public on my website</option><option value="not_applicable">Not applicable to my business</option></select></div>
+                <div class="field"><label for="report-email">Report recipient email</label><input id="report-email" name="report_email" type="email" required placeholder="Where reports should be sent" /></div>
+                <div class="field full"><label for="notes">Anything else we should know? <span class="optional">optional</span></label><textarea id="notes" name="notes" placeholder="Seasonality, unusual service boundaries, upcoming changes, or important cautions"></textarea></div>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend>6. Confirm and create</legend>
+              <p class="section-copy">Review your entries. The file is created locally in this browser and downloads to your device.</p>
+              <div class="choice-grid">
+                <label class="choice"><input type="checkbox" id="authority" name="authority_confirmed" required /><span><strong>I am authorized to provide these business details</strong><small>I am the owner or an authorized representative.</small></span></label>
+                <label class="choice"><input type="checkbox" id="no-secrets" name="no_secrets_confirmed" required /><span><strong>I did not include secrets or private customer data</strong><small>No passwords, codes, keys, payment data, or customer lists.</small></span></label>
+              </div>
+            </fieldset>
+
+            <div class="form-actions">
+              <button class="btn primary" type="submit">Download my intake file</button>
+              <p id="form-status" class="status" role="status" aria-live="polite">Your information stays in this browser until you download the file.</p>
+              <div id="success-panel" class="success-panel" aria-live="polite">
+                <h3>Your intake file is ready.</h3>
+                <p>Attach the downloaded JSON file to an email to Olsen Automation. That single file is the handoff used to create your dedicated ChatGPT Work session.</p>
+                <div class="actions"><a id="email-file" class="btn primary" href="mailto:brian@olsenautomation.com?subject=AI%20Visibility%20Intake">Open an email to Olsen Automation</a><button id="download-again" class="btn" type="button">Download again</button></div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section id="questions">
+      <div class="wrap">
+        <div class="section-head"><h2>Good questions.</h2><p>The goal is careful automation with a clear evidence trail—not a promise of guaranteed rankings.</p></div>
+        <div class="faq-grid">
+          <details><summary>Will this guarantee that AI recommends my business?</summary><p>No. Answer engines change and may personalize results. The service measures what appears, improves the public signals within your control, and reports changes honestly.</p></details>
+          <details><summary>Do you need my passwords?</summary><p>No. Never send passwords or codes. When access is needed, you retain ownership and invite an Olsen Automation account with the smallest practical role.</p></details>
+          <details><summary>What happens after I send the file?</summary><p>Olsen Automation validates the intake, confirms any missing ownership steps, creates the local monitor, performs a manual evidence run, and schedules recurring collection and due-date reporting.</p></details>
+          <details><summary>What can run without me?</summary><p>Monitoring and reports can run unattended. Public edits can run only inside your standing permissions. Pricing, identity changes, deletions, paid services, and unapproved client content always pause.</p></details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer><div class="wrap">© 2026 Olsen Automation LLC. Practical AI systems, automation, and production workflows. · <a href="mailto:brian@olsenautomation.com">brian@olsenautomation.com</a></div></footer>
+
+  <script>
+    (() => {
+      const form = document.getElementById('visibility-intake');
+      const progressBar = document.getElementById('progress-bar');
+      const progressLabel = document.getElementById('progress-label');
+      const status = document.getElementById('form-status');
+      const successPanel = document.getElementById('success-panel');
+      const downloadAgain = document.getElementById('download-again');
+      const emailFile = document.getElementById('email-file');
+      let lastDownload = null;
+
+      const lines = (value) => value.split(/\r?\n/).map(item => item.trim()).filter(Boolean);
+      const checked = (name) => Array.from(form.querySelectorAll(`[name="${name}"]:checked`)).map(input => input.value);
+      const value = (name) => (form.elements[name]?.value || '').trim();
+
+      function updateProgress() {
+        const required = Array.from(form.querySelectorAll('[required]'));
+        const groups = new Map();
+        required.forEach(field => {
+          const key = field.type === 'radio' ? `radio:${field.name}` : field.id || field.name;
+          if (!groups.has(key)) groups.set(key, []);
+          groups.get(key).push(field);
+        });
+        let complete = 0;
+        groups.forEach(fields => {
+          if (fields.some(field => field.type === 'checkbox' || field.type === 'radio' ? field.checked : field.value.trim() !== '')) complete += 1;
+        });
+        const percent = groups.size ? Math.round((complete / groups.size) * 100) : 0;
+        progressBar.style.width = `${percent}%`;
+        progressLabel.textContent = `${percent}%`;
+      }
+
+      function buildIntake() {
+        let domain = '';
+        try { domain = new URL(value('website')).hostname.replace(/^www\./, ''); } catch (_) { domain = ''; }
+        const businessName = value('business_name');
+        const brandVariants = Array.from(new Set([businessName, domain, ...lines(value('brand_variants'))].filter(Boolean)));
+        const requiredApprovals = Array.from(form.querySelectorAll('[name="approval_actions"]')).map(input => input.value);
+
+        return {
+          schema_version: '1.0.0',
+          intake_type: 'olsen_automation_ai_visibility',
+          created_at_utc: new Date().toISOString(),
+          source_page: 'https://olsenautomation.com/ai-visibility.html',
+          client: {
+            business_name: businessName,
+            website: value('website'),
+            domain,
+            contact_name: value('contact_name'),
+            contact_email: value('contact_email'),
+            public_email: value('public_email'),
+            public_phone: value('public_phone'),
+            main_location: value('location'),
+            timezone: value('timezone'),
+            business_model: value('business_model'),
+            public_address: value('public_address'),
+            primary_service: value('primary_service'),
+            services: lines(value('services')),
+            service_areas: lines(value('service_areas')),
+            brand_variants: brandVariants,
+            known_competitors: lines(value('competitors'))
+          },
+          visibility: {
+            target_queries: lines(value('queries')),
+            engines_requested: ['grok', 'perplexity', 'bing_copilot'],
+            cadence: 'weekly',
+            report_period_days: 14,
+            report_email: value('report_email')
+          },
+          public_footprint: {
+            google_business_profile: value('google_business_profile'),
+            apple_business_connect: value('apple_business_connect'),
+            yelp: value('yelp'),
+            booking_url: value('booking_url'),
+            other_profiles: lines(value('other_profiles')),
+            cms_platform: value('cms_platform'),
+            cms_login_url: value('cms_login_url')
+          },
+          access_readiness: {
+            google_business_profile: value('google_business_status'),
+            google_search_console: value('search_console_status'),
+            bing_webmaster_tools: value('bing_webmaster_status'),
+            apple_business_connect: value('apple_business_status'),
+            credentials_included: false,
+            access_method: 'official_invitation_only'
+          },
+          operating_permissions: {
+            automatic_actions_requested: checked('automatic_actions'),
+            approval_always_required: requiredApprovals,
+            photo_consent_policy: value('photo_consent_policy'),
+            notes: value('notes'),
+            final_scope_requires_separate_confirmation: true
+          },
+          confirmations: {
+            authorized_representative: document.getElementById('authority').checked,
+            no_secrets_or_private_customer_data: document.getElementById('no-secrets').checked
+          },
+          handoff: {
+            recipient: 'brian@olsenautomation.com',
+            next_step: 'Attach this file to an email to Olsen Automation. It will be validated before a dedicated local ChatGPT Work workflow is created.'
+          }
+        };
+      }
+
+      function downloadIntake(payload) {
+        const slug = (payload.client.business_name || 'business').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 54) || 'business';
+        const date = new Date().toISOString().slice(0, 10);
+        const filename = `${slug}-ai-visibility-intake-${date}.json`;
+        const blob = new Blob([JSON.stringify(payload, null, 2) + '\n'], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const anchor = document.createElement('a');
+        anchor.href = url;
+        anchor.download = filename;
+        document.body.appendChild(anchor);
+        anchor.click();
+        anchor.remove();
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+        lastDownload = payload;
+        return filename;
+      }
+
+      form.addEventListener('input', updateProgress);
+      form.addEventListener('change', updateProgress);
+
+      form.addEventListener('submit', event => {
+        event.preventDefault();
+        status.classList.remove('error');
+        successPanel.classList.remove('visible');
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          const firstInvalid = form.querySelector(':invalid');
+          firstInvalid?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          status.textContent = 'Please complete the highlighted required information before creating the file.';
+          status.classList.add('error');
+          return;
+        }
+        const payload = buildIntake();
+        const filename = downloadIntake(payload);
+        emailFile.href = `mailto:brian@olsenautomation.com?subject=${encodeURIComponent(`AI Visibility Intake — ${payload.client.business_name}`)}&body=${encodeURIComponent(`Hello Olsen Automation,\n\nAttached is my AI Visibility intake file: ${filename}\n\nPlease validate it and let me know if any one-time access invitations are needed.\n`)}`;
+        status.textContent = `Downloaded ${filename}`;
+        successPanel.classList.add('visible');
+        successPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      });
+
+      downloadAgain.addEventListener('click', () => {
+        if (lastDownload) downloadIntake(lastDownload);
+      });
+
+      updateProgress();
+    })();
+  </script>
+</body>
+</html>
