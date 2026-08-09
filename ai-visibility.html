@@ -541,7 +541,7 @@
 
       function downloadIntake(payload) {
         const slug = (payload.client.business_name || 'business').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 54) || 'business';
-        const date = new Date().toISOString().slice(0, 10);
+        const date = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Los_Angeles' }).format(new Date());
         const filename = `${slug}-ai-visibility-intake-${date}.json`;
         const blob = new Blob([JSON.stringify(payload, null, 2) + '\n'], { type: 'application/json' });
         const url = URL.createObjectURL(blob);
