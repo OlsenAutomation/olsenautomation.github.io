@@ -260,7 +260,7 @@
         <div class="process-grid">
           <article class="process-card"><span class="step-number">1</span><h3>Tell us the truth</h3><p>Enter your official business details, services, locations, public profiles, and the searches customers use.</p></article>
           <article class="process-card"><span class="step-number">2</span><h3>Choose boundaries</h3><p>Decide what may happen automatically and what must always wait for your approval.</p></article>
-          <article class="process-card"><span class="step-number">3</span><h3>Create one file</h3><p>The page downloads a structured JSON intake file. No passwords or secret keys are included.</p></article>
+          <article class="process-card"><span class="step-number">3</span><h3>Send one file</h3><p>The page securely sends Olsen Automation a structured JSON intake and downloads your backup. No passwords or secret keys are included.</p></article>
           <article class="process-card"><span class="step-number">4</span><h3>Start monitoring</h3><p>Olsen Automation uses that file to create a dedicated local workflow, weekly checks, and evidence-backed reports.</p></article>
         </div>
       </div>
@@ -269,8 +269,8 @@
     <section id="intake">
       <div class="wrap">
         <div class="section-head">
-          <h2>Create your intake file.</h2>
-          <p>Plain-language help is included beside the unfamiliar items. You can save the file without creating an account.</p>
+          <h2>Create and send your intake file.</h2>
+          <p>Plain-language help is included beside unfamiliar items. No account is required, and you receive a backup copy.</p>
         </div>
 
         <div class="intake-shell">
@@ -288,6 +288,7 @@
           </aside>
 
           <form id="visibility-intake" class="form-card" novalidate>
+            <div style="position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden" aria-hidden="true"><label for="company-website-confirm">Leave this field empty</label><input id="company-website-confirm" name="company_website_confirm" type="text" tabindex="-1" autocomplete="off" /></div>
             <div class="progress-wrap" aria-hidden="true">
               <div class="progress-meta"><span>Required information completed</span><span id="progress-label">0%</span></div>
               <div class="progress-track"><div id="progress-bar" class="progress-bar"></div></div>
@@ -392,7 +393,7 @@
 
             <fieldset>
               <legend>6. Confirm and create</legend>
-              <p class="section-copy">Review your entries. The file is created locally in this browser and downloads to your device.</p>
+              <p class="section-copy">Review your entries. When you submit, the structured intake is sent to Olsen Automation's Workspace inbox and a backup downloads to your device.</p>
               <div class="choice-grid">
                 <label class="choice"><input type="checkbox" id="authority" name="authority_confirmed" required /><span><strong>I am authorized to provide these business details</strong><small>I am the owner or an authorized representative.</small></span></label>
                 <label class="choice"><input type="checkbox" id="no-secrets" name="no_secrets_confirmed" required /><span><strong>I did not include secrets or private customer data</strong><small>No passwords, codes, keys, payment data, or customer lists.</small></span></label>
@@ -400,15 +401,16 @@
             </fieldset>
 
             <div class="form-actions">
-              <button class="btn primary" type="submit">Download my intake file</button>
-              <p id="form-status" class="status" role="status" aria-live="polite">Your information stays in this browser until you download the file.</p>
+              <button id="submit-intake" class="btn primary" type="submit">Send intake &amp; download backup</button>
+              <p id="form-status" class="status" role="status" aria-live="polite">Nothing is sent until you click the button above.</p>
               <div id="success-panel" class="success-panel" aria-live="polite">
-                <h3>Your intake file is ready.</h3>
-                <p>Attach the downloaded JSON file to an email to Olsen Automation. That single file is the handoff used to create your dedicated ChatGPT Work session.</p>
-                <div class="actions"><a id="email-file" class="btn primary" href="mailto:brian@olsenautomation.com?subject=AI%20Visibility%20Intake">Open an email to Olsen Automation</a><button id="download-again" class="btn" type="button">Download again</button></div>
+                <h3>Your intake was sent.</h3>
+                <p>Olsen Automation received the structured handoff for your dedicated ChatGPT Work session. A backup also downloaded to your device.</p>
+                <div class="actions"><button id="download-again" class="btn" type="button">Download backup again</button></div>
               </div>
             </div>
           </form>
+          <iframe id="intake-receiver-frame" name="intake-receiver-frame" title="Secure intake delivery response" hidden></iframe>
         </div>
       </div>
     </section>
@@ -436,8 +438,13 @@
       const status = document.getElementById('form-status');
       const successPanel = document.getElementById('success-panel');
       const downloadAgain = document.getElementById('download-again');
-      const emailFile = document.getElementById('email-file');
+      const submitButton = document.getElementById('submit-intake');
+      const receiverFrame = document.getElementById('intake-receiver-frame');
+      const receiverEndpoint = 'https://script.google.com/macros/s/AKfycbwtqcIqB02Q_BT4d5c3z1OCy6rQif5Jeyg897wQLBoY6UA5vHBR8NOcOdh1SAbmFC3FTQ/exec';
+      const formStartedAt = Date.now();
       let lastDownload = null;
+      let lastFilename = '';
+      let deliveryTimer = null;
 
       const lines = (value) => value.split(/\r?\n/).map(item => item.trim()).filter(Boolean);
       const checked = (name) => Array.from(form.querySelectorAll(`[name="${name}"]:checked`)).map(input => input.value);
@@ -527,7 +534,7 @@
           },
           handoff: {
             recipient: 'brian@olsenautomation.com',
-            next_step: 'Attach this file to an email to Olsen Automation. It will be validated before a dedicated local ChatGPT Work workflow is created.'
+            next_step: 'Olsen Automation received this intake by email. It will be validated before a dedicated local ChatGPT Work workflow is created.'
           }
         };
       }
@@ -549,6 +556,46 @@
         return filename;
       }
 
+      function sendIntake(payload) {
+        const deliveryForm = document.createElement('form');
+        deliveryForm.method = 'post';
+        deliveryForm.action = receiverEndpoint;
+        deliveryForm.target = receiverFrame.name;
+        deliveryForm.hidden = true;
+        const fields = {
+          company_website_confirm: value('company_website_confirm'),
+          form_started_at: String(formStartedAt),
+          payload: JSON.stringify(payload)
+        };
+        Object.entries(fields).forEach(([name, fieldValue]) => {
+          const input = document.createElement('input');
+          input.type = 'hidden';
+          input.name = name;
+          input.value = fieldValue;
+          deliveryForm.appendChild(input);
+        });
+        document.body.appendChild(deliveryForm);
+        deliveryForm.submit();
+        deliveryForm.remove();
+      }
+
+      window.addEventListener('message', event => {
+        const trustedGoogleOrigin = /^https:\/\/([a-z0-9-]+\.)*(script\.google\.com|googleusercontent\.com)$/i.test(event.origin);
+        if (!trustedGoogleOrigin || event.data?.channel !== 'olsen_ai_visibility_intake') return;
+        clearTimeout(deliveryTimer);
+        submitButton.disabled = false;
+        const result = event.data.payload || {};
+        if (!result.ok || !result.accepted) {
+          status.textContent = `${result.error || 'Delivery could not be confirmed.'} Your backup was still downloaded.`;
+          status.classList.add('error');
+          return;
+        }
+        status.classList.remove('error');
+        status.textContent = `Sent to Olsen Automation. Downloaded backup: ${lastFilename}`;
+        successPanel.classList.add('visible');
+        successPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      });
+
       form.addEventListener('input', updateProgress);
       form.addEventListener('change', updateProgress);
 
@@ -565,11 +612,16 @@
           return;
         }
         const payload = buildIntake();
-        const filename = downloadIntake(payload);
-        emailFile.href = `mailto:brian@olsenautomation.com?subject=${encodeURIComponent(`AI Visibility Intake — ${payload.client.business_name}`)}&body=${encodeURIComponent(`Hello Olsen Automation,\n\nAttached is my AI Visibility intake file: ${filename}\n\nPlease validate it and let me know if any one-time access invitations are needed.\n`)}`;
-        status.textContent = `Downloaded ${filename}`;
-        successPanel.classList.add('visible');
-        successPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        lastFilename = downloadIntake(payload);
+        submitButton.disabled = true;
+        status.textContent = `Sending intake to Olsen Automation… Backup downloaded: ${lastFilename}`;
+        sendIntake(payload);
+        clearTimeout(deliveryTimer);
+        deliveryTimer = setTimeout(() => {
+          submitButton.disabled = false;
+          status.textContent = 'Your backup downloaded, but delivery could not be confirmed. Please try sending again.';
+          status.classList.add('error');
+        }, 20000);
       });
 
       downloadAgain.addEventListener('click', () => {
