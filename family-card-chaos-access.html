@@ -1,0 +1,553 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Family Card Chaos — Family Access Guide</title>
+  <meta name="description" content="Private family instructions for requesting access and joining Family Card Chaos.">
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+  <meta name="referrer" content="no-referrer">
+  <meta name="theme-color" content="#f6f3ef">
+  <style>
+    :root {
+      --ink: #151619;
+      --muted: #67635f;
+      --soft: #f6f3ef;
+      --panel: #fff;
+      --line: rgba(21, 22, 25, .14);
+      --rust: #8b3f2b;
+      --blue: #2458c6;
+      --yellow: #f1bd38;
+      --coral: #e85b4f;
+      --green: #83a932;
+      --pink: #d94b85;
+      --max: 1160px;
+      --radius: 24px;
+      --shadow: 0 24px 70px rgba(21, 22, 25, .10);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+    body {
+      min-width: 320px;
+      margin: 0;
+      overflow-x: hidden;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 84% 5%, rgba(255,255,255,.96), transparent 31%),
+        linear-gradient(135deg, #fbfaf8 0%, #f5f0ea 48%, #eae3d9 100%);
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+      text-rendering: optimizeLegibility;
+    }
+
+    a { color: inherit; }
+    button, input { font: inherit; }
+    button { cursor: pointer; }
+    a:focus-visible, button:focus-visible, input:focus-visible {
+      outline: 3px solid rgba(36, 88, 198, .40);
+      outline-offset: 4px;
+    }
+
+    .skip-link {
+      position: fixed;
+      left: 18px;
+      top: -80px;
+      z-index: 100;
+      padding: 10px 14px;
+      border-radius: 999px;
+      color: #fff;
+      background: var(--ink);
+      transition: top .2s ease;
+    }
+    .skip-link:focus { top: 12px; }
+
+    .wrap { width: min(var(--max), calc(100% - 36px)); margin: 0 auto; }
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid var(--line);
+      background: rgba(246, 243, 239, .82);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+    .topbar-inner {
+      width: min(var(--max), calc(100% - 36px));
+      min-height: 66px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 760;
+      letter-spacing: -.02em;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .mark {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      color: #fff;
+      background: var(--ink);
+      font-size: 13px;
+      font-weight: 850;
+      letter-spacing: .03em;
+      box-shadow: 0 10px 24px rgba(21,22,25,.16);
+    }
+    .family-label {
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .hero { padding: 82px 0 58px; }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.22fr) minmax(310px, .78fr);
+      align-items: center;
+      gap: clamp(34px, 7vw, 88px);
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 18px;
+      color: var(--rust);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before { content: ""; width: 30px; height: 1px; background: currentColor; opacity: .55; }
+    h1, h2, h3, p { text-wrap: pretty; }
+    h1 {
+      max-width: 830px;
+      margin: 0;
+      font-size: clamp(52px, 8.2vw, 104px);
+      font-weight: 740;
+      line-height: .91;
+      letter-spacing: -.072em;
+    }
+    .lead {
+      max-width: 720px;
+      margin: 28px 0 0;
+      color: rgba(21,22,25,.72);
+      font-size: clamp(18px, 2.2vw, 23px);
+    }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+    .btn {
+      min-height: 50px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 12px 18px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--ink);
+      background: #fff;
+      box-shadow: 0 12px 30px rgba(21,22,25,.06);
+      font-weight: 780;
+      text-decoration: none;
+      transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 16px 36px rgba(21,22,25,.11); }
+    .btn.primary { color: #fff; border-color: var(--ink); background: var(--ink); }
+    .btn.blue { color: #fff; border-color: var(--blue); background: var(--blue); }
+    .btn svg { width: 19px; height: 19px; fill: none; stroke: currentColor; stroke-width: 2; }
+
+    .card-stack { position: relative; min-height: 410px; }
+    .game-card {
+      position: absolute;
+      width: min(270px, 78%);
+      aspect-ratio: 5 / 7;
+      padding: 22px;
+      border: 2px solid rgba(255,255,255,.68);
+      border-radius: 22px;
+      color: #fff;
+      box-shadow: var(--shadow);
+      font-size: clamp(24px, 3vw, 34px);
+      font-weight: 850;
+      line-height: .94;
+      letter-spacing: -.05em;
+    }
+    .game-card:nth-child(1) { left: 7%; top: 22px; transform: rotate(-11deg); background: var(--coral); }
+    .game-card:nth-child(2) { right: 2%; top: 4px; transform: rotate(8deg); background: var(--blue); }
+    .game-card:nth-child(3) { left: 18%; top: 108px; transform: rotate(-2deg); background: var(--ink); }
+    .game-card small { position: absolute; left: 22px; right: 22px; bottom: 22px; font-size: 12px; letter-spacing: .05em; line-height: 1.3; opacity: .82; }
+    .color-dots { display: flex; gap: 7px; margin-top: 18px; }
+    .color-dots span { width: 13px; height: 13px; border: 2px solid rgba(255,255,255,.72); border-radius: 4px; }
+    .color-dots span:nth-child(1) { background: var(--coral); }
+    .color-dots span:nth-child(2) { background: var(--blue); }
+    .color-dots span:nth-child(3) { background: var(--yellow); }
+    .color-dots span:nth-child(4) { background: var(--green); }
+    .color-dots span:nth-child(5) { background: var(--pink); }
+
+    section { padding: 58px 0; }
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 28px;
+      margin-bottom: 28px;
+      padding-top: 34px;
+      border-top: 1px solid var(--line);
+    }
+    h2 { margin: 0; font-size: clamp(38px, 5.4vw, 64px); line-height: .97; letter-spacing: -.06em; }
+    .section-head p { max-width: 540px; margin: 0; color: var(--muted); font-size: 17px; }
+
+    .quick-facts {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .fact {
+      min-height: 152px;
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.68);
+      box-shadow: 0 10px 34px rgba(21,22,25,.05);
+    }
+    .fact strong { display: block; margin-bottom: 8px; font-size: 18px; letter-spacing: -.025em; }
+    .fact span { color: var(--muted); font-size: 14px; }
+    .fact-number { display: block; margin-bottom: 16px; color: var(--rust); font-size: 13px; font-weight: 850; letter-spacing: .09em; }
+
+    .steps { counter-reset: step; display: grid; gap: 1px; border-top: 1px solid var(--line); }
+    .step {
+      counter-increment: step;
+      display: grid;
+      grid-template-columns: 78px minmax(0, 1fr) minmax(260px, .58fr);
+      gap: 26px;
+      align-items: start;
+      padding: 30px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .step::before {
+      content: "0" counter(step);
+      color: var(--rust);
+      font-size: 14px;
+      font-weight: 850;
+      letter-spacing: .08em;
+    }
+    .step h3 { margin: -7px 0 6px; font-size: clamp(25px, 3vw, 36px); line-height: 1.04; letter-spacing: -.045em; }
+    .step p { margin: 0; color: var(--muted); }
+    .step-note {
+      padding: 15px 17px;
+      border-left: 3px solid var(--yellow);
+      background: rgba(255,255,255,.58);
+      font-size: 14px;
+    }
+    code { padding: 2px 6px; border-radius: 6px; background: rgba(21,22,25,.07); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .92em; }
+
+    .access-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.02fr) minmax(340px, .98fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+    .access-copy, .access-form {
+      padding: clamp(25px, 4vw, 40px);
+      border: 1px solid var(--line);
+      border-radius: calc(var(--radius) + 8px);
+      background: rgba(255,255,255,.76);
+      box-shadow: var(--shadow);
+    }
+    .access-copy { display: flex; flex-direction: column; justify-content: space-between; }
+    .access-copy h3, .access-form h3 { margin: 0; font-size: clamp(30px, 4vw, 48px); line-height: .98; letter-spacing: -.055em; }
+    .access-copy p, .access-form p { color: var(--muted); }
+    .privacy-note { margin-top: 28px; font-size: 14px; }
+    label { display: block; margin: 24px 0 8px; font-weight: 780; }
+    input {
+      width: 100%;
+      min-height: 54px;
+      padding: 12px 15px;
+      border: 1px solid rgba(21,22,25,.27);
+      border-radius: 13px;
+      color: var(--ink);
+      background: #fff;
+    }
+    input:focus { border-color: var(--blue); box-shadow: 0 0 0 4px rgba(36,88,198,.10); outline: none; }
+    .form-actions { margin-top: 14px; }
+    .form-actions .btn { width: 100%; }
+    .form-status { min-height: 24px; margin: 12px 0 0; color: var(--blue); font-size: 14px; font-weight: 700; }
+
+    .invite-box {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 24px;
+      align-items: center;
+      padding: clamp(25px, 4vw, 42px);
+      border-radius: calc(var(--radius) + 8px);
+      color: #fff;
+      background: var(--ink);
+      box-shadow: var(--shadow);
+    }
+    .invite-box h3 { margin: 0; font-size: clamp(30px, 4vw, 48px); line-height: .98; letter-spacing: -.055em; }
+    .invite-box p { max-width: 720px; margin: 14px 0 0; color: rgba(255,255,255,.72); }
+    .invite-box .btn { white-space: nowrap; }
+    .copy-status { min-height: 22px; margin: 10px 0 0; color: #f4d57a; font-size: 14px; }
+
+    .help-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+    .help-item { padding: 24px 0 0; border-top: 3px solid var(--line); }
+    .help-item:nth-child(1) { border-color: var(--coral); }
+    .help-item:nth-child(2) { border-color: var(--blue); }
+    .help-item:nth-child(3) { border-color: var(--green); }
+    .help-item h3 { margin: 0 0 8px; font-size: 21px; letter-spacing: -.03em; }
+    .help-item p { margin: 0; color: var(--muted); }
+
+    footer { margin-top: 30px; padding: 30px 0 42px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 24px; }
+
+    @media (max-width: 900px) {
+      .hero-grid, .access-grid { grid-template-columns: 1fr; }
+      .hero { padding-top: 58px; }
+      .card-stack { width: min(470px, 100%); min-height: 380px; margin: 0 auto; }
+      .quick-facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .step { grid-template-columns: 58px minmax(0, 1fr); }
+      .step-note { grid-column: 2; }
+      .section-head { align-items: start; flex-direction: column; }
+    }
+    @media (max-width: 640px) {
+      .wrap, .topbar-inner { width: min(100% - 24px, var(--max)); }
+      .family-label { display: none; }
+      .hero { padding: 44px 0 36px; }
+      h1 { font-size: clamp(46px, 16vw, 72px); }
+      .actions { display: grid; }
+      .actions .btn { width: 100%; }
+      .card-stack { min-height: 330px; }
+      .game-card { padding: 18px; border-radius: 18px; }
+      .game-card small { left: 18px; right: 18px; bottom: 18px; }
+      section { padding: 42px 0; }
+      .quick-facts, .help-grid { grid-template-columns: 1fr; }
+      .step { grid-template-columns: 42px minmax(0, 1fr); gap: 12px; padding: 24px 0; }
+      .step-note { grid-column: 1 / -1; }
+      .access-copy, .access-form { padding: 24px; }
+      .invite-box { grid-template-columns: 1fr; }
+      .invite-box .btn { width: 100%; }
+      .footer-inner { flex-direction: column; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to family instructions</a>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="index.html" aria-label="Olsen Automation home">
+        <span class="mark" aria-hidden="true">OA</span>
+        <span>Olsen Automation</span>
+      </a>
+      <span class="family-label">Family-only game guide</span>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <div class="eyebrow">Private family game night</div>
+          <h1>Big laughs. One tiny room code.</h1>
+          <p class="lead">Family Card Chaos is our private, browser-based card game. It works on iPhone, iPad, Mac, and most modern browsers—no app download required.</p>
+          <div class="actions">
+            <a class="btn primary" href="#request-access">Request family access</a>
+            <a class="btn blue" href="https://play.olsenfamilygames.com/" rel="noreferrer">
+              Open the game
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="card-stack" aria-label="Three colorful playing cards">
+          <div class="game-card" aria-hidden="true">Family<div class="color-dots"><span></span><span></span><span></span><span></span><span></span></div><small>Made for the people who already know your best stories.</small></div>
+          <div class="game-card" aria-hidden="true">Card<small>Join from your own phone or tablet.</small></div>
+          <div class="game-card" aria-hidden="true">Chaos<small>Private access. Host-selected packs. Maximum nonsense.</small></div>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="what-heading">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="what-heading">What you need.</h2>
+          <p>The game runs from Brian’s Mac mini and uses Cloudflare Access to keep the general public out.</p>
+        </div>
+        <div class="quick-facts">
+          <div class="fact"><span class="fact-number">01</span><strong>Your approved email</strong><span>Use the exact address Brian adds to the family access list.</span></div>
+          <div class="fact"><span class="fact-number">02</span><strong>Your own device</strong><span>Use Safari or Chrome on an iPhone, iPad, laptop, or desktop.</span></div>
+          <div class="fact"><span class="fact-number">03</span><strong>A one-time code</strong><span>Cloudflare emails a short sign-in code. There is no password to remember.</span></div>
+          <div class="fact"><span class="fact-number">04</span><strong>The room code</strong><span>The game host shares a six-digit code after creating the room.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="cloudflare-heading">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="cloudflare-heading">Getting through the front door.</h2>
+          <p>Cloudflare is simply the private entrance. You do not need to create a Cloudflare account or install anything.</p>
+        </div>
+        <div class="steps">
+          <article class="step">
+            <div><h3>Request access below.</h3><p>Enter the email address you want to use. Your mail app will prepare a message to Brian so he can add that exact address.</p></div>
+            <div class="step-note">Access is not automatic. Wait for Brian to confirm that your address has been added.</div>
+          </article>
+          <article class="step">
+            <div><h3>Open the private game site.</h3><p>Visit <strong>play.olsenfamilygames.com</strong>. Cloudflare will ask for your approved email address before it shows the game.</p></div>
+            <div class="step-note">If you saved the page before approval, refresh it after Brian confirms access.</div>
+          </article>
+          <article class="step">
+            <div><h3>Ask Cloudflare for a code.</h3><p>Enter the approved email exactly, choose to send a one-time PIN, then check that inbox for the sign-in message.</p></div>
+            <div class="step-note">Check Spam or Junk if the code does not appear. Use the newest code if you requested more than one.</div>
+          </article>
+          <article class="step">
+            <div><h3>Enter the code and play.</h3><p>After Cloudflare accepts the code, Family Card Chaos opens. Your approved session can remain signed in for a while, so you may not see the code screen every time.</p></div>
+            <div class="step-note">Cloudflare protects the doorway; the six-digit room code puts you at the correct game table.</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="game-heading">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="game-heading">Once the game opens.</h2>
+          <p>Everyone joins from their own screen. The host controls the room and chooses which card packs are in play.</p>
+        </div>
+        <div class="steps">
+          <article class="step">
+            <div><h3>Choose Host or Join.</h3><p>One person chooses <strong>Host a game</strong>. Everyone else chooses <strong>Join a game</strong>.</p></div>
+            <div class="step-note">Unless Brian says otherwise, join the room instead of starting a second one.</div>
+          </article>
+          <article class="step">
+            <div><h3>Pick your family profile.</h3><p>Choose your name, enter a playful game-night name, and optionally add a headshot from your device.</p></div>
+            <div class="step-note">Photos are temporary and are not stored in GitHub or used for Cloudflare access.</div>
+          </article>
+          <article class="step">
+            <div><h3>Enter the room code.</h3><p>Type the six-digit code shown on the host’s lobby screen. The host can wait for everyone before starting.</p></div>
+            <div class="step-note">Room codes change between games. Ask the current host for the newest one.</div>
+          </article>
+          <article class="step">
+            <div><h3>Play your cards.</h3><p>Submit from your private hand, watch the answers reveal, and let the rotating judge choose the winner.</p></div>
+            <div class="step-note">The host decides whether the selected packs are family-safe or adult. Check before younger players join.</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="request-access" aria-labelledby="access-heading">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="access-heading">Ask to be added.</h2>
+          <p>This page does not collect or store addresses. It prepares an email in your device’s mail app.</p>
+        </div>
+        <div class="access-grid">
+          <div class="access-copy">
+            <div>
+              <h3>Use the inbox you can open while playing.</h3>
+              <p>Cloudflare sends the one-time sign-in code to this address, so choose an email you can check on your phone or tablet.</p>
+            </div>
+            <p class="privacy-note"><strong>Privacy note:</strong> your address goes only into the email you choose to send to Brian. This family guide has no analytics, database, or background form service.</p>
+          </div>
+          <form class="access-form" id="access-form">
+            <h3>Request access.</h3>
+            <p>Brian will add your exact address to the approved-family list and confirm when it is ready.</p>
+            <label for="family-email">Your email address</label>
+            <input id="family-email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="you@example.com" required>
+            <div class="form-actions"><button class="btn blue" type="submit">Prepare email to Brian</button></div>
+            <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="invite-heading">
+      <div class="wrap">
+        <div class="invite-box">
+          <div>
+            <h3 id="invite-heading">Share the family invite.</h3>
+            <p>Copy a short message with the guide link, access explanation, and game address—ready to paste into your family text thread.</p>
+            <div class="copy-status" id="copy-status" role="status" aria-live="polite"></div>
+          </div>
+          <button class="btn" id="copy-invite" type="button">Copy invite text</button>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="help-heading">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="help-heading">If something gets stuck.</h2>
+          <p>Most problems come from using a different email, an older code, or the host computer being offline.</p>
+        </div>
+        <div class="help-grid">
+          <article class="help-item"><h3>“Email not allowed”</h3><p>Make sure you used the exact address Brian approved. If it still fails, send a new access request below.</p></article>
+          <article class="help-item"><h3>No code arrived</h3><p>Check Spam or Junk, wait a minute, and request one new code. Enter the newest message you receive.</p></article>
+          <article class="help-item"><h3>“Can’t reach the host”</h3><p>The Mac mini or game server may be offline. Text Brian; refreshing repeatedly will not restart the host.</p></article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <span>© 2026 Olsen Automation LLC · Family Card Chaos</span>
+      <a href="mailto:brian@olsenautomation.com">brian@olsenautomation.com</a>
+    </div>
+  </footer>
+
+  <script>
+    const accessForm = document.querySelector('#access-form');
+    const familyEmail = document.querySelector('#family-email');
+    const formStatus = document.querySelector('#form-status');
+    const copyButton = document.querySelector('#copy-invite');
+    const copyStatus = document.querySelector('#copy-status');
+
+    accessForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const email = familyEmail.value.trim();
+      if (!familyEmail.checkValidity()) {
+        familyEmail.reportValidity();
+        return;
+      }
+      const subject = encodeURIComponent('Family Card Chaos access request');
+      const body = encodeURIComponent(`Hi Brian,\n\nPlease add this email address to the Family Card Chaos approved-family list:\n\n${email}\n\nPlease let me know when access is ready. Thanks!`);
+      formStatus.textContent = 'Opening your mail app. Review the message, then press Send.';
+      window.location.href = `mailto:brian@olsenautomation.com?subject=${subject}&body=${body}`;
+    });
+
+    const inviteText = `Family game night! We’re using Family Card Chaos, a private browser game that works on phones, iPads, and computers.\n\n1. Read the setup guide and request access: https://olsenautomation.com/family-card-chaos-access.html\n2. Wait for Brian to confirm your email was added.\n3. Open https://play.olsenfamilygames.com/ and enter that approved email.\n4. Cloudflare will email you a one-time sign-in code—no account or app needed.\n5. Once the game opens, choose Join a game and enter the six-digit room code from the host.\n\nSee you at the table!`;
+
+    copyButton.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(inviteText);
+        copyStatus.textContent = 'Invite copied. Paste it into your family text thread.';
+        copyButton.textContent = 'Copied!';
+      } catch {
+        const fallback = document.createElement('textarea');
+        fallback.value = inviteText;
+        fallback.setAttribute('readonly', '');
+        fallback.style.position = 'fixed';
+        fallback.style.opacity = '0';
+        document.body.appendChild(fallback);
+        fallback.select();
+        const copied = document.execCommand('copy');
+        fallback.remove();
+        copyStatus.textContent = copied ? 'Invite copied. Paste it into your family text thread.' : 'Copy did not work. Select the guide address from your browser instead.';
+        if (copied) copyButton.textContent = 'Copied!';
+      }
+    });
+  </script>
+</body>
+</html>
