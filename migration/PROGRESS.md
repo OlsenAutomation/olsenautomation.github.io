@@ -2,7 +2,19 @@
 
 Owner: Brian Olsen. Active branch: `site-redesign-v2`.
 
-## Current authorized checkpoint
+## Local site migration checkpoint — 2026-09-13
+
+Brian asked to continue after the Slices 2–4 checkpoint. This continuation implemented the homepage, project atlas, workshop and legacy-page migration locally. The earlier no-push/no-deploy restriction remains in force. See `LOCAL_MIGRATION_CHECKPOINT.md` and `QA_LOCAL_MIGRATION.md`.
+
+- 35 public-safe preview pages and four isolated unlisted review pages now use the shared shell. All 14 original HTML files remain untouched. The 12 legacy body fragments retain their checked content and anchors; the homepage uses approved V6 composition and retains the original capabilities, contact and project destinations through the atlas.
+- The 26-project atlas and project records now share one data registry and status vocabulary. Family Card Chaos and Olsen Music Studio have public summaries; detailed family access and application materials stay outside the public upload directory.
+- Workshop portal, room seeking, stair sequence and email preparation are connected to real page routes. No giant pilot, base64 media or handoff package enters generated output.
+- All 39 generated pages passed desktop/mobile rendering checks (78 measurements). Form validation, local accepted/rejected/timeout acknowledgements, downloads, keyboard navigation, reduced motion, no-JavaScript reading, media failure and portal controls were exercised. Physical Safari and Cloudflare-hosted acceptance remain pending.
+- Baseline assets and archive proposals remain unchanged. Eleven embedded images were extracted byte-for-byte into the isolated unlisted asset set with `DERIVATIVE_ASSETS.csv`; nothing was consolidated, moved or deleted. Content/route tracking gained progress fields and new route records without rerunning the inventories.
+- Preview mode prevents real intake delivery. Local QA used synthetic fixtures. No email, notification, access request or customer submission was sent.
+- `npm run check` passes. Publishing a Cloudflare branch preview requires Brian's approval and account authorization. Final production routing/SEO activation, real receiver delivery and device checks precede any separate go-live decision.
+
+## Prior foundation checkpoint (historical)
 
 Brian supplied the local-only approved V6 handoff and authorized continuation from the existing checkpoint into Slices 2–4 only. No new clone, backup, tag, branch or inventory run was performed.
 
