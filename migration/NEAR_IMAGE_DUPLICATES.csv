@@ -1,0 +1,10 @@
+source,comparison,dhash_distance,action
+assets/arc-forge/machine-cycle-01.webp,assets/arc-forge/machine-cycle-02.webp,2,human visual review; never auto-delete a near match
+assets/arc-forge/machine-cycle-01.webp,assets/arc-forge/machine-cycle-03.webp,6,human visual review; never auto-delete a near match
+assets/arc-forge/machine-cycle-02.webp,assets/arc-forge/machine-cycle-03.webp,6,human visual review; never auto-delete a near match
+assets/visual-ai/ring-source.jpg,product-photo-production.html:L554:img.src,0,human visual review; never auto-delete a near match
+assets/visual-ai/shadowbox-final.jpg,product-photo-production.html:L626:img.src,0,human visual review; never auto-delete a near match
+assets/visual-ai/shadowbox-source.jpg,product-photo-production.html:L622:img.src,0,human visual review; never auto-delete a near match
+assets/visual-ai/twizzlers-final.jpg,product-photo-production.html:L524:img.src,0,human visual review; never auto-delete a near match
+assets/visual-ai/twizzlers-intermediate.jpg,product-photo-production.html:L520:img.src,0,human visual review; never auto-delete a near match
+assets/visual-ai/twizzlers-source.jpg,product-photo-production.html:L516:img.src,0,human visual review; never auto-delete a near match

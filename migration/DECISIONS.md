@@ -8,3 +8,6 @@
 - Significant project claims require source evidence or explicit owner-reported/planned/experimental/unverified labels. No upgrade from a pilot to released work by inference.
 - No paid services or paid Cloudflare features. Workers Free with Static Assets is the deployment target; branch preview precedes any owner-approved cutover.
 - V6 is the approved design. Do not substitute newly invented concept art or deploy the single-file pilot. Await its location while completing independent work.
+- Owner follow-up: narrow current work to backup/rollback and inventories/duplicate analysis. No visual implementation, generator, media pipeline, clone, or additional repository folder. Await local-only `_codex_handoff/approved-pilot/Olsen-Automation-Future-Pilot-v6-Single-File.html`; ignore the entire handoff directory.
+- Current duplicate analysis records canonical proposals only; no consolidation while the scope is inventory-only.
+- Existing noindex/sitemap conflict is documented without changing privacy settings. Existing failed image decodes are documented without substituting uncertain media.

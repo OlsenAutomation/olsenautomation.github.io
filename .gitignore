@@ -1,1 +1,6 @@
 .DS_Store
+
+# Owner-provided reference material stays local.
+/_codex_handoff/
+/.migration-local/
+/tools/__pycache__/

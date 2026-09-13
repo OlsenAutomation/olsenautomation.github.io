@@ -1,0 +1,6 @@
+source,canonical,sha256,kind,action
+cassette-mp4.html:L8,404.html:L8,0f9152ee9a2daf6dbeb244b2ccf125155299dd52b3a3dbaa2da7e15547791e24,style,shared-source extraction candidate after visual checkpoint; retain originals
+contact.html:L8,404.html:L8,0f9152ee9a2daf6dbeb244b2ccf125155299dd52b3a3dbaa2da7e15547791e24,style,shared-source extraction candidate after visual checkpoint; retain originals
+docs.html:L8,404.html:L8,0f9152ee9a2daf6dbeb244b2ccf125155299dd52b3a3dbaa2da7e15547791e24,style,shared-source extraction candidate after visual checkpoint; retain originals
+support.html:L8,404.html:L8,0f9152ee9a2daf6dbeb244b2ccf125155299dd52b3a3dbaa2da7e15547791e24,style,shared-source extraction candidate after visual checkpoint; retain originals
+verify.html:L8,404.html:L8,0f9152ee9a2daf6dbeb244b2ccf125155299dd52b3a3dbaa2da7e15547791e24,style,shared-source extraction candidate after visual checkpoint; retain originals

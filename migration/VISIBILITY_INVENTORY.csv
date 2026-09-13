@@ -1,0 +1,15 @@
+path,robots,in_sitemap,public_inbound_pages,finding
+404.html,,False,,recorded; no visibility changes
+ai-visibility.html,,True,404.html;ai-visibility.html;cassette-mp4.html;contact.html;docs.html;index.html;support.html;verify.html,recorded; no visibility changes
+arc-forge.html,,True,arc-forge.html;index.html,recorded; no visibility changes
+cassette-mp4.html,,True,404.html;ai-visibility.html;cassette-mp4.html;contact.html;docs.html;index.html;support.html;verify.html,recorded; no visibility changes
+contact.html,,True,404.html;ai-visibility.html;cassette-mp4.html;contact.html;docs.html;index.html;support.html;verify.html,recorded; no visibility changes
+docs.html,,True,404.html;ai-visibility.html;cassette-mp4.html;contact.html;docs.html;index.html;support.html;verify.html,recorded; no visibility changes
+family-card-chaos-access.html,"noindex, nofollow, noarchive, nosnippet",False,,recorded; no visibility changes
+firefly-living-lights.html,,False,ai-visibility.html;firefly-living-lights.html;index.html,recorded; no visibility changes
+index.html,,True,404.html;ai-visibility.html;arc-forge.html;cassette-mp4.html;contact.html;docs.html;firefly-living-lights.html;index.html;support.html;verify.html,recorded; no visibility changes
+product-photo-production.html,"noindex,nofollow",True,404.html;ai-visibility.html;cassette-mp4.html;contact.html;docs.html;index.html;support.html;verify.html,noindex page listed in sitemap; preserve boundary and resolve at later migration
+support.html,,True,404.html;ai-visibility.html;cassette-mp4.html;contact.html;docs.html;index.html;support.html;verify.html,recorded; no visibility changes
+territory-sales-execution.html,"noindex,nofollow,noarchive",False,,recorded; no visibility changes
+verify.html,,True,404.html;ai-visibility.html;cassette-mp4.html;contact.html;docs.html;index.html;support.html;verify.html,recorded; no visibility changes
+visual-ai-evaluation.html,"noindex,nofollow,noarchive",False,,recorded; no visibility changes

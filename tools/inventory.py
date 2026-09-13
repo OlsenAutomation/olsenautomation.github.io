@@ -12,7 +12,7 @@ def git(*args): return subprocess.check_output(['git',*args],cwd=ROOT)
 def digest(b): return hashlib.sha256(b).hexdigest()
 def write(name, fields, rows):
  with (ROOT/'migration'/name).open('w',newline='') as f:
-  w=csv.DictWriter(f,fieldnames=fields); w.writeheader(); w.writerows(rows)
+  w=csv.DictWriter(f,lineterminator='\n',fieldnames=fields); w.writeheader(); w.writerows(rows)
 class Page(HTMLParser):
  def __init__(self, text):
   super().__init__(convert_charrefs=True); self.tags=[]; self.words=[]; self.skip=0; self.feed(text)
@@ -81,6 +81,10 @@ for p,doc in pages.items():
  content.append(dict(path=p,title=title,visibility='unlisted/noindex' if 'noindex' in robots else 'public',robots=robots,status_class=status,evidence=note,attribution='Brian Olsen / Olsen Automation; preserve all existing third-party disclosures',phone_correction_required=bool(re.search(r'626.{0,8}524',text)),action='retain; migrate only after checkpoint',sha256=digest(files[p])))
  routes.append(dict(existing_url='/'+p,proposed_url='/'+p,action='preserve',visibility='unlisted/noindex' if 'noindex' in robots else 'public',preview_policy='exclude from public preview' if 'noindex' in robots else 'baseline local QA only until page migration approved',canonical=';'.join(a.get('href','') for t,a,_ in doc.tags if t=='link' and a.get('rel')=='canonical')))
 routes.append(dict(existing_url='/',proposed_url='/',action='preserve index.html alias',visibility='public',preview_policy='no homepage migration before checkpoint',canonical='https://olsenautomation.com/'))
+# Non-HTML files also have preserved public URLs under GitHub Pages.
+for path in files:
+ if path.endswith('.html') or path.startswith('.') or path=='CNAME': continue
+ routes.append(dict(existing_url='/'+path,proposed_url='/'+path,action='preserve asset/download/source URL; archive proposal requires alias policy',visibility='existing public resource; noindex HTML does not protect its assets',preview_policy='exclude unless explicitly allowlisted for later preview',canonical=''))
 write('CONTENT_MATRIX.csv',list(content[0]),content)
 write('ASSET_INVENTORY.csv',list(assets[0]),assets)
 write('ROUTE_MAP.csv',list(routes[0]),routes)
@@ -102,7 +106,8 @@ for i,p in enumerate(pages):
   score=SequenceMatcher(None,' '.join(pages[p].words).split(),' '.join(pages[q].words).split(),autojunk=False).ratio()
   if score>=.60: duplicates.append(dict(kind='near text',source=p,canonical=q,sha256='',similarity=f'{score:.3f}',action='review only; shared boilerplate is not duplicate content'))
 write('DUPLICATES.csv',['kind','source','canonical','sha256','similarity','action'],duplicates)
-write('ARCHIVE_MANIFEST.csv',['source','sha256','proposed_destination','canonical_replacement','reason','status'],[])
+if not (ROOT/'migration/ARCHIVE_MANIFEST.csv').exists():
+ write('ARCHIVE_MANIFEST.csv',['source','sha256','proposed_destination','canonical_replacement','reason','status'],[])
 broken=[l for l in links if l['kind']=='internal' and (l['exists'] is False or l['fragment_valid'] is False)]
 summary=dict(baseline=BASE,tracked_files=len(files),html_pages=len(pages),noindex_pages=sum('noindex' in x['robots'] for x in content),total_bytes=sum(len(x) for x in files.values()),forms=sum(x['kind']=='form' for x in forms),links=len(links),broken_internal_references=len(broken),embedded_assets=len(embedded),embedded_bytes=sum(x['bytes'] for x in embedded),exact_duplicate_files=sum(x['kind']=='exact file' for x in duplicates),near_text_pairs=sum(x['kind']=='near text' for x in duplicates))
 (ROOT/'migration/INVENTORY_SUMMARY.json').write_text(json.dumps(summary,indent=2)+'\n')
