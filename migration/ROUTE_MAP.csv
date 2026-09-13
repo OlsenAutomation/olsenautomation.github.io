@@ -1,0 +1,16 @@
+existing_url,proposed_url,action,visibility,preview_policy,canonical
+/404.html,/404.html,preserve,public,baseline local QA only until page migration approved,
+/ai-visibility.html,/ai-visibility.html,preserve,public,baseline local QA only until page migration approved,
+/arc-forge.html,/arc-forge.html,preserve,public,baseline local QA only until page migration approved,https://olsenautomation.com/arc-forge.html
+/cassette-mp4.html,/cassette-mp4.html,preserve,public,baseline local QA only until page migration approved,
+/contact.html,/contact.html,preserve,public,baseline local QA only until page migration approved,
+/docs.html,/docs.html,preserve,public,baseline local QA only until page migration approved,
+/family-card-chaos-access.html,/family-card-chaos-access.html,preserve,unlisted/noindex,exclude from public preview,
+/firefly-living-lights.html,/firefly-living-lights.html,preserve,public,baseline local QA only until page migration approved,https://olsenautomation.com/firefly-living-lights.html
+/index.html,/index.html,preserve,public,baseline local QA only until page migration approved,
+/product-photo-production.html,/product-photo-production.html,preserve,unlisted/noindex,exclude from public preview,
+/support.html,/support.html,preserve,public,baseline local QA only until page migration approved,
+/territory-sales-execution.html,/territory-sales-execution.html,preserve,unlisted/noindex,exclude from public preview,
+/verify.html,/verify.html,preserve,public,baseline local QA only until page migration approved,
+/visual-ai-evaluation.html,/visual-ai-evaluation.html,preserve,unlisted/noindex,exclude from public preview,
+/,/,preserve index.html alias,public,no homepage migration before checkpoint,https://olsenautomation.com/

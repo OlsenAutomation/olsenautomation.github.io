@@ -1,0 +1,62 @@
+path,bytes,sha256,mime,references,disposition,review
+.gitignore,10,cf237c7aff44efbe6e502e645c3e06da03a69d7bdeb43392108ef3348143417e,application/octet-stream,,preserve baseline,unreferenced by HTML; inspect scripts/CSS before archive
+404.html,5777,de2b9c0ceffadd1991ec9d5066446265e2d771465d632bb6d4ef8fbdb3da4946,text/html,,preserve baseline,retained
+Brian_Olsen_DataAnnotation_Visual_AI_Trainer_Resume.pdf,116278,b520a2dfceda558fa00f239b5d1bf6a722ccd1c2fd5bd8af492c02dc72bd5cfb,application/pdf,visual-ai-evaluation.html,preserve baseline,retained
+CNAME,20,52078e3a7e4fc35d0f729be2f5df84b10937d2983b9767787afbe0e7c21801db,application/octet-stream,,preserve baseline,unreferenced by HTML; inspect scripts/CSS before archive
+ai-visibility.html,47118,b76e84a0e9d2e4903bd53894915891dbf13f5ebe2586225a5602372cfd2ad522,text/html,404.html;ai-visibility.html;cassette-mp4.html;contact.html;docs.html;index.html;support.html;verify.html,preserve baseline,retained
+apps-script/Code.gs,8760,0009fe77e24e879f7cec6454f56de564f2c7dfbaaee0de9ffa3c7619237d066f,application/octet-stream,,preserve baseline,unreferenced by HTML; inspect scripts/CSS before archive
+apps-script/README.md,1121,04417e730f1d5c71381e1abd4b69d77b94df79708b6d9ebe06e28ad4154c9de1,application/octet-stream,,preserve baseline,unreferenced by HTML; inspect scripts/CSS before archive
+arc-forge.html,33655,b639bf6a1201309e554db4e246eab9f36880f335b897cd2db5836c1c36ee94b1,text/html,arc-forge.html;index.html,preserve baseline,retained
+assets/arc-forge/machine-cycle-01.webp,209814,5d6403e1fd641b438724b96f7b57cb0a13bc4f5dedc9cfb921dfa835001f22ea,image/webp,arc-forge.html,preserve baseline,retained
+assets/arc-forge/machine-cycle-02.webp,201358,c19653c67a1072efe06146c965fc85a2bf976a73e079390a4a918f185e70e322,image/webp,arc-forge.html,preserve baseline,retained
+assets/arc-forge/machine-cycle-03.webp,203034,30c0be8a1fa98e963e27a749b2b7f0afa5600cd7d1eec57370c90b70c9ebb044,image/webp,arc-forge.html,preserve baseline,retained
+assets/js/application-view-ping.js,4211,4df5fad4508a5cb1dba04a32b4a745c09a8654684b82eed7986459449301291f,text/javascript,territory-sales-execution.html;visual-ai-evaluation.html,preserve baseline,retained
+assets/territory-execution/Brian_Olsen_Sazerac_Market_Development_Resume.pdf,80204,9eb24fa31721059b1413e95e14b27b28cf76ff59c6302a27518a3182f4c6f3b2,application/pdf,territory-sales-execution.html,preserve baseline,retained
+assets/territory-execution/bogle-winery-of-year-display.jpg,280337,e5bc9a8106bfae0c9df52842c7199efa31cf0b47277f9619f7e81a87b7464802,image/jpeg,,preserve baseline,unreferenced by HTML; inspect scripts/CSS before archive
+assets/territory-execution/cutwater-stadium.jpg,92235,0508c157e460ec7adbe22f707a00b8eee178d54be85a8daa438e6d6a044019c8,image/jpeg,territory-sales-execution.html,preserve baseline,retained
+assets/territory-execution/holiday-mix-match-display.jpg,446339,55abc01ba416bc28bc9ee4ceaa5d40de0ec1962610e5c7b0d112905dcdecefd3,image/jpeg,,preserve baseline,unreferenced by HTML; inspect scripts/CSS before archive
+assets/territory-execution/holiday-wine-arch.jpg,132576,6d007064db04e0ec48f8e4589ca0d013b4c33be194eba2f8ca566e68c3f871eb,image/jpeg,,preserve baseline,unreferenced by HTML; inspect scripts/CSS before archive
+assets/territory-execution/jack-daniels-coca-cola-holiday.webp,10827,7c60909a2cd7f080858ef5766151e1f7a8992cffbd081f6a1156d6aeb71f7d03,image/webp,,preserve baseline,unreferenced by HTML; inspect scripts/CSS before archive
+assets/territory-execution/jack-daniels-flavor-portfolio.jpg,575555,41c17cb85f873ec094e732946582b02352c0522b9c7db9bbce7c515147fccfa9,image/jpeg,territory-sales-execution.html,preserve baseline,retained
+assets/territory-execution/jack-daniels-football-feature.jpg,475127,49680d72137c731202db1cab95207b352d031aad24219f539a7ddfc3b900d12a,image/jpeg,territory-sales-execution.html,preserve baseline,retained
+assets/territory-execution/jack-daniels-holiday-coca-cola.jpg,616452,fb5c2adc62cdce32b996c9cfe1fee25c5a6e92f8eb37aca5b3a7da84fc78d8d5,image/jpeg,territory-sales-execution.html,preserve baseline,retained
+assets/territory-execution/jack-daniels-patriotic.jpg,462722,9d2a46a50b2c4aabffbfbfde530afd2f9c2312dcfedeb7df0aea8d0d05adf13f,image/jpeg,territory-sales-execution.html,preserve baseline,retained
+assets/territory-execution/jadot-eiffel-display.jpg,372631,5a3ea71818d37a3d0dcbd9167a8b7be7a57dcfef7f011429a7dfb987d19d3e3f,image/jpeg,,preserve baseline,unreferenced by HTML; inspect scripts/CSS before archive
+assets/territory-execution/korbel-seasonal-tower.jpg,396803,a16b1573bc5f9198076d89bc3b3c8bac0538aef778cfaea870cd76b74bc2427e,image/jpeg,territory-sales-execution.html,preserve baseline,retained
+assets/territory-execution/lighthouse-multi-brand-display.jpg,332128,c1610d454fbfc32fbbd6fe378401e78636ef0c226e4c16984ff7fc3de2ac2664,image/jpeg,territory-sales-execution.html,preserve baseline,retained
+assets/territory-execution/nineteen-crimes-feature.jpg,397054,9b45fa5ebe9df1434848cc53aa651d17fe1ea2dc50cc2238afde9422102c94d2,image/jpeg,territory-sales-execution.html,preserve baseline,retained
+assets/territory-execution/spirits-rtd-sprite.webp,19348,dbef1360ad334bf434a17cf83c85fc715c7ca945508ad9c88281601aa99a634d,image/webp,,preserve baseline,unreferenced by HTML; inspect scripts/CSS before archive
+assets/territory-execution/spring-wine-arch-display.jpg,396049,e066b6d22606ee168353b7f993d7ebb136c880ed95869d0b5b15072cb40e6aac,image/jpeg,territory-sales-execution.html,preserve baseline,retained
+assets/territory-execution/titos-cantarito-fall-display.jpg,363415,28b29d2dac171fac779094ce01587fbd8fdf246d42c406d797a665eba6df2437,image/jpeg,,preserve baseline,unreferenced by HTML; inspect scripts/CSS before archive
+assets/territory-execution/titos-golf-feature.jpg,469826,e9698415f73a8d6aab4e9648d5c91891a5d06adc0f7439e9183804536eabec7b,image/jpeg,territory-sales-execution.html,preserve baseline,retained
+assets/territory-execution/titos-mule-mug.jpg,554135,a290f8e20d0bb7cb4a6c468c8d17e9d542c34d170ecdc066cd1fc124ddb78288,image/jpeg,territory-sales-execution.html,preserve baseline,retained
+assets/visual-ai/ring-final.jpg,222838,e16a747af619c7868efc2efe68f919174b9e5a3fcbffa98fc7dac1c52a122ee6,image/jpeg,visual-ai-evaluation.html,preserve baseline,retained
+assets/visual-ai/ring-source.jpg,454410,433e062ba620ab192f0850ef42c518636849eeba1a6a2e5018c8d359d7f3b225,image/jpeg,visual-ai-evaluation.html,preserve baseline,retained
+assets/visual-ai/shadowbox-final.jpg,248160,c852655e3706d0cd68d841cfcf4ba153183b740e4af679bc64a68fafc942956c,image/jpeg,visual-ai-evaluation.html,preserve baseline,retained
+assets/visual-ai/shadowbox-source.jpg,214183,c57369bd08517f5a02ec53bfe4b1d343268cbfd3998b7f4d821b20de6a662330,image/jpeg,visual-ai-evaluation.html,preserve baseline,retained
+assets/visual-ai/twizzlers-final.jpg,291229,05176911f0f9ebe8d05ee81097285b308084c8eca2893c20af9d860e2e08fd21,image/jpeg,visual-ai-evaluation.html,preserve baseline,retained
+assets/visual-ai/twizzlers-intermediate.jpg,330373,d70ce8504a6f3e259155bec00d6812b34887b83b6d284054ff7f0bc333ab1ea6,image/jpeg,visual-ai-evaluation.html,preserve baseline,retained
+assets/visual-ai/twizzlers-source.jpg,431914,ef2a99d403766ce794b12b4dd5c253b1da4b73ba13a355d90405e89f5117b919,image/jpeg,visual-ai-evaluation.html,preserve baseline,retained
+cassette-mp4.html,8197,00990601b7b1335e6aa0e47d694a6bd045c0e7be6ecd63cf01530e1e0d71514f,text/html,404.html;ai-visibility.html;cassette-mp4.html;contact.html;docs.html;index.html;support.html;verify.html,preserve baseline,retained
+contact.html,6142,df17863009b1642fedcc9ecc8eae282fb44fdd29c1aefbd327a2db9fc4542dba,text/html,404.html;ai-visibility.html;cassette-mp4.html;contact.html;docs.html;index.html;support.html;verify.html,preserve baseline,retained
+docs.html,7495,d8677f11d207c740682534ae1bcc1beb660991bb05307e85e965dd797984e1ee,text/html,404.html;ai-visibility.html;cassette-mp4.html;contact.html;docs.html;index.html;support.html;verify.html,preserve baseline,retained
+family-card-chaos-access.html,24869,45bb792332b963d3ee118ada619b4399785aaf6ff9f13661f4e37b6117657c46,text/html,family-card-chaos-access.html,preserve baseline,retained
+firefly-living-lights.html,64413,f699474f8f5e9f8006ee5eaf520df5031920093a4fa6327b91077cb37f6293ee,text/html,ai-visibility.html;firefly-living-lights.html;index.html,preserve baseline,retained
+images/living-lights/addressable-level-shifter.jpg,302484,8485e3853379c1eb30efe892fd80f53b4de6797526ab62b1730f21b42d06d178,image/jpeg,firefly-living-lights.html,preserve baseline,retained
+images/living-lights/control-board.jpg,280969,c46aa0493fe64d3a2c0bf233372014a73da75bad740e1eab36d3cde3b34daa35,image/jpeg,firefly-living-lights.html,preserve baseline,retained
+images/living-lights/firefly-lab-ui.jpg,261709,bd0d1fe31a2bbf1d290ba5534e8b3c1115f4155d9e801b361cd05f8f5393fd17,image/jpeg,firefly-living-lights.html,preserve baseline,retained
+images/living-lights/led-branch-node.jpg,222483,59577bef379d963e8769040da988f03f66b3fbbbd0abdf9bd4be74c01623f42b,image/jpeg,firefly-living-lights.html,preserve baseline,retained
+images/living-lights/living-lights-outdoor-habitat.jpg,291095,c6257ef6477b2ab1621b98c39e4761a36c63c95fbd47ec8c3dc755238d4fb780,image/jpeg,firefly-living-lights.html,preserve baseline,retained
+images/living-lights/outdoor-habitat-context.jpg,116325,650fb3303ba79683f0e701c65fc4d58d029ba1bfd26de2e9d9fea1b1619e44e5,image/jpeg,firefly-living-lights.html,preserve baseline,retained
+images/living-lights/outdoor-test.jpg,145057,304440d1201faf0a54061838379066af29d8263f5b59de0fc71ab909a346f44e,image/jpeg,firefly-living-lights.html,preserve baseline,retained
+images/living-lights/placeholder.txt,30,fd1ceab67cd57a539ad07453c0ff9b78d3fff36a7f8f6fc40f87c9276fe0fcd1,text/plain,,preserve baseline,unreferenced by HTML; inspect scripts/CSS before archive
+images/living-lights/pod-wiring.jpg,387407,1f5f4d8bfa186531998d4391e9f6c3939ec333eaf385896752d104f2428a7724,image/jpeg,firefly-living-lights.html,preserve baseline,retained
+images/living-lights/service-harness.jpg,268629,0d9d254935c062838991d494bbf83310cec7b4ae46ce8d9170fd847a13f96121,image/jpeg,firefly-living-lights.html,preserve baseline,retained
+index.html,15959,243db2bc3de731e9c26c8c1c0ac761dfcf59af59bb1c42a96c43f7bfb3bbbb6a,text/html,404.html;ai-visibility.html;arc-forge.html;cassette-mp4.html;contact.html;docs.html;family-card-chaos-access.html;firefly-living-lights.html;index.html;support.html;verify.html;visual-ai-evaluation.html,preserve baseline,retained
+product-photo-production.html,2813195,2deed876079d3d94f44d9fb90e1920dd6566bd9edc088b2d94d426aedfaafa37,text/html,404.html;ai-visibility.html;cassette-mp4.html;contact.html;docs.html;index.html;product-photo-production.html;support.html;verify.html,preserve baseline,retained
+sitemap.xml,709,550bfff178d86f813092872f91f0700bda0405eff50fc19363e8b938dc071888,application/xml,,preserve baseline,unreferenced by HTML; inspect scripts/CSS before archive
+styles.css,454,2d0b5878824d419b9790eb7b0a3525e874dce31ec532a95624a9585f95f61309,text/css,,preserve baseline,unreferenced by HTML; inspect scripts/CSS before archive
+support.html,6179,0f61be1eb2dbd85fea34f4229957c56406d7fdf6d3450941f3be980c35358526,text/html,404.html;ai-visibility.html;cassette-mp4.html;contact.html;docs.html;index.html;support.html;verify.html,preserve baseline,retained
+territory-sales-execution.html,17331,5ef8b8672efe201eebaef57d7f249acf112fc00103a98b5d941efd3e915a7d01,text/html,territory-sales-execution.html,preserve baseline,retained
+verify.html,6710,b2107b9b1ced37aa0ce460427fe5ea3b86da69bd5640264a72cefbc378a83b70,text/html,404.html;ai-visibility.html;cassette-mp4.html;contact.html;docs.html;index.html;support.html;verify.html,preserve baseline,retained
+visual-ai-evaluation.html,16073,2d5f237e9ec99b24aa3b8675c9c1061e46f1d88a95de58db780739f605ebacd2,text/html,visual-ai-evaluation.html,preserve baseline,retained
