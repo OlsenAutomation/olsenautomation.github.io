@@ -8,6 +8,7 @@ if(git('branch','--show-current')!=='site-redesign-v2')throw Error('Preview publ
 if(git('status','--porcelain'))throw Error('Commit reviewed changes before publishing.');
 const config=JSON.parse(readFileSync(path.join(root,'wrangler.preview.json'),'utf8'));
 if(config.name!=='olsen-automation-v2-preview'||config.assets.directory!=='./dist'||config.workers_dev!==false||config.preview_urls!==true||config.routes||config.route)throw Error('Unexpected preview target or routing.');
+if(config.main!=='src/worker.js'||config.assets.binding!=='ASSETS'||JSON.stringify(config.assets.run_worker_first)!=='["/media/*.mp4"]')throw Error('Unexpected media Worker configuration.');
 execFileSync('npm',['run','check'],{cwd:root,stdio:'inherit'});
 execFileSync(path.join(root,'node_modules/.bin/wrangler'),[
   'versions','upload','--config','wrangler.preview.json',
