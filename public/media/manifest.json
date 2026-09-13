@@ -1,0 +1,2044 @@
+{
+  "schema": 1,
+  "images": {
+    "hero": {
+      "webp": [
+        {
+          "url": "/media/hero-640.27015a81bb59.webp",
+          "bytes": 29212,
+          "sha256": "27015a81bb59ecdf651b36a01f826441e243af1ab2416d42e4de9e5b547d5ecd",
+          "width": 640,
+          "height": 360
+        },
+        {
+          "url": "/media/hero-1280.470b9b3cd045.webp",
+          "bytes": 83888,
+          "sha256": "470b9b3cd0450eb9fe4d07015ce4d09a0bcb0fdd54090e9e407de734fa7cbc40",
+          "width": 1280,
+          "height": 720
+        },
+        {
+          "url": "/media/hero-1672.6c88320464d7.webp",
+          "bytes": 119836,
+          "sha256": "6c88320464d7364ab33f6470049ba1b2f55c4605af932971acec87f79346967a",
+          "width": 1672,
+          "height": 941
+        }
+      ],
+      "fallback": {
+        "url": "/media/hero-1280.ec42d6b820dc.jpg",
+        "bytes": 139526,
+        "sha256": "ec42d6b820dcba2d1956453149f017aeaed053d102bc2717f8f35cf0ef124d8b",
+        "width": 1280,
+        "height": 720
+      }
+    },
+    "whale-assembled": {
+      "webp": [
+        {
+          "url": "/media/whale-assembled-480.8535f99e5039.webp",
+          "bytes": 46686,
+          "sha256": "8535f99e5039e07c30ab6a1400f30ae768405315f8fd231964e0ead24bc0284d",
+          "width": 480,
+          "height": 640
+        },
+        {
+          "url": "/media/whale-assembled-960.838285ad673d.webp",
+          "bytes": 127034,
+          "sha256": "838285ad673dbebdd28213a791dba45c0d0d44ee7aeb533f1320bcc28339aa55",
+          "width": 960,
+          "height": 1280
+        }
+      ],
+      "fallback": {
+        "url": "/media/whale-assembled-960.6277a433d852.jpg",
+        "bytes": 231077,
+        "sha256": "6277a433d852c9affa51fa10e0ccddf6968a36e618a75142044ee8f1c91c8636",
+        "width": 960,
+        "height": 1280
+      }
+    },
+    "whale-kit-blue": {
+      "webp": [
+        {
+          "url": "/media/whale-kit-blue-480.8d952e3be596.webp",
+          "bytes": 65856,
+          "sha256": "8d952e3be596f7911e1e9dd5fed5aa8db9f23340b85f8efecb72c637ea124a40",
+          "width": 480,
+          "height": 640
+        },
+        {
+          "url": "/media/whale-kit-blue-960.f6a244ee873a.webp",
+          "bytes": 261990,
+          "sha256": "f6a244ee873aa7e39ec561e1b0d00608123a5ca6f35c1a3d690a8da9d8320d88",
+          "width": 960,
+          "height": 1280
+        }
+      ],
+      "fallback": {
+        "url": "/media/whale-kit-blue-960.3c2530b44db9.jpg",
+        "bytes": 336566,
+        "sha256": "3c2530b44db90c3563e75fbc263f19f022560dc317ba7db3ded667fd9fecdef6",
+        "width": 960,
+        "height": 1280
+      }
+    },
+    "whale-kit-white": {
+      "webp": [
+        {
+          "url": "/media/whale-kit-white-480.ccc00dc6f765.webp",
+          "bytes": 37510,
+          "sha256": "ccc00dc6f7654bdc3cb43089efb16f811c8cbacc1e575b5310a80d00a3ee6437",
+          "width": 480,
+          "height": 640
+        },
+        {
+          "url": "/media/whale-kit-white-960.f2054a85b45a.webp",
+          "bytes": 189582,
+          "sha256": "f2054a85b45a3aa7e8bd726d60bbc4075e59105041608fc0d535166d3717086a",
+          "width": 960,
+          "height": 1280
+        }
+      ],
+      "fallback": {
+        "url": "/media/whale-kit-white-960.518a97b47bdd.jpg",
+        "bytes": 263422,
+        "sha256": "518a97b47bdd6ddacfd52c7ac0912201ca8eb6c96c3d22538e996efe1364ca4c",
+        "width": 960,
+        "height": 1280
+      }
+    }
+  },
+  "videos": {
+    "portal": {
+      "duration": 10.041667,
+      "variants": [
+        {
+          "url": "/media/portal-640.2da0a9b7f322.mp4",
+          "bytes": 1155296,
+          "sha256": "2da0a9b7f3227a8e21ce8a9383437089b407dfcb055c72ceae6e9fbf72260d4d",
+          "width": 640,
+          "height": 360,
+          "duration": 10.041667
+        },
+        {
+          "url": "/media/portal-1280.f046a973266f.mp4",
+          "bytes": 4121319,
+          "sha256": "f046a973266fb85431c381006a92cc3bee8930368b1667945391d14ca485cec5",
+          "width": 1280,
+          "height": 720,
+          "duration": 10.041667
+        }
+      ],
+      "posters": [
+        {
+          "url": "/media/portal-poster-640.cee19a7af97d.webp",
+          "bytes": 29776,
+          "sha256": "cee19a7af97dca1a30eda1ea9c97576815a1e61f54370d8e25e24ebb53a9fe55",
+          "width": 640,
+          "height": 360
+        },
+        {
+          "url": "/media/portal-poster-1280.c62956990a45.webp",
+          "bytes": 89208,
+          "sha256": "c62956990a45a07a08f67135ab4b8eaf319d31961560d7f20436f688a4735643",
+          "width": 1280,
+          "height": 720
+        }
+      ]
+    },
+    "entry": {
+      "duration": 6.541667,
+      "variants": [
+        {
+          "url": "/media/entry-640.bb1bb1ebef7a.mp4",
+          "bytes": 775624,
+          "sha256": "bb1bb1ebef7aeb777b787e4926eac135115775fa1c088516a13bff458e4a9116",
+          "width": 640,
+          "height": 354,
+          "duration": 6.541667
+        },
+        {
+          "url": "/media/entry-752.326290888cf2.mp4",
+          "bytes": 1016741,
+          "sha256": "326290888cf241e2bb5b91dd69925741ccc2d7c89b82e9b5bfe44616d9d2858a",
+          "width": 752,
+          "height": 416,
+          "duration": 6.541667
+        }
+      ],
+      "posters": [
+        {
+          "url": "/media/entry-poster-640.d43af709fa87.webp",
+          "bytes": 40364,
+          "sha256": "d43af709fa871587d956df9554f2617e579a1b576c67c24a2a3a21ed0da91993",
+          "width": 640,
+          "height": 354
+        },
+        {
+          "url": "/media/entry-poster-752.86f921b0edbe.webp",
+          "bytes": 50474,
+          "sha256": "86f921b0edbed2e1c1aa497297ded899c7d45a22c5f31a4cbb303fb2f1eb3c1a",
+          "width": 752,
+          "height": 416
+        }
+      ]
+    },
+    "workbench": {
+      "duration": 10.033333,
+      "variants": [
+        {
+          "url": "/media/workbench-640.6cf7a83c57bd.mp4",
+          "bytes": 939055,
+          "sha256": "6cf7a83c57bd63f6e7f34eadecc7720a6c3b3d96fa535253010a1b008583d6ce",
+          "width": 640,
+          "height": 352,
+          "duration": 10.041667
+        },
+        {
+          "url": "/media/workbench-930.507743e2e708.mp4",
+          "bytes": 1563314,
+          "sha256": "507743e2e708f0c62fb7a0a5047253e4b25daa5eaf046dd8534ae3cca7e77608",
+          "width": 930,
+          "height": 512,
+          "duration": 10.041667
+        }
+      ],
+      "posters": [
+        {
+          "url": "/media/workbench-poster-640.0b34c577161d.webp",
+          "bytes": 34252,
+          "sha256": "0b34c577161d1ceb6ed88a46e8daa6d9c2e37b6c32614e63c19d531337e11bc2",
+          "width": 640,
+          "height": 352
+        },
+        {
+          "url": "/media/workbench-poster-930.f39b9de2236b.webp",
+          "bytes": 51660,
+          "sha256": "f39b9de2236bd1a0cc0a2a0589ccf3158726633d27735664f0e3e4e2adc427ca",
+          "width": 930,
+          "height": 512
+        }
+      ]
+    },
+    "stairs": {
+      "duration": 10.041667,
+      "variants": [
+        {
+          "url": "/media/stairs-640.e1a7e8900495.mp4",
+          "bytes": 802269,
+          "sha256": "e1a7e89004954723e03646c823ddbe39b09ba840929ed19e47b073a0ff281e1c",
+          "width": 640,
+          "height": 360,
+          "duration": 10.041667
+        },
+        {
+          "url": "/media/stairs-1280.31018dddc1dd.mp4",
+          "bytes": 2244373,
+          "sha256": "31018dddc1dd01ab92cc0ccea5113773f5513cc75dee5151cb5054a6ea37ea92",
+          "width": 1280,
+          "height": 720,
+          "duration": 10.041667
+        }
+      ],
+      "posters": [
+        {
+          "url": "/media/stairs-poster-640.16cdd74a32af.webp",
+          "bytes": 16680,
+          "sha256": "16cdd74a32af16434eef63f6a135bb79799acb5ee32a73d794524b55484e532c",
+          "width": 640,
+          "height": 360
+        },
+        {
+          "url": "/media/stairs-poster-1280.43f0125034b1.webp",
+          "bytes": 36806,
+          "sha256": "43f0125034b161f333d2bb3f0fad60af5a2a7d3e6e3a5abd0d89edf2de01ec96",
+          "width": 1280,
+          "height": 720
+        }
+      ]
+    }
+  },
+  "stairs": {
+    "fps": 12,
+    "duration": 10.041667,
+    "variants": [
+      {
+        "width": 480,
+        "count": 121,
+        "bytes": 1635690,
+        "frames": [
+          {
+            "url": "/media/stairs-0000-480.293ff25127a2.webp",
+            "bytes": 23906,
+            "sha256": "293ff25127a24f05270eacf2ce127e11e8d6e5298514ec90d400348757d6dfa0",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0001-480.6716f7f2c0b1.webp",
+            "bytes": 23964,
+            "sha256": "6716f7f2c0b152a53e76b53c56e45d22e21e208d7a388bf2848256a562587f79",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0002-480.70f9b0643365.webp",
+            "bytes": 23966,
+            "sha256": "70f9b0643365b4c5a83b56998280dde726efbdd3470942857b9af3982e7a799f",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0003-480.5d871e3c8a43.webp",
+            "bytes": 23856,
+            "sha256": "5d871e3c8a439919f7682ea86139b06aaaf758858e9dcf6b01833cb5c490f825",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0004-480.fb37537c8bcc.webp",
+            "bytes": 23848,
+            "sha256": "fb37537c8bcc6f43d066615305a60dd7e4c2fb6b8931d89321682576a1b22411",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0005-480.cf46dca524d0.webp",
+            "bytes": 23570,
+            "sha256": "cf46dca524d095616c6c7d3ca292a0097a2503700da408df13c722f20056701b",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0006-480.040ffc2ba2a8.webp",
+            "bytes": 23744,
+            "sha256": "040ffc2ba2a8dc900ddbd6c86a0ce0eebdf7eb7ac64c8f0a7c7201937e1dea51",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0007-480.088a77c071a4.webp",
+            "bytes": 23704,
+            "sha256": "088a77c071a4bd21c18b914f1ec8ab7659b07db901b0d920f755d55863e167af",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0008-480.04e02788195a.webp",
+            "bytes": 23576,
+            "sha256": "04e02788195a2291d94c7e4e78032ff11761f68609d299302f8fff53a37410f7",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0009-480.8322fe3631f9.webp",
+            "bytes": 23472,
+            "sha256": "8322fe3631f97b3f4fbce534530b74c5dc7c0264e6466a242f2cfd563f0d18a5",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0010-480.cca266b6db89.webp",
+            "bytes": 23374,
+            "sha256": "cca266b6db891a3a9400843b472375e4ab35ecfc84d0c06b88ffb24af2aef4c5",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0011-480.d87861b82666.webp",
+            "bytes": 23100,
+            "sha256": "d87861b8266635b986e3d6d155c709c9018c82074cc58268c8a78807ffe557da",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0012-480.77815053645f.webp",
+            "bytes": 22426,
+            "sha256": "77815053645feeef51b93c62b1ca6a5f6e304d941ea7748b19bcfd4841bf3c60",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0013-480.6ead6f895bb1.webp",
+            "bytes": 21602,
+            "sha256": "6ead6f895bb17aa90e8c720462b4e3fdebacc6fbb0fc0651ef2ab39f8adbff91",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0014-480.03db7dc8a806.webp",
+            "bytes": 21376,
+            "sha256": "03db7dc8a806fe3535ca4240278142dd165356484c3eba57869eea062ce1c2f9",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0015-480.a700d037f4b2.webp",
+            "bytes": 21370,
+            "sha256": "a700d037f4b21a62c83d9d64385bf5c5670df7904a36d49ced3cdd7e96f8d2ee",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0016-480.407eae724655.webp",
+            "bytes": 20984,
+            "sha256": "407eae724655baf24a95677303f5ac64757e0ab04c24b6a2591c4aaf540c6ad2",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0017-480.e2d8192beb7d.webp",
+            "bytes": 20124,
+            "sha256": "e2d8192beb7d7e97d813a7d6fd9de3832ccf8afe7ffa12ae0545fa3762e20f05",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0018-480.ebd05c949fee.webp",
+            "bytes": 20058,
+            "sha256": "ebd05c949feef2bea7c6e5ca0d8177545edbce7f8e4aba571d8397b966b2cee4",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0019-480.460121390c39.webp",
+            "bytes": 19524,
+            "sha256": "460121390c392f907f8af947cc4e9928f579ea5b5a6fc603a2322b78e0ba601a",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0020-480.f70738e0ef64.webp",
+            "bytes": 19242,
+            "sha256": "f70738e0ef64a75ae691037785f59a7ab0d3d90f1f72412ddd73512796bf5417",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0021-480.b9805ab811a1.webp",
+            "bytes": 18860,
+            "sha256": "b9805ab811a15bf12cbe2f3074d1db3ccf9cca408f457c608b8b5983305431c6",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0022-480.91b9845d4129.webp",
+            "bytes": 18530,
+            "sha256": "91b9845d41293c83a79f75539a16cf2c5dca9129cb2bcfc52bb33e1d051d03d3",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0023-480.1774575e6094.webp",
+            "bytes": 18250,
+            "sha256": "1774575e60947944d9114425f34d2ee486c71680ff0cf836ad3a92d2426fafab",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0024-480.dc9373839125.webp",
+            "bytes": 17642,
+            "sha256": "dc937383912590576210d059c5ef57ace7c0ed60948d5ff11b9a40dd53cb39e7",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0025-480.7e842ab227b8.webp",
+            "bytes": 17014,
+            "sha256": "7e842ab227b8b11752acb3f0e4ab83738548aeefa16ca4fe227c6bbe7ef3e747",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0026-480.febdca2abb27.webp",
+            "bytes": 16848,
+            "sha256": "febdca2abb2739f4fc20171747bd6d766f41dcd47d05915ecdc9741a38f76950",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0027-480.9468399e946f.webp",
+            "bytes": 16334,
+            "sha256": "9468399e946f2a9daa35f6a413eb9d7e3477a8936629c7cd1c9c38ec6ee789ff",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0028-480.84af33cf9714.webp",
+            "bytes": 15754,
+            "sha256": "84af33cf9714fdbb368023525d5245f65a3b85f735cda5457ec895fd653877b1",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0029-480.7f11f7ecc709.webp",
+            "bytes": 15644,
+            "sha256": "7f11f7ecc7095ded22bfc8a6109e6c153f8c4b849b1740b4a77b236e81c2fa65",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0030-480.b532ecb4e31b.webp",
+            "bytes": 15664,
+            "sha256": "b532ecb4e31b228af04d6001865a006ef4d57f311a18c56cd488cd7615a80da8",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0031-480.7cac59f9505d.webp",
+            "bytes": 15318,
+            "sha256": "7cac59f9505d80b783616e2581fd9a41211bdd142769d6c1e571ec1e1bf9d2dc",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0032-480.9c2ac83d12d4.webp",
+            "bytes": 14848,
+            "sha256": "9c2ac83d12d4f57098ecd73e0958b6541021b46f87ffd9c36c3bc096e89a34a8",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0033-480.0d966fcf8e39.webp",
+            "bytes": 14614,
+            "sha256": "0d966fcf8e3964d11dd064b07202173169cd769ebd13d1af78e810ccee84f950",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0034-480.03876c589492.webp",
+            "bytes": 14962,
+            "sha256": "03876c589492a57b4382554635da9f1ca3287dbc7eedde6ace189005671172b4",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0035-480.cdc32ba4cead.webp",
+            "bytes": 14996,
+            "sha256": "cdc32ba4cead89aefb22420339bf484c99932bc8995a9b5c0cdebcd426d31326",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0036-480.7f7bdd6ee925.webp",
+            "bytes": 14796,
+            "sha256": "7f7bdd6ee925a82feac6db51313cab82724c89a96759ef10acb3d077f4712784",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0037-480.b11de86b20a4.webp",
+            "bytes": 14192,
+            "sha256": "b11de86b20a439b9d538da4b8184c95c00328b7cf3237bd65ff5926da0818559",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0038-480.6a1e9bb4ffe4.webp",
+            "bytes": 13804,
+            "sha256": "6a1e9bb4ffe496bb3eae124a7198833a00d34ebcc14862586fc778f1971b0271",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0039-480.9d5a7563b04a.webp",
+            "bytes": 13006,
+            "sha256": "9d5a7563b04a45562fa068e6fc894b3b61dbf6518a7a87f80fbf01596baf7d59",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0040-480.d178f8f15d2a.webp",
+            "bytes": 12634,
+            "sha256": "d178f8f15d2a6b1707ea669b11a220aaf4aa8fe0c11228c0b00e61e1ece85008",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0041-480.e49bb6284eba.webp",
+            "bytes": 11932,
+            "sha256": "e49bb6284ebab150ab94a18a7209bc4e78b8609ba2dcf9d81d33ca31f25ade10",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0042-480.e2f568ee1a3a.webp",
+            "bytes": 11478,
+            "sha256": "e2f568ee1a3ade4000eb82fc4a8feb83563ea1efee88e0fb68aa99b54f76f1d3",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0043-480.f65fa5047c69.webp",
+            "bytes": 10912,
+            "sha256": "f65fa5047c69dcb6a0420db4fe4632b87c117d13fa721b2b270f17d347320ad7",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0044-480.a26127f73252.webp",
+            "bytes": 10404,
+            "sha256": "a26127f7325247760ada4b6259b0a8bc588f005d2ea9a99ff4fa8d560ace1448",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0045-480.e5761d70d1a4.webp",
+            "bytes": 10212,
+            "sha256": "e5761d70d1a44aa4167a8fd48d4c8f347ae633893a7a5d760aaaaeab201bad8f",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0046-480.32eceb3d15ce.webp",
+            "bytes": 9904,
+            "sha256": "32eceb3d15ce31fd9885852c05f9ddd510406fa28645cbb71ea2b7d1ca8fdb48",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0047-480.23ffd306fbaf.webp",
+            "bytes": 9804,
+            "sha256": "23ffd306fbaf1fbbad1230b75e326ba03e37e53175fb74481e741a612731a6ee",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0048-480.b8d524979be4.webp",
+            "bytes": 9400,
+            "sha256": "b8d524979be4b8d47caec58771972da5b5c8bd4cd04be01cb75e9b8fbf78bb54",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0049-480.97434d27d902.webp",
+            "bytes": 9096,
+            "sha256": "97434d27d902dca1c7e781d33c3eca4b2a2cff9771351cf34b8885b3cbb2534b",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0050-480.321c7bf547e9.webp",
+            "bytes": 8972,
+            "sha256": "321c7bf547e9acb95545281a05ee5ee846361ef71297134d56e1a96d717eb03f",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0051-480.0d241327e1b5.webp",
+            "bytes": 8470,
+            "sha256": "0d241327e1b506a05ec7d8407fc158547a046eb071b7e1c887616fa12ce47935",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0052-480.c57d50e8aae9.webp",
+            "bytes": 8396,
+            "sha256": "c57d50e8aae937b099d9bc107888d5bc4cede457d85a64922234fa26a9db083b",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0053-480.eca820f8f437.webp",
+            "bytes": 8378,
+            "sha256": "eca820f8f437626247afff0a70afcfdbcc7a4b59ecc5068a9693067e3f1ad2d3",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0054-480.8c8ea2709390.webp",
+            "bytes": 8516,
+            "sha256": "8c8ea27093902f9fd1b86dc10b8aa813395fc47553d3642ffbaf418c5bfe175a",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0055-480.fa7309341fe2.webp",
+            "bytes": 8516,
+            "sha256": "fa7309341fe2bfdf84a3d9b61d9a920f508baca9f0694962a64b449ed26ae08e",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0056-480.f5af2d26d1fe.webp",
+            "bytes": 8790,
+            "sha256": "f5af2d26d1fe349ce49c74f6bbb79dc72438f8b8d078532a8e2967da5450ca4c",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0057-480.fc77ee6c325a.webp",
+            "bytes": 8572,
+            "sha256": "fc77ee6c325ab1833fa2b89ffd3c6bf1c03204b83f49a9e65e31e0906da702b8",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0058-480.a63325271750.webp",
+            "bytes": 8748,
+            "sha256": "a63325271750088c4e40b7011ce59c50d74e2cd9b6c2c1b8f8cc31e805da64d2",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0059-480.73336e06385b.webp",
+            "bytes": 8738,
+            "sha256": "73336e06385bf758e45f30f2dd90e876d6a03c4ea59fb9f257b9e74b2bc0c4c8",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0060-480.7c4c32bbb965.webp",
+            "bytes": 8904,
+            "sha256": "7c4c32bbb965a2eaa72c615827b7b075007d57dd1f1571bce9039cb379e4ecc2",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0061-480.f99187434c77.webp",
+            "bytes": 8970,
+            "sha256": "f99187434c778e29f3ea40df8dacfbdcc1c00491566f971fcf7bee930cf70698",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0062-480.31cb604f43da.webp",
+            "bytes": 9030,
+            "sha256": "31cb604f43da0f1d344399f87ded2805724262d19fd74b942120126857e74783",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0063-480.c279ef1c1dcb.webp",
+            "bytes": 9482,
+            "sha256": "c279ef1c1dcb4f58da0b707b76a0484d8135d66472ef622cf356958c35883d2a",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0064-480.72222843ebb8.webp",
+            "bytes": 9278,
+            "sha256": "72222843ebb8b1228c24584f928f5fea9c63dada65e3b34f5bef2cf76321085e",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0065-480.9bb469bf84db.webp",
+            "bytes": 9276,
+            "sha256": "9bb469bf84db1044f27430097ce5ce82f01493370aa44472876c349d0b718255",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0066-480.cbe02abc37c3.webp",
+            "bytes": 9260,
+            "sha256": "cbe02abc37c3f4c175d41191a47d84e2adad8a0a2149fae81787dfd60be3abec",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0067-480.e1dc21df0b05.webp",
+            "bytes": 9156,
+            "sha256": "e1dc21df0b055c704301297cc9f51906ba267a8073a9c7c72f52b6452832d35d",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0068-480.21ccc1da928e.webp",
+            "bytes": 9398,
+            "sha256": "21ccc1da928eee9f064ee63ca54ff803011186acead378a012bb2e34c8cc7b95",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0069-480.64eb94564dd2.webp",
+            "bytes": 9638,
+            "sha256": "64eb94564dd2e41843617a2ba9d7c53f2267156cdd6c31b464f6b74f65459c70",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0070-480.f1130a7476e1.webp",
+            "bytes": 9796,
+            "sha256": "f1130a7476e1bc28e11ea9380c1a78ce93bb18e4e14dcb34f0ad8c4a9a151754",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0071-480.c067cbd0bbd5.webp",
+            "bytes": 9878,
+            "sha256": "c067cbd0bbd57c6a585fe54018bc1d4ec3f40abcd39b2dae8e99a83dae1ebc58",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0072-480.2b8ac17b4671.webp",
+            "bytes": 9822,
+            "sha256": "2b8ac17b46719a67528e121c2bfa6d83ef7efdb8b762d508fe48129f107ff783",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0073-480.09dd9f173c8d.webp",
+            "bytes": 10026,
+            "sha256": "09dd9f173c8d6349e2c8ddee05d8bdf691cf1f922c4326f6b99dec9a8656c9d2",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0074-480.47227a46817c.webp",
+            "bytes": 10036,
+            "sha256": "47227a46817cc365173293feadf538ca13d9b17f12b76dbe4499e5360068e995",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0075-480.d85524e2fede.webp",
+            "bytes": 9996,
+            "sha256": "d85524e2fedeb0516cd6b586d176bd72dc154a73c8d8e40d31933f1869ecccaf",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0076-480.ffed66cbf5dd.webp",
+            "bytes": 10128,
+            "sha256": "ffed66cbf5dd164fa0bbe9d1cc60e6b30079d07aa41d84811dfdbee5063a747a",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0077-480.4b8e66310c24.webp",
+            "bytes": 10148,
+            "sha256": "4b8e66310c247ef73be8a79a8554e7389d39262a280dae9f7a638943281cf71b",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0078-480.be70c4de07e3.webp",
+            "bytes": 10542,
+            "sha256": "be70c4de07e337444a89753e4babc7878724001835ae24cdeac05bf5b8dfff84",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0079-480.7b2f3f8654dc.webp",
+            "bytes": 10600,
+            "sha256": "7b2f3f8654dc386d499ea41afc088803e504bfd796672f9defe6f5613986d76b",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0080-480.e142cf87ea0d.webp",
+            "bytes": 10740,
+            "sha256": "e142cf87ea0daf0449810a3de9bf1e0682434092dab23b665ba19c4588a9d89c",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0081-480.02508299c7e7.webp",
+            "bytes": 10700,
+            "sha256": "02508299c7e7c6255363e4e89857ebaf23ffe4648410e3bff19b11974d838812",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0082-480.afd72ee12834.webp",
+            "bytes": 10702,
+            "sha256": "afd72ee12834276a3e89e86f1e720c968d060ba65311bfc33259c8338cdefcdd",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0083-480.6253cb18103c.webp",
+            "bytes": 10752,
+            "sha256": "6253cb18103ca414040ee9ebf6c693b2541f70dfbd6fb1133a52968086e1370d",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0084-480.7c0961f83e72.webp",
+            "bytes": 10916,
+            "sha256": "7c0961f83e726e9b38665946f20547eae6f869b6096ec4069035d7637e36c7bd",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0085-480.f8d82f4366ab.webp",
+            "bytes": 11004,
+            "sha256": "f8d82f4366ab6514a6878e11410d151f94afffaf4cd8e097dfc874d031ebb96f",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0086-480.e5a1fb0c6b35.webp",
+            "bytes": 11276,
+            "sha256": "e5a1fb0c6b35502ede32ac033f54be0dfdbbc577f2cd9bef643b616b64560574",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0087-480.d6e7fe4e340f.webp",
+            "bytes": 11172,
+            "sha256": "d6e7fe4e340f614ed35e45bef104a66a5baa572e932bf848e3f7844d1cd8d74e",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0088-480.9125efe17444.webp",
+            "bytes": 10984,
+            "sha256": "9125efe17444b5adbf17f9e5b22e52c6929009207c3d5a613edd5bef9f65804c",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0089-480.a1b68bb80e44.webp",
+            "bytes": 10910,
+            "sha256": "a1b68bb80e44be317890f7cd291cf553ae0007a6044db20663b2fe5f21cb756b",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0090-480.dfeafe29826d.webp",
+            "bytes": 11016,
+            "sha256": "dfeafe29826d4bd7b5d963d1da22bc45b3259f5117d00430d427470a4d97f5cf",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0091-480.eeb51a0894d7.webp",
+            "bytes": 11136,
+            "sha256": "eeb51a0894d7c89a7abef8280047bb004c0881bca4b4a18e1923a275d6c55d3a",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0092-480.0a4b76bbf2b8.webp",
+            "bytes": 11160,
+            "sha256": "0a4b76bbf2b87ea126a23a79983f68c2951e3c5bc404c588de373b6851e68c17",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0093-480.4cf8bfd4a4e1.webp",
+            "bytes": 10958,
+            "sha256": "4cf8bfd4a4e1e2950a486b1f1bf8c6e7ce0ffa2e28461f23c0f58f413f5575b0",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0094-480.ccadf5396dcd.webp",
+            "bytes": 11478,
+            "sha256": "ccadf5396dcd313287b82f87e438caa9d9b4a862c7c175683f7e2e8485611743",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0095-480.e4c8ca313062.webp",
+            "bytes": 11416,
+            "sha256": "e4c8ca313062f911191a20614276aef7c6777d19b018eb1e99adf01fa6694c61",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0096-480.386b8d49884c.webp",
+            "bytes": 11320,
+            "sha256": "386b8d49884c113c3849f8cde6a42605e0ae034ed9a0e3ebd98a2c2a66adf0ad",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0097-480.d526727bb1d3.webp",
+            "bytes": 11318,
+            "sha256": "d526727bb1d37cd908e56201e4ce7fd2a1b8938f5cb739cd1fd92859583beee1",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0098-480.b175c20087ef.webp",
+            "bytes": 11698,
+            "sha256": "b175c20087ef954baeb39a4a2c92a8ef658a2798d2f35af6e4a9883ba1bb6f9b",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0099-480.30d2a64058be.webp",
+            "bytes": 11864,
+            "sha256": "30d2a64058bec3769c6e644273d68822209b937802e558ffb7fd277df981fd07",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0100-480.72a92116ab41.webp",
+            "bytes": 12124,
+            "sha256": "72a92116ab41476e42ce0bb3d2f38afd58e591289ff3f667c8cf490a23f7cecc",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0101-480.8272d9d32048.webp",
+            "bytes": 12004,
+            "sha256": "8272d9d320482af36c5ba2dbbd8643460350b912e2463d7bae44636fcaffd6a4",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0102-480.848bd1c309e4.webp",
+            "bytes": 12294,
+            "sha256": "848bd1c309e4a014d4deb04dbac07acf11322b4ed74bea0de5b570aba7cfd33b",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0103-480.9ed0f8920391.webp",
+            "bytes": 12082,
+            "sha256": "9ed0f892039143bd5778ee9911fcd5baf324109b8b9f7777f89ac4ba577c0fb0",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0104-480.def0070d90bf.webp",
+            "bytes": 12044,
+            "sha256": "def0070d90bfe05d98fe47e7a2c033a2ab72251da44d1cf8e48e27a80f756996",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0105-480.18331de994db.webp",
+            "bytes": 12240,
+            "sha256": "18331de994dbb68ef0b59b4ee530f9d300a5c61b0e9038f12ba2f43c8b8bcb3a",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0106-480.57843e71dcd9.webp",
+            "bytes": 12182,
+            "sha256": "57843e71dcd96e0065e781bc2fa59abb817dfc948654c606733c16122533cdef",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0107-480.03e787373133.webp",
+            "bytes": 12448,
+            "sha256": "03e787373133f8cbbcea5d852e9445146e247917baad4295928d9204b31d7ab0",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0108-480.ecb5421ef4ab.webp",
+            "bytes": 12336,
+            "sha256": "ecb5421ef4ab602c10358018714cea156e583786a8b7afabc9825aa980ffc03b",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0109-480.4578665856d2.webp",
+            "bytes": 12554,
+            "sha256": "4578665856d2385421e85c4e9dd17e99cb92aea818d6c5ff87bb9bec0bc7abc4",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0110-480.ed27d036215f.webp",
+            "bytes": 12528,
+            "sha256": "ed27d036215ffd4b6042835ec34e8f0fad5ac29f73d1d7f69da04aa833f5b842",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0111-480.94b30bd91f91.webp",
+            "bytes": 12712,
+            "sha256": "94b30bd91f9136a6007f9a9cf9b93ec2bf354ceb631a70d8d277a05a6bbf7ba9",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0112-480.7116c918cc0a.webp",
+            "bytes": 12510,
+            "sha256": "7116c918cc0a224af0273e49b3bbe35e719c79abab4243b1c32f122af9d72e21",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0113-480.38b3d8b8f67a.webp",
+            "bytes": 12242,
+            "sha256": "38b3d8b8f67aa4f62ae3dd08f32c1b7fa8195a2ecdfe5b5cf7ca4beb6ef3dbd1",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0114-480.9f1f5ebea87f.webp",
+            "bytes": 12216,
+            "sha256": "9f1f5ebea87f9065dabe065059734ffbbae622de39c4dde260b041c9cfa472e4",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0115-480.e598b25906b0.webp",
+            "bytes": 12156,
+            "sha256": "e598b25906b01c3d3a12ebde673e01d0f7f17adbe1e5be5737e434d907e0b45b",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0116-480.d49cf7c4ba83.webp",
+            "bytes": 12096,
+            "sha256": "d49cf7c4ba83cd61e8fa99c99e12c59a4a4149554d845d7fa8da1da14eaa44da",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0117-480.ccca70526671.webp",
+            "bytes": 12216,
+            "sha256": "ccca70526671d61c99d932248a027807a13d7523444fb38c6a3af3fbf69a46d7",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0118-480.1f55a0f05875.webp",
+            "bytes": 11938,
+            "sha256": "1f55a0f058753ebf35670fbcc5b9a4ecbeb7358d29531b4ac23adda99f7ad89c",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0119-480.b2f4afb753f1.webp",
+            "bytes": 11818,
+            "sha256": "b2f4afb753f1220166414b4b43643cc9e152937ca6f8101b7f73afe0e02d699d",
+            "width": 480,
+            "height": 270
+          },
+          {
+            "url": "/media/stairs-0120-480.1f20dcaede2a.webp",
+            "bytes": 11332,
+            "sha256": "1f20dcaede2ab81798b5a3e60223d9dc395ff44c2acf21831a91ca51b3a35f62",
+            "width": 480,
+            "height": 270
+          }
+        ]
+      },
+      {
+        "width": 960,
+        "count": 121,
+        "bytes": 3637046,
+        "frames": [
+          {
+            "url": "/media/stairs-0000-960.46ee88e52b3b.webp",
+            "bytes": 51146,
+            "sha256": "46ee88e52b3b37881e2339d2037ae1891257e195a840ba271603adcbe00de227",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0001-960.962293500c4d.webp",
+            "bytes": 50110,
+            "sha256": "962293500c4d7b7562a69cee31d561a11dd5ac0e7ba39361421e23281ca7787d",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0002-960.3fdd482d77b0.webp",
+            "bytes": 50834,
+            "sha256": "3fdd482d77b05e9ae9ddfec71ae1d81796135520cfe7d6b39fe8a92858d20ba6",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0003-960.5002063b19b2.webp",
+            "bytes": 49660,
+            "sha256": "5002063b19b2161fb92f74080a9f3f48f29749d3f31e5de2d1f298a154d9447b",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0004-960.1a727ade1dc0.webp",
+            "bytes": 50738,
+            "sha256": "1a727ade1dc0265ab190b755b95437fd1828f09d4b26f62974b5173ac37790d6",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0005-960.72665193de07.webp",
+            "bytes": 49654,
+            "sha256": "72665193de07358ae9845319f2012f053701c5da1142c83f523206931a09697a",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0006-960.e6235266961b.webp",
+            "bytes": 50212,
+            "sha256": "e6235266961b2a27e87687d1fafd6b27d853973a81a03782ece8c8e0d1a72b88",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0007-960.5ad03ddc4027.webp",
+            "bytes": 49344,
+            "sha256": "5ad03ddc40271ab0ce8c6beb515cee3a77303742c1a7f42a2a2f940387e8683e",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0008-960.63920995d828.webp",
+            "bytes": 49918,
+            "sha256": "63920995d82836fa279bc4f08bceef9be6c0c3df3871e484720937f4c298a0dc",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0009-960.4e816b6146ea.webp",
+            "bytes": 48474,
+            "sha256": "4e816b6146ead6fd11b9699cdb51873eeb9ad08e632f4a3dc5222eb99bbb8a43",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0010-960.68e37a15f65e.webp",
+            "bytes": 49214,
+            "sha256": "68e37a15f65e37f831cc87bd25eb69806b36a8a77160c6ecdbaf1783dfdb2282",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0011-960.232b4a9ef3b7.webp",
+            "bytes": 48764,
+            "sha256": "232b4a9ef3b7067b8f904989816e72f1305b1f5965d8b14884aa2728bad92ce8",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0012-960.ad2766870fc9.webp",
+            "bytes": 47626,
+            "sha256": "ad2766870fc974f6a7855bcc6ed884c611545780ae5bd6ca9b864c16a5d69ad0",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0013-960.3fcb824bc717.webp",
+            "bytes": 44856,
+            "sha256": "3fcb824bc717678938636cf82412e01821001d96d9563e3fa4b7694f34fd94eb",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0014-960.5cbe47aca176.webp",
+            "bytes": 44742,
+            "sha256": "5cbe47aca17680099f168f7376b58a51021398dd3ba7b5abb90f0ce8455839da",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0015-960.5fc3d3769f68.webp",
+            "bytes": 44014,
+            "sha256": "5fc3d3769f680200decc6d33be767dc8daa2b68a97908eeffe2c91297741bf91",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0016-960.4a7ef8920dba.webp",
+            "bytes": 43752,
+            "sha256": "4a7ef8920dba63934cf0e752d3c164440d4d015ff52814b2216fe3a267827978",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0017-960.7e088ab48a61.webp",
+            "bytes": 42124,
+            "sha256": "7e088ab48a613ad14d45aaa321e990e6d9d2482a1bdf335253ed11b71f5b7436",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0018-960.3e39460c1ee5.webp",
+            "bytes": 41630,
+            "sha256": "3e39460c1ee5b428e7c54137a2d8ebfa35a9edae737010b7d1db13be3bb5865a",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0019-960.419c5e4d0508.webp",
+            "bytes": 40872,
+            "sha256": "419c5e4d05083d3f71514f7a2bb72674256e3131e8312e20ebf8629a40b5a3e2",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0020-960.91f72bdbab4f.webp",
+            "bytes": 40666,
+            "sha256": "91f72bdbab4f3f26b297ce03490ad52a5d4fefa672b4efe8393b30d31393dfd7",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0021-960.5e48fe5df705.webp",
+            "bytes": 39630,
+            "sha256": "5e48fe5df70558a709ac589a6c446b9e96c8c0df6f75ca4f931ba79427120309",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0022-960.43c168c3ee13.webp",
+            "bytes": 38644,
+            "sha256": "43c168c3ee13a7ed61d24cccdccd072a24b181061b5243e0d4c5fd4b6222f130",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0023-960.85b1a6a1d375.webp",
+            "bytes": 38398,
+            "sha256": "85b1a6a1d375976492d87ce124a6b7aebad9a6fbb3cd520b39ecb553ec577cd6",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0024-960.adb5cf205b75.webp",
+            "bytes": 36416,
+            "sha256": "adb5cf205b75b8f147367901c8c5061a1c9c40d1546293abfb3aa1f8ab5e748a",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0025-960.ebf6ae0924bf.webp",
+            "bytes": 35698,
+            "sha256": "ebf6ae0924bfbd45efa3bcf7514d8d77f42e89047a13fc600527ec63ec61fe08",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0026-960.3f70c71284b5.webp",
+            "bytes": 35066,
+            "sha256": "3f70c71284b5652984272bafb832b89ed721403fdfd195b83eec6dc48a6a96bb",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0027-960.0445bb4e0494.webp",
+            "bytes": 34256,
+            "sha256": "0445bb4e049416f3352e9a7b4f9cf3680e3e6999f8670d49260b733ce33e6fc6",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0028-960.debfcc9fc35d.webp",
+            "bytes": 33320,
+            "sha256": "debfcc9fc35d114e261dfe8f5006c1ab76daffd65ab568048155a808c7934268",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0029-960.2da3d84cec05.webp",
+            "bytes": 33212,
+            "sha256": "2da3d84cec0502fc829fab3764f01801120b77e23a9a7ed938e60880331a795d",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0030-960.8e9ec71852d0.webp",
+            "bytes": 32858,
+            "sha256": "8e9ec71852d0fd9fc7da005e684ad98caa0b83e03618f051ded65dba194f8e67",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0031-960.4fca79f99a0b.webp",
+            "bytes": 32764,
+            "sha256": "4fca79f99a0b25a6132993d1edc877dd4584b1159bdce936df908687422dd877",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0032-960.d0af74415d39.webp",
+            "bytes": 32070,
+            "sha256": "d0af74415d397a4cbc6dcf399dc8f8c6742e077790241652a94e4ad1f0b6ac1e",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0033-960.76366ba9810a.webp",
+            "bytes": 31858,
+            "sha256": "76366ba9810af5e36d6f3b0cde816b64034207b675b5799ae9c584cb1c2112ea",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0034-960.c32882043f7b.webp",
+            "bytes": 32538,
+            "sha256": "c32882043f7b07c6f0a249475c4a6c658d3b72ae3f8db9adade2604cbb648404",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0035-960.f60584601d52.webp",
+            "bytes": 32616,
+            "sha256": "f60584601d5218a9bc3d4342ac2d29e0cb8b00a698d6e25c0da0115965674487",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0036-960.34b71752799a.webp",
+            "bytes": 32712,
+            "sha256": "34b71752799a8be1d3c2ce8063dd08334050bb156334445fe48cd97645504ba3",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0037-960.12e2aab1dbbd.webp",
+            "bytes": 30968,
+            "sha256": "12e2aab1dbbdd0f482f5ff75c1514113b7f2b7dd984ad6475487f820f98316de",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0038-960.19eabe0175e5.webp",
+            "bytes": 30266,
+            "sha256": "19eabe0175e596492238ed998b621a8cea251e09f1574f61a0976ce4847aaee2",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0039-960.cc2b65a11277.webp",
+            "bytes": 28564,
+            "sha256": "cc2b65a1127730f59f70696dfd7a6699b5c7be06795a2a438fe92f4406866423",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0040-960.38c523ece779.webp",
+            "bytes": 27828,
+            "sha256": "38c523ece779ea915f4536df5d0e059411a68e42c0c5e39a5daaec88afc7327a",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0041-960.bb03deb1f85e.webp",
+            "bytes": 26452,
+            "sha256": "bb03deb1f85e78b37dbbe47dfca2407e0902da40455d2c22be264d8f10683fdb",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0042-960.bedd4eb9ab3d.webp",
+            "bytes": 25758,
+            "sha256": "bedd4eb9ab3d8607adde6f4332d8b3ef510cb14484d2a01bcf6767cc4cb569bc",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0043-960.d2235c9965e4.webp",
+            "bytes": 24430,
+            "sha256": "d2235c9965e46c83ffba20fa837a675b3329a835fbbac33c67df84d0688bb2e2",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0044-960.2557887b1451.webp",
+            "bytes": 23740,
+            "sha256": "2557887b14516bb9b1d2986302070ecb9bd756761e78c42a034ff63aabf96948",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0045-960.3d6396adf925.webp",
+            "bytes": 23156,
+            "sha256": "3d6396adf925448feffd2a7010573ba360b7977daa5805e38aadb8796bd5a26a",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0046-960.f3b6a01ccc14.webp",
+            "bytes": 23400,
+            "sha256": "f3b6a01ccc149bf840d29be26acaf11fb6cb84a728b9bc444c0be068f8022154",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0047-960.ea3b818a677f.webp",
+            "bytes": 21964,
+            "sha256": "ea3b818a677f4a0d067f04d373df607f14b971835fbdd7bec822eb9d025daafc",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0048-960.ec4177044589.webp",
+            "bytes": 21698,
+            "sha256": "ec417704458905be9fabb4e9a32900ab2e514501a9e5f18a1df54b8a4aeb45d8",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0049-960.78103c7d067e.webp",
+            "bytes": 20982,
+            "sha256": "78103c7d067e88431451bc0d9a3e6430aec7ccde52d09bd9cfd73ecff546ec43",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0050-960.6a1876da5e36.webp",
+            "bytes": 20834,
+            "sha256": "6a1876da5e3648cb572aa6f8820ba1885aa573a78c61bcd4fae91f9e13f5f7b5",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0051-960.43e991f661f9.webp",
+            "bytes": 20230,
+            "sha256": "43e991f661f9e2796264323ebda645e368e7e9ade7b8dbf2d1d27b16aee5421e",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0052-960.23fbda2b1764.webp",
+            "bytes": 20182,
+            "sha256": "23fbda2b1764f7d06970e6f707e306b6811d50cd6ef0ea7314e47c1396a35a31",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0053-960.43d04fabe97f.webp",
+            "bytes": 20046,
+            "sha256": "43d04fabe97f308759ea86b4d64010ca6fecfba94fc7217df8036624683a1300",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0054-960.a7415e2f92e3.webp",
+            "bytes": 20380,
+            "sha256": "a7415e2f92e3d06fec443ff6950e18a70849c7773b72b87e8aaeb2cc01339852",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0055-960.3e5df480c4ef.webp",
+            "bytes": 20306,
+            "sha256": "3e5df480c4efdd82b4217c19fa54cc47c109ea956fa69c1a43de939276be4104",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0056-960.8506fe6039fd.webp",
+            "bytes": 20904,
+            "sha256": "8506fe6039fd6b0b28c16851a86742cc8296bd3ffe0d4b5b7a8f6865e6aaa058",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0057-960.7cfbe8106011.webp",
+            "bytes": 21140,
+            "sha256": "7cfbe810601150ffc433f733f48faa5eec43d1419a2213be0c3b14c6529d62df",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0058-960.ecc6abfac584.webp",
+            "bytes": 21374,
+            "sha256": "ecc6abfac5841ee444b32d8633302e0b60ddb7298deff9bbc4bb33779583d924",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0059-960.f18e3f6eee0f.webp",
+            "bytes": 21112,
+            "sha256": "f18e3f6eee0fab51be50eb23772f4c38c6ad30b2f8d592db9510b51414402cbf",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0060-960.21c04e7c4ceb.webp",
+            "bytes": 21546,
+            "sha256": "21c04e7c4ceb0074e955ed9fb136b0c0a3f4618f1c9918bc74dd6635a6cf4984",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0061-960.bb8113b5b4ba.webp",
+            "bytes": 21570,
+            "sha256": "bb8113b5b4ba90e2eb94f115fda99747054f19c81a2979e350d3b463269dc340",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0062-960.9dcd8870db6f.webp",
+            "bytes": 22204,
+            "sha256": "9dcd8870db6fd217d2f7db52d43a613e95d5f305269c32989dc58cac14b65f70",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0063-960.7085678a9810.webp",
+            "bytes": 22246,
+            "sha256": "7085678a9810ccc977650acd15093866c74f3550426389e82d81c7d66163fbbc",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0064-960.ae7f0439bd6a.webp",
+            "bytes": 22762,
+            "sha256": "ae7f0439bd6ae68a600225050dbafa69e9aa02b43e26d708d5440ba1b3f48728",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0065-960.0fd3d3327b70.webp",
+            "bytes": 22736,
+            "sha256": "0fd3d3327b701115ade05a90e4e424059a8c186fb56c0779f34b30b15018e5b3",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0066-960.c14bb4989d85.webp",
+            "bytes": 22392,
+            "sha256": "c14bb4989d857d7142b54c25816a33e8a52bbcd42552f37ec6a8a902cdcbb133",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0067-960.3a867491cd76.webp",
+            "bytes": 22178,
+            "sha256": "3a867491cd76312cecf4382626d46b6ffb6d8109bba59cb9f107e34e5115c4fc",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0068-960.4c30b3eba4a7.webp",
+            "bytes": 22344,
+            "sha256": "4c30b3eba4a77ab7fb03478a02e2a058c4be9723ba1e0d3aa0d778aa396e3496",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0069-960.5f99210eaf23.webp",
+            "bytes": 23332,
+            "sha256": "5f99210eaf23a7c4850709af2531042ef745c99fcf23f3cd62edf1e9ce24f390",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0070-960.9f52453cb483.webp",
+            "bytes": 23642,
+            "sha256": "9f52453cb483798910df38700df6e68a334414814350bbfd51efc5c6eb4c4291",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0071-960.e20ee4e1baf2.webp",
+            "bytes": 23222,
+            "sha256": "e20ee4e1baf20d2a0f325612e06cf75c24d483548f0effcbae7c2d155ddba957",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0072-960.ad19f992c775.webp",
+            "bytes": 24002,
+            "sha256": "ad19f992c775a92146c5a12c070edf3b6e19724feb2dc71ef46d1734dfe7e4c3",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0073-960.88582984f318.webp",
+            "bytes": 23252,
+            "sha256": "88582984f31876e659ffbbf4459b484146386e847e71c2442b00f19abbeff248",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0074-960.38364b371272.webp",
+            "bytes": 23512,
+            "sha256": "38364b3712729d8f917c4690e3a5eea03361085c8a5e0d3d803766835e5704ad",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0075-960.0ed9e9c053ad.webp",
+            "bytes": 23928,
+            "sha256": "0ed9e9c053adc4904d895d65165192dc030d4c0e1f0e81231b8659533b8504df",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0076-960.4029131a5929.webp",
+            "bytes": 23630,
+            "sha256": "4029131a5929a15340b91854af3ca64cf0e6684298802293ff60673b1b723749",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0077-960.07c2d0e71f58.webp",
+            "bytes": 23726,
+            "sha256": "07c2d0e71f58b849d0c9f698b47547ddb4a61b266c4e5ddfbbca05dc48814ec7",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0078-960.fcca389bf3aa.webp",
+            "bytes": 24954,
+            "sha256": "fcca389bf3aad9db62d026e9dbc66d6b83bd44d8790debf7352aaa5c7f874e25",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0079-960.90011b312fc1.webp",
+            "bytes": 24800,
+            "sha256": "90011b312fc1af4410434f9b2fb22c22231838089e194ad248592bf6398b288b",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0080-960.80fbc4cfa2c3.webp",
+            "bytes": 25606,
+            "sha256": "80fbc4cfa2c3d923cd9dc280f63fdd98ae3bd813bd2a80bd4d9fc4dc37eec69e",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0081-960.2e5d2f9870b2.webp",
+            "bytes": 25104,
+            "sha256": "2e5d2f9870b2d810a8b3e88518ab289b15807c4cfe6fb3bb3922a0058cfa9e94",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0082-960.28a2fc69458b.webp",
+            "bytes": 25154,
+            "sha256": "28a2fc69458b14c9663e860986613cab0d54cc561b9d6f58bf3101535d3ab0d5",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0083-960.875c5f0469e7.webp",
+            "bytes": 25358,
+            "sha256": "875c5f0469e757339cdb167b3cd7d08274967715028337e5d4b15edb0f4eaca3",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0084-960.c2f869ed29cc.webp",
+            "bytes": 25748,
+            "sha256": "c2f869ed29cc52b65fe7732ecc9c67c4f09a65397b9bef3bea7eb12d4141f002",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0085-960.62e1483c15ed.webp",
+            "bytes": 25136,
+            "sha256": "62e1483c15ed7d9fd66b3efead95a171a7eb2ec3c7e3d3737f0005db649e47d2",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0086-960.0a5702a8eadd.webp",
+            "bytes": 25804,
+            "sha256": "0a5702a8eaddba1adf1d6bac5c9026c43f9c287d1762d0210039d5e268320e2f",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0087-960.b15e9a70e6e1.webp",
+            "bytes": 25330,
+            "sha256": "b15e9a70e6e1a962d9ee424d2804ba88e66246205ede390160cd58aa74914a79",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0088-960.afe1a675a9ad.webp",
+            "bytes": 24882,
+            "sha256": "afe1a675a9ad9e1da4bf046254d811b10d9dbb1824c0b3208883057373b620a6",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0089-960.a85621bc08cd.webp",
+            "bytes": 25016,
+            "sha256": "a85621bc08cd563617da4b05b192eeaf110f397b6a4df34b3994909bd279b0b5",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0090-960.2a90561aa9e9.webp",
+            "bytes": 25642,
+            "sha256": "2a90561aa9e998b7d048174964fbd552d73e4f9ecddc96453d34a3a071433ae5",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0091-960.f9c89cc8b04e.webp",
+            "bytes": 25692,
+            "sha256": "f9c89cc8b04e7c6f807093b2b3c052054b2cc96ad03598d098838e4bac4fd4c6",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0092-960.af6e0ad859f9.webp",
+            "bytes": 25834,
+            "sha256": "af6e0ad859f9cc5e753175fb7fa27760d9ec284458e75b82306345687247cba5",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0093-960.dc67942519b5.webp",
+            "bytes": 25928,
+            "sha256": "dc67942519b54616fa3aa3a9641d605ff2f0fd262ab47ab0b36b25300954f3c8",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0094-960.d8ceae1777c8.webp",
+            "bytes": 26336,
+            "sha256": "d8ceae1777c82c114ce405be98bf2e98b5a73280a850938264f5cbdfb290a567",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0095-960.a3db5a3e3308.webp",
+            "bytes": 25376,
+            "sha256": "a3db5a3e3308f75f88002ae4318d1abb7d45925636fb7c6e3a3432a5648253aa",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0096-960.45b3483fbabe.webp",
+            "bytes": 25958,
+            "sha256": "45b3483fbabe65e3761fed5aef7e882d059da4c0f8c7c358f2c1c3cc7edb6328",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0097-960.73df458a666e.webp",
+            "bytes": 26300,
+            "sha256": "73df458a666e7c689b26f3d7487974d141f31e69918ea1591309dbfcf40c9ddb",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0098-960.df3639369bda.webp",
+            "bytes": 27194,
+            "sha256": "df3639369bda34fdfdd4c919e12c77a302ec227a00ffa38f67075ded9a089acb",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0099-960.475e90f19ed1.webp",
+            "bytes": 27398,
+            "sha256": "475e90f19ed17e4886b5a614cfdfde945aee7aaafd919478598c63b0ff1e78a8",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0100-960.10bbcb0e5468.webp",
+            "bytes": 27648,
+            "sha256": "10bbcb0e5468a4a00f79f7259306486c13449074361d01e139e6fa05da4ccdcd",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0101-960.b697adf4e3c9.webp",
+            "bytes": 27890,
+            "sha256": "b697adf4e3c965fbd28fbd61d1562f1ffe658d738d8162fcd5dc70ea39cbcfaf",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0102-960.3b43a018497c.webp",
+            "bytes": 28372,
+            "sha256": "3b43a018497ca96c9e7fc46748cb1f14621e4971d7fe889266e8c7978524792c",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0103-960.81b15b97df13.webp",
+            "bytes": 28096,
+            "sha256": "81b15b97df13a1980372f06d86236af81216e813e4835d6b3a086d6f3f0c8899",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0104-960.ec287da134b4.webp",
+            "bytes": 27876,
+            "sha256": "ec287da134b4ddbe0c64ca609d1e7ef94866494ad6dd3b6d1a496c72cb6a0248",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0105-960.2da07a491dc5.webp",
+            "bytes": 27770,
+            "sha256": "2da07a491dc53fe67d15cc3bdbbae9464414095a472094b69b459eb25db13325",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0106-960.7b182103d16b.webp",
+            "bytes": 27688,
+            "sha256": "7b182103d16b1cfdd99a99bdfd64dbb62a0c8656d46000d42713c981ee54db63",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0107-960.4ec69211e76f.webp",
+            "bytes": 28430,
+            "sha256": "4ec69211e76f6cebc2e6eaa3c200cfd16e4a9a7fc28fd1eeea97fbac9c58b8b8",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0108-960.b80cde94451f.webp",
+            "bytes": 28238,
+            "sha256": "b80cde94451f14fd566c59bdadbe270bf0118f72e87019fddc301e3b5ac49e5f",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0109-960.61bac59ff27a.webp",
+            "bytes": 28644,
+            "sha256": "61bac59ff27a992c58e75e48509b93e1e9c1afb5f2ab834167d318c37dc4dedc",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0110-960.39a77afd0c39.webp",
+            "bytes": 28612,
+            "sha256": "39a77afd0c39e5e0a52c620403c805a0f83bcc3fb21748ac46ac43a18ca56234",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0111-960.f85c18d535db.webp",
+            "bytes": 28546,
+            "sha256": "f85c18d535db50f161732f890dc9a7cc573009abc121a83c1deb44171ef4b341",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0112-960.3810748d395a.webp",
+            "bytes": 27766,
+            "sha256": "3810748d395a8d91f555656a2f1c1422c24accaca65b732902e5c61e5fae5a85",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0113-960.e1a82ae83565.webp",
+            "bytes": 27588,
+            "sha256": "e1a82ae835655a46699dc34b61aca6d1c0c3cc3df10550976c2231a8f01ba4ce",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0114-960.129e3b61c3d3.webp",
+            "bytes": 27892,
+            "sha256": "129e3b61c3d39e0661fe14c6e42e1aa44739207b926b361f1f84b473eb9f219b",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0115-960.17b3ba67af88.webp",
+            "bytes": 27944,
+            "sha256": "17b3ba67af880e3171fccab6646a594ac9015b90a2159834a0ed31b46f206fe2",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0116-960.f65992f571aa.webp",
+            "bytes": 27292,
+            "sha256": "f65992f571aab96fed756b4fa1e8f5f9ebb8c602b023a473bb57a8589d006639",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0117-960.10f6ea5cda50.webp",
+            "bytes": 27164,
+            "sha256": "10f6ea5cda50e3491549d0dbf67bb939131f9bda7ed36a0afe36dd7c8e53b0b4",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0118-960.71f454956dc4.webp",
+            "bytes": 27056,
+            "sha256": "71f454956dc40e25c882bd6c1b32974d9a4eefa22bb04be98878e5e888c08123",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0119-960.d2f628cfcba9.webp",
+            "bytes": 26756,
+            "sha256": "d2f628cfcba96a263e0328b81ee0e311b6de988430d9b063d88440e1d30804a9",
+            "width": 960,
+            "height": 540
+          },
+          {
+            "url": "/media/stairs-0120-960.345284ba7f7d.webp",
+            "bytes": 26884,
+            "sha256": "345284ba7f7ddedd46ea2941d747fa2a0d6f60151a33fb1cfb38ffc0234fd0bb",
+            "width": 960,
+            "height": 540
+          }
+        ]
+      }
+    ]
+  },
+  "sources": [
+    {
+      "id": "hero",
+      "path": "reference-images/future-workshop-hero.png",
+      "bytes": 1865330,
+      "sha256": "32c2fa2de3a20bb9a5524b393e9a8ec68fdb3cb7b8f3b42f3641a360b8589837"
+    },
+    {
+      "id": "whale-assembled",
+      "path": "reference-images/whale-assembled.jpeg",
+      "bytes": 559991,
+      "sha256": "64552685d3e33d55ef2c9de67443346ea01ccb1d9593da49aa5f1f5f9ea475c5"
+    },
+    {
+      "id": "whale-kit-blue",
+      "path": "reference-images/whale-kit-blue.jpeg",
+      "bytes": 844545,
+      "sha256": "75a08f9d280d15f64a322f671064a25fe8019e67ce87ce4ca328e0a0246e6562"
+    },
+    {
+      "id": "whale-kit-white",
+      "path": "reference-images/whale-kit-white.jpeg",
+      "bytes": 742835,
+      "sha256": "7482c68a83274ae43a0b91c26b8406ae5f5f310ba753620bdb618a4ea9503b23"
+    },
+    {
+      "id": "portal",
+      "path": "reference-media/portal.mp4",
+      "bytes": 11227381,
+      "sha256": "7922b05a14e6fb7424e28592ff5ee8eed83ae2bf18d6abf7e7202bfa25d9c232",
+      "duration": 10.041667,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "entry",
+      "path": "reference-media/basement-entry-clean-test.mp4",
+      "bytes": 2284567,
+      "sha256": "cf637bb742a39352a0ba6abe6b2c50852e07af4dfa7b69a6ef484689c8cb325a",
+      "duration": 6.541667,
+      "width": 752,
+      "height": 416
+    },
+    {
+      "id": "workbench",
+      "path": "reference-media/basement-workbench-approach.mp4",
+      "bytes": 6334850,
+      "sha256": "c22feff344a38f34a6e639a0341add9022a54ff210436f05d6d488e4890070ac",
+      "duration": 10.033333,
+      "width": 930,
+      "height": 512
+    },
+    {
+      "id": "stairs",
+      "path": "reference-media/basement-walkup-stairs-10s.mp4",
+      "bytes": 5213864,
+      "sha256": "ad1f0b66e8cdabebd37839c43f0713abe6d39e6ee8bc2f8d5713601d04b1eb1a",
+      "duration": 10.041667,
+      "width": 1280,
+      "height": 720
+    }
+  ],
+  "policy": {
+    "audio": "removed from decorative derivatives",
+    "metadata": "removed; source hashes preserved",
+    "motion": "intent-gated; still fallback; no motion downloads for reduced motion/data saving",
+    "source_assets": "local handoff only; not deployed"
+  }
+}
