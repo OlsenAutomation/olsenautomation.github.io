@@ -4,16 +4,17 @@ Owner: Brian Olsen. Active branch: `site-redesign-v2`.
 
 ## Current authorized checkpoint
 
-Brian narrowed this turn to repository backup, rollback preparation, route/content/attribution/asset inventories, and duplicate analysis. Do not begin visual implementation. Do not create another clone or repository folder.
+Brian supplied the local-only approved V6 handoff and authorized continuation from the existing checkpoint into Slices 2–4 only. No new clone, backup, tag, branch or inventory run was performed.
 
 - Slice 0 complete: current remote main recorded, annotated local backup tag created, full Git bundle verified, branch created from remote main. No tracked changes existed at start.
 - Slice 1 complete for the frozen repository: all 61 tracked files inventoried; page/route/form/link/script/metadata/download and image hashes recorded; attribution and visibility reviewed; duplicate and archive proposals documented.
-- Slice 2 not started by owner instruction. Await the approved V6 pilot.
-- Slice 3 not started by owner instruction. Inventory scripts are not a site generator.
-- Slice 4 not started by owner instruction. Image inspection did not optimize or replace source media.
+- Slice 2 complete: shared V6-derived tokens, typography, header, footer, navigation, status definitions, buttons, form primitives, focus and responsive rules. Component preview only; no homepage migration.
+- Slice 3 complete: allowlisted static builder, localhost preview server, preservation/privacy/link/media validation, HTTP and motion-boundary checks. Three generated pages tested at desktop/mobile sizes.
+- Slice 4 complete for this checkpoint: eight source assets optimized into 272 files (20,245,087 bytes), with responsive imagery, silent videos, posters and two 121-frame stair sequences. Original media hashes unchanged. Further real-device and migrated-page performance acceptance is explicitly pending.
+- Slices 5 onward not started. Stop for owner review of `CHECKPOINT_SLICES_2_4.md`.
 
-Expected local-only pilot: `_codex_handoff/approved-pilot/Olsen-Automation-Future-Pilot-v6-Single-File.html`. The whole handoff directory is ignored by Git. No package has been committed.
+Verified local-only pilot: `_codex_handoff/approved-pilot/Olsen-Automation-Future-Pilot-v6-Single-File.html`. The symlink resolves to the canonical GitHub Desktop repository's handoff folder; this existing Codex checkout is a separate clone, not a linked worktree. All expected files were readable. The exact local Git exclusion remains in the path returned by `git rev-parse --git-path info/exclude`; no package or symlink is tracked. See `HANDOFF_VERIFICATION.md` for A–G and the three unchanged checkpoint hashes.
 
-Review `INVENTORY_FINDINGS.md`, `ATTRIBUTION_AND_CLAIMS.md`, and `ARCHIVE_MANIFEST.csv`. All archive rows are proposals; nothing was moved or deleted. No source pages, baseline assets, scripts, metadata, forms, sitemap, CNAME, main, DNS, accounts, or deployment settings changed.
+Review `CHECKPOINT_SLICES_2_4.md`, `DESIGN_SYSTEM.md`, `MEDIA_PIPELINE.md`, `QA_SLICES_2_4.md`, and `CLOUDFLARE_PREVIEW_PLAN.md`. The frozen inventories, duplicate evidence and archive proposals remain unchanged. All 60 inventoried source files other than the intentionally extended .gitignore still match their recorded SHA-256 values. No baseline pages, assets, forms, scripts, metadata, sitemap or CNAME changed.
 
-All commits and the backup tag remain local. No merge, push, site deployment, form submission, notification, or paid-service action was performed.
+All continuation commits remain local. No main edit, merge, push, site deployment, external form submission, notification, account action, DNS change, custom-domain change or paid-service action was performed. Local form QA used synthetic data and produced only a local draft download.
