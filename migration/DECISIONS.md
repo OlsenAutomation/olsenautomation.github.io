@@ -36,3 +36,9 @@
 - Eleven base64 images are extracted without re-encoding, hashed and mapped to separate unlisted files. Existing originals, six near-duplicate portfolio pairs, three meaningful ARC light states and all archive candidates remain in place. No duplicate cleanup is performed at this stage.
 - Cloudflare preview now proposes `html_handling: none` plus three explicit same-site 200 aliases. This retains `.html` routes without canonicalizing them to extensionless paths. It needs validation on the actual hosted preview before use for production.
 - Local validation cannot establish physical Safari playback, real intake delivery, external site health or Cloudflare account behavior. Those remain explicit release gates; final go-live approval remains separate.
+
+## Preview publication approval — 2026-09-13
+
+- Owner approved the specific branch push and public-safe Cloudflare Workers Free preview. This supersedes the prior no-push/no-deploy restriction only for that preview. No main merge, existing Pages change, domain cutover or DNS action is authorized.
+- Pin official Wrangler 4.131.1 with a lockfile. Keep telemetry disabled for this project. A publication wrapper requires the approved branch, clean committed sources, the explicit preview Worker/configuration, and passing preservation/build checks.
+- Use version upload with alias `site-redesign-v2`; upload only `dist`. The handoff and `dist-unlisted` remain excluded. Record exact remote branch SHA, Worker/version identity and hosted QA before reporting publication complete.

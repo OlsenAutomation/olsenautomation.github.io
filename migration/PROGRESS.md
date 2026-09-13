@@ -30,3 +30,7 @@ Verified local-only pilot: `_codex_handoff/approved-pilot/Olsen-Automation-Futur
 Review `CHECKPOINT_SLICES_2_4.md`, `DESIGN_SYSTEM.md`, `MEDIA_PIPELINE.md`, `QA_SLICES_2_4.md`, and `CLOUDFLARE_PREVIEW_PLAN.md`. The frozen inventories, duplicate evidence and archive proposals remain unchanged. All 60 inventoried source files other than the intentionally extended .gitignore still match their recorded SHA-256 values. No baseline pages, assets, forms, scripts, metadata, sitemap or CNAME changed.
 
 All continuation commits remain local. No main edit, merge, push, site deployment, external form submission, notification, account action, DNS change, custom-domain change or paid-service action was performed. Local form QA used synthetic data and produced only a local draft download.
+
+## Branch-preview publication authorized — 2026-09-13
+
+Brian approved pushing `site-redesign-v2` and publishing the public-safe build as a Cloudflare Workers Free branch preview. Main, existing GitHub Pages, CNAME and DNS remain outside this approval. Wrangler 4.131.1 is pinned; local build and Wrangler dry-run pass. GitHub Pages was rechecked: main at repository root, olsenautomation.com, built. Cloudflare CLI authentication and hosted validation are in progress.

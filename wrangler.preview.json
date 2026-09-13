@@ -8,5 +8,6 @@
     "directory": "./dist",
     "html_handling": "none",
     "not_found_handling": "404-page"
-  }
+  },
+  "send_metrics": false
 }
