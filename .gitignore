@@ -4,3 +4,6 @@
 /_codex_handoff/
 /.migration-local/
 /tools/__pycache__/
+/dist/
+/node_modules/
+/.wrangler/
