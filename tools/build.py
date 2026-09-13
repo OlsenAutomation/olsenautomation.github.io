@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
-"""Allowlisted preview builder. No legacy content migration, root copying or handoff output."""
+"""Allowlisted preview builder. Shared-source migration with preserved assets and isolated unlisted output."""
 import hashlib,html,json,shutil
 from pathlib import Path
 from string import Template
+from site_pages import build_site
 ROOT=Path(__file__).resolve().parents[1];SRC=ROOT/'src';DIST=ROOT/'dist'
 def read(p):return (SRC/p).read_text()
 def render(path,**data):return Template(read(path)).substitute(data)
@@ -18,7 +19,7 @@ def build():
  DIST.mkdir();(DIST/'assets').mkdir()
  for folder in ['styles','scripts']:
   for p in (SRC/folder).iterdir():
-   if p.is_file() and p.suffix in ('.css','.js'):shutil.copyfile(p,DIST/'assets'/p.name)
+   if p.is_file() and p.suffix in ('.css','.js') and p.name!='family-access.js':shutil.copyfile(p,DIST/'assets'/p.name)
  shutil.copyfile(SRC/'favicon.svg',DIST/'assets/favicon.svg')
  # Only generated, hashed media from manifest entries, never originals/source paths.
  def assets(node):
@@ -38,6 +39,7 @@ def build():
  (DIST/'media/manifest.json').write_text(json.dumps(runtime,separators=(',',':'))+'\n')
  header=render('_includes/header.html',name=escape(site['name']),navigation=links(site['navigation']))
  footer=render('_includes/footer.html',footer_links=links(site['footer']),email=escape(site['email']),telephone=escape(site['telephone']),phone=escape(site['phone']))
+ footer+=render('_includes/portal.html',portal_poster=media['videos']['portal']['posters'][-1]['url'])
  arrow='<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M14 7l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>'
  status_rows=''.join(f'<div class="status-row"><dt class="status-label tone-{escape(s["tone"])}">{escape(s["label"])}</dt><dd>{escape(s["meaning"])}</dd></div>' for s in statuses)
  common=dict(arrow=arrow,hero_picture=picture(media['images']['hero'],'Dark maker workshop with a mechanical whale, camera and floating project displays',eager=True),status_rows=status_rows)
@@ -46,8 +48,11 @@ def build():
   content=render(f'previews/{slug}.html',**data)
   page=render('_includes/layout.html',title=title,description=description,content=content,header=header,footer=footer,page_styles='<link rel="stylesheet" href="/assets/media.css">' if slug=='media' else '',page_scripts='<script type="module" src="/assets/media.js"></script>' if slug=='media' else '')
   dest=DIST/'preview'/slug/'index.html';dest.parent.mkdir(parents=True,exist_ok=True);dest.write_text(page)
- (DIST/'404.html').write_text(render('_includes/layout.html',title='Preview page not found',description='This local preview contains only the approved component review surfaces.',content='<section class="section"><div class="wrap"><h1>Page not found.</h1><p>This preview contains the shared shell and workshop media components.</p><a class="btn primary" href="/preview/shell/">Open the shared shell</a></div></section>',header=header,footer=footer,page_styles='',page_scripts=''))
+ (DIST/'404.html').write_text(render('_includes/layout.html',title='Page not found',description='The requested Olsen Automation page could not be found.',content='<section class="section"><div class="wrap"><h1>Page not found.</h1><p>The page may have moved, or the address may be incorrect.</p><a class="btn primary" href="/">Return to Olsen Automation</a></div></section>',header=header,footer=footer,page_styles='',page_scripts=''))
+ build_site(header,footer,render,media)
  (DIST/'robots.txt').write_text('User-agent: *\nDisallow: /\n')
  (DIST/'_headers').write_text("/*\n  X-Robots-Tag: noindex, nofollow, noarchive, nosnippet\n  Referrer-Policy: no-referrer\n  X-Content-Type-Options: nosniff\n  Content-Security-Policy: default-src 'self'; img-src 'self'; media-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; font-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'none'\n  Permissions-Policy: camera=(), microphone=(), geolocation=()\n/assets/*\n  Cache-Control: no-cache\n/media/*\n  Cache-Control: public, max-age=86400\n")
- print(f'Built {len(list(DIST.rglob("*.html")))} allowlisted preview pages; no legacy pages or handoff files copied.')
+ aliases=json.loads((SRC/'_data/route-aliases.json').read_text())
+ (DIST/'_redirects').write_text(''.join(f'{source} {target} 200\n' for source,target in aliases.items()))
+ print(f'Built {len(list(DIST.rglob("*.html")))} allowlisted preview pages; original root files untouched; handoff material excluded.')
 if __name__=='__main__':build()
