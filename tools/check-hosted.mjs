@@ -37,13 +37,19 @@ for(const route of ['/missing','/_codex_handoff/approved-pilot/QA-REPORT.md','/.
 const post=await fetch(new URL('/preview/media/',base),{method:'POST',body:'synthetic-preview-qa',redirect:'manual'});
 report.postStatus=post.status;if(post.status!==405)report.failures.push({route:'/preview/media/',error:'POST expected 405'});
 const manifest=JSON.parse(await readFile(path.join(root,'public/media/manifest.json'),'utf8'));
-const video=manifest.videos.entry.variants[0];
-const range=await fetch(new URL(video.url,base),{headers:{Range:'bytes=0-99'}});
-report.range={status:range.status,bytes:(await range.arrayBuffer()).byteLength,contentRange:range.headers.get('content-range'),cache:range.headers.get('cache-control')};
-if(range.status!==206||report.range.bytes!==100)report.failures.push({route:video.url,error:'Range expected 206 and 100 bytes'});
-const invalid=await fetch(new URL(video.url,base),{headers:{Range:`bytes=${video.bytes+1}-`}});
-report.invalidRangeStatus=invalid.status;if(invalid.status!==416)report.failures.push({route:video.url,error:'Invalid range expected 416'});
+report.ranges=[];
+for(const video of Object.values(manifest.videos).flatMap(v=>v.variants)){
+  const source=await readFile(path.join(root,'dist',video.url));
+  for(const [request,start,end] of [['bytes=0-99',0,99],['bytes=-64',video.bytes-64,video.bytes-1]]){
+    const range=await fetch(new URL(video.url,base),{headers:{Range:request}});
+    const bytes=Buffer.from(await range.arrayBuffer());
+    report.ranges.push({route:video.url,request,status:range.status,bytes:bytes.length,contentRange:range.headers.get('content-range'),cache:range.headers.get('cache-control')});
+    if(range.status!==206||!bytes.equals(source.subarray(start,end+1))||range.headers.get('content-range')!==`bytes ${start}-${end}/${video.bytes}`)report.failures.push({route:video.url,error:'Range response differs from exact source bytes'});
+  }
+  const invalid=await fetch(new URL(video.url,base),{headers:{Range:`bytes=${video.bytes+1}-`}});
+  if(invalid.status!==416)report.failures.push({route:video.url,error:'Invalid range expected 416'});
+}
 report.assets.sort((a,b)=>a.route.localeCompare(b.route));
 await writeFile(path.join(root,'.migration-local/hosted-http-checks.json'),JSON.stringify(report,null,2)+'\n');
-console.log(JSON.stringify({base:report.base,assets:report.assets.length,aliases:report.routes.length,excluded:report.excluded.length,post:report.postStatus,range:report.range,invalidRange:invalid.status,failures:report.failures},null,2));
+console.log(JSON.stringify({base:report.base,assets:report.assets.length,aliases:report.routes.length,excluded:report.excluded.length,post:report.postStatus,ranges:report.ranges.length,failures:report.failures},null,2));
 if(report.failures.length)process.exitCode=1;

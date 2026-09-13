@@ -2,9 +2,22 @@
 
 Owner: Brian Olsen. Active branch: `site-redesign-v2`.
 
-## Local site migration checkpoint — 2026-09-13
+## Current checkpoint — Cloudflare preview published, 2026-09-13
 
-Brian asked to continue after the Slices 2–4 checkpoint. This continuation implemented the homepage, project atlas, workshop and legacy-page migration locally. The earlier no-push/no-deploy restriction remains in force. See `LOCAL_MIGRATION_CHECKPOINT.md` and `QA_LOCAL_MIGRATION.md`.
+Brian authorized the branch push and public-safe Workers Free preview, then completed Wrangler authorization in Safari. The reviewed source commit is `3ef1d449aa9ebb7f63e7c9f63f30241ed19b14bf`, pushed to GitHub. Cloudflare version `29e16c24-e5ed-4578-8e94-5d2455b172c0` is available at [the branch preview](https://site-redesign-v2-olsen-automation-v2-preview.brian-dbb.workers.dev/).
+
+- Workers Free verified in the account dashboard. Stable workers.dev serving is disabled; version previews are enabled. No custom route, domain, DNS, paid feature, main merge or GitHub Pages source change occurred.
+- All 340 served files match the reviewed build SHA-256 values. Three route aliases pass; 17 private/source/missing paths return 404; POST returns 405. All eight MP4s pass exact prefix/suffix and invalid-range checks.
+- Fixed a real hosted seek failure with an MP4-only Worker and public Static Assets binding. Images, frames, scripts and pages retain static routing. The browser now reaches 9.9917 seconds of the 10.041667-second workbench clip at both desktop and mobile sizes.
+- All 35 public pages passed 1440×900 and 390×844 rendering checks (70 records). Guided tour, atlas, mobile navigation, portals, stairs, forms, downloads, reduced motion, no-JavaScript content and failed-media fallback were exercised. Native macOS Safari also reached the final workbench frame with the slider.
+- Intake and workshop tests used synthetic data and created local drafts only. No email, receiver submission, notification or customer data was sent. Four retained unlisted pages remain outside the public artifact.
+- Frozen inventories, archives, original pages and assets are preserved; the local-only handoff remains untracked and excluded. Remote main remains `0feac3f8376c5110eedfc20f5cdeecd0494f1ed7`; GitHub Pages remains main/root at olsenautomation.com.
+
+See `PREVIEW_PUBLICATION.md`, `QA_HOSTED_PREVIEW.md`, and `HOSTED_RENDER_QA.csv`. Physical iPhone/iPad acceptance, production form delivery, final SEO/private-route policy and owner go-live approval remain separate gates. The sections below record earlier checkpoints and their authority at the time.
+
+## Local site migration checkpoint — historical, 2026-09-13
+
+Brian asked to continue after the Slices 2–4 checkpoint. This continuation implemented the homepage, project atlas, workshop and legacy-page migration locally. The no-push/no-deploy restriction remained in force during that checkpoint. See `LOCAL_MIGRATION_CHECKPOINT.md` and `QA_LOCAL_MIGRATION.md`.
 
 - 35 public-safe preview pages and four isolated unlisted review pages now use the shared shell. All 14 original HTML files remain untouched. The 12 legacy body fragments retain their checked content and anchors; the homepage uses approved V6 composition and retains the original capabilities, contact and project destinations through the atlas.
 - The 26-project atlas and project records now share one data registry and status vocabulary. Family Card Chaos and Olsen Music Studio have public summaries; detailed family access and application materials stay outside the public upload directory.
@@ -31,7 +44,7 @@ Review `CHECKPOINT_SLICES_2_4.md`, `DESIGN_SYSTEM.md`, `MEDIA_PIPELINE.md`, `QA_
 
 All continuation commits remain local. No main edit, merge, push, site deployment, external form submission, notification, account action, DNS change, custom-domain change or paid-service action was performed. Local form QA used synthetic data and produced only a local draft download.
 
-## Branch-preview publication authorized — 2026-09-13
+## Branch-preview publication authorized — historical preparation, 2026-09-13
 
 Brian approved pushing `site-redesign-v2` and publishing the public-safe build as a Cloudflare Workers Free branch preview. Main, existing GitHub Pages, CNAME and DNS remain outside this approval. Wrangler 4.131.1 is pinned; local build and Wrangler dry-run pass. GitHub Pages was rechecked: main at repository root, olsenautomation.com, built. Cloudflare CLI authentication and hosted validation are in progress.
 
