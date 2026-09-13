@@ -7,46 +7,46 @@
   "navigation": [
     {
       "label": "Selected work",
-      "href": "https://olsenautomation.com/#work"
+      "href": "/#work"
     },
     {
       "label": "Process",
-      "href": "https://olsenautomation.com/#approach"
+      "href": "/#process"
     },
     {
       "label": "Project atlas",
-      "href": "https://olsenautomation.com/#work"
+      "href": "/projects.html"
     },
     {
       "label": "Learn AI",
-      "href": "/preview/media/#portal"
+      "href": "/workshop.html"
     },
     {
       "label": "About",
-      "href": "https://olsenautomation.com/#contact"
+      "href": "/#about"
     },
     {
       "label": "Start a conversation",
-      "href": "mailto:brian@olsenautomation.com",
+      "href": "/#contact",
       "class": "nav-cta"
     }
   ],
   "footer": [
     {
       "label": "Docs",
-      "href": "https://olsenautomation.com/docs.html"
+      "href": "/docs.html"
     },
     {
       "label": "Support",
-      "href": "https://olsenautomation.com/support.html"
+      "href": "/support.html"
     },
     {
       "label": "Verify",
-      "href": "https://olsenautomation.com/verify.html"
+      "href": "/verify.html"
     },
     {
       "label": "Contact",
-      "href": "https://olsenautomation.com/contact.html"
+      "href": "/contact.html"
     }
   ]
 }

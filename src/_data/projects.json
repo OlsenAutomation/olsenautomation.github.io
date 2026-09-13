@@ -1,0 +1,262 @@
+[
+  {
+    "title": "Context Passport Compiler",
+    "slug": "context-passport-compiler",
+    "route": "/projects/context-passport-compiler.html",
+    "category": "systems",
+    "summary": "Local-first governance for personal AI context, source history, conflicts, review, and deliberate continuation between tools.",
+    "status": "private implementations",
+    "evidence": "Owner-reported. No independent release or device-test evidence is presented here.",
+    "source": "Approved V6 pilot, project atlas"
+  },
+  {
+    "title": "StateSeal",
+    "slug": "stateseal",
+    "route": "/projects/stateseal.html",
+    "category": "systems",
+    "summary": "An exact-change trust layer where an agent may propose, but externally scoped owner approval governs accepted state.",
+    "status": "private implementations",
+    "evidence": "Owner-reported. No independent release or device-test evidence is presented here.",
+    "source": "Approved V6 pilot, project atlas"
+  },
+  {
+    "title": "Scribr",
+    "slug": "scribr",
+    "route": "/projects/scribr.html",
+    "category": "systems",
+    "summary": "Local transcription, structured artifacts, immutable revisions, repair evidence, and portable transcript cassettes.",
+    "status": "working local applications",
+    "evidence": "Owner-reported. No independent release or device-test evidence is presented here.",
+    "source": "Approved V6 pilot, project atlas"
+  },
+  {
+    "title": "Artifact OS",
+    "slug": "artifact-os",
+    "route": "/projects/artifact-os.html",
+    "category": "systems",
+    "summary": "A human-led production operating model for evidence, production, review, correction, approval, and controlled publication.",
+    "status": "architecture/research",
+    "evidence": "Owner-reported. No independent release or device-test evidence is presented here.",
+    "source": "Approved V6 pilot, project atlas"
+  },
+  {
+    "title": "Cassette.mp4",
+    "slug": "cassette-mp4",
+    "route": "/cassette-mp4.html",
+    "category": "systems",
+    "summary": "A portable, self-describing envelope for transcripts, summaries, instructions, and context.",
+    "status": "architecture/research",
+    "evidence": "Existing public project record; specific outcomes remain bounded by the evidence and limitations on that page.",
+    "source": "Approved V6 pilot, project atlas"
+  },
+  {
+    "title": "AI Visibility",
+    "slug": "ai-visibility",
+    "route": "/ai-visibility.html",
+    "category": "systems",
+    "summary": "Answer-engine monitoring, evidence capture, and safely bounded improvements for local businesses.",
+    "status": "working local applications",
+    "evidence": "Existing public project record; specific outcomes remain bounded by the evidence and limitations on that page.",
+    "source": "Approved V6 pilot, project atlas"
+  },
+  {
+    "title": "ARC//FORGE",
+    "slug": "arc-forge",
+    "route": "/arc-forge.html",
+    "category": "games",
+    "summary": "A systems-engineering game that lets players discover the need for rules and automation through play.",
+    "status": "active prototypes",
+    "evidence": "Existing public project record; specific outcomes remain bounded by the evidence and limitations on that page.",
+    "source": "Approved V6 pilot, project atlas"
+  },
+  {
+    "title": "Glimmerlings",
+    "slug": "glimmerlings",
+    "route": "/projects/glimmerlings.html",
+    "category": "games",
+    "summary": "A Minecraft Bedrock Add-On about hatching, bonding, training, breeding, and battling elemental companions.",
+    "status": "active prototypes",
+    "evidence": "Owner-reported. No independent release or device-test evidence is presented here.",
+    "source": "Approved V6 pilot, project atlas"
+  },
+  {
+    "title": "Wing & Light",
+    "slug": "wing-light",
+    "route": "/projects/wing-light.html",
+    "category": "games",
+    "summary": "An original one-touch iOS arcade game with native device testing, lifecycle recovery, accessibility, and evidence-led repair.",
+    "status": "device-tested pilots",
+    "evidence": "Owner-reported. No independent release or device-test evidence is presented here.",
+    "source": "Approved V6 pilot, project atlas"
+  },
+  {
+    "title": "Family Card Chaos",
+    "slug": "family-card-chaos",
+    "route": "/projects/family-card-chaos.html",
+    "category": "games",
+    "summary": "A private family multiplayer card game with separate player hands, host controls, recovery, roles, and living-room display.",
+    "status": "private implementations",
+    "evidence": "Owner-reported. No independent release or device-test evidence is presented here.",
+    "source": "Approved V6 pilot, project atlas"
+  },
+  {
+    "title": "Sauce+ Private Roku",
+    "slug": "sauce-private-roku",
+    "route": "/projects/sauce-private-roku.html",
+    "category": "games",
+    "summary": "An unofficial local MediaBridge and Roku client for browsing authenticated subscriptions and protected playback.",
+    "status": "private implementations",
+    "evidence": "Owner-reported. No independent release or device-test evidence is presented here.",
+    "source": "Approved V6 pilot, project atlas"
+  },
+  {
+    "title": "Olsen Music Studio",
+    "slug": "olsen-music-studio",
+    "route": "/projects/olsen-music-studio.html",
+    "category": "games",
+    "summary": "A local-first learning app with separate Clarinet and Guitar packs, evidence, review, and explicit lesson advancement.",
+    "status": "working local applications",
+    "evidence": "Owner-reported. No independent release or device-test evidence is presented here.",
+    "source": "Approved V6 pilot, project atlas"
+  },
+  {
+    "title": "Living Lights",
+    "slug": "living-lights",
+    "route": "/firefly-living-lights.html",
+    "category": "hardware",
+    "summary": "Low-voltage firefly behavior, distributed ESP32 pods, guarded updates, physical wiring, and field observation.",
+    "status": "active prototypes",
+    "evidence": "Existing public project record; specific outcomes remain bounded by the evidence and limitations on that page.",
+    "source": "Approved V6 pilot, project atlas"
+  },
+  {
+    "title": "Mechanical Whale",
+    "slug": "mechanical-whale",
+    "route": "/projects/mechanical-whale.html",
+    "category": "hardware",
+    "summary": "A moving skeletal whale built through kit-card experiments, print iteration, physical assembly, and mechanism correction.",
+    "status": "active prototypes",
+    "evidence": "Supplied kit and assembly photographs; motion and physical fit results are owner-reported.",
+    "source": "Approved V6 pilot, project atlas"
+  },
+  {
+    "title": "Easter Tomb",
+    "slug": "easter-tomb",
+    "route": "/projects/easter-tomb.html",
+    "category": "hardware",
+    "summary": "A mechanical teaching model with a rolling stone, internal bed motion, pulley revisions, printed parts, and assembly research.",
+    "status": "active prototypes",
+    "evidence": "Owner-reported. No independent release or device-test evidence is presented here.",
+    "source": "Approved V6 pilot, project atlas"
+  },
+  {
+    "title": "Sandy Miniatures",
+    "slug": "sandy-miniatures",
+    "route": "/projects/sandy-miniatures.html",
+    "category": "hardware",
+    "summary": "Character modeling, coloration, independent eye/base parts, tiny editions, and QR-linked physical storytelling.",
+    "status": "active prototypes",
+    "evidence": "Owner-reported. No independent release or device-test evidence is presented here.",
+    "source": "Approved V6 pilot, project atlas"
+  },
+  {
+    "title": "Cedar Bracket-Cover Planters",
+    "slug": "cedar-bracket-cover-planters",
+    "route": "/projects/cedar-bracket-cover-planters.html",
+    "category": "hardware",
+    "summary": "Measured customer constraints turned into removable, load-bearing wooden enclosures that hide existing hardware.",
+    "status": "released work",
+    "evidence": "Owner-reported. No independent release or device-test evidence is presented here.",
+    "source": "Approved V6 pilot, project atlas"
+  },
+  {
+    "title": "Functional Print & Fit",
+    "slug": "functional-print-fit",
+    "route": "/projects/functional-print-fit.html",
+    "category": "hardware",
+    "summary": "Adapters, holders, mechanisms, tolerances, material decisions, and the repeated lesson that the physical part gets the final vote.",
+    "status": "historical experiments",
+    "evidence": "Owner-reported. No independent release or device-test evidence is presented here.",
+    "source": "Approved V6 pilot, project atlas"
+  },
+  {
+    "title": "Visual AI Evaluation",
+    "slug": "visual-ai-evaluation",
+    "route": "/projects/visual-ai-evaluation.html",
+    "category": "visual",
+    "summary": "Prompt direction, reference authority, output comparison, fact-checking, and photographic judgment.",
+    "status": "workshop pilots",
+    "evidence": "Owner-reported professional or demonstration work. Detailed application materials are shared separately.",
+    "source": "Approved V6 pilot, project atlas"
+  },
+  {
+    "title": "Product Image Production",
+    "slug": "product-image-production",
+    "route": "/projects/product-image-production.html",
+    "category": "visual",
+    "summary": "Photography, Photoshop, AI-assisted reconstruction, and creative-director QA for commercial imagery.",
+    "status": "workshop pilots",
+    "evidence": "Owner-reported professional or demonstration work. Detailed application materials are shared separately.",
+    "source": "Approved V6 pilot, project atlas"
+  },
+  {
+    "title": "Territory Sales Execution",
+    "slug": "territory-sales-execution",
+    "route": "/projects/territory-sales-execution.html",
+    "category": "visual",
+    "summary": "Field merchandising, account development, display execution, photography, and role-specific evidence.",
+    "status": "historical professional work",
+    "evidence": "Owner-reported professional or demonstration work. Detailed application materials are shared separately.",
+    "source": "Approved V6 pilot, project atlas"
+  },
+  {
+    "title": "Photography & Visual Production",
+    "slug": "photography-visual-production",
+    "route": "/projects/photography-visual-production.html",
+    "category": "visual",
+    "summary": "Weddings, portraits, events, product imagery, client delivery, and the professional visual judgment behind the AI work.",
+    "status": "professional practice",
+    "evidence": "Owner-reported. No independent release or device-test evidence is presented here.",
+    "source": "Approved V6 pilot, project atlas"
+  },
+  {
+    "title": "ClearFloor",
+    "slug": "clearfloor",
+    "route": "/projects/clearfloor.html",
+    "category": "visual",
+    "summary": "A paper-trading research desk centered on finite hypotheses, attribution, spread, slippage, and the discipline to reject weak candidates.",
+    "status": "architecture/research",
+    "evidence": "Owner-reported. No independent release or device-test evidence is presented here.",
+    "source": "Approved V6 pilot, project atlas"
+  },
+  {
+    "title": "BatchQuote",
+    "slug": "batchquote",
+    "route": "/projects/batchquote.html",
+    "category": "visual",
+    "summary": "An offline print-order calculator covering whole plates, retries, labor, operating costs, fees, and target margin.",
+    "status": "active prototypes",
+    "evidence": "Owner-reported. No independent release or device-test evidence is presented here.",
+    "source": "Approved V6 pilot, project atlas"
+  },
+  {
+    "title": "Role-Specific Application Portfolios",
+    "slug": "role-specific-application-portfolios",
+    "route": "/projects/role-specific-application-portfolios.html",
+    "category": "visual",
+    "summary": "Job-specific landing pages that select relevant evidence without changing the underlying professional facts.",
+    "status": "working local applications",
+    "evidence": "Owner-reported professional or demonstration work. Detailed application materials are shared separately.",
+    "source": "Approved V6 pilot, project atlas"
+  },
+  {
+    "title": "AI Without the Hype",
+    "slug": "ai-without-the-hype",
+    "route": "/workshop.html",
+    "category": "education",
+    "summary": "A small in-person workshop for adults who want to use AI for real tasks without jargon, pressure, or blind trust.",
+    "status": "workshop pilots",
+    "evidence": "Approved workshop pilot and curriculum outline; date, price and attendance are not confirmed.",
+    "source": "Approved V6 pilot, project atlas"
+  }
+]
