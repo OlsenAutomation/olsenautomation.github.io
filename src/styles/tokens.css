@@ -1,0 +1,13 @@
+/* Extracted from approved V6: shared source for all normal-page primitives. */
+:root {
+  --bg:#050b10; --bg-deep:#020609; --surface:rgba(10,24,34,.78);
+  --surface-solid:#0b1822; --surface-bright:rgba(18,39,52,.92);
+  --text:#f5f8f8; --text-soft:#c2d0d7; --muted:#8396a1;
+  --line:rgba(153,202,220,.17); --line-strong:rgba(153,202,220,.33);
+  --cyan:#5fe4ef; --cyan-dim:rgba(95,228,239,.15);
+  --ember:#ff7a45; --ember-dim:rgba(255,122,69,.16); --gold:#f0c978; --green:#9bc6a2;
+  --font-workshop:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  --max:1220px; --radius:26px; --shadow:0 34px 100px rgba(0,0,0,.42);
+  --header-h:76px; --font:"Avenir Next",Avenir,"Segoe UI",ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,sans-serif;
+}
+@media(max-width:760px){:root{--header-h:68px}}

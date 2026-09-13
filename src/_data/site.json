@@ -1,0 +1,52 @@
+{
+  "name": "Olsen Automation",
+  "stance": "Human judgment. AI leverage. Real-world proof.",
+  "email": "brian@olsenautomation.com",
+  "phone": "(805) 500-8865",
+  "telephone": "tel:+18055008865",
+  "navigation": [
+    {
+      "label": "Selected work",
+      "href": "https://olsenautomation.com/#work"
+    },
+    {
+      "label": "Process",
+      "href": "https://olsenautomation.com/#approach"
+    },
+    {
+      "label": "Project atlas",
+      "href": "https://olsenautomation.com/#work"
+    },
+    {
+      "label": "Learn AI",
+      "href": "/preview/media/#portal"
+    },
+    {
+      "label": "About",
+      "href": "https://olsenautomation.com/#contact"
+    },
+    {
+      "label": "Start a conversation",
+      "href": "mailto:brian@olsenautomation.com",
+      "class": "nav-cta"
+    }
+  ],
+  "footer": [
+    {
+      "label": "Docs",
+      "href": "https://olsenautomation.com/docs.html"
+    },
+    {
+      "label": "Support",
+      "href": "https://olsenautomation.com/support.html"
+    },
+    {
+      "label": "Verify",
+      "href": "https://olsenautomation.com/verify.html"
+    },
+    {
+      "label": "Contact",
+      "href": "https://olsenautomation.com/contact.html"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+[
+  {"id":"released","label":"Released work","tone":"green","meaning":"A released artifact with a verifiable version and availability."},
+  {"id":"local","label":"Working local applications","tone":"cyan","meaning":"Works in the owner's local environment; public availability is separate."},
+  {"id":"device","label":"Device-tested pilots","tone":"cyan","meaning":"Tested on a named physical device within a stated scope."},
+  {"id":"prototype","label":"Active prototypes","tone":"ember","meaning":"In development; tests and limitations remain explicit."},
+  {"id":"private","label":"Private implementations","tone":"gold","meaning":"Implementation stays private; only approved public summaries may be shown."},
+  {"id":"research","label":"Architecture/research","tone":"gold","meaning":"Concepts and research; implementation and results are not implied."},
+  {"id":"historical","label":"Historical experiments","tone":"muted","meaning":"An earlier experiment, retained with its date and limits."},
+  {"id":"workshop","label":"Workshop pilots","tone":"ember","meaning":"A workshop concept or pilot; reservations, price and outcomes remain separate."}
+]
