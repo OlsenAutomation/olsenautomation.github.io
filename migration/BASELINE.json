@@ -1,0 +1,7 @@
+{
+  "main_commit": "0feac3f8376c5110eedfc20f5cdeecd0494f1ed7",
+  "tag": "site-v2-baseline-20260912",
+  "branch": "site-redesign-v2",
+  "bundle": "../site-v2-backup/site-v2-baseline.bundle",
+  "cname_sha256": "52078e3a7e4fc35d0f729be2f5df84b10937d2983b9767787afbe0e7c21801db"
+}
