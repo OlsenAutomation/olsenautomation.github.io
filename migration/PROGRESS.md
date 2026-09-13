@@ -34,3 +34,5 @@ All continuation commits remain local. No main edit, merge, push, site deploymen
 ## Branch-preview publication authorized — 2026-09-13
 
 Brian approved pushing `site-redesign-v2` and publishing the public-safe build as a Cloudflare Workers Free branch preview. Main, existing GitHub Pages, CNAME and DNS remain outside this approval. Wrangler 4.131.1 is pinned; local build and Wrangler dry-run pass. GitHub Pages was rechecked: main at repository root, olsenautomation.com, built. Cloudflare CLI authentication and hosted validation are in progress.
+
+The branch push completed and was verified at `916d9001af9bc31c494dea918adf10ec0f803277`; remote main remains the recorded baseline. Cloudflare publication is awaiting owner sign-in/authorization, with the official OAuth screen prepared. No Worker/version/preview URL has been created. See `PREVIEW_PUBLICATION.md` for the receipt, prepared artifact and resume steps.
