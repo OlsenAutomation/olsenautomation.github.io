@@ -1,0 +1,211 @@
+[
+  {
+    "route": "/ai-visibility.html",
+    "source": "pages/legacy/ai-visibility.html",
+    "title": "AI Visibility Monitoring & Improvement | Olsen Automation",
+    "description": "A practical AI visibility service for local businesses: answer-engine monitoring, evidence, safe improvements, and a guided intake that creates one reusable setup file.",
+    "private": false,
+    "robots": "",
+    "metadata": "",
+    "styles": [
+      "pages",
+      "legacy"
+    ],
+    "scripts": [
+      "pages",
+      "intake"
+    ]
+  },
+  {
+    "route": "/arc-forge.html",
+    "source": "pages/legacy/arc-forge.html",
+    "title": "ARC//FORGE — Build the Machine. Discover the System.",
+    "description": "ARC//FORGE is a systems-thinking game about experimentation, automation, and discovering the hidden logic behind the machines you create.",
+    "private": false,
+    "robots": "",
+    "metadata": "<link href=\"https://olsenautomation.com/arc-forge.html\" rel=\"canonical\"/>\n<meta content=\"website\" property=\"og:type\"/>\n<meta content=\"Olsen Automation\" property=\"og:site_name\"/>\n<meta content=\"ARC//FORGE — Build the Machine. Discover the System.\" property=\"og:title\"/>\n<meta content=\"ARC//FORGE is a systems-thinking game about experimentation, automation, and discovering the hidden logic behind the machines you create.\" property=\"og:description\"/>\n<meta content=\"https://olsenautomation.com/arc-forge.html\" property=\"og:url\"/>\n<meta content=\"https://olsenautomation.com/assets/arc-forge/machine-cycle-02.webp\" property=\"og:image\"/>\n<meta content=\"1672\" property=\"og:image:width\"/>\n<meta content=\"941\" property=\"og:image:height\"/>\n<meta content=\"ARC//FORGE machine glowing with cyan, purple, and orange energy\" property=\"og:image:alt\"/>\n<meta content=\"summary_large_image\" name=\"twitter:card\"/>\n<meta content=\"ARC//FORGE — Build the Machine. Discover the System.\" name=\"twitter:title\"/>\n<meta content=\"A systems-thinking game about experimentation, automation, and discovering the hidden logic behind the machines you create.\" name=\"twitter:description\"/>\n<meta content=\"https://olsenautomation.com/assets/arc-forge/machine-cycle-02.webp\" name=\"twitter:image\"/>",
+    "styles": [
+      "pages",
+      "legacy"
+    ],
+    "scripts": [
+      "pages"
+    ]
+  },
+  {
+    "route": "/cassette-mp4.html",
+    "source": "pages/legacy/cassette-mp4.html",
+    "title": "Cassette.mp4 | Olsen Automation LLC",
+    "description": "Cassette.mp4 is a portable, self-describing context envelope for AI assistants.",
+    "private": false,
+    "robots": "",
+    "metadata": "",
+    "styles": [
+      "pages",
+      "legacy"
+    ],
+    "scripts": [
+      "pages"
+    ]
+  },
+  {
+    "route": "/contact.html",
+    "source": "pages/legacy/contact.html",
+    "title": "Contact | Olsen Automation LLC",
+    "description": "Contact Brian Olsen for product image production, AI-assisted workflows, and Olsen Automation inquiries.",
+    "private": false,
+    "robots": "",
+    "metadata": "",
+    "styles": [
+      "pages",
+      "legacy"
+    ],
+    "scripts": [
+      "pages"
+    ]
+  },
+  {
+    "route": "/docs.html",
+    "source": "pages/legacy/docs.html",
+    "title": "Docs | Olsen Automation LLC",
+    "description": "Quick-start documentation for Cassette.mp4 and Olsen Automation context tools.",
+    "private": false,
+    "robots": "",
+    "metadata": "",
+    "styles": [
+      "pages",
+      "legacy"
+    ],
+    "scripts": [
+      "pages"
+    ]
+  },
+  {
+    "route": "/family-card-chaos-access.html",
+    "source": "pages/legacy/family-card-chaos-access.html",
+    "title": "Family Card Chaos — Family Access Guide",
+    "description": "Private family instructions for requesting access and joining Family Card Chaos.",
+    "private": true,
+    "robots": "noindex, nofollow, noarchive, nosnippet",
+    "metadata": "<meta content=\"noindex, nofollow, noarchive, nosnippet\" name=\"robots\"/>",
+    "styles": [
+      "pages",
+      "legacy"
+    ],
+    "scripts": [
+      "pages",
+      "family-access"
+    ]
+  },
+  {
+    "route": "/firefly-living-lights.html",
+    "source": "pages/legacy/firefly-living-lights.html",
+    "title": "Living Lights / Firefly System | Olsen Automation",
+    "description": "Living Lights is an active ESP32-based outdoor low-voltage lighting prototype designed to imitate the calm, organic behavior of living fireflies.",
+    "private": false,
+    "robots": "",
+    "metadata": "<link href=\"https://olsenautomation.com/firefly-living-lights.html\" rel=\"canonical\"/>",
+    "styles": [
+      "pages",
+      "legacy"
+    ],
+    "scripts": [
+      "pages"
+    ]
+  },
+  {
+    "route": "/product-photo-production.html",
+    "source": "pages/legacy/product-photo-production.html",
+    "title": "AI-Assisted Product Image Production & Retouching | Brian Olsen",
+    "description": "A short product image production portfolio showing hands-on photography, Photoshop retouching, AI-assisted image generation, and creative-director QA.",
+    "private": true,
+    "robots": "noindex,nofollow",
+    "metadata": "<meta content=\"noindex,nofollow\" name=\"robots\"/>",
+    "styles": [
+      "pages",
+      "legacy"
+    ],
+    "scripts": [
+      "pages"
+    ]
+  },
+  {
+    "route": "/support.html",
+    "source": "pages/legacy/support.html",
+    "title": "Support | Olsen Automation LLC",
+    "description": "Support information for Olsen Automation tools and Cassette.mp4 inquiries.",
+    "private": false,
+    "robots": "",
+    "metadata": "",
+    "styles": [
+      "pages",
+      "legacy"
+    ],
+    "scripts": [
+      "pages"
+    ]
+  },
+  {
+    "route": "/territory-sales-execution.html",
+    "source": "pages/legacy/territory-sales-execution.html",
+    "title": "Territory Sales & Retail Execution | Brian Olsen",
+    "description": "Brian Olsen's territory sales and retail execution portfolio: spirits, RTD, wine, off-premise merchandising, promotional displays, distributor coordination, route management, and field reporting.",
+    "private": true,
+    "robots": "noindex,nofollow,noarchive",
+    "metadata": "<meta content=\"noindex,nofollow,noarchive\" name=\"robots\"/>\n<script defer src=\"assets/js/application-view-ping.js?v=20260727-1\" data-page-id=\"territory-sales-execution\" data-page-label=\"Territory sales portfolio\"></script>",
+    "styles": [
+      "pages",
+      "legacy"
+    ],
+    "scripts": [
+      "pages"
+    ]
+  },
+  {
+    "route": "/verify.html",
+    "source": "pages/legacy/verify.html",
+    "title": "Verify | Olsen Automation LLC",
+    "description": "Public verification key and release verification instructions for Olsen Automation cassette releases.",
+    "private": false,
+    "robots": "",
+    "metadata": "",
+    "styles": [
+      "pages",
+      "legacy"
+    ],
+    "scripts": [
+      "pages"
+    ]
+  },
+  {
+    "route": "/visual-ai-evaluation.html",
+    "source": "pages/legacy/visual-ai-evaluation.html",
+    "title": "Visual AI Evaluation | Brian Olsen",
+    "description": "Brian Olsen's visual AI evaluation portfolio: prompt design, reference-based analysis, output comparison, fact-checking, and photographic judgment.",
+    "private": true,
+    "robots": "noindex,nofollow,noarchive",
+    "metadata": "<meta content=\"noindex,nofollow,noarchive\" name=\"robots\"/>\n<script defer src=\"assets/js/application-view-ping.js?v=20260727-1\" data-page-id=\"visual-ai-evaluation\" data-page-label=\"Visual AI evaluation portfolio\"></script>",
+    "styles": [
+      "pages",
+      "legacy"
+    ],
+    "scripts": [
+      "pages"
+    ]
+  },
+  {
+    "route": "/workshop.html",
+    "source": "pages/workshop.html",
+    "title": "AI Without the Hype | Olsen Automation",
+    "description": "A small, hands-on beginner AI workshop with Brian Olsen in Oxnard. Join the interest list; date and price will be shared before you commit.",
+    "private": false,
+    "styles": [
+      "media",
+      "workshop"
+    ],
+    "scripts": [
+      "workshop"
+    ],
+    "metadata": ""
+  }
+]

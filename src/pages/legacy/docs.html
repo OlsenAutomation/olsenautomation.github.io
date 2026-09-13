@@ -1,0 +1,16 @@
+<article class="legacy-page legacy-docs">
+<section class="hero">
+<div class="wrap">
+<div class="eyebrow">Docs</div>
+<h1>Cassette.mp4 quick start.</h1>
+<p class="lede">Portable, drift-resistant context you can hand to an assistant without exposing internal orchestration.</p>
+</div>
+</section><div class="migration-evidence wrap"><p class="status-label">{{status:research}}</p><p>Concept usage notes. A downloadable cassette release is not supplied here.</p><p class="notice">Availability note: the descriptions and commands below are the existing public concept record. No downloadable cassette release or signed example is supplied here; compatibility and verification remain unverified until tested with an actual artifact.</p></div>
+<section class="wrap grid">
+<article class="card"><h2>What you get</h2><ul><li><strong>Portable file:</strong> a single MP4 plus optional sidecars that travels anywhere.</li><li><strong>Predictable schema:</strong> a compact JSON payload assistants can read consistently.</li><li><strong>Repeatability:</strong> semantic chunking and summaries for faithful recall.</li></ul><h3>Quick start</h3><ol><li>Download your cassette, for example <code>ClientName.mp4</code>.</li><li>Drop it into your assistant or upload it alongside <code>cassette.json</code> when requested.</li><li>Use the safe commands below to index and retrieve context.</li></ol><h3>Commands</h3><ul><li><code>BUILD INDEX</code> — build or refresh a retrieval sidecar.</li><li><code>RETRIEVE "your query"</code> — get top-K small summaries relevant to your question.</li><li><code>RETRIEVE JSON "your query"</code> — structured hits only.</li><li><code>EXPORT</code> — manifest-first export.</li><li><code>PRINT &lt;path&gt;</code> — peek at a tiny subsection for debugging.</li></ul><p>Internal stitching, deduplication thresholds, and orchestration details are intentionally not documented publicly.</p></article><article class="card"><h2>Bundle anatomy</h2><pre><code>&lt;Project&gt;.mp4               # Primary portable cassette
+cassette.json              # Same payload in JSON, optional
+MAIN.retrieval_index.json  # Optional retrieval sidecar
+snapshots/                 # Optional versioned exports
+catalog.json               # Checksums / manifest</code></pre><h3>FAQ</h3><p><strong>Can I verify this cassette came from Olsen Automation?</strong><br/>Yes. See the Verify page for public-key and verification steps.</p><p><strong>Does this include raw transcripts?</strong><br/>By default, no. The public surface is focused on compact summaries and structured context. Full transcripts may be gated or licensed.</p><p><strong>Will this work offline?</strong><br/>Core reading and basic retrieval can. Dense embeddings are optional.</p></article>
+</section>
+</article>

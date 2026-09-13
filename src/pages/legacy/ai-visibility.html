@@ -1,0 +1,194 @@
+<article class="legacy-page legacy-ai-visibility">
+<section class="hero">
+<div class="wrap">
+<div class="eyebrow">AI Visibility</div>
+<h1>Help answer engines find your business.</h1>
+<p class="lead">We measure whether Grok, Perplexity, and Copilot recommend your business, preserve the evidence, and turn what we learn into careful, trackable improvements.</p>
+<div class="actions">
+<a class="btn primary" href="#intake">Start the guided intake</a>
+<a class="btn" href="#how-it-works">See how it works</a>
+</div>
+<div aria-label="Service highlights" class="signal-grid">
+<div class="signal"><strong>Real answer checks</strong><span>We open each configured engine and record only what it actually returns.</span></div>
+<div class="signal"><strong>Evidence, not guesses</strong><span>Every result is timestamped and saved so changes can be compared honestly.</span></div>
+<div class="signal"><strong>Safe improvements</strong><span>Only pre-authorized updates run automatically. Sensitive changes pause.</span></div>
+<div class="signal"><strong>One reusable file</strong><span>Your intake becomes a structured setup file for a dedicated ChatGPT Work session.</span></div>
+</div>
+</div>
+</section><div class="migration-evidence wrap"><p class="status-label">{{status:local}}</p><p>The service workflow is owner-reported. Intake delivery and business outcomes are separate; rankings, leads and revenue are not guaranteed.</p></div>
+<section id="how-it-works">
+<div class="wrap">
+<div class="section-head">
+<h2>From intake to ongoing visibility.</h2>
+<p>One guided setup creates the source of truth. The recurring workflow handles collection, evidence, reporting, and only the improvements you authorize.</p>
+</div>
+<div class="process-grid">
+<article class="process-card"><span class="step-number">1</span><h3>Tell us the truth</h3><p>Enter your official business details, services, locations, public profiles, and the searches customers use.</p></article>
+<article class="process-card"><span class="step-number">2</span><h3>Choose boundaries</h3><p>Decide what may happen automatically and what must always wait for your approval.</p></article>
+<article class="process-card"><span class="step-number">3</span><h3>Send one file</h3><p>The page securely sends Olsen Automation a structured JSON intake and downloads your backup. No passwords or secret keys are included.</p></article>
+<article class="process-card"><span class="step-number">4</span><h3>Start monitoring</h3><p>Olsen Automation uses that file to create a dedicated local workflow, weekly checks, and evidence-backed reports.</p></article>
+</div>
+</div>
+</section>
+<section id="intake">
+<div class="wrap">
+<div class="section-head">
+<h2>Create and send your intake file.</h2>
+<p>Plain-language help is included beside unfamiliar items. No account is required, and you receive a backup copy.</p>
+</div>
+<div class="intake-shell">
+<aside class="intake-aside">
+<div class="eyebrow">Before you start</div>
+<h3>What you may want nearby</h3>
+<ul>
+<li>Your website and public business contact information</li>
+<li>A list of services and locations you actually serve</li>
+<li>Links to Google, Apple, Yelp, and social profiles</li>
+<li>The name of your website platform</li>
+<li>Three searches a customer might type</li>
+</ul>
+<div class="privacy-note"><strong>Keep secrets out.</strong><br/>Never enter passwords, one-time codes, API keys, payment information, customer lists, or private client details. Access is granted later through official invitations.</div>
+</aside>
+<form class="form-card" id="visibility-intake" novalidate="">
+<div aria-hidden="true" class="preserved-inline-1"><label for="company-website-confirm">Leave this field empty</label><input autocomplete="off" id="company-website-confirm" name="company_website_confirm" tabindex="-1" type="text"/></div>
+<div aria-hidden="true" class="progress-wrap">
+<div class="progress-meta"><span>Required information completed</span><span id="progress-label">0%</span></div>
+<div class="progress-track"><div class="progress-bar" id="progress-bar"></div></div>
+</div>
+<fieldset>
+<legend>1. Your business</legend>
+<p class="section-copy">This becomes the canonical record used to catch conflicting names, phone numbers, locations, and links.</p>
+<div class="form-grid">
+<div class="field"><label for="business-name">Official business name</label><input autocomplete="organization" id="business-name" name="business_name" placeholder="Example: Harbor Family Photography" required="" type="text"/></div>
+<div class="field"><label for="website">Website</label><input id="website" name="website" placeholder="https://example.com" required="" type="url"/></div>
+<div class="field"><label for="contact-name">Primary contact name</label><input autocomplete="name" id="contact-name" name="contact_name" required="" type="text"/></div>
+<div class="field"><label for="contact-email">Primary contact email</label><input autocomplete="email" id="contact-email" name="contact_email" required="" type="email"/></div>
+<div class="field"><label for="public-email">Public business email <span class="optional">optional</span></label><input autocomplete="email" id="public-email" name="public_email" type="email"/></div>
+<div class="field"><label for="public-phone">Public business phone <span class="optional">optional</span></label><input autocomplete="tel" id="public-phone" name="public_phone" type="tel"/></div>
+<div class="field"><label for="location">Main city and state</label><input id="location" name="location" placeholder="Oxnard, California" required="" type="text"/></div>
+<div class="field"><label for="timezone">Time zone</label><select id="timezone" name="timezone" required=""><option value="">Choose one</option><option>America/Los_Angeles</option><option>America/Denver</option><option>America/Chicago</option><option>America/New_York</option><option>America/Phoenix</option><option>Pacific/Honolulu</option><option>America/Anchorage</option><option value="other">Other / not listed</option></select></div>
+<div class="field full">
+<span class="label">How do customers reach you?</span>
+<div class="choice-grid">
+<label class="choice"><input name="business_model" required="" type="radio" value="storefront"/><span><strong>At my location</strong><small>Customers visit a public storefront or office during stated hours.</small></span></label>
+<label class="choice"><input name="business_model" required="" type="radio" value="service_area"/><span><strong>I travel to them</strong><small>You serve customers in an area and may keep your home address private.</small></span></label>
+<label class="choice"><input name="business_model" required="" type="radio" value="hybrid"/><span><strong>Both</strong><small>You have a public location and also travel to customers.</small></span></label>
+<label class="choice"><input name="business_model" required="" type="radio" value="online"/><span><strong>Online only</strong><small>Your work is not tied to a customer-facing physical location.</small></span></label>
+</div>
+<details class="help"><summary>ELI5: Why does this matter?</summary><div>Search platforms treat storefronts, service-area businesses, and online-only businesses differently. We need the truthful choice so we do not accidentally publish a private address or create an ineligible local listing.</div></details>
+</div>
+<div class="field full"><label for="public-address">Public address <span class="optional">only if customers may visit it</span></label><input autocomplete="street-address" id="public-address" name="public_address" placeholder="Leave blank if your address should stay private" type="text"/></div>
+</div>
+</fieldset>
+<fieldset>
+<legend>2. Services and searches</legend>
+<p class="section-copy">Use one item per line. We use this section to create buyer-intent checks without inserting your business name into the question.</p>
+<div class="form-grid">
+<div class="field"><label for="primary-service">Primary service or category</label><input id="primary-service" name="primary_service" placeholder="Family photographer" required="" type="text"/></div>
+<div class="field"><label for="service-areas">Cities or areas served</label><textarea id="service-areas" name="service_areas" placeholder="Oxnard, California
+Ventura, California" required=""></textarea></div>
+<div class="field full"><label for="services">Services offered</label><textarea id="services" name="services" placeholder="Family photography
+Maternity photography
+Mini sessions" required=""></textarea></div>
+<div class="field full"><label for="queries">Search phrases to monitor</label><textarea id="queries" name="queries" placeholder="family photographer Oxnard
+Oxnard family photography
+Ventura family photographer" required=""></textarea><p class="hint">Start with three to six phrases a ready-to-buy customer would naturally use.</p><details class="help"><summary>ELI5: What is a search phrase?</summary><div><p>It is the exact question or short phrase we type into an AI answer engine. Good examples combine a real service with a location or buying need.</p><p>Use “emergency plumber Ventura” or “family photographer Oxnard,” not your company name.</p></div></details></div>
+<div class="field"><label for="brand-variants">Other names for your business <span class="optional">optional</span></label><textarea id="brand-variants" name="brand_variants" placeholder="Short name
+Owner's professional name
+example.com"></textarea></div>
+<div class="field"><label for="competitors">Known competitors <span class="optional">optional</span></label><textarea id="competitors" name="competitors" placeholder="One business per line"></textarea></div>
+</div>
+</fieldset>
+<fieldset>
+<legend>3. Your public footprint</legend>
+<p class="section-copy">Paste links when you have them. “Not sure” is a useful answer—the first audit can locate and reconcile the profiles.</p>
+<div class="form-grid">
+<div class="field"><label for="google-profile">Google Business Profile link <span class="optional">optional</span></label><input id="google-profile" name="google_business_profile" placeholder="https://maps.google.com/..." type="url"/><details class="help"><summary>ELI5: What is this and where is it?</summary><div><p>This is the business card that appears in Google Search and Maps. Open your business in Google Maps, choose Share, and copy the link.</p><a href="https://support.google.com/business/answer/3403100" rel="noopener noreferrer" target="_blank">Google's owner and manager guide</a></div></details></div>
+<div class="field"><label for="apple-profile">Apple Maps link <span class="optional">optional</span></label><input id="apple-profile" name="apple_business_connect" placeholder="https://maps.apple.com/..." type="url"/><details class="help"><summary>ELI5: What is this and where is it?</summary><div><p>This is how your business appears in Apple Maps, Siri, and other Apple experiences. Find the business in Apple Maps, choose Share, and copy the link.</p><a href="https://businessconnect.apple.com/" rel="noopener noreferrer" target="_blank">Open Apple Business Connect</a></div></details></div>
+<div class="field"><label for="yelp-profile">Yelp link <span class="optional">optional</span></label><input id="yelp-profile" name="yelp" placeholder="https://www.yelp.com/biz/..." type="url"/></div>
+<div class="field"><label for="booking-link">Booking or contact link <span class="optional">optional</span></label><input id="booking-link" name="booking_url" placeholder="https://example.com/book" type="url"/></div>
+<div class="field full"><label for="other-profiles">Other directory and social links <span class="optional">optional</span></label><textarea id="other-profiles" name="other_profiles" placeholder="https://www.instagram.com/example
+https://www.facebook.com/example
+https://directory.example/profile"></textarea></div>
+<div class="field"><label for="cms">Website platform</label><select id="cms" name="cms_platform" required=""><option value="">Choose one</option><option>WordPress</option><option>Squarespace</option><option>Wix</option><option>Shopify</option><option>Pixieset</option><option>Webflow</option><option>GoDaddy Website Builder</option><option>GitHub Pages</option><option>Custom / developer managed</option><option>I do not know</option><option>I do not have a website</option></select><details class="help"><summary>ELI5: What is a website platform?</summary><div>It is the tool used to edit your website. If you sign in somewhere to change photos or text, that company's name is usually the answer. Your latest website invoice may also show it.</div></details></div>
+<div class="field"><label for="cms-login">Website sign-in page <span class="optional">link only</span></label><input id="cms-login" name="cms_login_url" placeholder="https://example.com/admin" type="url"/><p class="hint">Do not enter your username or password.</p></div>
+</div>
+</fieldset>
+<fieldset>
+<legend>4. Access readiness</legend>
+<p class="section-copy">This does not grant access. It tells us what exists so we can send the correct official invitation instructions later.</p>
+<div class="safety"><strong>Never paste credentials here.</strong><p>The safe pattern is: you keep ownership, and invite Olsen Automation as a manager or user. You can remove that access later.</p></div>
+<div class="form-grid preserved-inline-2">
+<div class="field"><label for="gbp-status">Google Business Profile</label><select id="gbp-status" name="google_business_status" required=""><option value="">Choose one</option><option value="verified_owner">Verified and I am an owner</option><option value="verified_not_owner">Verified but someone else owns it</option><option value="unverified">Exists but is not verified</option><option value="missing">I do not think one exists</option><option value="unknown">I am not sure</option></select><details class="help"><summary>ELI5: How would I grant access?</summary><div><p>On your Google Business Profile: More → Business Profile settings → People and access → Add. Invite the operations email as a Manager, not an Owner.</p><a href="https://support.google.com/business/answer/3403100" rel="noopener noreferrer" target="_blank">Official Google instructions</a></div></details></div>
+<div class="field"><label for="search-console-status">Google Search Console</label><select id="search-console-status" name="search_console_status" required=""><option value="">Choose one</option><option value="owner">Set up and I am an owner</option><option value="user">Set up but I am only a user</option><option value="missing">Not set up</option><option value="unknown">I am not sure</option></select><details class="help"><summary>ELI5: What is it and where is access?</summary><div><p>Search Console is Google's dashboard for how it reads your website. An owner opens Settings → Users and permissions → Add user and grants Full access.</p><a href="https://support.google.com/webmasters/answer/7687615" rel="noopener noreferrer" target="_blank">Official Search Console instructions</a></div></details></div>
+<div class="field"><label for="bing-status">Bing Webmaster Tools</label><select id="bing-status" name="bing_webmaster_status" required=""><option value="">Choose one</option><option value="administrator">Set up and I am an administrator</option><option value="user">Set up but I am not an administrator</option><option value="missing">Not set up</option><option value="unknown">I am not sure</option></select><details class="help"><summary>ELI5: What is it and where is access?</summary><div><p>It is Bing's version of Search Console and helps Bing and Copilot find site updates. In Bing Webmaster Tools, open User management and add a user with Read/Write access.</p><a href="https://www2.bing.com/webmasters/help/how-to-add-users-to-your-site-account-d5d00364" rel="noopener noreferrer" target="_blank">Official Bing instructions</a></div></details></div>
+<div class="field"><label for="apple-status">Apple Business Connect</label><select id="apple-status" name="apple_business_status" required=""><option value="">Choose one</option><option value="administrator">Set up and I manage it</option><option value="user">Set up but someone else manages it</option><option value="missing">Not set up</option><option value="unknown">I am not sure</option></select><details class="help"><summary>ELI5: What is it?</summary><div><p>Apple Business Connect controls how eligible businesses appear across Apple services, including Maps. The business owner should retain control and delegate access when available.</p><a href="https://businessconnect.apple.com/" rel="noopener noreferrer" target="_blank">Open Apple Business Connect</a></div></details></div>
+</div>
+</fieldset>
+<fieldset>
+<legend>5. Standing permissions</legend>
+<p class="section-copy">These are operating preferences, not a contract. Actual access and the final work agreement are confirmed separately.</p>
+<div class="field full">
+<span class="label">Actions that may run automatically</span>
+<div class="choice-grid">
+<label class="choice"><input checked="" name="automatic_actions" type="checkbox" value="monitor_answer_engines"/><span><strong>Monitor AI answers</strong><small>Run configured searches and preserve evidence.</small></span></label>
+<label class="choice"><input checked="" name="automatic_actions" type="checkbox" value="generate_reports"/><span><strong>Generate reports</strong><small>Create periodic visibility summaries.</small></span></label>
+<label class="choice"><input name="automatic_actions" type="checkbox" value="submit_indexing"/><span><strong>Submit updated pages</strong><small>Notify search tools after an authorized page change.</small></span></label>
+<label class="choice"><input name="automatic_actions" type="checkbox" value="correct_profile_consistency"/><span><strong>Correct profile consistency</strong><small>Match approved public facts across existing profiles.</small></span></label>
+<label class="choice"><input name="automatic_actions" type="checkbox" value="update_site_content"/><span><strong>Improve website content</strong><small>Use verified facts and approved page templates.</small></span></label>
+<label class="choice"><input name="automatic_actions" type="checkbox" value="publish_approved_photos"/><span><strong>Publish approved photos</strong><small>Only images that have documented publication permission.</small></span></label>
+</div>
+</div>
+<div class="field full preserved-inline-3">
+<span class="label">Always pause for approval</span>
+<div class="choice-grid">
+<label class="choice"><input checked="" disabled="" name="approval_actions" type="checkbox" value="pricing_offers"/><span><strong>Pricing or offers</strong><small>Required safeguard.</small></span></label>
+<label class="choice"><input checked="" disabled="" name="approval_actions" type="checkbox" value="negative_review_response"/><span><strong>Negative-review responses</strong><small>Required safeguard.</small></span></label>
+<label class="choice"><input checked="" disabled="" name="approval_actions" type="checkbox" value="business_identity"/><span><strong>Name, address, phone, or category</strong><small>Required safeguard.</small></span></label>
+<label class="choice"><input checked="" disabled="" name="approval_actions" type="checkbox" value="deletions"/><span><strong>Deleting pages or profiles</strong><small>Required safeguard.</small></span></label>
+<label class="choice"><input checked="" disabled="" name="approval_actions" type="checkbox" value="paid_services"/><span><strong>Paid tools or advertising</strong><small>Required safeguard.</small></span></label>
+<label class="choice"><input checked="" disabled="" name="approval_actions" type="checkbox" value="unverified_client_content"/><span><strong>Client names, stories, or images</strong><small>Unless publication permission is documented.</small></span></label>
+</div>
+</div>
+<div class="form-grid preserved-inline-4">
+<div class="field"><label for="photo-consent">Photo and client-content policy</label><select id="photo-consent" name="photo_consent_policy" required=""><option value="">Choose one</option><option value="none_without_approval">Do not publish anything without case-by-case approval</option><option value="approved_library_only">Use only a separately approved media library</option><option value="website_public_only">Reuse only material already public on my website</option><option value="not_applicable">Not applicable to my business</option></select></div>
+<div class="field"><label for="report-email">Report recipient email</label><input id="report-email" name="report_email" placeholder="Where reports should be sent" required="" type="email"/></div>
+<div class="field full"><label for="notes">Anything else we should know? <span class="optional">optional</span></label><textarea id="notes" name="notes" placeholder="Seasonality, unusual service boundaries, upcoming changes, or important cautions"></textarea></div>
+</div>
+</fieldset>
+<fieldset>
+<legend>6. Confirm and create</legend>
+<p class="section-copy">Review your entries. When you submit, the structured intake is sent to Olsen Automation's Workspace inbox and a backup downloads to your device.</p>
+<div class="choice-grid">
+<label class="choice"><input id="authority" name="authority_confirmed" required="" type="checkbox"/><span><strong>I am authorized to provide these business details</strong><small>I am the owner or an authorized representative.</small></span></label>
+<label class="choice"><input id="no-secrets" name="no_secrets_confirmed" required="" type="checkbox"/><span><strong>I did not include secrets or private customer data</strong><small>No passwords, codes, keys, payment data, or customer lists.</small></span></label>
+</div>
+</fieldset>
+<div class="form-actions">
+<button class="btn primary" id="submit-intake" hidden="" type="submit">Send intake &amp; download backup</button>
+<p aria-live="polite" class="status" id="form-status" role="status">Nothing is sent until you click the button above.</p>
+<div aria-live="polite" class="success-panel" id="success-panel">
+<h3>Your intake was sent.</h3>
+<p>Olsen Automation received the structured handoff for your dedicated ChatGPT Work session. A backup also downloaded to your device.</p>
+<div class="actions"><button class="btn" id="download-again" type="button">Download backup again</button></div>
+</div>
+</div>
+</form>
+<iframe hidden="" id="intake-receiver-frame" name="intake-receiver-frame" title="Secure intake delivery response"></iframe>
+</div>
+</div>
+</section>
+<section id="questions">
+<div class="wrap">
+<div class="section-head"><h2>Good questions.</h2><p>The goal is careful automation with a clear evidence trail—not a promise of guaranteed rankings.</p></div>
+<div class="faq-grid">
+<details><summary>Will this guarantee that AI recommends my business?</summary><p>No. Answer engines change and may personalize results. The service measures what appears, improves the public signals within your control, and reports changes honestly.</p></details>
+<details><summary>Do you need my passwords?</summary><p>No. Never send passwords or codes. When access is needed, you retain ownership and invite an Olsen Automation account with the smallest practical role.</p></details>
+<details><summary>What happens after I send the file?</summary><p>Olsen Automation validates the intake, confirms any missing ownership steps, creates the local monitor, performs a manual evidence run, and schedules recurring collection and due-date reporting.</p></details>
+<details><summary>What can run without me?</summary><p>Monitoring and reports can run unattended. Public edits can run only inside your standing permissions. Pricing, identity changes, deletions, paid services, and unapproved client content always pause.</p></details>
+</div>
+</div>
+</section>
+</article>
+
+<noscript><p class="wrap notice">Intake preparation requires JavaScript. You can email <a href="mailto:brian@olsenautomation.com">Brian directly</a> for help.</p></noscript>

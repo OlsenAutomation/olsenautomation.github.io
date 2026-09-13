@@ -1,0 +1,16 @@
+<article class="legacy-page legacy-verify">
+<section class="hero">
+<div class="wrap">
+<div class="eyebrow">Verify</div>
+<h1>Verify signed releases.</h1>
+<p class="lede">Use this public key to verify signed cassette releases and manifests from Olsen Automation.</p>
+</div>
+</section><div class="migration-evidence wrap"><p class="status-label">{{status:research}}</p><p>Published public-key material and verification instructions. A signed example is not supplied here.</p><p class="notice">Availability note: the descriptions and commands below are the existing public concept record. No downloadable cassette release or signed example is supplied here; compatibility and verification remain unverified until tested with an actual artifact.</p></div>
+<section class="wrap grid">
+<article class="card"><h2>Olsen Automation Public Key</h2><p><strong>Key type:</strong> Ed25519<br/><strong>Key ID:</strong> 634B4BD7E1DFB951</p><pre><code>untrusted comment: minisign public key 634B4BD7E1DFB951
+RWRRud/h10tLY/tq1TOly33agV47Pg59+bPKQIZeT3+4BXcpaIYm28R4</code></pre><h3>Verify a release</h3><pre><code>minisign -Vm hash_manifest.txt -p pubkey.txt
+# or verify a single file + its .minisig
+minisign -Vm RAG_systems_prototype.mp4 -p pubkey.txt</code></pre><h3>Inline public key form</h3><pre><code>minisign -Vm hash_manifest.txt   -P "RWRRud/h10tLY/tq1TOly33agV47Pg59+bPKQIZeT3+4BXcpaIYm28R4"</code></pre><h3>Verify hashes</h3><p>After verifying the signed manifest, confirm file checksums match:</p><pre><code>shasum -a 256 RAG_systems_prototype.mp4
+shasum -a 256 "Stanford AI Protocol.mp4"</code></pre></article><article class="card notice"><h2>Troubleshooting</h2><ul><li><strong>Key mismatch:</strong> the signature was made with a different key. Use the published key above or re-sign with the matching secret key.</li><li><strong>No such file:</strong> ensure you are pointing to the correct <code>pubkey.txt</code> path, or use the inline <code>-P</code> form.</li></ul></article>
+</section>
+</article>
