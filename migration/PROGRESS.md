@@ -2,7 +2,17 @@
 
 Owner: Brian Olsen. Active branch: `site-redesign-v2`.
 
-## Current checkpoint — Cloudflare preview published, 2026-09-13
+## Basement usability correction — local verification complete, 2026-09-13
+
+Brian reported slow basement videos, unclear scrolling, weak stair interaction, and a repeated basement link. The branch now has a short play/pause room tour, three named room stops, visible sliders and scroll instructions, controls inside the stair scene, and shorter scroll distances. The featured workshop card points to the existing learning section; that section contains the single featured basement entrance.
+
+Room and stair clips are fetched once after intent into releasable local Blob URLs, using existing 640-wide derivatives. The next room clip preloads after the first clip is ready. Stairs use one 802,269-byte MP4 rather than loading individual frames during movement. Original videos and frame assets remain preserved. The portal uses the smaller existing clip at 1.5× playback; room/stairs play at 1.25× and remain pausable/scrubbable.
+
+Local browser checks passed at 1440×900, 390×844, and 375×667: play/stop/replay, named stops, keyboard seeking, wheel seeking, door shortcut, reduced motion, failed-media retry, no-JavaScript content and no horizontal overflow. Under 2 Mbps / 150 ms latency / 4× CPU emulation, entry loaded in 3.267 s, the prefetched workbench in 3.920 s, and stairs in 3.472 s. Repeated scrubbing made no additional MP4 requests. No actual phone performance claim is made. Native Safari retesting could not be completed because app focus kept returning to another window and navigation timed out; the new version still needs physical Safari acceptance.
+
+`npm run check` includes meaningful buffered-player regression checks for rapid/reverse seeks, clip transition, replay, cleanup, retry, and cancellation. Public/private preservation checks still pass. Branch-preview update is the next action under Brian's existing approval; main, DNS and the live site remain untouched.
+
+## Previous checkpoint — Cloudflare preview published, 2026-09-13
 
 Brian authorized the branch push and public-safe Workers Free preview, then completed Wrangler authorization in Safari. The reviewed source commit is `3ef1d449aa9ebb7f63e7c9f63f30241ed19b14bf`, pushed to GitHub. Cloudflare version `29e16c24-e5ed-4578-8e94-5d2455b172c0` is available at [the branch preview](https://site-redesign-v2-olsen-automation-v2-preview.brian-dbb.workers.dev/).
 

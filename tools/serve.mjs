@@ -7,6 +7,7 @@ const dist = path.join(root, 'dist');
 const unlisted = path.join(root, 'dist-unlisted');
 const privateReview = process.env.SITE_PRIVATE_REVIEW === '1';
 const aliases=JSON.parse(await readFile(path.join(root,'src/_data/route-aliases.json'),'utf8'));
+const previewHeaders=JSON.parse(await readFile(path.join(root,'src/_data/preview-headers.json'),'utf8'));
 const port = Number(process.env.SITE_PREVIEW_PORT || 43187);
 const mime = {'.html':'text/html; charset=utf-8','.css':'text/css','.js':'text/javascript','.json':'application/json','.svg':'image/svg+xml','.webp':'image/webp','.jpg':'image/jpeg','.png':'image/png','.mp4':'video/mp4','.txt':'text/plain','.pdf':'application/pdf'};
 const server = http.createServer(async (req,res) => {
@@ -45,7 +46,7 @@ const server = http.createServer(async (req,res) => {
     res.setHeader('Referrer-Policy','no-referrer');
     res.setHeader('Cache-Control','no-store');
     res.setHeader('X-Content-Type-Options','nosniff');
-    if (!pathname.startsWith('/reference/')) res.setHeader('Content-Security-Policy',"default-src 'self'; img-src 'self'; media-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action "+(pathname==='/ai-visibility.html'?"'self'":"'none'"));
+    if (!pathname.startsWith('/reference/')) res.setHeader('Content-Security-Policy',previewHeaders['Content-Security-Policy'].replace("form-action 'none'",pathname==='/ai-visibility.html'?"form-action 'self'":"form-action 'none'"));
     res.setHeader('Accept-Ranges','bytes');
     let start=0,end=info.size-1;
     if (req.headers.range) {

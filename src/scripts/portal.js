@@ -10,7 +10,7 @@ if(dialog){
     if(url.origin!==location.origin||url.pathname!=='/workshop.html'||location.pathname==='/workshop.html'||a.closest('#site-portal'))return;
     if(matchMedia('(prefers-reduced-motion: reduce)').matches||navigator.connection?.saveData)return;
     event.preventDefault();opener=a;active=true;dialog.showModal();timer=setTimeout(finish,14000);
-    try{const r=await fetch('/media/manifest.json');if(!r.ok)throw Error();const m=await r.json();if(!active)return;video.src=selectVariant(m.videos.portal.variants,innerWidth<=760?640:1280).url;await video.play();}catch{finish();}
+    try{const r=await fetch('/media/manifest.json');if(!r.ok)throw Error();const m=await r.json();if(!active)return;video.src=selectVariant(m.videos.portal.variants,640).url;video.playbackRate=1.5;await video.play();}catch{finish();}
   });
   video.addEventListener('ended',finish);video.addEventListener('error',finish);
   dialog.addEventListener('close',()=>{active=false;clearTimeout(timer);video.pause();const focusTarget=opener?.getClientRects().length?opener:document.querySelector('.nav-toggle');focusTarget?.focus({preventScroll:true});});

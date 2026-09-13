@@ -8,7 +8,7 @@
     "validate": "python3 tools/validate.py",
     "preview": "node tools/serve.mjs",
     "test": "node tools/checks.mjs",
-    "check": "npm run build && npm run validate && npm test && node tools/check-media-worker.mjs",
+    "check": "npm run build && npm run validate && npm test && node tools/check-media-worker.mjs && node tools/check-buffered-journey.mjs",
     "preview:upload": "node tools/upload-preview.mjs"
   },
   "engines": {
