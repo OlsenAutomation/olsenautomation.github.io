@@ -1,4 +1,30 @@
-# Hosted branch preview QA — 2026-09-13
+# Hosted basement usability correction — 2026-09-13
+
+Verified version: `27859d44-20fa-4ed1-bbe8-d2ac5061a735`. Implementation: `16639b74917769bb3c2577e4b8015faac02cf060`. [Branch preview](https://site-redesign-v2-olsen-automation-v2-preview.brian-dbb.workers.dev/).
+
+Brian's device feedback identified slow/unclear room scrolling, weak stair control and duplicated basement entry language after the original QA. This correction adds play/pause/replay and three named room stops, keeps staircase controls in the scene, shortens long scroll regions, and fetches each small clip once after intent. The staircase uses an existing MP4 instead of requesting separate frames during movement. The featured workshop card now links to the learning section; that section retains the single featured basement entrance. Original media and frame sequences are preserved.
+
+| Check | Result |
+| --- | --- |
+| Identity, content and layout | PASS: all 35 public pages at 1440×900 and 390×844 (70 records), correct title/URL, one H1, useful content, no horizontal overflow, broken visible images or unlabeled controls. Short-phone 375×667 workshop checked locally; normal flow keeps the lower actions reachable. |
+| Overlays and console | PASS: no framework overlays or relevant warning/error logs in the full hosted page sweep. Deliberate local media blocking is recorded separately. |
+| HTTP, metadata, privacy | PASS: 341 served file hashes, three aliases, 17 excluded paths, POST 405, noindex, blocked public form-action, all 16 valid video range cases and eight invalid ranges. Only media-src gains blob: for same-origin downloaded clips; no external connections or private content added. |
+| Room interaction | PASS: automatic entry→workbench playback finishes at 100%; Play/Pause/Replay, Entrance/Room/Workbench stops and keyboard end seeking work. Hosted wheel scroll advances 40→59%. Two MP4 fetches total across playback and repeated seeking. 157 + 241 decoded frames, zero drops reported in normal in-app Chromium. |
+| Stairs | PASS: walk finishes at 100% with door active; one 802,269-byte MP4 request, zero numbered-frame requests. Reverse seeking, pause and wheel movement (39→63%) work while the panel stays at top 82 px. Direct-door shortcut restores focus to the door link. 241 decoded frames and zero reported drops in normal in-app Chromium. |
+| Slower connection | PASS locally at 2 Mbps, 150 ms latency and 4× CPU emulation: entry 3.267 s, workbench 3.920 s (prefetched during entry), stairs 3.472 s. Loading text and skip remain usable. Encoded room/stair buffers total at most 2,516,948 bytes; this is not total browser memory. |
+| Fallback and recovery | PASS locally: reduced motion requests no videos, still mode releases buffers, blocked MP4 shows poster and useful status, retry succeeds, no-JavaScript class content/direct email/door link remain. All temporary emulation was removed. |
+| Homepage entrance | PASS: one main-content “Enter the basement workshop” link. Flagship card points to #learn. Portal reaches workshop automatically using the smaller clip at 1.5× speed. |
+| Physical devices | PENDING for this version. Native Safari retesting was interrupted by app/window focus and a clipboard/navigation timeout. Touch-event injection is not supported by the in-app CDP tool. No actual phone/tablet touch, Safari or memory claim is made. |
+
+Flow: homepage entrance → portal → Enter the room → pause/stops/keyboard/wheel → Walk upstairs → pause/slider/wheel → door shortcut. No form receiver, email or notification was sent. Existing draft-only forms and privacy boundaries remain unchanged.
+
+Validation commands: `npm run check`; `node tools/check-hosted.mjs <exact-version-url>` and branch alias; `wrangler versions view <version> --json`. CUA supplied DOM, viewport screenshots, mouse-wheel input and temporary network/CPU/reduced-motion/no-JS emulation. The Browser plugin is not installed; the available Computer Use browser API handled validation without an external browser dependency.
+
+Evidence: `HOSTED_RENDER_QA.csv` now records this version. Ignored `.migration-local/basement-fix/render.json` and its 70 screenshots preserve the hosted page measurements. The HTTP receipt is `.migration-local/hosted-http-checks.json`. Unit regressions exercise rapid/reverse seek, one-fetch-per-clip behavior, replay, clip handoff, buffer cleanup, failure retry and late-work cancellation. All previous receipts below remain historical evidence; the old Safari pass does not certify this updated implementation.
+
+---
+
+# Previous hosted QA — version 29e16c24, 2026-09-13
 
 Verified version: `29e16c24-e5ed-4578-8e94-5d2455b172c0`, implementation commit `3ef1d449aa9ebb7f63e7c9f63f30241ed19b14bf`.
 

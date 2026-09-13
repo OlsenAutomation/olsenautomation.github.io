@@ -2,7 +2,7 @@
 
 Owner: Brian Olsen. Active branch: `site-redesign-v2`.
 
-## Basement usability correction — local verification complete, 2026-09-13
+## Current checkpoint — basement usability correction published, 2026-09-13
 
 Brian reported slow basement videos, unclear scrolling, weak stair interaction, and a repeated basement link. The branch now has a short play/pause room tour, three named room stops, visible sliders and scroll instructions, controls inside the stair scene, and shorter scroll distances. The featured workshop card points to the existing learning section; that section contains the single featured basement entrance.
 
@@ -10,7 +10,7 @@ Room and stair clips are fetched once after intent into releasable local Blob UR
 
 Local browser checks passed at 1440×900, 390×844, and 375×667: play/stop/replay, named stops, keyboard seeking, wheel seeking, door shortcut, reduced motion, failed-media retry, no-JavaScript content and no horizontal overflow. Under 2 Mbps / 150 ms latency / 4× CPU emulation, entry loaded in 3.267 s, the prefetched workbench in 3.920 s, and stairs in 3.472 s. Repeated scrubbing made no additional MP4 requests. No actual phone performance claim is made. Native Safari retesting could not be completed because app focus kept returning to another window and navigation timed out; the new version still needs physical Safari acceptance.
 
-`npm run check` includes meaningful buffered-player regression checks for rapid/reverse seeks, clip transition, replay, cleanup, retry, and cancellation. Public/private preservation checks still pass. Branch-preview update is the next action under Brian's existing approval; main, DNS and the live site remain untouched.
+`npm run check` includes meaningful buffered-player regression checks for rapid/reverse seeks, clip transition, replay, cleanup, retry, and cancellation. Public/private preservation checks still pass. Implementation commit `16639b74917769bb3c2577e4b8015faac02cf060` is pushed and published as version `27859d44-20fa-4ed1-bbe8-d2ac5061a735` at the existing branch alias. All 35 public pages passed desktop/mobile checks again (70 records); all 341 served files match SHA-256, with three aliases, 17 excluded paths, blocked POST and all eight video range checks passing. Hosted room playback decoded 157 entrance and 241 workbench frames with zero reported drops; stairs decoded 241 frames with zero reported drops in in-app Chromium. Room wheel motion advanced 40→59 percent; stair wheel motion advanced 39→63 percent with the control panel fixed at 82 px from the top. These are emulator/browser observations, not physical Safari results. Main, DNS and the live site remain untouched.
 
 ## Previous checkpoint — Cloudflare preview published, 2026-09-13
 

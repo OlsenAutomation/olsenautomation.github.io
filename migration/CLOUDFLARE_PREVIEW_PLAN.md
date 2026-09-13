@@ -12,7 +12,7 @@ Only `dist` is uploaded as Static Assets: 35 public pages and their allowlisted 
 
 ## Routing and validation
 
-`html_handling: none` and `not_found_handling: 404-page` preserve explicit .html URLs. Three same-site 200 aliases from `src/_data/route-aliases.json` serve `/`, `/preview/shell/` and `/preview/media/`. Hosted checks verify those aliases, all 340 served file hashes, private/missing-path 404s, noindex/CSP, blocked POST and exact ranges across all eight MP4s.
+`html_handling: none` and `not_found_handling: 404-page` preserve explicit .html URLs. Three same-site 200 aliases from `src/_data/route-aliases.json` serve `/`, `/preview/shell/` and `/preview/media/`. Hosted checks verify those aliases, all 341 served file hashes, private/missing-path 404s, noindex/CSP, blocked POST and exact ranges across all eight MP4s.
 
 The AI intake downloads a draft on hosted previews and never posts to the preserved Google receiver. Workshop interest prepares a reviewable email draft, with no automatic sending. Public/private boundaries and the original site's privacy settings remain separate from preview indexing.
 
