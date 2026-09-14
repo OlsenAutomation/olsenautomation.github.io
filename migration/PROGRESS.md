@@ -2,6 +2,18 @@
 
 Owner: Brian Olsen. Active branch: `site-redesign-v2`.
 
+## Project-photo implementation — 2026-09-13
+
+Brian authorized using the reviewed project photos on the new page and cleaning up messy images. The homepage now has three physical-build features, the shared atlas has images on seven project cards, and five project records have galleries with ten images. Existing public ARC//FORGE and Living Lights imagery also supplies their atlas cards. Project statuses and original evidence remain unchanged.
+
+- Three built-in image edits clean the backgrounds of the Whale, Tomb and cedar photographs. These are explicitly labeled AI-retouched presentations. Original build/assembly/detail photos appear in the records; all untouched source references remain local. Generative retouching may reinterpret fine detail and is not additional physical-test evidence.
+- Ten selected metadata-free masters plus three existing public images produce 52 responsive WebP/JPEG derivatives totaling 4,134,800 bytes; the largest is 292,461 bytes. Card images use smaller variants and lazy loading. Derivatives carry no EXIF, ICC or comment metadata. Sources, prompts and hashes are documented in the project-photo manifests.
+- All 35 public routes passed desktop/mobile rendering measurements (70 records), and four retained unlisted pages passed both sizes locally (eight records). All five new galleries loaded every image; photo links, atlas filtering, mobile navigation, keyboard focus and reduced motion passed. Browser checks were in Chromium at 1440×900 and 390×844, not physical Safari. Full build, preservation, link, form-isolation, metadata, media-range and buffered-player checks passed.
+- Private customer/family captures, uncertain attribution and images belonging to unlisted pages remain held. The handoff and full discovery catalog remain ignored. Thirteen unused first-pass JPEG encoding trials were retained in an ignored local archive with hashes; no inventoried source was moved or deleted.
+- Publication of this change uses the already approved branch-preview path. Final publication receipt will follow hosted verification; main, GitHub Pages, DNS and the custom domain remain outside this action.
+
+See `PROJECT_PHOTO_QA.md`, `PROJECT_PHOTO_RENDER_QA.csv`, `PROJECT_PHOTO_PROVENANCE.csv`, `PROJECT_PHOTO_ASSETS.csv`, and `PROJECT_PHOTO_EDIT_PROMPTS.md`.
+
 ## Image discovery checkpoint — local review, 2026-09-13
 
 Brian asked to find reusable project images in the relevant project folders and conversations. A separate, ignored review catalog now accounts for all 26 entries in the current site registry. This did not rerun or replace the frozen migration inventories.

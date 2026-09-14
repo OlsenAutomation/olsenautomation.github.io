@@ -5,6 +5,7 @@ from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import urlsplit,unquote
 from html import unescape
+from PIL import Image
 ROOT=Path(__file__).resolve().parents[1];DIST=ROOT/'dist';PRIVATE=ROOT/'dist-unlisted';errors=[]
 def check(ok,message):
  if not ok:errors.append(message)
@@ -103,6 +104,31 @@ def walk(node):
   for value in node:yield from walk(value)
 for item in walk(manifest):
  p=DIST/item['url'].lstrip('/');check(p.is_file() and hashlib.sha256(p.read_bytes()).hexdigest()==item['sha256'],f'Media integrity: {item["url"]}')
+project_media=json.loads((ROOT/'public/media/project-manifest.json').read_text())
+photo_sources=json.loads((ROOT/'src/_data/project-photo-sources.json').read_text())
+photo_records=json.loads((ROOT/'src/_data/project-photos.json').read_text())
+unlisted_assets=set(json.loads((ROOT/'src/_data/unlisted-assets.json').read_text()))
+check(set(photo_records)<={p['slug'] for p in projects},'Photo record has no project')
+for source in photo_sources:
+ path=ROOT/source['path']
+ check(source['path'] not in unlisted_assets,'Project photo exposes unlisted source')
+ check(path.is_file() and not path.is_symlink() and path.resolve().is_relative_to(ROOT),'Invalid project photo source')
+ check(hashlib.sha256(path.read_bytes()).hexdigest()==source['sha256'],'Project photo master changed')
+ if source['path'].startswith('assets/project-photos/'):
+  with Image.open(path) as image:
+   check(not image.getexif() and not image.info.get('icc_profile') and not image.info.get('comment'),'Selected project master contains EXIF/ICC/comment metadata')
+for record in photo_records.values():
+ for item in record['items']:
+  check(item['asset'] in project_media['images'],'Missing project image record')
+  check(bool(item['alt'].strip()) and bool(item['caption'].strip()) and bool(item['kind'].strip()),'Photo needs description and evidence type')
+  if 'presentation' in item['asset']:check(item['kind']=='AI-retouched presentation','Retouched photo lacks disclosure')
+for item in walk(project_media):
+ p=DIST/item['url'].lstrip('/')
+ check(p.is_file() and hashlib.sha256(p.read_bytes()).hexdigest()==item['sha256'],f'Project photo integrity: {item["url"]}')
+ with Image.open(p) as image:
+  check(not image.getexif() and not image.info.get('icc_profile') and not image.info.get('comment'),'Project photo contains EXIF/ICC/comment metadata')
+  check(image.size==(item['width'],item['height']),'Project photo dimensions drifted')
+check('PROJECT_PHOTO_HIGHLIGHTS' not in (DIST/'index.html').read_text(),'Unresolved homepage photo highlights')
 for variant in manifest['stairs']['variants']:check(variant['count']==len(variant['frames']) and variant['count']>=120,'Incomplete stair sequence')
 if errors:print('\n'.join(errors));sys.exit(1)
 print(f'PASS: {len(public_routes)} public preview + {len(private_routes)} isolated unlisted pages; preserved content, metadata, source files, assets, shell, links and privacy.')

@@ -1,0 +1,50 @@
+{
+  "mechanical-whale": {
+    "teaser": "A printed mechanism, a tested joint, and the next round of correction.",
+    "items": [
+      {"asset":"whale-presentation","kind":"AI-retouched presentation","alt":"White skeletal whale prototype with a crank and wave-shaped supports, presented against a retouched charcoal background","caption":"Presentation edit from Brian’s assembly photograph. The background was cleaned with AI; use the original photos below for the physical development record.","fit":"contain"},
+      {"asset":"whale-assembly","kind":"Original build photo","alt":"White mechanical whale assembled on a tabletop beside its empty kit frame and loose washers","caption":"The supplied assembly photo shows a real printed iteration. It does not establish that the complete powered mechanism has passed testing.","fit":"contain"},
+      {"asset":"whale-hinge","kind":"Physical test photo","alt":"White printed hinge and collar test piece on a dark desk","caption":"Brian reported that this hinge and collar printed well and moved successfully. That result applies to this component, not the full assembly.","fit":"contain"}
+    ]
+  },
+  "easter-tomb": {
+    "teaser": "The real printed assembly makes the next design problem visible.",
+    "items": [
+      {"asset":"tomb-presentation","kind":"AI-retouched presentation","alt":"Close view of the printed Easter Tomb cross-shaft and cord drums against a cleaned dark background","caption":"Background-retouched presentation of the partially assembled mechanism. The cord drums were under revision; the image is not evidence of a completed working model.","fit":"contain"},
+      {"asset":"tomb-assembly","kind":"Original assembly photo","alt":"Cream-colored printed cord drums and supports in the partially assembled Easter Tomb model","caption":"An original development photo records the drum and cord-routing problem. The later replacement drums still needed a physical test.","fit":"contain"}
+    ]
+  },
+  "cedar-bracket-cover-planters": {
+    "teaser": "Measured constraints become physical cedar covers and planters.",
+    "items": [
+      {"asset":"cedar-presentation","kind":"AI-retouched presentation","alt":"Three unfinished cedar covers and planters grouped around a timber, with a retouched dark background","caption":"AI-retouched presentation based on Brian’s supplied build photo. Customer delivery is owner-reported; the photograph does not establish a load rating.","fit":"contain"},
+      {"asset":"cedar-detail","kind":"Original build detail","alt":"Close view of unfinished cedar trim, rough grain and a visible screw at a planter corner","caption":"Original close-up of the cedar build. Material texture and the visible fastener remain as photographed.","fit":"contain"}
+    ]
+  },
+  "scribr": {
+    "teaser": "A working local transcription application, shown with an empty input.",
+    "items": [
+      {"asset":"scribr-transcribe","kind":"Application screenshot","alt":"Scribr’s dark transcription interface with an empty source field and local processing status","caption":"Saved application capture from July 2026. This empty-state view contains no customer transcript or job history. Public availability remains separate from local operation.","fit":"contain"}
+    ]
+  },
+  "wing-light": {
+    "teaser": "A native game pilot with a quiet visual language and one-touch play.",
+    "items": [
+      {"asset":"wing-light-calm","kind":"Simulator screenshot","alt":"Wing and Light calm-mode screen with a glowing bird, cloud tunnel and tap-anywhere instruction","caption":"Saved simulator capture of the calm-mode interface. Brian reports physical-device testing separately; this screenshot itself is simulator evidence.","fit":"contain"},
+      {"asset":"wing-light-home","kind":"Simulator screenshot","alt":"Wing and Light home screen with Play, Daily Trial, Cosmetics, Missions, Achievements and Settings controls","caption":"Saved home-screen capture from the pilot. The screen documents the interface, not a public App Store release.","fit":"contain"}
+    ]
+  },
+  "living-lights": {
+    "teaser": "Visible light, wiring, and hardware from the outdoor prototype.",
+    "items": [
+      {"asset":"living-lights-habitat","kind":"Prototype photo","alt":"Warm Living Lights prototype nodes glowing among plants and branches at night","caption":"Existing outdoor prototype photo. The project record includes hardware development and field-observation limits.","fit":"cover"},
+      {"asset":"living-lights-board","kind":"Hardware photo","alt":"Living Lights ESP32 development board mounted in a blue terminal carrier","caption":"Existing project hardware photo; active prototype.","fit":"contain"}
+    ]
+  },
+  "arc-forge": {
+    "teaser": "Visual development for a systems-engineering game.",
+    "items": [
+      {"asset":"arc-forge-scene","kind":"Prototype artwork","alt":"ARC FORGE machinery with cyan, purple and orange energy systems","caption":"Existing public visual-development asset. Artwork does not establish gameplay completion or release.","fit":"cover"}
+    ]
+  }
+}

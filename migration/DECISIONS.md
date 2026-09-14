@@ -1,5 +1,15 @@
 # Migration decisions
 
+## Project image use and cleanup — 2026-09-13
+
+- Brian's request to utilize the reviewed photos and clean messy images authorizes this selected public-safe image update. Keep the existing branch-preview authorization; do not change main, the production site, DNS or domain routing.
+- Use ten selected presentation/build/application masters and three existing public images. Retain full source paths and recovered conversation attachments only in the ignored local review catalog. Commit selected safe masters and relative-path/hash provenance so the production image pipeline is reproducible.
+- Use the built-in image editor for three background cleanups. Label each result as an AI-retouched presentation, preserve originals, and do not infer model completion, load capacity, release or device testing from a cleaned image. Screenshots retain application/simulator labels and their original content.
+- Preserve the unlisted boundary even when a reference was shortlisted during discovery. No territory/visual-evaluation reference image, customer screenshot, family background or uncertain model attribution is added to public output.
+- Render homepage, atlas and project galleries from shared photo data and components. Publish only content-hashed responsive derivatives; strip EXIF/GPS/ICC/comments. Retain unused generated encoding trials in a local archive instead of adding them to the public asset manifest.
+
+## Baseline and earlier decisions
+
 - 2026-09-12: GitHub is canonical. Work only on `site-redesign-v2`. Remove inherited origin/main upstream to prevent an accidental plain push to main.
 - Preserve all baseline files and public routes throughout this checkpoint. Inventories are internal review documents, excluded from deploy output.
 - Approved stance: “Human judgment. AI leverage. Real-world proof.” Public phone: (805) 500-8865 / tel:+18055008865.

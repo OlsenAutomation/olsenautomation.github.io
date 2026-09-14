@@ -14,6 +14,9 @@ def picture(record,alt,sizes='(max-width: 760px) 100vw, 45vw',eager=False):
  return f'<picture><source type="image/webp" srcset="{srcset}" sizes="{escape(sizes)}"><img src="{escape(fallback["url"])}" width="{fallback["width"]}" height="{fallback["height"]}" alt="{escape(alt)}" loading="{"eager" if eager else "lazy"}" decoding="async"></picture>'
 def build():
  media=json.loads((ROOT/'public/media/manifest.json').read_text());site=json.loads(read('_data/site.json'));statuses=json.loads(read('_data/statuses.json'))
+ project_media=json.loads((ROOT/'public/media/project-manifest.json').read_text())
+ assert not media['images'].keys() & project_media['images'].keys(), 'Duplicate media identity'
+ media['images'].update(project_media['images'])
  if DIST.is_symlink():raise ValueError('dist must not be a symlink')
  if DIST.exists():shutil.rmtree(DIST) # generated output only; never source/inventory paths
  DIST.mkdir();(DIST/'assets').mkdir()
