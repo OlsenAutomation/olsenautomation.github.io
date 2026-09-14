@@ -2,6 +2,15 @@
 
 Owner: Brian Olsen. Active branch: `site-redesign-v2`.
 
+## Project-context audit — 2026-09-14
+
+Brian requested a card-by-card review of existing chat context, extending the earlier photo discovery. All 26 current registry entries now have a local readiness checklist with available material, remaining extraction/verification work, claim limits and source references. No new project briefs or repeated photo uploads are needed to prepare bounded drafts.
+
+- Searched the existing read-only archive of 2,237 conversations (dated through July 20), screened 22,176 message bodies across 204 primary local Codex histories, and supplemented those results with current ChatGPT searches and recent-page reads from 32 relevant conversations/tasks. This is broad discovery plus selected close reading, not a claim that every cloud message was read.
+- Located additional project imagery and context, including existing motion footage, dashboard images, versioned project packages, direct owner test results and corrections. Historical proposals, owner reports and implementation evidence remain distinct; older successes do not validate newer candidates.
+- The detailed 26-row checklist, 34-source index and raw evidence snapshots remain local and ignored under `.migration-local/project-context-audit/`. No private chat excerpts, account/customer data or source package entered the Git index or public build.
+- This is a research checkpoint only. Public cards/statuses, existing inventories, source assets, private/unlisted boundaries, the Cloudflare preview, main, DNS and the custom domain are unchanged. No push or deployment was performed.
+
 ## Project-photo implementation — 2026-09-13
 
 Brian authorized using the reviewed project photos on the new page and cleaning up messy images. The homepage now has three physical-build features, the shared atlas has images on seven project cards, and five project records have galleries with ten images. Existing public ARC//FORGE and Living Lights imagery also supplies their atlas cards. Project statuses and original evidence remain unchanged.
