@@ -12,7 +12,15 @@
 
 ## Hosted acceptance
 
-Pending upload and exact-file verification at this local checkpoint. The next receipt will identify the uploaded commit/version and results. The update is authorized only for the existing public-safe branch preview.
+Published commit `ef7e28f` through Worker version `c55c0803-7490-434c-a2df-cf71d505c8a3` using the existing branch-preview-only uploader.
+
+- Alias: https://site-redesign-v2-olsen-automation-v2-preview.brian-dbb.workers.dev/
+- Immutable version: https://c55c0803-olsen-automation-v2-preview.brian-dbb.workers.dev/
+- 424 hosted file hashes match the local build; three aliases match their intended HTML. Twenty exclusion checks pass, POST is blocked with 405, and all 24 prefix/suffix checks across 12 video variants pass. Invalid ranges return 416. No verification failures.
+- The hosted Whale page presents the new story and intent-gated players; the motion excerpt reached its 12-second end with ready data and no media error. The hosted assembly player was also exercised.
+- The branch was pushed without changing remote main, which remains `0feac3f8376c5110eedfc20f5cdeecd0494f1ed7`. No main merge, production deployment, DNS/custom-domain change, paid feature or actual form submission occurred.
+
+See PROJECT_STORY_PREVIEW_RECEIPT.json. The final receipt commit changes migration documentation only; the published source commit above identifies the actual uploaded build.
 
 ## Limits
 

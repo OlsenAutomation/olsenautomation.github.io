@@ -1,0 +1,13 @@
+{
+  "checkedAt": "2026-09-14T21:02:56.851Z",
+  "published_commit": "ef7e28f",
+  "version": "c55c0803-7490-434c-a2df-cf71d505c8a3",
+  "alias": "https://site-redesign-v2-olsen-automation-v2-preview.brian-dbb.workers.dev",
+  "immutable_preview": "https://c55c0803-olsen-automation-v2-preview.brian-dbb.workers.dev",
+  "files_verified": 424,
+  "aliases_verified": 3,
+  "excluded_routes_verified": 20,
+  "mp4_range_checks": 24,
+  "post_status": 405,
+  "failures": []
+}
