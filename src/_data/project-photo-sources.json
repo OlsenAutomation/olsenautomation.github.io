@@ -89,5 +89,40 @@
     "sha256": "c19653c67a1072efe06146c965fc85a2bf976a73e079390a4a918f185e70e322",
     "candidate": "",
     "treatment": "Existing public project asset"
+  },
+  {
+    "id": "whale-v041-presentation",
+    "path": "assets/project-photos/whale-v041-presentation.png",
+    "sha256": "2fc8b185f1e1f92eb2d68e92abdffd81ce6701960503b475cc50d356a9e5b4ff",
+    "candidate": "WHALE-041-8002",
+    "treatment": "AI-retouched presentation"
+  },
+  {
+    "id": "whale-v041-original",
+    "path": "assets/project-photos/whale-v041-original.png",
+    "sha256": "dcfd74308cab6c50e84ff70a63aef84d836ff3b847b7e3908a859f6f5ab0fb15",
+    "candidate": "WHALE-041-8002",
+    "treatment": "Original assembly photograph, metadata stripped"
+  },
+  {
+    "id": "whale-v041-comparison",
+    "path": "assets/project-photos/whale-v041-comparison.png",
+    "sha256": "3d7173b8430bf9d24af17487e2fdcdf1e6636e6b62230936fb1cbf061715e541",
+    "candidate": "WHALE-041-8004",
+    "treatment": "Original comparison photograph, metadata stripped"
+  },
+  {
+    "id": "batchquote-interface",
+    "path": "assets/project-photos/batchquote-interface.png",
+    "sha256": "8eb56ba8c86256adc7cd7241cab4926aa757dcc4f52070fc72738a406377ecf6",
+    "candidate": "LIBRARY-BATCHQUOTE",
+    "treatment": "Saved prototype interface image; sample data"
+  },
+  {
+    "id": "clearfloor-concept",
+    "path": "assets/project-photos/clearfloor-concept.png",
+    "sha256": "1c4813239f7306d5cf1627daba61f2bdb786ce895c23f7d9909ad1d90b46ade1",
+    "candidate": "LIBRARY-CLEARFLOOR",
+    "treatment": "Saved interface concept; synthetic paper-trading data"
   }
 ]

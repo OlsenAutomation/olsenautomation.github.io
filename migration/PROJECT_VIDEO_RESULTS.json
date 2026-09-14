@@ -1,0 +1,90 @@
+[
+  {
+    "id": "whale-v041-motion",
+    "source_filename": "IMG_8008.mp4",
+    "source_sha256": "6c4445f013991d205438fc92eb2a6d3a6da1e6feeb004d19e474dc0a8b5aba8a",
+    "source_bytes": 32406381,
+    "excerpt_start_seconds": 0.5,
+    "excerpt_duration_seconds": 12,
+    "audio": "removed",
+    "speed": "unchanged from supplied source",
+    "variants": [
+      {
+        "url": "/media/whale-v041-motion-640.7bee56c0b12b.mp4",
+        "sha256": "7bee56c0b12bc7507a0dd0d7a092492cc9f9a2636593d00c8d06489d30dfa363",
+        "bytes": 858233,
+        "width": 640,
+        "height": 360,
+        "duration": 12.0
+      },
+      {
+        "url": "/media/whale-v041-motion-910.1124833f06a5.mp4",
+        "sha256": "1124833f06a5010bfa2fda643c7af28eeafcde5f7b0f9433395e482be68e28b8",
+        "bytes": 1428447,
+        "width": 910,
+        "height": 512,
+        "duration": 12.0
+      }
+    ],
+    "posters": [
+      {
+        "url": "/media/whale-v041-motion-poster-640.14f220d61091.webp",
+        "sha256": "14f220d61091cbb1dcc52eb540c1914dd77a4da0524f348fa6b168275e3e591c",
+        "bytes": 24842,
+        "width": 640,
+        "height": 360
+      },
+      {
+        "url": "/media/whale-v041-motion-poster-910.ce8dd98e503e.webp",
+        "sha256": "ce8dd98e503ef9176991b862c42e13d1b671238cb15614923992043b70a55155",
+        "bytes": 39816,
+        "width": 910,
+        "height": 512
+      }
+    ]
+  },
+  {
+    "id": "whale-v041-assembly",
+    "source_filename": "IMG_7998.mp4",
+    "source_sha256": "8beb616d2aaa57ccf2ea059f9f70fa2a5da82cccc06cd03ddaf460100e3de9a4",
+    "source_bytes": 17466302,
+    "excerpt_start_seconds": 0,
+    "excerpt_duration_seconds": 28.9,
+    "audio": "removed",
+    "speed": "unchanged from supplied source",
+    "variants": [
+      {
+        "url": "/media/whale-v041-assembly-640.9fc87ee27d97.mp4",
+        "sha256": "9fc87ee27d978b1a7878c2c4d8c2369fdc1810f8c78766039e2f5fc13be18ede",
+        "bytes": 3306372,
+        "width": 640,
+        "height": 360,
+        "duration": 28.9
+      },
+      {
+        "url": "/media/whale-v041-assembly-910.713a35697cc2.mp4",
+        "sha256": "713a35697cc2dabcdcd34c08aaa494e0558688114df56324693864a0b79d37d5",
+        "bytes": 3327640,
+        "width": 910,
+        "height": 512,
+        "duration": 28.9
+      }
+    ],
+    "posters": [
+      {
+        "url": "/media/whale-v041-assembly-poster-640.b11ed42483da.webp",
+        "sha256": "b11ed42483daca9fdabea4434368b1a1b4e229e9c7375fe5c7d11ff46814d6db",
+        "bytes": 30616,
+        "width": 640,
+        "height": 360
+      },
+      {
+        "url": "/media/whale-v041-assembly-poster-910.5bfa78b1d58d.webp",
+        "sha256": "5bfa78b1d58dce0affa1df80d1a0afcd300b1f2b997795c2ff57616e8af3deac",
+        "bytes": 72662,
+        "width": 910,
+        "height": 512
+      }
+    ]
+  }
+]

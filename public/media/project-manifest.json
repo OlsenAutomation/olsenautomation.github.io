@@ -416,6 +416,166 @@
         "width": 1280,
         "height": 720
       }
+    },
+    "whale-v041-presentation": {
+      "webp": [
+        {
+          "url": "/media/whale-v041-presentation-384.86f444ea4102.webp",
+          "sha256": "86f444ea4102f0ad364f73a01278ef417e34055747baca310e22e497d8406e3a",
+          "bytes": 10120,
+          "width": 384,
+          "height": 288
+        },
+        {
+          "url": "/media/whale-v041-presentation-768.35824f254750.webp",
+          "sha256": "35824f2547508a5d1b6d1b27ed1236bffb718c0daf1a1ea01f9df554173e3429",
+          "bytes": 30138,
+          "width": 768,
+          "height": 576
+        },
+        {
+          "url": "/media/whale-v041-presentation-1280.c7ed6ca10c7e.webp",
+          "sha256": "c7ed6ca10c7e8f7fbf9817abcdfb66eadc0500330e75b89fdbcf598a1a604572",
+          "bytes": 68562,
+          "width": 1280,
+          "height": 960
+        }
+      ],
+      "fallback": {
+        "url": "/media/whale-v041-presentation-1280.1a86d3a06719.jpg",
+        "sha256": "1a86d3a06719cb0092cf1283799a3dc40632c6a1c102711ec1d9fb1bf64d5081",
+        "bytes": 146708,
+        "width": 1280,
+        "height": 960
+      }
+    },
+    "whale-v041-original": {
+      "webp": [
+        {
+          "url": "/media/whale-v041-original-384.e45e757afe81.webp",
+          "sha256": "e45e757afe81b8dd061e95d23a45c1bc2bda79618d8794c5d0d80345d4c0a8c4",
+          "bytes": 21174,
+          "width": 384,
+          "height": 288
+        },
+        {
+          "url": "/media/whale-v041-original-768.429752f9f886.webp",
+          "sha256": "429752f9f88681a77e8dcd8cf30aca02642a83818bbc9bdeed054fd675b1f2cb",
+          "bytes": 77634,
+          "width": 768,
+          "height": 576
+        },
+        {
+          "url": "/media/whale-v041-original-1280.c3d4e9936789.webp",
+          "sha256": "c3d4e9936789c69b4e57a577b48e6969796bef5ecb766c3ba558883aed99a122",
+          "bytes": 159568,
+          "width": 1280,
+          "height": 960
+        }
+      ],
+      "fallback": {
+        "url": "/media/whale-v041-original-1280.baf5abaf09ec.jpg",
+        "sha256": "baf5abaf09ec38de4ca2074f92d4335287fb738c254265ad76bc8c27615175cf",
+        "bytes": 260416,
+        "width": 1280,
+        "height": 960
+      }
+    },
+    "whale-v041-comparison": {
+      "webp": [
+        {
+          "url": "/media/whale-v041-comparison-384.5f2affcf8a66.webp",
+          "sha256": "5f2affcf8a6606e0f1715b7a7e2c5cc395bd472d72b128bdc8b28460c8b08859",
+          "bytes": 22880,
+          "width": 384,
+          "height": 288
+        },
+        {
+          "url": "/media/whale-v041-comparison-768.d3d4a284e4e7.webp",
+          "sha256": "d3d4a284e4e7c7737cc32936af3bb83bf4050775b444262c3e92557bb554ab74",
+          "bytes": 68448,
+          "width": 768,
+          "height": 576
+        },
+        {
+          "url": "/media/whale-v041-comparison-1280.3ec90eef836e.webp",
+          "sha256": "3ec90eef836e37cf091049b386d4a6e0448fb092ec2db448b4eaff2deff31dce",
+          "bytes": 127832,
+          "width": 1280,
+          "height": 960
+        }
+      ],
+      "fallback": {
+        "url": "/media/whale-v041-comparison-1280.1c221cb5dde5.jpg",
+        "sha256": "1c221cb5dde57592878d42349628424538fb314d0fc9059295d26184d2f1b2eb",
+        "bytes": 236364,
+        "width": 1280,
+        "height": 960
+      }
+    },
+    "batchquote-interface": {
+      "webp": [
+        {
+          "url": "/media/batchquote-interface-384.21d68076a335.webp",
+          "sha256": "21d68076a3355e412009e5e39abfdd7c10d37a7dae6ef1bd47fd5e28a23abdf3",
+          "bytes": 9504,
+          "width": 384,
+          "height": 256
+        },
+        {
+          "url": "/media/batchquote-interface-768.74df38951a32.webp",
+          "sha256": "74df38951a3207030c0d813a8e89b83d3276b876fcae44fdbde92b80340fadbb",
+          "bytes": 27074,
+          "width": 768,
+          "height": 512
+        },
+        {
+          "url": "/media/batchquote-interface-1280.ebfbfc02cf33.webp",
+          "sha256": "ebfbfc02cf33bc9128dd42c4b3fef412d8ab8a6b12bbe37bbb80a2ec51f7a899",
+          "bytes": 51294,
+          "width": 1280,
+          "height": 854
+        }
+      ],
+      "fallback": {
+        "url": "/media/batchquote-interface-1280.48674a6d6022.jpg",
+        "sha256": "48674a6d602232badf195bb7c9b8081c56ba10e926f67d090aca5e4fe4067572",
+        "bytes": 123152,
+        "width": 1280,
+        "height": 853
+      }
+    },
+    "clearfloor-concept": {
+      "webp": [
+        {
+          "url": "/media/clearfloor-concept-384.ed9699e1178e.webp",
+          "sha256": "ed9699e1178e4ceb83b772a1efa8011badfe2308efa88b19950b27a08e456a78",
+          "bytes": 11660,
+          "width": 384,
+          "height": 267
+        },
+        {
+          "url": "/media/clearfloor-concept-768.3cd9ca4546c6.webp",
+          "sha256": "3cd9ca4546c6dfb68682b419a529150467bd582db8487cea7eb3d41111125690",
+          "bytes": 36466,
+          "width": 768,
+          "height": 533
+        },
+        {
+          "url": "/media/clearfloor-concept-1280.a3cf49b8d09c.webp",
+          "sha256": "a3cf49b8d09cc7de193eb20d0b504aaa97c7906666bac048ee70f1d2cd23197c",
+          "bytes": 75118,
+          "width": 1280,
+          "height": 889
+        }
+      ],
+      "fallback": {
+        "url": "/media/clearfloor-concept-1280.806991c5ccf2.jpg",
+        "sha256": "806991c5ccf2223b8022273af2f16cbf193676839df6f0f893baa8af452b9087",
+        "bytes": 177464,
+        "width": 1280,
+        "height": 888
+      }
     }
   }
 }

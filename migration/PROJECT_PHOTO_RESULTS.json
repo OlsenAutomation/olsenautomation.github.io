@@ -1,8 +1,8 @@
 {
-  "masters": 13,
-  "source_bytes": 16571765,
-  "derivatives": 52,
-  "derivative_bytes": 4134800,
+  "masters": 18,
+  "source_bytes": 25106619,
+  "derivatives": 72,
+  "derivative_bytes": 5876376,
   "largest_derivative_bytes": 292461,
   "metadata": "EXIF, GPS and comments excluded from derivatives",
   "retouching": "Explicitly labeled; source references retained locally"
