@@ -5,6 +5,7 @@
   "scripts": {
     "build": "python3 tools/build.py",
     "media": "python3 tools/media.py",
+    "media:projects": "python3 tools/project_media.py",
     "validate": "python3 tools/validate.py",
     "preview": "node tools/serve.mjs",
     "test": "node tools/checks.mjs",

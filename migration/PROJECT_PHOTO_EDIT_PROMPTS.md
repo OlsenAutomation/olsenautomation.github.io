@@ -1,0 +1,16 @@
+# Project photo presentation edits
+
+Brian authorized using the reviewed photos and cleaning messy images on 2026-09-13. These three edits used the built-in image generation tool. They are labeled AI-retouched presentation images, not independent technical evidence. Originals are retained in the ignored local candidate catalog. No private handoff package is copied or committed.
+
+## cedar
+
+Use case: precise-object-edit. Asset type: Olsen Automation project photograph cleanup. Input image is the edit target and the sole factual authority. Clean only the environment around the THREE real cedar boxes grouped at the bottom of this photo. Preserve the exact photographed cedar boxes, grain, knots, trim, feet, fasteners, roughness, openings, relative arrangement and perspective. The tall unfinished timber belongs to this photograph: keep its visible lower portion and let it extend beyond the upper crop. Do not fabricate any structure or alter the products. Remove the lawn chair, house, trampoline, bins, tools, plants and other background clutter. Replace the background and supporting ground with a simple dark charcoal studio surface, soft realistic contact shadows. Frame a tight landscape 4:3 crop around the three boxes; top of the existing timber may be outside the crop. Keep authentic raw unfinished wood color, no extra saturation, no new finish, no text, no watermark. This is documentary product-photo retouching, not a redesign; do not beautify defects or invent hidden sides.
+
+## whale
+
+Use case: precise-object-edit. Asset type: project photo background cleanup. Input is the exact edit target. Preserve the photographed white mechanical skeletal whale model exactly, including all ribs, their number/spacing, tail, crank, shafts, linkages, wave-shaped supports, layer texture, roughness, geometry and current pose. Remove only unrelated background clutter: drinking vessels, packaging and the tabletop reflections, detached empty kit frame on the left and loose washers on the right. Put the unchanged assembled model on a neutral dark charcoal surface with a quiet charcoal backdrop and soft natural contact shadow. Tight landscape 4:3 framing around the complete existing assembly, slightly above tabletop camera angle unchanged. Do not add components, fix the mechanism, straighten or reinterpret pieces, change materials, or imply it is a different finished product. No text or logos. This edited presentation image will be paired with the original evidence photo.
+
+## tomb
+
+Use case: precise-object-edit. Asset type: documentary mechanism photo cleanup. The input photograph is the edit target. Keep the cream 3D-printed Easter Tomb mechanism and base pixel-faithful in geometry and appearance: pulleys, cross-shaft, supports, grooves, holes, cords, layer lines, cracks, roughness and visible unfinished condition must stay. Clean ONLY the distant background above/behind the printed base: replace laptop, keyboard and miscellaneous objects with an unobtrusive dark charcoal background. Preserve camera angle, crop boundaries, all foreground shadows and exact partial assembly. Do not add or remove any part or cord, repair the drum, smooth away print defects, improve fit, or reconstruct details. Portrait 3:4 output with the existing framing. No text or watermark.
+

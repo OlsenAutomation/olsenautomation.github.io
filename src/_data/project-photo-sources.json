@@ -1,0 +1,93 @@
+[
+  {
+    "id": "whale-presentation",
+    "path": "assets/project-photos/whale-presentation.png",
+    "sha256": "9c343e221d8fdab8e15554481c274db98ebfadf97c0df7a442810ebfd6610140",
+    "candidate": "IMG-003",
+    "treatment": "AI-retouched presentation"
+  },
+  {
+    "id": "whale-assembly",
+    "path": "assets/project-photos/whale-assembly.png",
+    "sha256": "fee4e98c64a7a41fe9a740fecda9eac884267fc8ac14c121c26bda4d0311469a",
+    "candidate": "IMG-003",
+    "treatment": "Supplied build photograph"
+  },
+  {
+    "id": "whale-hinge",
+    "path": "assets/project-photos/whale-hinge.png",
+    "sha256": "5f5bdb61bbe86480083f958a46c77672c2d0a13506bfc7498b453444491b06bd",
+    "candidate": "IMG-001",
+    "treatment": "Supplied physical-test photograph"
+  },
+  {
+    "id": "tomb-presentation",
+    "path": "assets/project-photos/tomb-presentation.png",
+    "sha256": "bea52cc057ad1faaf3ac3fad647808666f44381b879fc9366c17048a024a3b7e",
+    "candidate": "IMG-020",
+    "treatment": "AI-retouched presentation"
+  },
+  {
+    "id": "tomb-assembly",
+    "path": "assets/project-photos/tomb-assembly.png",
+    "sha256": "91ec2ee2015435068b5a0e6959c6c19a51dcb6313a7fae894d706fbc7ac7363d",
+    "candidate": "IMG-018",
+    "treatment": "Supplied assembly photograph"
+  },
+  {
+    "id": "cedar-presentation",
+    "path": "assets/project-photos/cedar-presentation.png",
+    "sha256": "faa54e1b7b819a0100e82a79568f9e0c9f59ae9f97c95bd64796b74d2cdb5d77",
+    "candidate": "IMG-032",
+    "treatment": "AI-retouched presentation"
+  },
+  {
+    "id": "cedar-detail",
+    "path": "assets/project-photos/cedar-detail.png",
+    "sha256": "d52619f7937be81ebea660843b1a81bbdb59d6e130dbef9d6c7d562de8b4b90e",
+    "candidate": "IMG-033",
+    "treatment": "Supplied construction-detail photograph"
+  },
+  {
+    "id": "scribr-transcribe",
+    "path": "assets/project-photos/scribr-transcribe.png",
+    "sha256": "91b99978901cf54cd9be614a6e6b814f35866fc422bd022ea3225eb67348e75a",
+    "candidate": "IMG-059",
+    "treatment": "Unaltered application capture"
+  },
+  {
+    "id": "wing-light-home",
+    "path": "assets/project-photos/wing-light-home.png",
+    "sha256": "9d24ca6135bacb6ea77d81533c29f1bb917336d964c2be82e4ae56ebcbf90bf9",
+    "candidate": "IMG-046",
+    "treatment": "Unaltered simulator capture"
+  },
+  {
+    "id": "wing-light-calm",
+    "path": "assets/project-photos/wing-light-calm.png",
+    "sha256": "daae92e76dfb6c09585948c6a7cfa89dff25a1920745dfc40a3067cdc5fd4dad",
+    "candidate": "IMG-048",
+    "treatment": "Unaltered simulator capture"
+  },
+  {
+    "id": "living-lights-habitat",
+    "path": "images/living-lights/living-lights-outdoor-habitat.jpg",
+    "sha256": "c6257ef6477b2ab1621b98c39e4761a36c63c95fbd47ec8c3dc755238d4fb780",
+    "candidate": "",
+    "treatment": "Existing public project asset"
+  },
+  {
+    "id": "living-lights-board",
+    "path": "images/living-lights/control-board.jpg",
+    "sha256": "c46aa0493fe64d3a2c0bf233372014a73da75bad740e1eab36d3cde3b34daa35",
+    "candidate": "",
+    "treatment": "Existing public project asset"
+  },
+  {
+    "id": "arc-forge-scene",
+    "path": "assets/arc-forge/machine-cycle-02.webp",
+    "sha256": "c19653c67a1072efe06146c965fc85a2bf976a73e079390a4a918f185e70e322",
+    "candidate": "",
+    "treatment": "Existing public project asset"
+  }
+]

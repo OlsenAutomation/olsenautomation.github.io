@@ -1,0 +1,421 @@
+{
+  "schema": 1,
+  "images": {
+    "whale-presentation": {
+      "webp": [
+        {
+          "url": "/media/whale-presentation-384.176d857068c2.webp",
+          "sha256": "176d857068c285117ffa6483e4ff01a9d14dc9595736ea1a16088f853d362345",
+          "bytes": 10034,
+          "width": 384,
+          "height": 288
+        },
+        {
+          "url": "/media/whale-presentation-768.636aaf27f9d6.webp",
+          "sha256": "636aaf27f9d63dcb3ff23b49affe79102190edcb147d079444e6a0814470fb6b",
+          "bytes": 29346,
+          "width": 768,
+          "height": 576
+        },
+        {
+          "url": "/media/whale-presentation-1280.ea991a51e318.webp",
+          "sha256": "ea991a51e318f9e5bf5fdbd86d9917f6c2121c3f942e674788156d3fdfe720ae",
+          "bytes": 62860,
+          "width": 1280,
+          "height": 960
+        }
+      ],
+      "fallback": {
+        "url": "/media/whale-presentation-1280.16826be3f67d.jpg",
+        "sha256": "16826be3f67df93633b48bfec25ac2c03b76606fce626a7e8bf9ccab114891a8",
+        "bytes": 123644,
+        "width": 1280,
+        "height": 960
+      }
+    },
+    "whale-assembly": {
+      "webp": [
+        {
+          "url": "/media/whale-assembly-384.eddaed30e146.webp",
+          "sha256": "eddaed30e146c1210354f621d4ff0f2770b0f38f95c074680a8cfeede6067e8d",
+          "bytes": 27376,
+          "width": 384,
+          "height": 288
+        },
+        {
+          "url": "/media/whale-assembly-768.1116b6086759.webp",
+          "sha256": "1116b6086759a5bfb267d2b7cfc8c9caf2622c0cb62c889302d2f308dbfabc0f",
+          "bytes": 85318,
+          "width": 768,
+          "height": 576
+        },
+        {
+          "url": "/media/whale-assembly-1280.8af3a8c6d875.webp",
+          "sha256": "8af3a8c6d875d20d3e01c01628933de0831fbd209f6f63e7cbe2d1d09425b20a",
+          "bytes": 160304,
+          "width": 1280,
+          "height": 960
+        }
+      ],
+      "fallback": {
+        "url": "/media/whale-assembly-1280.ff17af18c9ed.jpg",
+        "sha256": "ff17af18c9ed2124d9c8231459d87eb8eaa8fc2fa22795749ac4239bb76758e5",
+        "bytes": 242194,
+        "width": 1280,
+        "height": 960
+      }
+    },
+    "whale-hinge": {
+      "webp": [
+        {
+          "url": "/media/whale-hinge-384.16273383f816.webp",
+          "sha256": "16273383f816952a497f9a3c78c9b5a9e88b58c7effa8beed02d2859acc8742c",
+          "bytes": 14432,
+          "width": 384,
+          "height": 288
+        },
+        {
+          "url": "/media/whale-hinge-768.e5b21edb10be.webp",
+          "sha256": "e5b21edb10be59e43efae1a7a96924c4a635adcff51aecf28d571276b8045a21",
+          "bytes": 46114,
+          "width": 768,
+          "height": 576
+        },
+        {
+          "url": "/media/whale-hinge-1280.05f15d7d54fa.webp",
+          "sha256": "05f15d7d54fab8eb8d4becb07887170e2adad26c1f2a47b2eaa7263b4538d0a8",
+          "bytes": 90912,
+          "width": 1280,
+          "height": 960
+        }
+      ],
+      "fallback": {
+        "url": "/media/whale-hinge-1280.1746fe164ea7.jpg",
+        "sha256": "1746fe164ea7ce11c363d11eb02b336e8f09504ec35ec5943a439fcc10bdcc4f",
+        "bytes": 155923,
+        "width": 1280,
+        "height": 960
+      }
+    },
+    "tomb-presentation": {
+      "webp": [
+        {
+          "url": "/media/tomb-presentation-384.64d46df7ddfa.webp",
+          "sha256": "64d46df7ddfaeefb364d8d6d48e981481b7b6ce1bf254c34d44a9cea83cb3ed0",
+          "bytes": 11420,
+          "width": 384,
+          "height": 512
+        },
+        {
+          "url": "/media/tomb-presentation-768.4e6c1eec0394.webp",
+          "sha256": "4e6c1eec03946638ac4c4bc94edb499d60fc89889a97b52fb6b4b6ccfea89416",
+          "bytes": 29346,
+          "width": 768,
+          "height": 1024
+        },
+        {
+          "url": "/media/tomb-presentation-1086.bf3ebbf0b746.webp",
+          "sha256": "bf3ebbf0b746a25abc6e0cbf83d380cbd956ab1fe852246bdad0da8f355b82c7",
+          "bytes": 51738,
+          "width": 1086,
+          "height": 1448
+        }
+      ],
+      "fallback": {
+        "url": "/media/tomb-presentation-1086.f1d6d96bf64b.jpg",
+        "sha256": "f1d6d96bf64bb20d6878fc031006737d6196bdd1255e64662525e8aa8e80bd6e",
+        "bytes": 108880,
+        "width": 1086,
+        "height": 1448
+      }
+    },
+    "tomb-assembly": {
+      "webp": [
+        {
+          "url": "/media/tomb-assembly-384.ba8d0aee9f8d.webp",
+          "sha256": "ba8d0aee9f8d2aa06f0f4c49afd3d0b6c3a4efb1852fbdf0af12ec28302d70ae",
+          "bytes": 18278,
+          "width": 384,
+          "height": 512
+        },
+        {
+          "url": "/media/tomb-assembly-768.ffd98d72a4a7.webp",
+          "sha256": "ffd98d72a4a7cda7d16f73c1f9436bcdd66e2118828d83fbfb776bbdd91adeb5",
+          "bytes": 49140,
+          "width": 768,
+          "height": 1024
+        },
+        {
+          "url": "/media/tomb-assembly-1152.f95d1dd69c3c.webp",
+          "sha256": "f95d1dd69c3c3995c0cbafbc8a45371aeacb9256121a1e71c62f4305a13a9583",
+          "bytes": 91430,
+          "width": 1152,
+          "height": 1536
+        }
+      ],
+      "fallback": {
+        "url": "/media/tomb-assembly-1152.5bc0c9bd18ca.jpg",
+        "sha256": "5bc0c9bd18ca39e7124fc36dcd9eeead0a099edbab744c8da21ab5bf81f1a3b1",
+        "bytes": 168577,
+        "width": 1152,
+        "height": 1536
+      }
+    },
+    "cedar-presentation": {
+      "webp": [
+        {
+          "url": "/media/cedar-presentation-384.a8d0952027a8.webp",
+          "sha256": "a8d0952027a80087e7b5d1076c93b70bd30d8fc52bcfcc717430d50987a0c316",
+          "bytes": 6130,
+          "width": 384,
+          "height": 288
+        },
+        {
+          "url": "/media/cedar-presentation-768.037c09a0f6d3.webp",
+          "sha256": "037c09a0f6d330f3bafad325604b9e17f5b2fa905bcdaaaa0d1cdc38eff74e95",
+          "bytes": 19908,
+          "width": 768,
+          "height": 576
+        },
+        {
+          "url": "/media/cedar-presentation-1280.8870d0db1cc7.webp",
+          "sha256": "8870d0db1cc775dfb8fff750ec3fe56747dbf7319e4c768bdb8769c2ef434e7b",
+          "bytes": 48972,
+          "width": 1280,
+          "height": 960
+        }
+      ],
+      "fallback": {
+        "url": "/media/cedar-presentation-1280.8de009f4d1a2.jpg",
+        "sha256": "8de009f4d1a24fd3c254223d0c83c6a1456f7edf9db1ea170fc6de9a9ff9d16e",
+        "bytes": 114409,
+        "width": 1280,
+        "height": 960
+      }
+    },
+    "cedar-detail": {
+      "webp": [
+        {
+          "url": "/media/cedar-detail-384.1ed54fec0204.webp",
+          "sha256": "1ed54fec02040d5c76c32ef3202d4129cda5484f152309d0eb0b212daf4bf902",
+          "bytes": 30826,
+          "width": 384,
+          "height": 512
+        },
+        {
+          "url": "/media/cedar-detail-768.c57976a02d00.webp",
+          "sha256": "c57976a02d0078e0f6663e9c88c9bc86962fdd71f828be51613af88b7fc3efa9",
+          "bytes": 84250,
+          "width": 768,
+          "height": 1024
+        },
+        {
+          "url": "/media/cedar-detail-1080.68da146e9159.webp",
+          "sha256": "68da146e915969e9a7cf010c066dc2360a3154b2813c22f72a14c4634c87dba8",
+          "bytes": 169240,
+          "width": 1080,
+          "height": 1440
+        }
+      ],
+      "fallback": {
+        "url": "/media/cedar-detail-1080.2a0ca6ac36ef.jpg",
+        "sha256": "2a0ca6ac36ef976adc48c2eb61a987b71eb3f47cf34d4ddd9eb509ce677256ae",
+        "bytes": 292461,
+        "width": 1080,
+        "height": 1440
+      }
+    },
+    "scribr-transcribe": {
+      "webp": [
+        {
+          "url": "/media/scribr-transcribe-384.2b16b50c0943.webp",
+          "sha256": "2b16b50c0943f3e5e819a535fa7c8b551c5fd0283508874c70ea3337ccdae07a",
+          "bytes": 7142,
+          "width": 384,
+          "height": 273
+        },
+        {
+          "url": "/media/scribr-transcribe-768.f5c7d94d80c0.webp",
+          "sha256": "f5c7d94d80c0080ec505a434be757918e1bf79dacc66fde494e70446fdb99091",
+          "bytes": 18342,
+          "width": 768,
+          "height": 545
+        },
+        {
+          "url": "/media/scribr-transcribe-1280.c06f70c37a92.webp",
+          "sha256": "c06f70c37a92baab36101cfa34886b49f2265a4e27999f7603ded7ae56a0af42",
+          "bytes": 33474,
+          "width": 1280,
+          "height": 907
+        }
+      ],
+      "fallback": {
+        "url": "/media/scribr-transcribe-1280.bd564ea28d8d.jpg",
+        "sha256": "bd564ea28d8d1f12a06b721163a575d1652981d9b7a359f5cab35cf16f6db972",
+        "bytes": 96489,
+        "width": 1280,
+        "height": 907
+      }
+    },
+    "wing-light-home": {
+      "webp": [
+        {
+          "url": "/media/wing-light-home-384.4496c4c62266.webp",
+          "sha256": "4496c4c622661d413742a93e2327764b52b103e70adae378d8947a8a2051a2d7",
+          "bytes": 9942,
+          "width": 384,
+          "height": 835
+        },
+        {
+          "url": "/media/wing-light-home-768.84cc533422f9.webp",
+          "sha256": "84cc533422f9d81dc865d752c17cd630e5108a63f8c76901400432a23dd9dc67",
+          "bytes": 23348,
+          "width": 768,
+          "height": 1669
+        },
+        {
+          "url": "/media/wing-light-home-1280.f4533d96276a.webp",
+          "sha256": "f4533d96276a7df4af5296d98303f847bb902584cb8ace2656a998e7eebd3ad6",
+          "bytes": 42208,
+          "width": 1280,
+          "height": 2782
+        }
+      ],
+      "fallback": {
+        "url": "/media/wing-light-home-1280.9f4b0521cb21.jpg",
+        "sha256": "9f4b0521cb217b9980dc45c9b4f24071a5b33cb92982cb82518922d33c3276c9",
+        "bytes": 139599,
+        "width": 1280,
+        "height": 2781
+      }
+    },
+    "wing-light-calm": {
+      "webp": [
+        {
+          "url": "/media/wing-light-calm-384.1079746dff11.webp",
+          "sha256": "1079746dff11743aa5d8b5b451cba6ce23dbebb99fef25f7ca745440dc6220ae",
+          "bytes": 14450,
+          "width": 384,
+          "height": 835
+        },
+        {
+          "url": "/media/wing-light-calm-768.bdc8f19db16f.webp",
+          "sha256": "bdc8f19db16feb2e55ec6cfc6506794d83c8acd01609ffef80bcd91bde8c3ff2",
+          "bytes": 35324,
+          "width": 768,
+          "height": 1669
+        },
+        {
+          "url": "/media/wing-light-calm-1280.47b8e453bc42.webp",
+          "sha256": "47b8e453bc4210a1d7d0a10c5a6cdd05bce6a45fb55b63c0aa710d4039f7624a",
+          "bytes": 66638,
+          "width": 1280,
+          "height": 2782
+        }
+      ],
+      "fallback": {
+        "url": "/media/wing-light-calm-1280.588890785690.jpg",
+        "sha256": "5888907856907f4f4e93bb3d2d87d97a52814dc5902de1a16fc0cc606a3199c5",
+        "bytes": 173419,
+        "width": 1280,
+        "height": 2781
+      }
+    },
+    "living-lights-habitat": {
+      "webp": [
+        {
+          "url": "/media/living-lights-habitat-384.45629b6b15d3.webp",
+          "sha256": "45629b6b15d3a20d61bd98698c1f2a43c49d9883239cd95fecc0ce9ab6c478c7",
+          "bytes": 11224,
+          "width": 384,
+          "height": 216
+        },
+        {
+          "url": "/media/living-lights-habitat-768.084e6a2257d8.webp",
+          "sha256": "084e6a2257d8cb3f145437e47471379b4f4cfa06310da18aea217d6a763eff05",
+          "bytes": 39024,
+          "width": 768,
+          "height": 432
+        },
+        {
+          "url": "/media/living-lights-habitat-1280.149da1a83381.webp",
+          "sha256": "149da1a83381bd9c2d9ae0d97a7541c5640f1dcae476abefa0367689035e8685",
+          "bytes": 84784,
+          "width": 1280,
+          "height": 720
+        }
+      ],
+      "fallback": {
+        "url": "/media/living-lights-habitat-1280.cdbaad748bf0.jpg",
+        "sha256": "cdbaad748bf08079a33cb1d2bebd3707ecad1efa6e03872cfbc32969817652ba",
+        "bytes": 136742,
+        "width": 1280,
+        "height": 720
+      }
+    },
+    "living-lights-board": {
+      "webp": [
+        {
+          "url": "/media/living-lights-board-384.b628041ca4b7.webp",
+          "sha256": "b628041ca4b72d1cb6b7e5e3851ce045b6ca4532bb6fa86c2a8ebad0c29a7a2e",
+          "bytes": 40360,
+          "width": 384,
+          "height": 512
+        },
+        {
+          "url": "/media/living-lights-board-768.b416c5e7f590.webp",
+          "sha256": "b416c5e7f5907e0288f23f9f25ff0ad29ab60bf8189f012c27b316431ae1cf7b",
+          "bytes": 98300,
+          "width": 768,
+          "height": 1024
+        },
+        {
+          "url": "/media/living-lights-board-1152.ad394aef2f86.webp",
+          "sha256": "ad394aef2f862d297f10d276c76d48395eb1931b06d358d6352c7bfc6577b5c4",
+          "bytes": 175560,
+          "width": 1152,
+          "height": 1536
+        }
+      ],
+      "fallback": {
+        "url": "/media/living-lights-board-1152.bd4c8170dab5.jpg",
+        "sha256": "bd4c8170dab5b11d195ebb58b1427f51b735ce5a297aef15ede70eec64ab9888",
+        "bytes": 240212,
+        "width": 1152,
+        "height": 1536
+      }
+    },
+    "arc-forge-scene": {
+      "webp": [
+        {
+          "url": "/media/arc-forge-scene-384.5c765899afe0.webp",
+          "sha256": "5c765899afe06afc740c3de2cdfd0aac39645b393dc0e4cf4a469aec89c3c722",
+          "bytes": 13348,
+          "width": 384,
+          "height": 217
+        },
+        {
+          "url": "/media/arc-forge-scene-768.75751796fa41.webp",
+          "sha256": "75751796fa41a9ca4a3beefab14de6d65a33b39997097b9f03b78973a94ea631",
+          "bytes": 43768,
+          "width": 768,
+          "height": 433
+        },
+        {
+          "url": "/media/arc-forge-scene-1280.ff8b4c93cb15.webp",
+          "sha256": "ff8b4c93cb15fbbf68e7cfe4827289af0f77ecfb45aebe999584aeb309c6669e",
+          "bytes": 93554,
+          "width": 1280,
+          "height": 721
+        }
+      ],
+      "fallback": {
+        "url": "/media/arc-forge-scene-1280.67ee857d2d0f.jpg",
+        "sha256": "67ee857d2d0fb42013578113cb4a03dcd2b51d840756897f02e2a5e0a309fe2f",
+        "bytes": 154087,
+        "width": 1280,
+        "height": 720
+      }
+    }
+  }
+}
