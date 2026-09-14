@@ -21,4 +21,17 @@ Seven selected master copies initially retained camera/capture metadata through 
 
 Public render measurements are in `PROJECT_PHOTO_RENDER_QA.csv`; full screenshots, interaction observations and local-only unlisted measurements are in the ignored `.migration-local/project-photo-qa/` folder.
 
-Hosted publication and verification are recorded below after the approved branch preview is updated.
+## Hosted publication verified
+
+Source: `8874ee7e9741c638c01469042ab44a9fec0a14cf` on `site-redesign-v2`, following media commit `5a65f0096612b7f46bbfeb2b266aed075284f7c9`. Both are pushed to the canonical GitHub repository.
+
+Cloudflare preview version: `ce003752-0a75-499a-988a-f79a3c18ade6`.
+
+- [Branch preview](https://site-redesign-v2-olsen-automation-v2-preview.brian-dbb.workers.dev/#on-the-bench)
+- [Exact version](https://ce003752-olsen-automation-v2-preview.brian-dbb.workers.dev/)
+
+`tools/check-hosted.mjs` verified all 394 served files against build SHA-256, three aliases, 17 existing excluded routes, blocked POST (405), and exact prefix/suffix/invalid ranges for all eight MP4s. Five additional photo-source/discovery paths returned 404, including selected masters and the build-only source manifest. No failures.
+
+The homepage, atlas and five new gallery pages were checked again at 1440×900 and 390×844 on the hosted alias (14 records). All had the expected new photo counts, no horizontal overflow, no broken in-view images and retained noindex. Results are in `PROJECT_PHOTO_HOSTED_QA.csv`; screenshots and detailed HTTP evidence remain local.
+
+The upload used `wrangler versions upload` through the branch-guarded wrapper. No production deployment, route/domain/DNS change or main merge occurred. Remote main was rechecked at the unchanged baseline `0feac3f8376c5110eedfc20f5cdeecd0494f1ed7`.
