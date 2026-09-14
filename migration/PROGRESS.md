@@ -4,6 +4,8 @@ Owner: Brian Olsen. Active branch: `site-redesign-v2`.
 
 ## Project-context audit — 2026-09-14
 
+Whale follow-up: Brian identified today's V4.1 build; the source release message labels it v0.4.1. The local review now includes two original clips (51.8-second crank demonstration and 28.9-second assembly timelapse), seven supplied images, version context and byte-verified source copies. Visual review of the images and sampled video frames establishes visible motion on the assembled, owner-modified prototype beyond the earlier hinge test. The documented retention/bracing corrections remain part of the evidence; no claim of glue-free reliability or completed correction tests was added. The local card checklist is updated and no further Whale photos or recording are needed for drafting. No public content or deployment changed.
+
 Brian requested a card-by-card review of existing chat context, extending the earlier photo discovery. All 26 current registry entries now have a local readiness checklist with available material, remaining extraction/verification work, claim limits and source references. No new project briefs or repeated photo uploads are needed to prepare bounded drafts.
 
 - Searched the existing read-only archive of 2,237 conversations (dated through July 20), screened 22,176 message bodies across 204 primary local Codex histories, and supplemented those results with current ChatGPT searches and recent-page reads from 32 relevant conversations/tasks. This is broad discovery plus selected close reading, not a claim that every cloud message was read.
