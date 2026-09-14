@@ -45,7 +45,7 @@ for file,page in pages.items():
  for tag,a in page.tags:
   if tag=='img':check('alt' in a and 'width' in a and 'height' in a,f'{name}: image requires alt/dimensions')
   if tag=='video':check(a.get('preload')=='none' and 'src' not in a and 'autoplay' not in a,f'{name}: media loads before intent')
-  for attr in ('href','src','poster','srcset'):
+  for attr in ('href','src','poster','srcset','data-small','data-large'):
    if attr not in a:continue
    urls=[a[attr]] if attr!='srcset' else [x.strip().split()[0] for x in a[attr].split(',')]
    for url in urls:
@@ -129,6 +129,24 @@ for item in walk(project_media):
   check(not image.getexif() and not image.info.get('icc_profile') and not image.info.get('comment'),'Project photo contains EXIF/ICC/comment metadata')
   check(image.size==(item['width'],item['height']),'Project photo dimensions drifted')
 check('PROJECT_PHOTO_HIGHLIGHTS' not in (DIST/'index.html').read_text(),'Unresolved homepage photo highlights')
+stories=json.loads((ROOT/'src/_data/project-stories.json').read_text())
+check(set(stories)=={p['slug'] for p in projects},'Project story coverage differs from atlas')
+for project in projects:
+ rendered=pages[DIST/project['route'].lstrip('/')]
+ check(sum(a.get('data-project-story')==project['slug'] for _,a in rendered.tags)==1,'Missing or duplicated project story: '+project['slug'])
+ check(project['evidence']==stories[project['slug']]['evidence'],'Card and project evidence differ')
+ for value in stories[project['slug']].values():
+  check(not any(private in str(value) for private in ('chatgpt.com/c/','/Users/','.migration-local','_codex_handoff')),'Private source reference in project story')
+project_videos=json.loads((ROOT/'public/media/project-video-manifest.json').read_text())
+for item in walk(project_videos):
+ p=DIST/item['url'].lstrip('/')
+ check(p.is_file() and hashlib.sha256(p.read_bytes()).hexdigest()==item['sha256'],'Project video/poster integrity: '+item['url'])
+ if p.suffix=='.mp4':
+  probe=json.loads(subprocess.check_output(['ffprobe','-v','error','-show_streams','-show_format','-of','json',str(p)]))
+  check(len(probe['streams'])==1 and probe['streams'][0]['codec_type']=='video','Project video retains audio or data track')
+  tags=' '.join(str(k).lower() for group in [probe['format'],*probe['streams']] for k in group.get('tags',{}))
+  check(not any(word in tags for word in ('location','creation_time','artist','comment','description','title')),'Project video contains identifying metadata')
+  check(p.stat().st_size<4200000,'Project video exceeds preview range-buffer budget')
 for variant in manifest['stairs']['variants']:check(variant['count']==len(variant['frames']) and variant['count']>=120,'Incomplete stair sequence')
 if errors:print('\n'.join(errors));sys.exit(1)
 print(f'PASS: {len(public_routes)} public preview + {len(private_routes)} isolated unlisted pages; preserved content, metadata, source files, assets, shell, links and privacy.')

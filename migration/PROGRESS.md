@@ -2,6 +2,12 @@
 
 Owner: Brian Olsen. Active branch: `site-redesign-v2`.
 
+## Project stories and current Whale media — 2026-09-14
+
+Brian approved continuing from the source-context and Whale review. All 26 existing project records now have shared, source-informed stories, workflow steps, current evidence and next steps. The Whale record includes the September 14 v0.4.1 motion excerpt, assembly timelapse, original assembly/comparison photos and a disclosed background-retouched lead image. Saved BatchQuote and ClearFloor interface images were recovered and classified; synthetic/sample values are not customer or performance evidence.
+
+The 35 public pages and four isolated pages pass desktop/mobile checks (78 settled renders). Video playback, intent, keyboard focus, reduced motion, retry, no-script access and media-range checks pass. Full source history and attachments remain local-only. No original inventory item was deleted or moved. See PROJECT_STORY_CHECKPOINT.md and QA_PROJECT_STORIES.md. Branch-preview publication is authorized and prepared; the hosted receipt follows when verification completes.
+
 ## Project-context audit — 2026-09-14
 
 Whale follow-up: Brian identified today's V4.1 build; the source release message labels it v0.4.1. The local review now includes two original clips (51.8-second crank demonstration and 28.9-second assembly timelapse), seven supplied images, version context and byte-verified source copies. Visual review of the images and sampled video frames establishes visible motion on the assembled, owner-modified prototype beyond the earlier hinge test. The documented retention/bracing corrections remain part of the evidence; no claim of glue-free reliability or completed correction tests was added. The local card checklist is updated and no further Whale photos or recording are needed for drafting. No public content or deployment changed.

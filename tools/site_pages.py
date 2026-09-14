@@ -1,6 +1,8 @@
 """Explicit page registry. Public preview and unlisted local review stay separate."""
 import html,json,re,shutil
 from project_photos import load as load_photos,card as photo_card,gallery as photo_gallery,highlights as photo_highlights
+from project_stories import load as load_stories,story as project_story,videos as project_videos
+from project_photos import figure as photo_figure
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1];SRC=ROOT/'src';DIST=ROOT/'dist';PRIVATE=ROOT/'dist-unlisted'
 def esc(s):return html.escape(str(s),quote=True)
@@ -28,7 +30,8 @@ def build_site(header,footer,render,media):
  projects=json.loads((SRC/'_data/projects.json').read_text())
  status_labels={s['label'].lower():s['label'] for s in json.loads((SRC/'_data/statuses.json').read_text())}
  def status(item):return status_labels.get(item['status'].lower(),item['status'].capitalize())
- photos=load_photos()
+ photos=load_photos();stories=load_stories()
+ assert set(stories)=={p["slug"] for p in projects}, "Every project needs a reviewed story"
  cards=''.join(render('_includes/project-card.html',category=esc(p['category']),route=esc(p['route']),title=esc(p['title']),summary=esc(p['summary']),status=esc(status(p)),evidence_label='Owner-reported' if p['evidence'].startswith('Owner-reported') else 'Evidence and limits in project record',photo=photo_card(photos[p['slug']]['items'][0],media) if p['slug'] in photos else '') for p in projects)
  home=(SRC/'pages/home.html').read_text().replace('<!-- PROJECT_ATLAS -->',cards).replace('<!-- PROJECT_PHOTO_HIGHLIGHTS -->',photo_highlights(photos,projects,media))
  for p in projects:home=home.replace('{{status:'+p['slug']+'}}',esc(status(p)))
@@ -41,17 +44,26 @@ def build_site(header,footer,render,media):
   if not item['route'].startswith('/projects/'):continue
   extra=(SRC/'pages/project-details'/f'{item["slug"]}.html')
   detail=extra.read_text() if extra.exists() else ''
-  photos_markup=photo_gallery(photos[item['slug']],media) if item['slug'] in photos else ''
+  photos_markup=photo_gallery(photos[item['slug']],media,False) if item['slug'] in photos and len(photos[item['slug']]['items'])>1 else ''
+  hero=photo_figure(photos[item['slug']]['items'][0],media,True) if item['slug'] in photos else ''
+  narrative=project_story(item['slug'],stories[item['slug']])
+  clips=project_videos(item['slug'],media)
   images=''
   if item['title']=='Mechanical Whale':
    images='<div class="project-evidence-grid">'+''.join(f'<figure><img src="{media["images"][name]["webp"][-1]["url"]}" alt="{alt}" width="960" height="1280" loading="lazy"><figcaption>{alt}</figcaption></figure>' for name,alt in [('whale-kit-blue','Supplied blue whale kit photograph'),('whale-kit-white','Supplied white whale kit photograph'),('whale-assembled','Supplied assembled whale photograph')])+'</div>'
   external='<a class="btn" href="https://brianvincentphotography.com">Open Brian Vincent Photography</a>' if item['title']=='Photography & Visual Production' else ''
-  body=f'<article class="project-record wrap"><a class="back-link" href="/projects.html">All projects</a><p class="status-label">{esc(status(item))}</p><h1>{esc(item["title"])}</h1><p class="project-lead">{esc(item["summary"])}</p>{photos_markup}<section class="evidence-note"><h2>Evidence and current scope.</h2><p>{esc(item["evidence"])}</p><p>This summary is based on Brian’s approved project description. It does not establish public availability, independent validation, customer outcomes, or a release date.</p></section>{detail}{images}{external}<div class="actions"><a class="btn primary" href="/contact.html">Ask about this project</a><a class="btn" href="/projects.html">Back to the atlas</a></div></article>'
-  page(item['route'],item['title']+' | Olsen Automation',item['summary'],body,('pages','project-photos'))
+  notes=('<details class="project-notes"><summary>Additional project notes and earlier references</summary>'+detail+images+'</details>') if detail or images else ''
+  body=f'<article class="project-record wrap"><a class="back-link" href="/projects.html">All projects</a><p class="status-label">{esc(status(item))}</p><h1>{esc(item["title"])}</h1><p class="project-lead">{esc(item["summary"])}</p>{hero}{clips}{narrative}{photos_markup}{notes}{external}<div class="actions"><a class="btn primary" href="/contact.html">Ask about this project</a><a class="btn" href="/projects.html">Back to the atlas</a></div></article>'
+  page(item['route'],item['title']+' | Olsen Automation',item['summary'],body,('pages','project-photos','project-stories'),('project-videos',) if clips else ())
  for item in json.loads((SRC/'_data/pages.json').read_text()) if (SRC/'_data/pages.json').exists() else []:
   content=(SRC/item['source']).read_text()
   for entry in json.loads((SRC/'_data/statuses.json').read_text()):content=content.replace('{{status:'+entry['id']+'}}',esc(entry['label']))
-  page(item['route'],item['title'],item['description'],content,list(item.get('styles',('pages',)))+['preserved-layout'],item.get('scripts',()),item.get('metadata',''),item.get('private',False))
+  matching=next((p for p in projects if p['route']==item['route']),None)
+  extra_styles=[]
+  if matching and not item.get('private',False):
+   content+='<div class="project-record wrap project-record-update">'+project_story(matching['slug'],stories[matching['slug']])+'</div>'
+   extra_styles=['project-stories']
+  page(item['route'],item['title'],item['description'],content,list(item.get('styles',('pages',)))+['preserved-layout']+extra_styles,item.get('scripts',()),item.get('metadata',''),item.get('private',False))
  (DIST/'route-registry.json').write_text(json.dumps([r for r in registry if not r['private']],indent=2)+'\n')
  (PRIVATE/'route-registry.json').write_text(json.dumps([r for r in registry if r['private']],indent=2)+'\n')
  return registry

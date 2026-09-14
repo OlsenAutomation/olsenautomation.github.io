@@ -4,259 +4,259 @@
     "slug": "context-passport-compiler",
     "route": "/projects/context-passport-compiler.html",
     "category": "systems",
-    "summary": "Local-first governance for personal AI context, source history, conflicts, review, and deliberate continuation between tools.",
+    "summary": "A local library for finding past conversations and carrying selected context into the next task.",
     "status": "private implementations",
-    "evidence": "Owner-reported. No independent release or device-test evidence is presented here.",
-    "source": "Approved V6 pilot, project atlas"
+    "evidence": "Local implementation and a recorded cross-tool handoff. Current-project continuity is still under development; private conversation contents are not included here.",
+    "source": "Approved project atlas, expanded from owner source-history review, September 2026"
   },
   {
     "title": "StateSeal",
     "slug": "stateseal",
     "route": "/projects/stateseal.html",
     "category": "systems",
-    "summary": "An exact-change trust layer where an agent may propose, but externally scoped owner approval governs accepted state.",
+    "summary": "A private implementation that keeps proposed changes separate from the authority to accept them.",
     "status": "private implementations",
-    "evidence": "Owner-reported. No independent release or device-test evidence is presented here.",
-    "source": "Approved V6 pilot, project atlas"
+    "evidence": "Private local validation and implementation records. These scoped results are not an independent security audit or a guarantee about every integration.",
+    "source": "Approved project atlas, expanded from owner source-history review, September 2026"
   },
   {
     "title": "Scribr",
     "slug": "scribr",
     "route": "/projects/scribr.html",
     "category": "systems",
-    "summary": "Local transcription, structured artifacts, immutable revisions, repair evidence, and portable transcript cassettes.",
+    "summary": "A working local transcription tool with source-linked screenshots, review decisions and portable context packs.",
     "status": "working local applications",
-    "evidence": "Owner-reported. No independent release or device-test evidence is presented here.",
-    "source": "Approved V6 pilot, project atlas"
+    "evidence": "Recorded local installation and import/export recovery checks, reviewed September 2026. AI interpretations require review, and local image analysis can remain slow.",
+    "source": "Approved project atlas, expanded from owner source-history review, September 2026"
   },
   {
     "title": "Artifact OS",
     "slug": "artifact-os",
     "route": "/projects/artifact-os.html",
     "category": "systems",
-    "summary": "A human-led production operating model for evidence, production, review, correction, approval, and controlled publication.",
+    "summary": "Architecture and interface experiments for taking a project from brief through production, review and delivery.",
     "status": "architecture/research",
-    "evidence": "Owner-reported. No independent release or device-test evidence is presented here.",
-    "source": "Approved V6 pilot, project atlas"
+    "evidence": "Architecture/specification records and a bounded interface prototype. A complete production system is not established by the reviewed evidence.",
+    "source": "Approved project atlas, expanded from owner source-history review, September 2026"
   },
   {
     "title": "Cassette.mp4",
     "slug": "cassette-mp4",
     "route": "/cassette-mp4.html",
     "category": "systems",
-    "summary": "A portable, self-describing envelope for transcripts, summaries, instructions, and context.",
+    "summary": "A portable-context format experiment for keeping source material, instructions and interpretation together.",
     "status": "architecture/research",
-    "evidence": "Existing public project record; specific outcomes remain bounded by the evidence and limitations on that page.",
-    "source": "Approved V6 pilot, project atlas"
+    "evidence": "Historical format documentation and compatibility experiments. Behavior depends on the particular package and receiving tool; universal compatibility is not claimed.",
+    "source": "Approved project atlas, expanded from owner source-history review, September 2026"
   },
   {
     "title": "AI Visibility",
     "slug": "ai-visibility",
     "route": "/ai-visibility.html",
     "category": "systems",
-    "summary": "Answer-engine monitoring, evidence capture, and safely bounded improvements for local businesses.",
+    "summary": "Answer-engine monitoring that saves dated evidence and separates observed results from unavailable checks.",
     "status": "working local applications",
-    "evidence": "Existing public project record; specific outcomes remain bounded by the evidence and limitations on that page.",
-    "source": "Approved V6 pilot, project atlas"
+    "evidence": "Recorded monitoring runs distinguish observed, unavailable and failed checks. No ranking, recommendation placement or customer-growth guarantee is made.",
+    "source": "Approved project atlas, expanded from owner source-history review, September 2026"
   },
   {
     "title": "ARC//FORGE",
     "slug": "arc-forge",
     "route": "/arc-forge.html",
     "category": "games",
-    "summary": "A systems-engineering game that lets players discover the need for rules and automation through play.",
+    "summary": "A systems-thinking game prototype shaped through experimentation, interface repair and physical iPad feedback.",
     "status": "active prototypes",
-    "evidence": "Existing public project record; specific outcomes remain bounded by the evidence and limitations on that page.",
-    "source": "Approved V6 pilot, project atlas"
+    "evidence": "Prototype development records and owner-confirmed checks on a specific iPad candidate. This is not a claim of a public release or measured educational effectiveness.",
+    "source": "Approved project atlas, expanded from owner source-history review, September 2026"
   },
   {
     "title": "Glimmerlings",
     "slug": "glimmerlings",
     "route": "/projects/glimmerlings.html",
     "category": "games",
-    "summary": "A Minecraft Bedrock Add-On about hatching, bonding, training, breeding, and battling elemental companions.",
+    "summary": "A Minecraft Bedrock add-on prototype exploring hatching, bonding, training and persistent creature companions.",
     "status": "active prototypes",
-    "evidence": "Owner-reported. No independent release or device-test evidence is presented here.",
-    "source": "Approved V6 pilot, project atlas"
+    "evidence": "Development packages and version-specific test reports. Earlier device results do not validate a newer untested package or establish Marketplace release.",
+    "source": "Approved project atlas, expanded from owner source-history review, September 2026"
   },
   {
     "title": "Wing & Light",
     "slug": "wing-light",
     "route": "/projects/wing-light.html",
     "category": "games",
-    "summary": "An original one-touch iOS arcade game with native device testing, lifecycle recovery, accessibility, and evidence-led repair.",
+    "summary": "A native iOS game pilot refined through simulator work and focused physical iPhone tests.",
     "status": "device-tested pilots",
-    "evidence": "Owner-reported. No independent release or device-test evidence is presented here.",
-    "source": "Approved V6 pilot, project atlas"
+    "evidence": "Simulator captures and focused owner-confirmed iPhone checks for named candidates. No public App Store release is claimed.",
+    "source": "Approved project atlas, expanded from owner source-history review, September 2026"
   },
   {
     "title": "Family Card Chaos",
     "slug": "family-card-chaos",
     "route": "/projects/family-card-chaos.html",
     "category": "games",
-    "summary": "A private family multiplayer card game with separate player hands, host controls, recovery, roles, and living-room display.",
+    "summary": "A private multiplayer card game with separate player, host and shared-display roles.",
     "status": "private implementations",
-    "evidence": "Owner-reported. No independent release or device-test evidence is presented here.",
-    "source": "Approved V6 pilot, project atlas"
+    "evidence": "Private implementation and operational troubleshooting records. Family identities, room codes, access instructions and deck contents are not public project material.",
+    "source": "Approved project atlas, expanded from owner source-history review, September 2026"
   },
   {
     "title": "Sauce+ Private Roku",
     "slug": "sauce-private-roku",
     "route": "/projects/sauce-private-roku.html",
     "category": "games",
-    "summary": "An unofficial local MediaBridge and Roku client for browsing authenticated subscriptions and protected playback.",
+    "summary": "A private Roku and MediaBridge integration with progress, Resume and Continue Watching behavior.",
     "status": "private implementations",
-    "evidence": "Owner-reported. No independent release or device-test evidence is presented here.",
-    "source": "Approved V6 pilot, project atlas"
+    "evidence": "Owner-recorded playback and navigation checks on a specific repair build. This remains a private integration, with no provider endorsement or content redistribution implied.",
+    "source": "Approved project atlas, expanded from owner source-history review, September 2026"
   },
   {
     "title": "Olsen Music Studio",
     "slug": "olsen-music-studio",
     "route": "/projects/olsen-music-studio.html",
     "category": "games",
-    "summary": "A local-first learning app with separate Clarinet and Guitar packs, evidence, review, and explicit lesson advancement.",
+    "summary": "A local practice studio with separate learning paths and a swing-focused return-to-clarinet program.",
     "status": "working local applications",
-    "evidence": "Owner-reported. No independent release or device-test evidence is presented here.",
-    "source": "Approved V6 pilot, project atlas"
+    "evidence": "Recorded functional checks include editing, acceptance, saving and restart persistence. The app does not automatically listen to or assess playing; learning outcomes are not established.",
+    "source": "Approved project atlas, expanded from owner source-history review, September 2026"
   },
   {
     "title": "Living Lights",
     "slug": "living-lights",
     "route": "/firefly-living-lights.html",
     "category": "hardware",
-    "summary": "Low-voltage firefly behavior, distributed ESP32 pods, guarded updates, physical wiring, and field observation.",
+    "summary": "An outdoor lighting prototype combining physical placement, independent light behavior and ESP32 control.",
     "status": "active prototypes",
-    "evidence": "Existing public project record; specific outcomes remain bounded by the evidence and limitations on that page.",
-    "source": "Approved V6 pilot, project atlas"
+    "evidence": "Prototype photographs and dated hardware/update records. Outdoor durability, every hardware generation and future learning behavior are not validated by those observations.",
+    "source": "Approved project atlas, expanded from owner source-history review, September 2026"
   },
   {
     "title": "Mechanical Whale",
     "slug": "mechanical-whale",
     "route": "/projects/mechanical-whale.html",
     "category": "hardware",
-    "summary": "A moving skeletal whale built through kit-card experiments, print iteration, physical assembly, and mechanism correction.",
+    "summary": "A hand-cranked skeletal whale, now demonstrated in the v0.4.1 build, with wave supports and assembly details still being refined.",
     "status": "active prototypes",
-    "evidence": "Supplied kit and assembly photographs; motion and physical fit results are owner-reported.",
-    "source": "Approved V6 pilot, project atlas"
+    "evidence": "Physical prototype — motion demonstrated in the supplied September 14, 2026 video. The shown build includes assembly modifications; it does not establish that the revised kit assembles without glue or passes an endurance test.",
+    "source": "Approved project atlas, expanded from owner source-history review, September 2026"
   },
   {
     "title": "Easter Tomb",
     "slug": "easter-tomb",
     "route": "/projects/easter-tomb.html",
     "category": "hardware",
-    "summary": "A mechanical teaching model with a rolling stone, internal bed motion, pulley revisions, printed parts, and assembly research.",
+    "summary": "A printed teaching model links a rolling stone and internal bed motion. Real assembly revealed a cord-routing problem now driving the next drum revision.",
     "status": "active prototypes",
-    "evidence": "Owner-reported. No independent release or device-test evidence is presented here.",
-    "source": "Approved V6 pilot, project atlas"
+    "evidence": "Active physical prototype. Original photographs document the partial assembly and drum problem. The replacement drums and complete model still need a physical test.",
+    "source": "Approved project atlas, expanded from owner source-history review, September 2026"
   },
   {
     "title": "Sandy Miniatures",
     "slug": "sandy-miniatures",
     "route": "/projects/sandy-miniatures.html",
     "category": "hardware",
-    "summary": "Character modeling, coloration, independent eye/base parts, tiny editions, and QR-linked physical storytelling.",
+    "summary": "Cat-reference studies, kit experiments and miniature concepts explore recognizable shape, separate color parts and small-scale storytelling.",
     "status": "active prototypes",
-    "evidence": "Owner-reported. No independent release or device-test evidence is presented here.",
-    "source": "Approved V6 pilot, project atlas"
+    "evidence": "Active design experiments. Reference and design work are recorded; the reviewed material does not establish a finished, tested miniature edition. Downloadable geometry is not offered here.",
+    "source": "Approved project atlas, expanded from owner source-history review, September 2026"
   },
   {
     "title": "Cedar Bracket-Cover Planters",
     "slug": "cedar-bracket-cover-planters",
     "route": "/projects/cedar-bracket-cover-planters.html",
     "category": "hardware",
-    "summary": "Measured customer constraints turned into removable, load-bearing wooden enclosures that hide existing hardware.",
+    "summary": "Three custom cedar covers and planters turn awkward post-and-bracket constraints into removable wooden assemblies. Completion and pickup are owner-reported.",
     "status": "released work",
-    "evidence": "Owner-reported. No independent release or device-test evidence is presented here.",
-    "source": "Approved V6 pilot, project atlas"
+    "evidence": "Released custom work. Brian reported that three builds were completed and picked up. Photographs document construction; no engineered load rating is claimed.",
+    "source": "Approved project atlas, expanded from owner source-history review, September 2026"
   },
   {
     "title": "Functional Print & Fit",
     "slug": "functional-print-fit",
     "route": "/projects/functional-print-fit.html",
     "category": "hardware",
-    "summary": "Adapters, holders, mechanisms, tolerances, material decisions, and the repeated lesson that the physical part gets the final vote.",
+    "summary": "Adapters, pins, clips and spacers turn measured problems into small print tests, with digital checks kept separate from a proven physical fit.",
     "status": "historical experiments",
-    "evidence": "Owner-reported. No independent release or device-test evidence is presented here.",
-    "source": "Approved V6 pilot, project atlas"
+    "evidence": "A collection of historical experiments and current fit trials. Recent pin, spacer and clip changes were digitally sliced; physical fit remained unverified in the reviewed record. An adapter fit study does not establish electrical compatibility.",
+    "source": "Approved project atlas, expanded from owner source-history review, September 2026"
   },
   {
     "title": "Visual AI Evaluation",
     "slug": "visual-ai-evaluation",
     "route": "/projects/visual-ai-evaluation.html",
     "category": "visual",
-    "summary": "Prompt direction, reference authority, output comparison, fact-checking, and photographic judgment.",
+    "summary": "Reference-led demonstrations compare AI imagery, identify factual or visual errors, and turn human critique into specific corrections.",
     "status": "workshop pilots",
-    "evidence": "Owner-reported professional or demonstration work. Detailed application materials are shared separately.",
-    "source": "Approved V6 pilot, project atlas"
+    "evidence": "Workshop and portfolio demonstrations, not evidence of a paid AI-evaluation role. Detailed application examples remain separately shared; private application materials are not included in this public record.",
+    "source": "Approved project atlas, expanded from owner source-history review, September 2026"
   },
   {
     "title": "Product Image Production",
     "slug": "product-image-production",
     "route": "/projects/product-image-production.html",
     "category": "visual",
-    "summary": "Photography, Photoshop, AI-assisted reconstruction, and creative-director QA for commercial imagery.",
+    "summary": "Photography, careful masking and AI-assisted image studies meet in a workflow where the actual product remains the reference.",
     "status": "workshop pilots",
-    "evidence": "Owner-reported professional or demonstration work. Detailed application materials are shared separately.",
-    "source": "Approved V6 pilot, project atlas"
+    "evidence": "Owner-reported photography and editing work, with separate AI-assisted demonstrations. No customer imagery or private application examples are newly published here; commercial outcomes are not independently measured.",
+    "source": "Approved project atlas, expanded from owner source-history review, September 2026"
   },
   {
     "title": "Territory Sales Execution",
     "slug": "territory-sales-execution",
     "route": "/projects/territory-sales-execution.html",
     "category": "visual",
-    "summary": "Field merchandising, account development, display execution, photography, and role-specific evidence.",
+    "summary": "Owner-reported account service, merchandising and field coordination connect planning with the practical work at each stop.",
     "status": "historical professional work",
-    "evidence": "Owner-reported professional or demonstration work. Detailed application materials are shared separately.",
-    "source": "Approved V6 pilot, project atlas"
+    "evidence": "Historical professional work described by Brian. Detailed role materials remain separately shared. This summary does not establish independently measured sales growth or authorize disclosure of account information.",
+    "source": "Approved project atlas, expanded from owner source-history review, September 2026"
   },
   {
     "title": "Photography & Visual Production",
     "slug": "photography-visual-production",
     "route": "/projects/photography-visual-production.html",
     "category": "visual",
-    "summary": "Weddings, portraits, events, product imagery, client delivery, and the professional visual judgment behind the AI work.",
+    "summary": "Weddings, portraits, events and product work build the visual judgment behind Brian’s approach to directing and reviewing images.",
     "status": "professional practice",
-    "evidence": "Owner-reported. No independent release or device-test evidence is presented here.",
-    "source": "Approved V6 pilot, project atlas"
+    "evidence": "Owner-reported professional practice. The wedding example is a narrative from Brian’s source history; its matching photograph is not presented here. Brian Vincent Photography remains the separate photography portfolio.",
+    "source": "Approved project atlas, expanded from owner source-history review, September 2026"
   },
   {
     "title": "ClearFloor",
     "slug": "clearfloor",
     "route": "/projects/clearfloor.html",
     "category": "visual",
-    "summary": "A paper-trading research desk centered on finite hypotheses, attribution, spread, slippage, and the discipline to reject weak candidates.",
+    "summary": "A paper-trading research experiment uses finite hypothesis campaigns and failure gates. The reviewed work did not demonstrate an income-producing strategy.",
     "status": "architecture/research",
-    "evidence": "Owner-reported. No independent release or device-test evidence is presented here.",
-    "source": "Approved V6 pilot, project atlas"
+    "evidence": "Architecture and research experiment, paused in the reviewed record. No demonstrated profitability, live trading service or reliable income is claimed. Dashboard examples are research illustrations, not account-performance evidence.",
+    "source": "Approved project atlas, expanded from owner source-history review, September 2026"
   },
   {
     "title": "BatchQuote",
     "slug": "batchquote",
     "route": "/projects/batchquote.html",
     "category": "visual",
-    "summary": "An offline print-order calculator covering whole plates, retries, labor, operating costs, fees, and target margin.",
+    "summary": "An offline prototype estimates a print order using full plates, retry allowance, labor, operating costs, selling fees and target margin.",
     "status": "active prototypes",
-    "evidence": "Owner-reported. No independent release or device-test evidence is presented here.",
-    "source": "Approved V6 pilot, project atlas"
+    "evidence": "Active local prototype. The development record reports calculation checks; customer trials, adoption and measured savings were not established. The pictured values are a sample job, not a customer quote.",
+    "source": "Approved project atlas, expanded from owner source-history review, September 2026"
   },
   {
     "title": "Role-Specific Application Portfolios",
     "slug": "role-specific-application-portfolios",
     "route": "/projects/role-specific-application-portfolios.html",
     "category": "visual",
-    "summary": "Job-specific landing pages that select relevant evidence without changing the underlying professional facts.",
-    "status": "working local applications",
-    "evidence": "Owner-reported professional or demonstration work. Detailed application materials are shared separately.",
-    "source": "Approved V6 pilot, project atlas"
+    "summary": "Private application pages and readable resumes connect a role’s requirements with existing work. A proposed generator remains a separate future idea.",
+    "status": "private implementations",
+    "evidence": "Private implementations: authored application pages and documents. An automated application generator was proposed but was not established as a working application. No hiring result or screening-system bypass is claimed.",
+    "source": "Approved project atlas, expanded from owner source-history review, September 2026"
   },
   {
     "title": "AI Without the Hype",
     "slug": "ai-without-the-hype",
     "route": "/workshop.html",
     "category": "education",
-    "summary": "A small in-person workshop for adults who want to use AI for real tasks without jargon, pressure, or blind trust.",
+    "summary": "A planned small workshop for adults who want practical AI experience, clear checks and a place to ask ordinary questions.",
     "status": "workshop pilots",
-    "evidence": "Approved workshop pilot and curriculum outline; date, price and attendance are not confirmed.",
-    "source": "Approved V6 pilot, project atlas"
+    "evidence": "Workshop pilot in preparation. An outline and interest page exist; a date, price, completed session and attendance are not confirmed. Joining the interest list does not reserve or pay for a place.",
+    "source": "Approved project atlas, expanded from owner source-history review, September 2026"
   }
 ]

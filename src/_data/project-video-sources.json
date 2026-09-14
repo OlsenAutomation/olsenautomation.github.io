@@ -1,0 +1,18 @@
+[
+  {
+    "id": "whale-v041-motion",
+    "source_filename": "IMG_8008.mp4",
+    "sha256": "6c4445f013991d205438fc92eb2a6d3a6da1e6feeb004d19e474dc0a8b5aba8a",
+    "start": 0.5,
+    "duration": 12,
+    "poster_time": 2
+  },
+  {
+    "id": "whale-v041-assembly",
+    "source_filename": "IMG_7998.mp4",
+    "sha256": "8beb616d2aaa57ccf2ea059f9f70fa2a5da82cccc06cd03ddaf460100e3de9a4",
+    "start": 0,
+    "duration": 28.9,
+    "poster_time": 15
+  }
+]

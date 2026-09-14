@@ -17,9 +17,9 @@ def card(item,media):
  return f'<div class="atlas-photo fit-{esc(item.get("fit","cover"))}">{picture(item,media,compact=True)}<span class="photo-kind">{esc(item["kind"])}</span></div>'
 def figure(item,media,hero=False):
  return f'<figure class="project-photo {"project-photo-hero" if hero else ""} fit-{esc(item.get("fit","cover"))}">{picture(item,media,eager=hero)}<figcaption><span class="photo-kind">{esc(item["kind"])}</span><p>{esc(item["caption"])}</p></figcaption></figure>'
-def gallery(record,media):
+def gallery(record,media,include_hero=True):
  items=record['items']
- return '<section class="project-photo-section" aria-label="Project images">'+figure(items[0],media,True)+('<div class="project-photo-grid">'+''.join(figure(i,media) for i in items[1:])+'</div>' if len(items)>1 else '')+'</section>'
+ return '<section class="project-photo-section" aria-label="Project images">'+(figure(items[0],media,True) if include_hero else '')+('<div class="project-photo-grid">'+''.join(figure(i,media) for i in items[1:])+'</div>' if len(items)>1 else '')+'</section>'
 def highlights(records,projects,media):
  cards=[]
  for slug in ['mechanical-whale','easter-tomb','cedar-bracket-cover-planters']:

@@ -1,0 +1,392 @@
+{
+  "context-passport-compiler": {
+    "headline": "Pick up the thread without starting over.",
+    "summary": "A local library for finding past conversations and carrying selected context into the next task.",
+    "origin": "A useful decision can disappear into a long conversation. Brian wanted a way to find that history, preserve where it came from, and take the relevant parts into another working session.",
+    "built": "Context Passport Compiler imports conversation archives, makes them searchable and packages selected material for review and export. The original source and the extracted context remain distinguishable.",
+    "lesson": "A recorded handoff reached another assistant successfully, but the older source history sent it back toward an earlier project stage. Moving a packet worked; reliable continuation still depended on a current, well-supported briefing.",
+    "next": "Improve history freshness and produce a concise account of what exists, what changed and where to continue.",
+    "evidence": "Local implementation and a recorded cross-tool handoff. Current-project continuity is still under development; private conversation contents are not included here.",
+    "flow": [
+      "Import history",
+      "Find context",
+      "Review sources",
+      "Carry it forward"
+    ]
+  },
+  "stateseal": {
+    "headline": "Make approval apply to the exact change.",
+    "summary": "A private implementation that keeps proposed changes separate from the authority to accept them.",
+    "origin": "An assistant can suggest an edit. That should not silently give it permission to replace the accepted version, especially when the underlying state has changed since review.",
+    "built": "StateSeal explores signed, explicitly scoped changes, a recorded history and replay of accepted state. The project separates inspection and proposals from the owner's approval authority.",
+    "lesson": "The development record includes a private cycle through initial state, an approved change and replay. It also exposed practical onboarding problems, including a plugin-launch issue that received its own repair.",
+    "next": "Make that small approval-and-replay loop easier to operate and explain before expanding its role in other applications.",
+    "evidence": "Private local validation and implementation records. These scoped results are not an independent security audit or a guarantee about every integration.",
+    "flow": [
+      "Inspect",
+      "Propose",
+      "Owner approves",
+      "Replay"
+    ]
+  },
+  "scribr": {
+    "headline": "Keep the words—and the context around them.",
+    "summary": "A working local transcription tool with source-linked screenshots, review decisions and portable context packs.",
+    "origin": "Text alone can miss what a tutorial demonstrates on screen. Brian wanted the transcript and the visual explanation to travel together without losing the original source.",
+    "built": "Scribr combines transcription with timed screenshots and reviewable context. Recent work added saved progress between processing stages, image accept/reject decisions and a simpler Complete pack download.",
+    "lesson": "Longer material exposed failures that short tests missed: a slow image stage could interrupt other work, and reimporting a compact pack could fail. The recorded repair and installed-app checks covered recovery, export and reimport with images and decisions preserved.",
+    "next": "Continue improving local processing speed and the usefulness of suggested context while keeping human review visible.",
+    "evidence": "Recorded local installation and import/export recovery checks, reviewed September 2026. AI interpretations require review, and local image analysis can remain slow.",
+    "flow": [
+      "Capture source",
+      "Transcribe",
+      "Review context",
+      "Export a pack"
+    ]
+  },
+  "artifact-os": {
+    "headline": "Give creative work a traceable path to finished.",
+    "summary": "Architecture and interface experiments for taking a project from brief through production, review and delivery.",
+    "origin": "A folder full of outputs does not explain which version is accepted, why it changed or whether it answers the brief. Artifact OS grew from the need to make those relationships clear.",
+    "built": "The project defines a lifecycle for briefs, source assets, specifications, iterations, reviews and packaged work. A separate disposable interface prototype explores how that process could feel in use.",
+    "lesson": "Detailed specifications and a prototype interface are meaningful work, but they are different milestones from a complete production application. The project record keeps those stages separate.",
+    "next": "Prove one small end-to-end workflow with real inputs, useful review and a recoverable final package.",
+    "evidence": "Architecture/specification records and a bounded interface prototype. A complete production system is not established by the reviewed evidence.",
+    "flow": [
+      "Brief",
+      "Make",
+      "Review",
+      "Package"
+    ]
+  },
+  "cassette-mp4": {
+    "headline": "Make context travel with its explanation.",
+    "summary": "A portable-context format experiment for keeping source material, instructions and interpretation together.",
+    "origin": "A file can arrive without the context needed to understand it. This experiment asks whether the material and its own explanation can travel as one understandable package.",
+    "built": "Cassette.mp4 explores a self-describing envelope for transcripts, summaries and instructions. Its public documentation records the format idea and how an assistant might inspect it.",
+    "lesson": "The history contains several generations of context packaging. A successful ZIP-based Scribr pack does not automatically prove the same behavior for the earlier MP4-envelope experiment.",
+    "next": "Keep format versions explicit and test creation, opening and recovery against named receiving tools.",
+    "evidence": "Historical format documentation and compatibility experiments. Behavior depends on the particular package and receiving tool; universal compatibility is not claimed.",
+    "flow": [
+      "Source material",
+      "Context envelope",
+      "Inspect",
+      "Recover"
+    ]
+  },
+  "ai-visibility": {
+    "headline": "Observe what the answer actually says.",
+    "summary": "Answer-engine monitoring that saves dated evidence and separates observed results from unavailable checks.",
+    "origin": "A business can exist online and still be absent from the answers people receive. Brian wanted to inspect those answers directly instead of guessing from conventional search rankings.",
+    "built": "The workflow starts with truthful business information and intended customer questions, then records what an answer engine actually returned. Changes and possible improvements are reviewed against that evidence.",
+    "lesson": "A dated mention or citation is useful evidence for that check. It is not a promise of future placement, an explanation of why the engine chose it or proof that a customer converted.",
+    "next": "Build comparable observations over time and make only improvements that fit the owner's stated permissions.",
+    "evidence": "Recorded monitoring runs distinguish observed, unavailable and failed checks. No ranking, recommendation placement or customer-growth guarantee is made.",
+    "flow": [
+      "Choose a question",
+      "Observe answer",
+      "Save evidence",
+      "Review changes"
+    ]
+  },
+  "arc-forge": {
+    "headline": "Build a machine. Discover how the system behaves.",
+    "summary": "A systems-thinking game prototype shaped through experimentation, interface repair and physical iPad feedback.",
+    "origin": "Brian wanted the satisfaction of building a machine to become a game about experimentation: make a change, watch what happens and discover a better arrangement.",
+    "built": "ARC//FORGE develops that idea through interacting resources, upgrades, feedback and engineering choices. The visual world gives the machinery a presence while the interface explains what the player can try.",
+    "lesson": "A late device check found guidance that overflowed its card. The recorded correction was checked in both iPad orientations, including whether the existing save survived the update.",
+    "next": "Continue refining the relationship between player choices, understandable feedback and a rewarding discovery loop.",
+    "evidence": "Prototype development records and owner-confirmed checks on a specific iPad candidate. This is not a claim of a public release or measured educational effectiveness.",
+    "flow": [
+      "Build",
+      "Observe",
+      "Adjust",
+      "Discover"
+    ]
+  },
+  "glimmerlings": {
+    "headline": "Creatures worth getting to know.",
+    "summary": "A Minecraft Bedrock add-on prototype exploring hatching, bonding, training and persistent creature companions.",
+    "origin": "The idea was larger than adding a few isolated pets. Brian wanted creatures with a connected first-session experience and reasons to keep interacting with them.",
+    "built": "Glimmerlings develops models, visual variants and add-on behavior around a discover-and-care loop. Its history includes packaged test builds, owner feedback and corrections to creature interactions.",
+    "lesson": "An add-on can package successfully and still fail inside Minecraft. Missing creatures, broken commands and incorrect skins belong in engineering verification before a player is asked whether the game is enjoyable.",
+    "next": "Verify the exact packaged candidate in Bedrock, then refine the first session around hatching, bonding and training.",
+    "evidence": "Development packages and version-specific test reports. Earlier device results do not validate a newer untested package or establish Marketplace release.",
+    "flow": [
+      "Hatch",
+      "Bond",
+      "Train",
+      "Return"
+    ]
+  },
+  "wing-light": {
+    "headline": "One touch, a little lift, a quieter kind of play.",
+    "summary": "A native iOS game pilot refined through simulator work and focused physical iPhone tests.",
+    "origin": "Wing & Light explores a simple interaction with a gentle visual atmosphere: a small input should feel responsive, readable and comfortable to repeat.",
+    "built": "The SwiftUI/SpriteKit pilot combines flight, calm-mode presentation and game feedback. Development work includes settings, sound, persistence and how the game behaves when the app leaves and returns to the foreground.",
+    "lesson": "Hardware testing surfaced details a still screenshot could not prove. The record includes owner checks of a revised Game Over sound at different volume settings and alongside external audio.",
+    "next": "Preserve that comfortable interaction while refining the complete play session and device behavior.",
+    "evidence": "Simulator captures and focused owner-confirmed iPhone checks for named candidates. No public App Store release is claimed.",
+    "flow": [
+      "Touch",
+      "Fly",
+      "Respond",
+      "Try again"
+    ]
+  },
+  "family-card-chaos": {
+    "headline": "One shared game. A private hand on every phone.",
+    "summary": "A private multiplayer card game with separate player, host and shared-display roles.",
+    "origin": "Brian wanted a game people could play together while using their own phones or tablets. The shared screen needed to bring the room together without revealing individual hands.",
+    "built": "The local-first implementation separates player actions, hosting, display and owner administration. Its development history covers room state, interruptions, pack management and backups.",
+    "lesson": "Joining a private game involves more than the game server. Later troubleshooting distinguished an outer access-policy failure from game behavior, keeping the diagnosis focused on the layer that actually blocked entry.",
+    "next": "Keep joining and recovery simple while preserving private hands and owner-controlled access.",
+    "evidence": "Private implementation and operational troubleshooting records. Family identities, room codes, access instructions and deck contents are not public project material.",
+    "flow": [
+      "Host a room",
+      "Join privately",
+      "Play together",
+      "Recover safely"
+    ]
+  },
+  "sauce-private-roku": {
+    "headline": "Come back to the place you left.",
+    "summary": "A private Roku and MediaBridge integration with progress, Resume and Continue Watching behavior.",
+    "origin": "A viewing session should not become a search for the last position. Brian wanted playback progress and navigation to behave consistently across the private viewing experience.",
+    "built": "The integration connects a Roku interface with local media-bridge state. The developed controls include Resume, Start over, Continue Watching and watched/unwatched state.",
+    "lesson": "The useful milestone was a corrected physical-Roku test: progress returned, Resume reached the saved point and Back moved through the intended screens. A mistaken test answer was explicitly corrected in the record.",
+    "next": "Keep packaging and version records aligned with the exact behavior that received the device test.",
+    "evidence": "Owner-recorded playback and navigation checks on a specific repair build. This remains a private integration, with no provider endorsement or content redistribution implied.",
+    "flow": [
+      "Watch",
+      "Save progress",
+      "Return",
+      "Resume"
+    ]
+  },
+  "olsen-music-studio": {
+    "headline": "Find your way back into the music.",
+    "summary": "A local practice studio with separate learning paths and a swing-focused return-to-clarinet program.",
+    "origin": "Returning to an instrument is different from starting one. Brian wanted useful short sessions that rebuilt comfort and connected practice to the swing and Dixieland music he enjoys.",
+    "built": "The studio preserves separate clarinet and guitar paths. The return-to-clarinet work adds adjustable sessions, reviewable practice proposals and short check-ins that inform the next session.",
+    "lesson": "The application needs to respond to what the player reports now. An old difficulty should not keep dominating recommendations after later check-ins show improvement.",
+    "next": "Use the sessions in practice and refine the proposals from real observations, with musical judgment kept in human hands.",
+    "evidence": "Recorded functional checks include editing, acceptance, saving and restart persistence. The app does not automatically listen to or assess playing; learning outcomes are not established.",
+    "flow": [
+      "Review session",
+      "Play",
+      "Check in",
+      "Adjust"
+    ]
+  },
+  "living-lights": {
+    "headline": "A garden that seems to have small lives of its own.",
+    "summary": "An outdoor lighting prototype combining physical placement, independent light behavior and ESP32 control.",
+    "origin": "Brian wanted the impression of fireflies discovered among plants: varying heights, quiet spaces and small points of light rather than an obvious repeating display.",
+    "built": "Living Lights combines physical light experiments with controller firmware and a multi-pod habitat. The existing project record follows the hardware, behavior and guarded update path as separate parts of the build.",
+    "lesson": "The recorded pod milestone was deliberately narrow: one satellite received a guarded update twice while another remained a control. That is stronger evidence than assuming every pod or update mode behaves identically.",
+    "next": "Keep observing the known baseline and improve the illusion without treating future behavior or durability goals as finished features.",
+    "evidence": "Prototype photographs and dated hardware/update records. Outdoor durability, every hardware generation and future learning behavior are not validated by those observations.",
+    "flow": [
+      "Place light",
+      "Observe habitat",
+      "Adjust behavior",
+      "Test hardware"
+    ]
+  },
+  "mechanical-whale": {
+    "headline": "A whale that moves—and teaches through every revision.",
+    "summary": "A hand-cranked skeletal whale, now demonstrated in the v0.4.1 build, with wave supports and assembly details still being refined.",
+    "origin": "The idea was a kit that becomes a moving sculpture: printed parts, a visible skeleton, and a hand crank that brings the whale and its waves to life.",
+    "built": "The v0.4.1 build brings together the braced body, tested collar, two wave supports and numbered hardware. The September 14 photos and videos show Brian assembling and moving the physical model.",
+    "lesson": "Assembly exposed details that a clean digital model could miss. The rear wave could escape its pin channel, some part numbers were hard to read, and fixed connections needed glue and extra bracing.",
+    "next": "A proposed test plate adds a longer rear pin and washer, locking base tabs, hooked brace ends and clearer numbers. Those replacement parts still need a physical fit and motion test.",
+    "evidence": "Physical prototype — motion demonstrated in the supplied September 14, 2026 video. The shown build includes assembly modifications; it does not establish that the revised kit assembles without glue or passes an endurance test.",
+    "flow": [
+      "Print the kit",
+      "Assemble and adjust",
+      "Crank the mechanism",
+      "Revise the weak points"
+    ]
+  },
+  "easter-tomb": {
+    "headline": "Tell the story through a moving model.",
+    "summary": "A printed teaching model links a rolling stone and internal bed motion. Real assembly revealed a cord-routing problem now driving the next drum revision.",
+    "origin": "This project explores a mechanical teaching model in which the movement carries part of the story, with a rolling stone and an internal moving bed.",
+    "built": "Printed supports, shafts and cord drums reached a partial physical assembly. Assembly research and a 3D viewer help explain how the parts are intended to work together.",
+    "lesson": "The cord hole barely met its groove, making threading difficult in the printed part. The correction focused on the two drums, adding clearer access and paired cord holes while preserving the rest of the mechanism.",
+    "next": "Print and thread the replacement drums, then check the complete motion before treating the mechanism as finished.",
+    "evidence": "Active physical prototype. Original photographs document the partial assembly and drum problem. The replacement drums and complete model still need a physical test.",
+    "flow": [
+      "Model the motion",
+      "Print the parts",
+      "Thread and assemble",
+      "Test the revised drums"
+    ]
+  },
+  "sandy-miniatures": {
+    "headline": "Translate a familiar character into a tiny physical form.",
+    "summary": "Cat-reference studies, kit experiments and miniature concepts explore recognizable shape, separate color parts and small-scale storytelling.",
+    "origin": "Sandy’s reference photos provide the character cues: silhouette, coloration, eyes and expression. The challenge is keeping those recognizable as the object becomes small and printable.",
+    "built": "The work includes a slot-together kit direction and separate miniature studies, with decisions about independent eyes, bases and color parts. QR-linked storytelling remains an idea under exploration.",
+    "lesson": "A convincing image is only one step. Small parts must also print, fit and retain the intended expression. Studies that adapt outside models also need clear attribution and reuse permission.",
+    "next": "Resolve the source-model permissions for any shared geometry, then select and physically test a specific miniature.",
+    "evidence": "Active design experiments. Reference and design work are recorded; the reviewed material does not establish a finished, tested miniature edition. Downloadable geometry is not offered here.",
+    "flow": [
+      "Study the reference",
+      "Choose the silhouette",
+      "Separate printable parts",
+      "Check the physical result"
+    ]
+  },
+  "cedar-bracket-cover-planters": {
+    "headline": "Build around the hardware that is already there.",
+    "summary": "Three custom cedar covers and planters turn awkward post-and-bracket constraints into removable wooden assemblies. Completion and pickup are owner-reported.",
+    "origin": "Existing posts and exposed brackets defined the job. The covers needed to work around the real hardware and uneven placement, rather than assuming a perfectly centered post.",
+    "built": "Brian built cedar enclosures with openings around the brackets, removable floors and supporting cleats. The supplied photographs show the material, joinery and finished group.",
+    "lesson": "The useful measurements were the ones that described the obstruction and access, including an off-center post. Removable parts made that fit more practical.",
+    "next": "For another installation, measure its actual brackets and clearances before adapting the design.",
+    "evidence": "Released custom work. Brian reported that three builds were completed and picked up. Photographs document construction; no engineered load rating is claimed.",
+    "flow": [
+      "Measure the obstruction",
+      "Plan removable access",
+      "Build in cedar",
+      "Check the installed fit"
+    ]
+  },
+  "functional-print-fit": {
+    "headline": "The physical part gets the final vote.",
+    "summary": "Adapters, pins, clips and spacers turn measured problems into small print tests, with digital checks kept separate from a proven physical fit.",
+    "origin": "Many useful prints start with a very specific problem: a pin is too short, a spacer is missing, a clip needs another tolerance, or a housing must meet an existing part.",
+    "built": "The collection includes adapter studies and small mechanism corrections. Recent glider work adjusted pin length and spacer thickness and prepared a set of retaining-clip variants for printing.",
+    "lesson": "A clean slice confirms a printable toolpath, not a successful fit. Keeping the visible or mating geometry fixed and changing one dimension at a time makes the physical result easier to interpret.",
+    "next": "Print the prepared variants and report which one fits before carrying that dimension into a complete build.",
+    "evidence": "A collection of historical experiments and current fit trials. Recent pin, spacer and clip changes were digitally sliced; physical fit remained unverified in the reviewed record. An adapter fit study does not establish electrical compatibility.",
+    "flow": [
+      "Measure the problem",
+      "Change one feature",
+      "Print a small test",
+      "Keep the proven fit"
+    ]
+  },
+  "visual-ai-evaluation": {
+    "headline": "Look closely enough to catch what the model invented.",
+    "summary": "Reference-led demonstrations compare AI imagery, identify factual or visual errors, and turn human critique into specific corrections.",
+    "origin": "An image can look polished while getting the product, label or physical detail wrong. These demonstrations bring photographic judgment to that gap.",
+    "built": "The workflow compares an authoritative reference with a generated result, names the mismatch and directs a narrower correction. Packaging and product details make the difference between a plausible image and a faithful one visible.",
+    "lesson": "Reference authority matters more than confidence in the output. A correction needs another comparison, because repairing one area can introduce an error somewhere else.",
+    "next": "Extend the demonstrations with examples whose references and publication permissions are clear.",
+    "evidence": "Workshop and portfolio demonstrations, not evidence of a paid AI-evaluation role. Detailed application examples remain separately shared; private application materials are not included in this public record.",
+    "flow": [
+      "Establish the reference",
+      "Inspect the output",
+      "Describe the mismatch",
+      "Review the correction"
+    ]
+  },
+  "product-image-production": {
+    "headline": "Keep the product true while improving the presentation.",
+    "summary": "Photography, careful masking and AI-assisted image studies meet in a workflow where the actual product remains the reference.",
+    "origin": "Commercial imagery needs a clear subject and a controlled presentation. Brian’s photography and editing work provides the starting point for exploring where AI assistance helps and where it introduces errors.",
+    "built": "The source history includes photographed and manually masked food imagery, alongside packaging-repair demonstrations that compare original, generated and corrected images.",
+    "lesson": "Owning a photograph or preparing its cutout does not mean authoring the entire final design. Likewise, a convincing reconstructed label can still contain invented information and needs a reference check.",
+    "next": "Build further public before-and-after examples from images with clear rights and approved customer use.",
+    "evidence": "Owner-reported photography and editing work, with separate AI-assisted demonstrations. No customer imagery or private application examples are newly published here; commercial outcomes are not independently measured.",
+    "flow": [
+      "Photograph the product",
+      "Prepare the image",
+      "Direct the presentation",
+      "Verify the details"
+    ]
+  },
+  "territory-sales-execution": {
+    "headline": "Turn a route plan into work completed in the field.",
+    "summary": "Owner-reported account service, merchandising and field coordination connect planning with the practical work at each stop.",
+    "origin": "A territory is a sequence of real places, people and constraints. A plan has to account for the route as well as the work that can actually be completed on arrival.",
+    "built": "Brian’s professional history includes account service, display execution, route planning, reporting, coordination and training. Role-specific evidence organizes that experience around the needs of a particular position.",
+    "lesson": "The plan and the record of completed work serve different purposes. Clear follow-through depends on knowing what was planned, what happened and what still needs attention.",
+    "next": "Keep future case studies specific to approved examples, with customer and account details shared only in the appropriate context.",
+    "evidence": "Historical professional work described by Brian. Detailed role materials remain separately shared. This summary does not establish independently measured sales growth or authorize disclosure of account information.",
+    "flow": [
+      "Plan the route",
+      "Understand the account",
+      "Complete the work",
+      "Record the follow-through"
+    ]
+  },
+  "photography-visual-production": {
+    "headline": "Make the photograph when the plan changes.",
+    "summary": "Weddings, portraits, events and product work build the visual judgment behind Brian’s approach to directing and reviewing images.",
+    "origin": "A useful photograph often depends on responding to the moment. In one owner-described wedding example, a planned sparkler exit was cancelled shortly before it was meant to happen.",
+    "built": "Brian redirected the scene around guests’ phone lights, positioned the couple and chose an aperture that turned the small lights into starbursts. The decision combined people, light and camera technique.",
+    "lesson": "Equipment and editing matter, but the first job is to see the available conditions and make a workable decision. That same attention to pose, light and believable detail carries into AI-assisted image review.",
+    "next": "Continue the photographic practice and add public case studies when the corresponding images are cleared for use.",
+    "evidence": "Owner-reported professional practice. The wedding example is a narrative from Brian’s source history; its matching photograph is not presented here. Brian Vincent Photography remains the separate photography portfolio.",
+    "flow": [
+      "Read the conditions",
+      "Direct the scene",
+      "Make the photograph",
+      "Review and deliver"
+    ]
+  },
+  "clearfloor": {
+    "headline": "Give a research idea a fair test—and a stopping point.",
+    "summary": "A paper-trading research experiment uses finite hypothesis campaigns and failure gates. The reviewed work did not demonstrate an income-producing strategy.",
+    "origin": "ClearFloor explored whether a structured research desk could turn trading ideas into bounded tests, with explicit assumptions and a reason to reject weak candidates.",
+    "built": "The v0.9 research direction organized finite hypothesis campaigns, attribution and execution-cost considerations such as spread and slippage. Local packages and dashboard views document the experiment.",
+    "lesson": "A dashboard, a backtest or an attractive hypothesis is not proof of an income stream. A useful research process must be able to stop when the evidence does not support continuing.",
+    "next": "The reviewed effort was paused. Any renewed experiment would need a specific hypothesis, test budget and acceptance criteria.",
+    "evidence": "Architecture and research experiment, paused in the reviewed record. No demonstrated profitability, live trading service or reliable income is claimed. Dashboard examples are research illustrations, not account-performance evidence.",
+    "flow": [
+      "State a hypothesis",
+      "Bound the experiment",
+      "Examine the evidence",
+      "Continue or stop"
+    ]
+  },
+  "batchquote": {
+    "headline": "Price the whole print run.",
+    "summary": "An offline prototype estimates a print order using full plates, retry allowance, labor, operating costs, selling fees and target margin.",
+    "origin": "A spool-price calculation misses much of the cost of an order. A partly filled final plate, a failed print or time spent finishing the pieces can change the estimate.",
+    "built": "BatchQuote brings those inputs into one local calculator with saved jobs and an order-price estimate. The prototype records its assumptions, including whole plates and margin rather than markup.",
+    "lesson": "A useful estimate needs visible assumptions. The current model also has limits: it does not solve every mixed-item or mixed-plate production job.",
+    "next": "Complete browser, print and download checks, then observe someone using it on a real quote before claiming practical time savings.",
+    "evidence": "Active local prototype. The development record reports calculation checks; customer trials, adoption and measured savings were not established. The pictured values are a sample job, not a customer quote.",
+    "flow": [
+      "Describe the print run",
+      "Include the full costs",
+      "Review the assumptions",
+      "Prepare an estimate"
+    ]
+  },
+  "role-specific-application-portfolios": {
+    "headline": "Choose the relevant evidence without changing the facts.",
+    "summary": "Private application pages and readable resumes connect a role’s requirements with existing work. A proposed generator remains a separate future idea.",
+    "origin": "A general resume cannot give every project equal space. The aim was to make the relevant evidence easier for a particular reviewer to find while keeping the underlying professional facts consistent.",
+    "built": "Brian prepared role-specific landing pages and resumes, choosing examples that match a position and keeping detailed application material behind its existing unlisted boundaries.",
+    "lesson": "A tailored presentation should change emphasis, not invent experience. The completed documents and pages are distinct from a proposed app that would automate their production.",
+    "next": "Refine the private workflow as applications require it; treat a reusable generator as a future implementation project.",
+    "evidence": "Private implementations: authored application pages and documents. An automated application generator was proposed but was not established as a working application. No hiring result or screening-system bypass is claimed.",
+    "flow": [
+      "Read the role",
+      "Select real evidence",
+      "Prepare the application",
+      "Review the facts"
+    ]
+  },
+  "ai-without-the-hype": {
+    "headline": "Try a useful task. Learn where judgment matters.",
+    "summary": "A planned small workshop for adults who want practical AI experience, clear checks and a place to ask ordinary questions.",
+    "origin": "The workshop starts with everyday work rather than a list of tools: bring a task, try an approach and learn how to judge the result.",
+    "built": "An approved pilot outline and interest page define the direction. The approach pairs practical exercises with checking sources, protecting private information and deciding what still needs a human.",
+    "lesson": "An impressive first answer can be incomplete or wrong. Learning to ask, compare and correct is as useful as learning the tool itself.",
+    "next": "Confirm the practical arrangements and pilot format before announcing a session.",
+    "evidence": "Workshop pilot in preparation. An outline and interest page exist; a date, price, completed session and attendance are not confirmed. Joining the interest list does not reserve or pay for a place.",
+    "flow": [
+      "Bring a real task",
+      "Try an AI approach",
+      "Check the result",
+      "Choose the next action"
+    ]
+  }
+}

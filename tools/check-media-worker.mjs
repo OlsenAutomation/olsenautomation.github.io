@@ -23,4 +23,4 @@ for(const video of files){
   const head=await get({Range:'bytes=0-9'},'HEAD');assert.equal(head.status,200);assert.equal((await head.arrayBuffer()).byteLength,0);assert.equal(head.headers.get('accept-ranges'),'bytes');
   assert.equal((await get({},'POST')).status,405);
 }
-console.log('PASS: all 8 actual MP4 assets support exact prefix, suffix and open-ended byte ranges, invalid ranges, validators, HEAD, blocked POST and preview security headers.');
+console.log(`PASS: all ${files.length} actual MP4 assets support exact prefix, suffix and open-ended byte ranges, invalid ranges, validators, HEAD, blocked POST and preview security headers.`);

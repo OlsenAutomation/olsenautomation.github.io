@@ -30,13 +30,13 @@ for(const [route,target] of Object.entries(aliases)){
   const bytes=Buffer.from(await response.arrayBuffer());
   try{assert.equal(response.status,200);assert.equal(sha(bytes),sha(await readFile(path.join(root,'dist',target))));report.routes.push({route,target,status:response.status});}catch(error){report.failures.push({route,error:error.message});}
 }
-for(const route of ['/missing','/_codex_handoff/approved-pilot/QA-REPORT.md','/.git/config','/migration/CONTENT_MATRIX.csv','/CNAME','/family-card-chaos-access.html','/visual-ai-evaluation.html','/product-photo-production.html','/territory-sales-execution.html','/assets/family-access.js','/unlisted-media/test.png','/src/pages/home.html','/contact','/contact/','/__test/intake-receiver','/_headers','/_redirects']){
+for(const route of ['/missing','/_codex_handoff/approved-pilot/QA-REPORT.md','/.git/config','/migration/CONTENT_MATRIX.csv','/CNAME','/family-card-chaos-access.html','/visual-ai-evaluation.html','/product-photo-production.html','/territory-sales-execution.html','/assets/family-access.js','/unlisted-media/test.png','/src/pages/home.html','/contact','/contact/','/__test/intake-receiver','/_headers','/_redirects','/.migration-local/project-context-audit/PROJECT_CARD_READINESS.md','/src/_data/project-stories.json','/assets/project-photos/whale-v041-original.png']){
   const response=await fetch(new URL(route,base),{redirect:'manual'});report.excluded.push({route,status:response.status});
   if(response.status!==404)report.failures.push({route,error:'Expected 404'});
 }
 const post=await fetch(new URL('/preview/media/',base),{method:'POST',body:'synthetic-preview-qa',redirect:'manual'});
 report.postStatus=post.status;if(post.status!==405)report.failures.push({route:'/preview/media/',error:'POST expected 405'});
-const manifest=JSON.parse(await readFile(path.join(root,'public/media/manifest.json'),'utf8'));
+const manifest=JSON.parse(await readFile(path.join(root,'dist/media/manifest.json'),'utf8'));
 report.ranges=[];
 for(const video of Object.values(manifest.videos).flatMap(v=>v.variants)){
   const source=await readFile(path.join(root,'dist',video.url));

@@ -17,6 +17,9 @@ def build():
  project_media=json.loads((ROOT/'public/media/project-manifest.json').read_text())
  assert not media['images'].keys() & project_media['images'].keys(), 'Duplicate media identity'
  media['images'].update(project_media['images'])
+ project_videos=json.loads((ROOT/'public/media/project-video-manifest.json').read_text())
+ assert not media['videos'].keys() & project_videos['videos'].keys(), 'Duplicate video identity'
+ media['videos'].update(project_videos['videos'])
  if DIST.is_symlink():raise ValueError('dist must not be a symlink')
  if DIST.exists():shutil.rmtree(DIST) # generated output only; never source/inventory paths
  DIST.mkdir();(DIST/'assets').mkdir()

@@ -1,5 +1,17 @@
 # Migration decisions
 
+## Project stories and Whale build media — 2026-09-14
+
+Brian approved continuing from the reviewed project-context and Whale checkpoint. The existing branch-preview approval applies to this update. All 26 atlas projects now have shared, source-informed accounts of origin, implementation, lessons, next steps and current evidence. Five existing public project routes retain their prior content and gain a clearly separate story section. No additional project was invented to force the atlas to 27 entries.
+
+- Correct the cedar summary to removable bracket covers and floors; do not claim an engineered load rating.
+- Classify authored application portfolios as private implementations. The proposed generator is not a released or working app.
+- Label Whale v0.4.1 as an active physical prototype with demonstrated motion on the modified assembly. Proposed pin/brace/numbering corrections remain untested physically.
+- Keep private application, family, customer, account and raw conversation material out of the published artifact. Use public-safe summaries, not copied conversations or private links.
+- Retain original photo masters, earlier project images and all frozen inventory items. The new AI background edit is visibly disclosed. BatchQuote uses a saved prototype view with sample data; ClearFloor is a concept with synthetic paper data, not a verified runtime or performance screenshot.
+- Offer a 12-second normal-speed Whale excerpt and the 28.9-second supplied timelapse. Remove incidental audio and identifying metadata. Load videos on explicit Play, preserve native controls and direct MP4 fallbacks, and provide textual visual descriptions.
+- No new paid feature, main change, production deployment, DNS or custom-domain action is authorized or performed by this checkpoint.
+
 ## Project image use and cleanup — 2026-09-13
 
 - Brian's request to utilize the reviewed photos and clean messy images authorizes this selected public-safe image update. Keep the existing branch-preview authorization; do not change main, the production site, DNS or domain routing.

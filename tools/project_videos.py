@@ -24,13 +24,17 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--source-directory', type=Path, default=ROOT / '.migration-local/project-context-audit/whale-v4.1-2026-09-14/originals')
     args = parser.parse_args()
-    sources = [('whale-v041-motion', 'IMG_8008.mp4', .5, 12, 2), ('whale-v041-assembly', 'IMG_7998.mp4', 0, 28.9, 15)]
+    sources = json.loads((ROOT / 'src/_data/project-video-sources.json').read_text())
     manifest = {'schema': 1, 'videos': {}}; audit = []
     with tempfile.TemporaryDirectory(prefix='whale-video-') as temp:
         temp = Path(temp)
-        for identity, filename, start, duration, poster_time in sources:
+        for item in sources:
+            identity, filename = item['id'], item['source_filename']
+            start, duration, poster_time = item['start'], item['duration'], item['poster_time']
             source = args.source_directory / filename
+            assert source.name == filename and source.parent == args.source_directory
             source_hash = hashlib.sha256(source.read_bytes()).hexdigest()
+            assert source_hash == item['sha256'], f'Unreviewed source bytes: {filename}'
             variants = []; posters = []
             for width in (640, 910):
                 output = temp / f'{identity}-{width}.mp4'
