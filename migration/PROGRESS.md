@@ -2,6 +2,16 @@
 
 Owner: Brian Olsen. Active branch: `site-redesign-v2`.
 
+## Image discovery checkpoint — local review, 2026-09-13
+
+Brian asked to find reusable project images in the relevant project folders and conversations. A separate, ignored review catalog now accounts for all 26 entries in the current site registry. This did not rerun or replace the frozen migration inventories.
+
+- Indexed 4,072 accessible image paths and hashed them: 2,377 unique byte hashes, with 719 exact-duplicate groups and 1,695 extra copies. Many are build/cache/worktree copies, not distinct portfolio images. No consolidation or deletion occurred.
+- Recovered 37 supplied image attachments from six relevant conversations and visually reviewed 82 representative candidates across 15 project entries. The local catalog marks 27 as recommended for selection, 32 as reference-only, and 23 as held. Selection is not publication approval.
+- Strong finds include physical Whale and Easter Tomb development photos, cedar bracket-cover build photos, a clean Scribr application view, Wing & Light simulator captures, and existing Living Lights and historical display photography. Renders, partial builds, and simulator output keep their evidence distinctions.
+- Customer screenshots, personal backgrounds, private application data, uncertain performance claims, and third-party design attribution remain held locally. Missing or restricted sources are recorded per project. No image, private context package, or source-path manifest entered the public build or Git index.
+- Review files and recovered copies are under `.migration-local/project-image-review/`, excluded from Git. The review server binds only to `127.0.0.1:43190`. Original sources, the handoff, current Cloudflare preview, main, DNS, and the live site are unchanged. No owner input is needed to retain and review this catalog.
+
 ## Current checkpoint — basement usability correction published, 2026-09-13
 
 Brian reported slow basement videos, unclear scrolling, weak stair interaction, and a repeated basement link. The branch now has a short play/pause room tour, three named room stops, visible sliders and scroll instructions, controls inside the stair scene, and shorter scroll distances. The featured workshop card points to the existing learning section; that section contains the single featured basement entrance.
