@@ -23,4 +23,15 @@ Brian reported that the Whale clips look good and basement navigation appears to
 
 ## Publication boundary
 
-The standing approval covers pushing `site-redesign-v2` and updating the existing public-safe Cloudflare Workers Free branch preview only. Main remains `0feac3f8376c5110eedfc20f5cdeecd0494f1ed7`. Originals, frozen inventories, handoff exclusion, private-route isolation, live GitHub Pages, DNS, custom domain and production remain unchanged. The hosted receipt will be recorded after publication.
+The standing approval covers pushing `site-redesign-v2` and updating the existing public-safe Cloudflare Workers Free branch preview only. Main remains `0feac3f8376c5110eedfc20f5cdeecd0494f1ed7`. Originals, frozen inventories, handoff exclusion, private-route isolation, live GitHub Pages, DNS, custom domain and production remain unchanged.
+
+## Hosted receipt
+
+- Pushed source commit: `70e8868a1d95180299304f9bd28d2adf5c6f4391`.
+- Uploaded version: `5710c393-e50c-4e2a-a239-a7e655723b79`, using the guarded version-upload command only.
+- Existing alias: https://site-redesign-v2-olsen-automation-v2-preview.brian-dbb.workers.dev/workshop.html
+- Immutable version: https://5710c393-olsen-automation-v2-preview.brian-dbb.workers.dev/workshop.html
+- Exactly four public assets changed: workshop HTML, workshop CSS, workshop JavaScript and the new scroll geometry module. The 421 other public files were reused.
+- Hosted verification passes for all 425 file hashes, three route aliases, 20 excluded paths, blocked POST (405) and 24 range checks across all 12 MP4s. Machine receipt: ignored `.migration-local/hosted-http-checks.json`.
+- At 390×844, hosted keyboard scrolling reached the door, reverse wheel scrolling reached 63% / 6.3358 seconds with the CTA hidden, and forward scrolling returned to 100% / 10 seconds with readyState 4. The complete CTA fit onscreen without horizontal overflow and focused First name when clicked. The pilot box is absent. Screenshot remains local-only.
+- Temporary viewport overrides were reset. Remote main was rechecked at the unchanged baseline after publication. No production version deployment, trigger deployment, domain change or real submission occurred.
