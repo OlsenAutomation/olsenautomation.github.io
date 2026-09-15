@@ -258,3 +258,43 @@
 @media(prefers-reduced-motion:reduce){
  .workshop-page.motion-enabled #journey,.workshop-page .exit-journey.motion-active{height:auto}
 }
+
+/* The workshop text leads directly into the room-to-door walk. */
+.workshop-page .exit-journey.motion-active{height:320svh}
+.workshop-page #door-stage{position:sticky;top:var(--header-h);height:calc(100svh - var(--header-h));min-height:0;display:grid;place-items:end center;padding:32px 20px 44px}
+.workshop-page .exit-door{position:relative;inset:auto;transform:none;width:min(620px,100%);margin:0;padding:24px}
+.workshop-page .exit-navigation{position:absolute;top:20px;left:20px;right:20px;z-index:8;display:flex;align-items:start;justify-content:space-between;gap:16px}
+.workshop-page .exit-scroll-cue{padding:8px 12px;font-size:13px;border-radius:999px;background:rgba(4,10,16,.7);text-shadow:0 1px 6px #000}
+.workshop-page .stair-options{width:min(320px,45%);font-size:13px;text-align:right}
+.workshop-page .stair-options summary{display:inline-block;cursor:pointer;padding:8px 12px;border-radius:999px;background:rgba(4,10,16,.7);list-style:none;text-decoration:underline;text-underline-offset:4px}
+.workshop-page .stair-options[open]{padding:12px;background:rgba(4,10,16,.96);border:1px solid var(--line);border-radius:14px}
+.workshop-page .stair-options[open] summary{padding:0 0 10px;background:none}
+.workshop-page .stair-options .journey-slider{gap:8px}
+.workshop-page .stair-options a{display:inline-block;padding:10px 0;color:#9cedf4;text-underline-offset:4px}
+.workshop-page #stair-status{top:72px;left:20px;right:auto;max-width:min(520px,calc(100% - 40px));text-align:left;margin:0;font-size:13px}
+.workshop-page #stair-status:empty{display:none}
+.workshop-page .stair-retry{position:absolute;z-index:8;top:130px;left:20px;padding:10px 14px;font-size:13px}
+.workshop-background{background:transparent;padding-block:0 34px;color:var(--muted)}
+.workshop-background>summary{cursor:pointer;font-size:14px;text-decoration:underline;text-underline-offset:4px;padding:12px 0}
+.workshop-background .project-story{margin:20px 0 0}
+@media(max-width:760px){
+ .workshop-page #door-stage{padding:22px 14px 36px}
+ .workshop-page .exit-navigation{top:14px;left:14px;right:14px;gap:8px}
+ .workshop-page .exit-scroll-cue,.workshop-page .stair-options{font-size:11px}
+ .workshop-page .stair-options{width:42%}
+ .workshop-page .stair-options[open]{width:62%}
+ .workshop-page .exit-door{padding:20px}
+ .workshop-page .exit-door h2{font-size:40px}
+ .workshop-page .exit-door p{font-size:16px;line-height:1.4}
+}
+@media(max-height:650px){
+ .workshop-page #door-stage{padding:12px 20px 24px}
+ .workshop-page .exit-door{padding:14px;max-width:720px}
+ .workshop-page .exit-door h2{font-size:30px;margin-bottom:8px}
+ .workshop-page .exit-door .section-kicker{display:none}
+ .workshop-page .exit-door p{font-size:14px;line-height:1.3}
+ .workshop-page .exit-actions{margin-top:10px;gap:8px}
+ .workshop-page .return-button,.workshop-page .exit-door-link{min-height:44px;padding:8px 12px;font-size:13px}
+ .workshop-page .exit-signup-note{margin-top:8px;font-size:11px}
+}
+@media(prefers-reduced-motion:reduce){.workshop-page .exit-journey.motion-active{height:auto}}

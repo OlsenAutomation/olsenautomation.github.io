@@ -2,6 +2,12 @@
 
 Owner: Brian Olsen. Active branch: `site-redesign-v2`.
 
+## Continuous basement exit — 2026-09-14
+
+Brian accepted the Whale clips and reported that basement navigation appears to work, then requested an uninterrupted return through the room/upstairs and removal of the distracting pilot box. Continuing to scroll after the workshop text now drives the existing stair video; the CTA appears at the door. The separate exit decision panel is removed, motion controls are optional, and detailed workshop evidence is tucked into a background disclosure while In planning remains visible.
+
+Desktop, mobile and short landscape checks pass, including reverse movement, keyboard seeking, CTA focus, static/reduced-motion access, failed-media retry and no horizontal overflow. Full preservation/build/link/privacy/media checks pass. The other 34 public HTML pages match the previous hosted receipt; original assets and frozen inventories remain intact. See QA_CONTINUOUS_BASEMENT.md. Publication to the existing authorized branch preview is in progress. Main, GitHub Pages, DNS, custom domain and production are unchanged.
+
 ## Project stories and current Whale media — 2026-09-14
 
 Brian approved continuing from the source-context and Whale review. All 26 existing project records now have shared, source-informed stories, workflow steps, current evidence and next steps. The Whale record includes the September 14 v0.4.1 motion excerpt, assembly timelapse, original assembly/comparison photos and a disclosed background-retouched lead image. Saved BatchQuote and ClearFloor interface images were recovered and classified; synthetic/sample values are not customer or performance evidence.

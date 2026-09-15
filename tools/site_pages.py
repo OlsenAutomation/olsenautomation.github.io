@@ -61,7 +61,11 @@ def build_site(header,footer,render,media):
   matching=next((p for p in projects if p['route']==item['route']),None)
   extra_styles=[]
   if matching and not item.get('private',False):
-   content+='<div class="project-record wrap project-record-update">'+project_story(matching['slug'],stories[matching['slug']])+'</div>'
+   story_markup=project_story(matching['slug'],stories[matching['slug']])
+   if '<!-- WORKSHOP_PROJECT_STORY -->' in content:
+    content=content.replace('<!-- WORKSHOP_PROJECT_STORY -->','<details class="workshop-background section-inner"><summary>Workshop background</summary>'+story_markup+'</details>')
+   else:
+    content+='<div class="project-record wrap project-record-update">'+story_markup+'</div>'
    extra_styles=['project-stories']
   page(item['route'],item['title'],item['description'],content,list(item.get('styles',('pages',)))+['preserved-layout']+extra_styles,item.get('scripts',()),item.get('metadata',''),item.get('private',False))
  (DIST/'route-registry.json').write_text(json.dumps([r for r in registry if not r['private']],indent=2)+'\n')

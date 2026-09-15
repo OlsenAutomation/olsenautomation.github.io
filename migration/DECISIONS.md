@@ -80,3 +80,9 @@ Use existing 640-wide silent derivatives for room/stair/portal motion. Room/stai
 The stair frame sequences and original source assets remain preserved and available in the media specimen. No inventory cleanup or deletion occurred. Keep the flagship workshop summary card, linking it to the learning section, and retain one featured “Enter the basement workshop” action there. Header/atlas navigation remain valid route indexes.
 
 Continue the already-authorized branch preview update. This is ordinary usability correction, not approval for main, DNS, live forms, privacy changes or a production cutover. Native touch and physical Safari acceptance remain separate from Chromium viewport/connection emulation.
+
+## Continuous basement exit — 2026-09-14
+
+Brian requested an uninterrupted scroll from the workbench text back through the room and up the stairs, ending with the CTA at the door. Replace the separate stair-entry decision with the existing buffered room-to-door video tied to absolute scroll position. Reserve the final part of the section for reading the CTA; reversing the scroll reverses the video and hides the CTA until arrival. Keep a small optional motion disclosure, keyboard seeking, an immediate skip and static/error fallbacks. Existing entrance controls and media assets remain unchanged.
+
+Remove the distracting pilot disclaimer from the main composition. Keep the workshop explicitly In planning and retain its detailed status/evidence in an optional Workshop background disclosure within the workshop text. This is presentation cleanup, not a change to release status, attendance evidence, attribution, pricing or reservation commitments. The final CTA now precedes the shared footer without an appended review panel. Continue only the existing authorized branch preview; no main or domain action.
