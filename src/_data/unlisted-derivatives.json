@@ -1,0 +1,56 @@
+{
+  "Brian_Olsen_DataAnnotation_Visual_AI_Trainer_Resume.pdf": {
+    "source": "public/unlisted-reviewed/Brian_Olsen_DataAnnotation_Visual_AI_Trainer_Resume.pdf",
+    "sha256": "bd87762b223bcbca81a192d6c650211edd5a6758173909af2121c9dbd4b0e97f",
+    "original_sha256": "b520a2dfceda558fa00f239b5d1bf6a722ccd1c2fd5bd8af492c02dc72bd5cfb",
+    "reason": "Correct approved public phone; remove document metadata; preserve layout and other text"
+  },
+  "assets/territory-execution/Brian_Olsen_Sazerac_Market_Development_Resume.pdf": {
+    "source": "public/unlisted-reviewed/assets/territory-execution/Brian_Olsen_Sazerac_Market_Development_Resume.pdf",
+    "sha256": "61a883a2eb83a7691cfd4782791e76c3f7bff045b3143314f0136aceed13cb7c",
+    "original_sha256": "9eb24fa31721059b1413e95e14b27b28cf76ff59c6302a27518a3182f4c6f3b2",
+    "reason": "Correct approved public phone; remove document metadata; preserve layout and other text"
+  },
+  "assets/visual-ai/ring-final.jpg": {
+    "source": "public/unlisted-reviewed/assets/visual-ai/ring-final.jpg",
+    "sha256": "7c2d877391b01db4aba7af8c3b95a42618cd8ead5a51e0debaf78405026687b8",
+    "original_sha256": "e16a747af619c7868efc2efe68f919174b9e5a3fcbffa98fc7dac1c52a122ee6",
+    "reason": "Lossless removal of EXIF, Photoshop and ICC metadata; identical decoded pixels"
+  },
+  "assets/visual-ai/ring-source.jpg": {
+    "source": "public/unlisted-reviewed/assets/visual-ai/ring-source.jpg",
+    "sha256": "cc6e1a6666b9a7da83ce2c743d7fd6be103fa060bc930638cdeb49fde1009067",
+    "original_sha256": "433e062ba620ab192f0850ef42c518636849eeba1a6a2e5018c8d359d7f3b225",
+    "reason": "Lossless removal of EXIF, Photoshop and ICC metadata; identical decoded pixels"
+  },
+  "assets/visual-ai/shadowbox-final.jpg": {
+    "source": "public/unlisted-reviewed/assets/visual-ai/shadowbox-final.jpg",
+    "sha256": "19b1c1457a065b34ebc319c31bb4a87f1865744cf7476448f38215c66891f9ad",
+    "original_sha256": "c852655e3706d0cd68d841cfcf4ba153183b740e4af679bc64a68fafc942956c",
+    "reason": "Lossless removal of EXIF, Photoshop and ICC metadata; identical decoded pixels"
+  },
+  "assets/visual-ai/shadowbox-source.jpg": {
+    "source": "public/unlisted-reviewed/assets/visual-ai/shadowbox-source.jpg",
+    "sha256": "472d47f4195a550ab1ec6e4e45505df3c1db02995159a3acb545e75d3f39fb1b",
+    "original_sha256": "c57369bd08517f5a02ec53bfe4b1d343268cbfd3998b7f4d821b20de6a662330",
+    "reason": "Lossless removal of EXIF, Photoshop and ICC metadata; identical decoded pixels"
+  },
+  "assets/visual-ai/twizzlers-final.jpg": {
+    "source": "public/unlisted-reviewed/assets/visual-ai/twizzlers-final.jpg",
+    "sha256": "8a81d30fb28789a8be07c66c33e1d03721b5abacdb0a3cd7024ccdf0c35c1903",
+    "original_sha256": "05176911f0f9ebe8d05ee81097285b308084c8eca2893c20af9d860e2e08fd21",
+    "reason": "Lossless removal of EXIF, Photoshop and ICC metadata; identical decoded pixels"
+  },
+  "assets/visual-ai/twizzlers-intermediate.jpg": {
+    "source": "public/unlisted-reviewed/assets/visual-ai/twizzlers-intermediate.jpg",
+    "sha256": "cc36341226b5c354eccedf5b9b24f3a122d5067f52638adcc9e3742469524642",
+    "original_sha256": "d70ce8504a6f3e259155bec00d6812b34887b83b6d284054ff7f0bc333ab1ea6",
+    "reason": "Lossless removal of EXIF, Photoshop and ICC metadata; identical decoded pixels"
+  },
+  "assets/visual-ai/twizzlers-source.jpg": {
+    "source": "public/unlisted-reviewed/assets/visual-ai/twizzlers-source.jpg",
+    "sha256": "16540d2865da969b3e400fb625ecb65bbae4d800bde3696694f7ccec2fb411a4",
+    "original_sha256": "ef2a99d403766ce794b12b4dd5c253b1da4b73ba13a355d90405e89f5117b919",
+    "reason": "Lossless removal of EXIF, Photoshop and ICC metadata; identical decoded pixels"
+  }
+}
