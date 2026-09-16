@@ -1,10 +1,11 @@
 # Launch preparation — September 15, 2026
 
-Status: technical preparation in progress on `site-redesign-v2`; production is not ready or authorized. The currently live GitHub Pages site, main branch and domain configuration remain untouched.
+Status: this launch-preparation checkpoint is complete on `site-redesign-v2`; production is not ready or authorized. The currently live GitHub Pages site, main branch and domain configuration remain untouched.
 
 ## Completed in this checkpoint
 
 - All 32 public content pages now have a canonical URL, Open Graph and Twitter title/description/image metadata generated from shared sources. Existing authored metadata is preserved. Project imagery retains its evidence label in share-image descriptions; original build photographs are preferred where available.
+- Canonical and social URLs target the existing production domain for the later cutover. New media paths are verified inside the build/preview, but are not yet served by the old live site; this is metadata preparation, not a claim that external share-card caches already display the new site.
 - All 35 public HTML bodies match the preceding hosted preview byte for byte. No page layout, copy, form, script, video, download or project status changed. The four isolated HTML pages are also unchanged. The established desktop/mobile page checks remain relevant; six additional representative renders at 1440×900 and 390×844 passed, with no overflow, no premature video loading or console errors. Mobile navigation and atlas filtering worked (Hardware & making: six results).
 - `npm run release:review` runs the full build/preservation/link/privacy/media suite and prepares a separate 87-route release matrix. It does not create an uploadable production build. The new matrix supplements the frozen inventory instead of recreating it.
 - The local draft sitemap contains 32 public canonical URLs. It excludes the four unlisted pages, development specimens and 404. This resolves the original proposal conflict where a noindex product-photo page was listed in the old sitemap, without editing the old sitemap or any live setting.
@@ -50,3 +51,11 @@ No executable production deployment command or domain mutation is included in th
 The cutover packet must identify the approved source commit, artifact hashes, Worker version, route/privacy decisions, test receipts, DNS/routing diff and rollback values. Keep the existing GitHub Pages site and its source intact during the reversible cutover. On a regression, restore the captured routing/domain state, verify legacy public and retained direct-link routes, and record the rollback. Main is never edited or merged as part of this work.
 
 Final owner go-live approval remains separate from preview publication, test-email authorization and privacy choices.
+
+## Preview publication receipt
+
+Source commit `476e475a93a69c8e3021b58909362817d1a81c98` is pushed to `site-redesign-v2`. Metadata-only changes to 32 HTML files were uploaded as Worker version `cadfe07a-dee0-4007-9665-5344d744cfec`. The existing branch alias now serves that version; all 425 file hashes, three aliases, 20 excluded paths, blocked POST (405) and 24 ranges across 12 MP4s pass hosted verification. Browser inspection confirms canonical/social metadata, preview mode and noindex remain correct. The other 393 public files were reused unchanged.
+
+Version preview: https://cadfe07a-olsen-automation-v2-preview.brian-dbb.workers.dev/
+
+The real test used the unchanged live intake page under its separate one-email authorization. No production build, main merge, DNS change, custom-domain mutation, telemetry-policy change, unlisted upload or duplicate cleanup occurred. Portfolio access and notification choices remain pending.
