@@ -9,7 +9,7 @@
     "validate": "python3 tools/validate.py",
     "preview": "node tools/serve.mjs",
     "test": "node tools/checks.mjs",
-    "check": "npm run build && npm run validate && npm test && node tools/check-media-worker.mjs && node tools/check-buffered-journey.mjs && node tools/check-scroll-journey.mjs && node tools/check-intake-receiver.mjs",
+    "check": "npm run build && npm run validate && npm test && node tools/check-media-worker.mjs && node tools/check-buffered-journey.mjs && node tools/check-scroll-journey.mjs && node tools/check-intake-receiver.mjs && node tools/check-notifications.mjs",
     "preview:upload": "node tools/upload-preview.mjs",
     "media:videos": "python3 tools/project_videos.py",
     "release:review": "npm run check && python3 tools/release_review.py"

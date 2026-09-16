@@ -8,9 +8,15 @@
   "assets": {
     "directory": "./dist",
     "binding": "ASSETS",
-    "run_worker_first": ["/media/*.mp4"],
+    "run_worker_first": [
+      "/media/*.mp4",
+      "/api/visit"
+    ],
     "html_handling": "none",
     "not_found_handling": "404-page"
   },
-  "send_metrics": false
+  "send_metrics": false,
+  "vars": {
+    "VISIT_NOTIFICATIONS": "disabled"
+  }
 }

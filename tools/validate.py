@@ -28,12 +28,14 @@ registry=json.loads((ROOT/'src/_data/pages.json').read_text())
 projects=json.loads((ROOT/'src/_data/projects.json').read_text())
 public_routes={'index.html','projects.html','404.html','preview/shell/index.html','preview/media/index.html'}|{r['route'].lstrip('/') for r in registry if not r['private']}|{r['route'].lstrip('/') for r in projects if r['route'].startswith('/projects/')}
 private_routes={r['route'].lstrip('/') for r in registry if r['private']}
+approved_unlisted={r.lstrip('/') for r in json.loads((ROOT/'src/_data/unlisted-publication.json').read_text())['approved_routes']}
+check(approved_unlisted==private_routes-{'family-card-chaos-access.html'},'Unlisted approval boundary changed')
 pages={p:Page(p.read_text()) for root in (DIST,PRIVATE) for p in root.rglob('*.html')}
-check({str(p.relative_to(DIST)) for p in pages if p.is_relative_to(DIST)}==public_routes,'Unexpected public routes')
+check({str(p.relative_to(DIST)) for p in pages if p.is_relative_to(DIST)}==public_routes|approved_unlisted,'Unexpected public routes')
 check({str(p.relative_to(PRIVATE)) for p in pages if p.is_relative_to(PRIVATE)}==private_routes,'Unexpected unlisted routes')
 headers=[];footers=[]
 for file,page in pages.items():
- private=file.is_relative_to(PRIVATE);root=PRIVATE if private else DIST;name=str(file.relative_to(root));text=file.read_text();ids=[a['id'] for _,a in page.tags if 'id' in a]
+ isolated=file.is_relative_to(PRIVATE);root=PRIVATE if isolated else DIST;name=str(file.relative_to(root));private=name in private_routes;text=file.read_text();ids=[a['id'] for _,a in page.tags if 'id' in a]
  check(any(t=='body' and a.get('data-site-mode')=='preview' for t,a in page.tags),f'{name}: missing preview delivery guard')
  check(len(ids)==len(set(ids)),f'{name}: duplicate ids')
  check(sum(t=='h1' for t,a in page.tags)==1,f'{name}: one h1 required')
@@ -65,7 +67,7 @@ for file,page in pages.items():
     if u.scheme or u.netloc:continue
     path=unquote(u.path);dest=((root/path.lstrip('/')) if path.startswith('/') else (file.parent/path)) if path else file
     if path.endswith('/'):dest/='index.html'
-    if not dest.is_file() and private:dest=DIST/dest.relative_to(PRIVATE)
+    if not dest.is_file() and isolated:dest=DIST/dest.relative_to(PRIVATE)
     check(dest.is_file(),f'{name}: missing {url}')
     if u.fragment and dest.is_file() and dest.suffix=='.html':check(any(b.get('id')==u.fragment for _,b in pages[dest].tags),f'{name}: missing fragment {url}')
  headers.append(re.search(r'<header.*?</header>',text,re.S).group());footers.append(re.search(r'<footer.*?</footer>',text,re.S).group())
@@ -83,11 +85,13 @@ for r in registry:
  if r['route']=='/verify.html':
   old=re.findall(r'<pre[^>]*>(.*?)</pre>',original,re.S);new=re.findall(r'<pre[^>]*>(.*?)</pre>',(DIST/'verify.html').read_text(),re.S)
   check([unescape(x) for x in old]==[unescape(x) for x in new],'Verification commands/key changed')
+approved_assets=set(json.loads((ROOT/'src/_data/unlisted-assets.json').read_text()))|{p.relative_to(PRIVATE).as_posix() for p in (PRIVATE/'unlisted-media').rglob('*') if p.is_file()}
 for p in DIST.rglob('*'):
  if not p.is_file():continue
  rel=p.relative_to(DIST)
  check(not p.is_symlink(),f'Output symlink: {rel}')
- check(not any(x in str(rel) for x in ('_codex_handoff','migration','apps-script','.git','CNAME','.pdf','unlisted-media','family-access','application-view-ping')),f'Forbidden public output: {rel}')
+ check(not any(x in str(rel) for x in ('_codex_handoff','migration','apps-script','.git','CNAME','family-access')),f'Forbidden public output: {rel}')
+ if any(x in str(rel) for x in ('.pdf','unlisted-media','application-view-ping')):check(str(rel) in approved_assets,f'Unapproved direct-link asset: {rel}')
  check(p.stat().st_size<25*1024*1024,f'Cloudflare per-file limit: {rel}')
 check(sum(p.is_file() for p in DIST.rglob('*'))<20000,'Cloudflare Free asset count exceeded')
 check((DIST/'robots.txt').read_text()=='User-agent: *\nDisallow: /\n','Preview robots changed')
@@ -101,6 +105,20 @@ for row in csv.DictReader((ROOT/'migration/ASSET_INVENTORY.csv').open()):
  p=ROOT/row['path'];check(p.is_file() and hashlib.sha256(p.read_bytes()).hexdigest()==row['sha256'],f'Baseline file changed: {row["path"]}')
 for group,root in [('public',DIST),('unlisted',PRIVATE)]:
  for relative in json.loads((ROOT/'src/_data'/f'{group}-assets.json').read_text()):check((ROOT/relative).read_bytes()==(root/relative).read_bytes(),f'Preserved asset changed: {relative}')
+derivatives=json.loads((ROOT/'src/_data/unlisted-derivatives.json').read_text())
+for relative in approved_assets:
+ expected=ROOT/derivatives[relative]['source'] if relative in derivatives else PRIVATE/relative
+ if relative=='assets/js/application-view-ping.js':expected=ROOT/'src/scripts/application-view-ping.js'
+ check((DIST/relative).read_bytes()==expected.read_bytes(),f'Unlisted published asset changed: {relative}')
+for relative,record in derivatives.items():
+ check(hashlib.sha256((ROOT/record['source']).read_bytes()).hexdigest()==record['sha256'],'Unlisted derivative hash changed')
+ check(hashlib.sha256((ROOT/relative).read_bytes()).hexdigest()==record['original_sha256'],'Unlisted original changed')
+ if relative.endswith('.pdf'):
+  text=subprocess.check_output(['pdftotext',str(DIST/relative),'-'],text=True)
+  check('626' not in text and ('(805) 500-8865' in text or '805-500-8865' in text),'Resume phone incorrect')
+for route in approved_unlisted:
+ check('noindex' in Head((DIST/route).read_text()).meta['robots'],'Unlisted indexing changed')
+ check('/'+route not in {r['route'] for r in json.loads((DIST/'route-registry.json').read_text())},'Unlisted route listed in registry')
 for row in csv.DictReader((ROOT/'migration/DERIVATIVE_ASSETS.csv').open()):check(hashlib.sha256((PRIVATE/row['replacement'].lstrip('/')).read_bytes()).hexdigest()==row['sha256'],'Embedded extraction changed')
 for p in DIST.rglob('*.js'):
  for relative in re.findall(r'(?:from\s*|import\s*)[\"\'](\.[^\"\']+)[\"\']',p.read_text()):check((p.parent/relative).is_file(),f'Broken module import: {p.name} {relative}')
@@ -161,4 +179,4 @@ for item in walk(project_videos):
   check(p.stat().st_size<4200000,'Project video exceeds preview range-buffer budget')
 for variant in manifest['stairs']['variants']:check(variant['count']==len(variant['frames']) and variant['count']>=120,'Incomplete stair sequence')
 if errors:print('\n'.join(errors));sys.exit(1)
-print(f'PASS: {len(public_routes)} public preview + {len(private_routes)} isolated unlisted pages; preserved content, metadata, source files, assets, shell, links and privacy.')
+print(f'PASS: {len(public_routes)} public preview + {len(approved_unlisted)} approved direct-link pages; {len(private_routes)} retained local review pages; preserved content, metadata, source files, assets, shell, links and privacy.')

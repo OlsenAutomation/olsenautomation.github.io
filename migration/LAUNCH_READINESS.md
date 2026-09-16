@@ -2,7 +2,7 @@
 
 Status: this launch-preparation checkpoint is complete on `site-redesign-v2`; production is not ready or authorized. The currently live GitHub Pages site, main branch and domain configuration remain untouched.
 
-## Completed in this checkpoint
+## Completed in the metadata checkpoint (historical)
 
 - All 32 public content pages now have a canonical URL, Open Graph and Twitter title/description/image metadata generated from shared sources. Existing authored metadata is preserved. Project imagery retains its evidence label in share-image descriptions; original build photographs are preferred where available.
 - Canonical and social URLs target the existing production domain for the later cutover. New media paths are verified inside the build/preview, but are not yet served by the old live site; this is metadata preparation, not a claim that external share-card caches already display the new site.
@@ -13,14 +13,14 @@ Status: this launch-preparation checkpoint is complete on `site-redesign-v2`; pr
 - The existing backup bundle and baseline tag were verified again, without recreating either. Remote main remains `0feac3f8376c5110eedfc20f5cdeecd0494f1ed7`.
 - Seven external link destinations were checked. Apple, GitHub, both Google help pages and Bing responded successfully. The photography site rejected the automated HTTP check but loaded normally in the browser. LinkedIn restricted automated access (999); it remains unverified rather than classified as broken.
 
-Local evidence: `.migration-local/launch-review/` contains body comparisons, six screenshots/render records, external-link observations, the draft sitemap/robots and a machine-readable readiness report. No local report, handoff material, source transcript or unlisted file is part of `dist`.
+Local evidence: `.migration-local/launch-review/` contains body comparisons, six screenshots/render records, external-link observations, the draft sitemap/robots and a machine-readable readiness report. No local report, handoff material or source transcript is part of `dist`. The subsequent owner-approved portfolio publication is recorded below.
 
 ## Production route and privacy decisions
 
-`LAUNCH_ROUTE_REVIEW.csv` accounts for every recorded route plus generated pages and aliases: 50 public-preview destinations, 25 isolated destinations and 12 source-only destinations. These counts include assets and aliases, not just HTML pages. Every row records recoverable bytes and a proposed disposition. No item is deleted, moved or consolidated.
+`LAUNCH_ROUTE_REVIEW.csv` accounts for every recorded route plus generated pages and aliases: 74 preview destinations (including approved unlisted resources), one isolated family destination and 12 source-only destinations. These counts include assets and aliases, not just HTML pages. Every row records recoverable bytes and a proposed disposition. No item is deleted, moved or consolidated.
 
-1. **Three professional portfolio pages and two résumés.** Proposed default: keep `/product-photo-production.html`, `/territory-sales-execution.html` and `/visual-ai-evaluation.html` at their original direct-link URLs with their exact existing noindex directives, omitted from navigation and the sitemap. Their supporting assets/downloads follow the same decision. Owner confirmation is needed before adding this held material to a hosted artifact; an access-controlled version is the alternative. Existing source disclosure is not blanket permission to expose new customer information.
-2. **Application-view notifications.** Territory and visual-AI pages currently preserve a script that sends visit and résumé-click notifications. It remains excluded/blocked in the public preview. Keeping or disabling those notifications is a privacy choice for Brian; preserve the original until he decides.
+1. **Approved: direct-link professional portfolios.** Brian selected unlisted access for `/product-photo-production.html`, `/territory-sales-execution.html` and `/visual-ai-evaluation.html`, including their two résumés and supporting images. These exact URLs are now included in the preview allowlist with the existing noindex directives and excluded from navigation, the public route registry and the draft sitemap. This is link sharing, not authentication; anyone holding a link can forward it. Originals remain untouched. Website résumé copies use the approved public phone, and seven image copies have metadata removed without changing decoded pixels.
+2. **Approved: engagement alerts.** Preserve résumé-click alerts and add site-visit/class-information alerts using the existing ntfy destination. A first-party Worker relay accepts only fixed event/route values; no form data, identifiers, query strings or visitor IP are forwarded. The shared footer provides an opt-out; DNT/GPC are honored. Both client and server gates keep previews silent. Activation and delivery verification belong to the later production release. See `UNLISTED_NOTIFICATIONS.md` for exact event semantics and limits.
 3. **Family guide.** Keep `/family-card-chaos-access.html` isolated until the exact production route has verified access control. No private family content may be added to an unprotected static asset directory. Retain the URL and source; do not replace it with a public redirect that exposes private instructions. Preparing the access-controlled destination and account authorization is a separate step after the owner chooses the route policy.
 
 ## Real intake test — completed after explicit approval
@@ -33,7 +33,7 @@ Brian explicitly approved one synthetic test email during this checkpoint. At ap
 
 Detailed mailbox identifiers, attachment and browser attempt receipt remain only in ignored local evidence. Browser DOM inspection masked the email input values, so the delivered attachment—not those empty readback strings—was used to verify `qa@example.com`. This confirms the existing live form/receiver delivery path; it does not yet validate the future migrated production mode and CSP. Workshop interest remains a user-reviewed mailto draft and does not require a new backend.
 
-## Technical work after the decisions
+## Remaining production preparation
 
 - Build a separate production artifact from the approved branch commit. Keep the approved public metadata and exact legacy `.html` routing. Remove preview-only pages and diagnostic registry files; preserve all approved original resource/download URLs, including held resources according to their disposition.
 - Apply indexable headers/robots only to the approved public pages. Preserve exact noindex on retained unlisted HTML and use appropriate noindex headers for its approved downloads. The local sitemap/robots are drafts, not activated settings.
@@ -58,4 +58,4 @@ Source commit `476e475a93a69c8e3021b58909362817d1a81c98` is pushed to `site-rede
 
 Version preview: https://cadfe07a-olsen-automation-v2-preview.brian-dbb.workers.dev/
 
-The real test used the unchanged live intake page under its separate one-email authorization. No production build, main merge, DNS change, custom-domain mutation, telemetry-policy change, unlisted upload or duplicate cleanup occurred. Portfolio access and notification choices remain pending.
+The real test used the unchanged live intake page under its separate one-email authorization. No production build, main merge, DNS change, custom-domain mutation, telemetry-policy change, unlisted upload or duplicate cleanup occurred. Those choices were pending at that historical checkpoint; Brian subsequently approved the direct-link and notification policies above.

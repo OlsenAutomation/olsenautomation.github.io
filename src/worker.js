@@ -1,10 +1,12 @@
-// MP4 range responses for seekable media on version previews. All other assets stay static.
+// Seekable MP4s and a gated notification endpoint; other assets stay static.
 import manifest from '../dist/media/manifest.json' with {type:'json'};
 import previewHeaders from './_data/preview-headers.json' with {type:'json'};
+import {visitNotification} from './visit-worker.js';
 
 const videos=new Map(Object.values(manifest.videos).flatMap(v=>v.variants).map(v=>[v.url,v.bytes]));
 export default {
   async fetch(request,env){
+    if(new URL(request.url).pathname==='/api/visit')return visitNotification(request,env);
     const size=videos.get(new URL(request.url).pathname);
     if(!size||!['GET','HEAD'].includes(request.method))return env.ASSETS.fetch(request);
     // Static Assets returned 200 to Range on the hosted preview. Fetch the known

@@ -13,6 +13,9 @@ const mime = {'.html':'text/html; charset=utf-8','.css':'text/css','.js':'text/j
 const server = http.createServer(async (req,res) => {
   try {
     const requestUrl = new URL(req.url, 'http://localhost');
+    if(requestUrl.pathname==='/api/visit'){
+      res.writeHead(req.method==='POST'?200:405,{'Content-Type':'application/json','Cache-Control':'no-store'});res.end('{"state":"disabled"}');return;
+    }
     if(requestUrl.pathname==='/__test/intake-receiver' && req.method==='POST'){
       let size=0;for await(const chunk of req){size+=chunk.length;if(size>150000){res.writeHead(413);res.end();return;}}
       const mode=requestUrl.searchParams.get('mode');

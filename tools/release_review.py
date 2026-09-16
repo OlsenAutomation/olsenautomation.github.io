@@ -40,13 +40,13 @@ def prepare():
                 decision = 'Family access boundary'
             else:
                 proposal = 'Retain exact direct-link route and existing noindex; exclude from navigation/sitemap'
-                decision = 'Unlisted portfolio publication and existing notification behavior'
+                decision = 'Approved: direct-link/noindex portfolios; resume, site and class alerts for live release'
         elif isolated.is_file():
             proposal = 'Preserve exact supporting asset/download URL with its approved unlisted page policy'
-            decision = 'Follows unlisted portfolio/access decision'
+            decision = 'Approved portfolio assets; family guide stays isolated'
         elif route.startswith('/assets/territory-execution/'):
             proposal = 'Preserve original bytes and URL under the portfolio visibility decision'
-            decision = 'Follows unlisted portfolio decision'
+            decision = 'Unused source asset remains preserved; no cleanup authorized'
         elif route.startswith('/preview/'):
             proposal = 'Development specimen; exclude from production output'
             indexing = 'noindex'
@@ -66,7 +66,7 @@ def prepare():
         rows.append(dict(route=route,preview_state=state,production_proposal=proposal,production_indexing=indexing,
                          owner_decision=decision,recoverable_sha256=hashlib.sha256(source.read_bytes()).hexdigest()))
     with (ROOT / 'migration/LAUNCH_ROUTE_REVIEW.csv').open('w', newline='') as stream:
-        writer = csv.DictWriter(stream, fieldnames=list(rows[0]))
+        writer = csv.DictWriter(stream, fieldnames=list(rows[0]), lineterminator='\n')
         writer.writeheader(); writer.writerows(rows)
     ET.register_namespace('', 'http://www.sitemaps.org/schemas/sitemap/0.9')
     urlset = ET.Element('{http://www.sitemaps.org/schemas/sitemap/0.9}urlset')
@@ -76,15 +76,15 @@ def prepare():
     (LOCAL / 'robots.txt').write_text('User-agent: *\nAllow: /\nSitemap: ' + ORIGIN + '/sitemap.xml\n')
     # These are release blockers, not toggles or implicit approval records.
     blockers = [
-        'Owner decision on three existing noindex portfolios and their two resumes/supporting assets',
-        'Owner decision on family access route and existing application-view notifications',
+        'Family guide remains excluded; verify any future access-controlled destination before publication',
+        'Enable and verify approved notification relay only with the production release; preview is intentionally silent',
         'Migrated production form/CSP acceptance; existing live-form delivery verified in test 20260915-01',
         'Physical iPhone/iPad Safari acceptance of the exact candidate',
         'Separate production artifact, route/header/form configuration and hosted pre-cutover validation',
         'Fresh domain/DNS snapshot, concrete cutover/rollback plan and explicit final owner go-live approval',
     ]
     summary = {'production_ready': False, 'deployable': False, 'reviewed_routes': len(rows),
-               'sitemap_public_urls': len(sitemap_urls), 'isolated_pages': len(private), 'blockers': blockers}
+               'sitemap_public_urls': len(sitemap_urls), 'isolated_pages': sum(not (DIST / r.lstrip('/')).exists() for r in private), 'approved_unlisted_pages': sum((DIST / r.lstrip('/')).exists() for r in private), 'blockers': blockers}
     (LOCAL / 'readiness.json').write_text(json.dumps(summary, indent=2) + '\n')
     assert not (DIST / 'sitemap.xml').exists(), 'Draft sitemap must not enter preview output'
     assert (DIST / 'robots.txt').read_text() == 'User-agent: *\nDisallow: /\n'

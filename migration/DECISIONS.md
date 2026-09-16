@@ -94,3 +94,11 @@ The request to proceed authorizes technical launch preparation and the standing 
 Fill missing canonical/social metadata from one shared implementation, preserving authored values, existing claims and all preview/noindex rules. Prefer original evidence photographs where available. The future sitemap/robots stay only in ignored local review output; the public preview continues to disallow indexing and block external form submission. The release-review tool supplements the frozen route inventory and explicitly reports that no deployable production artifact exists yet.
 
 Test the original Apps Script locally with in-memory service replacements, not the live email endpoint. A successful offline acceptance is not delivered mail. Keep all four unlisted pages isolated until their route/access decisions and production tests are complete. No automated deployment or production configuration is enabled by this checkpoint.
+
+## Direct-link access and visit alerts approved — 2026-09-15
+
+Brian chose link-accessible, unlisted professional portfolios; preserve exact URLs/noindex and keep them outside navigation/sitemap. Include the three existing professional pages and their reviewed supporting assets in the approved branch preview. Anyone with a link can open or forward it; do not represent this as authentication. Family information remains excluded pending actual access control.
+
+Retain résumé-click notifications and add general website/class-information alerts using the existing free ntfy destination. Use shared client logic and a first-party relay, coarse messages, 30-minute suppression, eight-second visible dwell for view events, and a visitor opt-out with DNT/GPC support. Previews stay silent; activate only in the separately approved production release. No new tracking identifiers, paid services or account access.
+
+Publish phone-corrected résumé derivatives and losslessly metadata-stripped image derivatives at the existing URLs. Keep baseline files and frozen inventories unchanged, with replacement hashes/reasons in the derivative manifest. This resolves the two pending owner privacy choices; it does not approve main, DNS, production or domain changes. See `UNLISTED_NOTIFICATIONS.md`.

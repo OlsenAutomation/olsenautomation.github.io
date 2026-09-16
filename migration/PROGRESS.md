@@ -1,5 +1,14 @@
 # Site V2 progress
 
+## Current checkpoint — unlisted portfolios and notification policy, 2026-09-15
+
+- Owner choices resolved: three direct-link/noindex portfolios, retained résumé alerts, added website/class-information alerts for the eventual live release. Family guide remains excluded.
+- Approved portfolio routes and supporting assets now build into preview output, absent from navigation, the public route registry and draft sitemap. Two résumé derivatives use the approved public phone; seven JPEG derivatives remove metadata without changing pixels. Originals and frozen inventories remain intact.
+- Shared notification client, strict same-origin relay, cooldowns and privacy opt-out implemented and tested. Preview gates prevent any actual alert; live activation/delivery remains part of production preparation.
+- Full preservation, HTTP/media/form and alert checks pass; 38 pages checked at desktop/mobile, plus keyboard preference persistence and all three PDF pages. Raw evidence stays local. No new email or notification sent.
+- Preview publication receipt to follow. No main merge, DNS/custom-domain change, paid feature or inventory cleanup.
+
+
 Owner: Brian Olsen. Active branch: `site-redesign-v2`.
 
 ## Launch preparation — 2026-09-15

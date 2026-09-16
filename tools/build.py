@@ -5,6 +5,7 @@ from pathlib import Path
 from string import Template
 from site_pages import build_site
 from site_metadata import add_public_metadata
+from unlisted_publication import publish as publish_unlisted
 ROOT=Path(__file__).resolve().parents[1];SRC=ROOT/'src';DIST=ROOT/'dist'
 def read(p):return (SRC/p).read_text()
 def render(path,**data):return Template(read(path)).substitute(data)
@@ -26,7 +27,7 @@ def build():
  DIST.mkdir();(DIST/'assets').mkdir()
  for folder in ['styles','scripts']:
   for p in (SRC/folder).iterdir():
-   if p.is_file() and p.suffix in ('.css','.js') and p.name!='family-access.js':shutil.copyfile(p,DIST/'assets'/p.name)
+   if p.is_file() and p.suffix in ('.css','.js') and p.name not in ('family-access.js','application-view-ping.js'):shutil.copyfile(p,DIST/'assets'/p.name)
  shutil.copyfile(SRC/'favicon.svg',DIST/'assets/favicon.svg')
  # Only generated, hashed media from manifest entries, never originals/source paths.
  def assets(node):
@@ -57,6 +58,7 @@ def build():
   dest=DIST/'preview'/slug/'index.html';dest.parent.mkdir(parents=True,exist_ok=True);dest.write_text(page)
  (DIST/'404.html').write_text(render('_includes/layout.html',title='Page not found',description='The requested Olsen Automation page could not be found.',content='<section class="section"><div class="wrap"><h1>Page not found.</h1><p>The page may have moved, or the address may be incorrect.</p><a class="btn primary" href="/">Return to Olsen Automation</a></div></section>',header=header,footer=footer,page_styles='',page_scripts=''))
  build_site(header,footer,render,media)
+ publish_unlisted(DIST,ROOT/'dist-unlisted')
  add_public_metadata(DIST,site,media,json.loads(read('_data/projects.json')),json.loads(read('_data/project-photos.json')))
  (DIST/'robots.txt').write_text('User-agent: *\nDisallow: /\n')
  security=json.loads(read('_data/preview-headers.json'))

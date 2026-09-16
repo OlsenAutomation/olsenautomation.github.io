@@ -25,3 +25,4 @@ document.addEventListener('click', event => {
 nav.addEventListener('click', event => { if (event.target.closest('a')) closeMenu(); });
 compact.addEventListener('change', () => closeMenu());
 import './portal.js';
+import './visit-notifications.js';
