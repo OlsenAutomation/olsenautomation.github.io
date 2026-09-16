@@ -39,3 +39,11 @@ Before approved production cutover, wire production mode and the enabled variabl
 `npm run release:review` checks baseline hashes, allowlisted routes and derivatives, private-family exclusions, noindex/navigation/sitemap boundaries, links/downloads, media ranges, intake isolation, and notification behavior. Notification checks cover dwell time, repeat suppression, trusted résumé clicks, hidden tabs, storage failure, opt-out/DNT/GPC, preview gates, payload/origin/path validation, provider failure and burst limiting. No external email or alert is sent by these tests.
 
 All 38 publishable HTML pages were rendered locally at 1440×900 and 390×844: one H1, meaningful main content, privacy disclosure present, preview/noindex intact, no horizontal overflow, no console warnings/errors. Keyboard disclosure operation and opt-out persistence across pages passed. Three PDF pages were visually checked. Raw screenshots and receipts remain ignored in `.migration-local/unlisted-review/`. Physical Safari acceptance and actual new-alert delivery remain later release checks.
+
+## Preview publication receipt
+
+Source commit `76b0719950ea82f5e687859be2dd973c3cef9be5` (asset preparation `ce0ba53`) was pushed to `site-redesign-v2` and uploaded as version `9aab3e8f-58c0-4650-b16a-abdc073b0683`. The standing branch alias serves this version. All 461 asset hashes, three aliases, 17 excluded paths, blocked ordinary POST and 24 byte-range checks across 12 MP4s pass. The notification endpoint explicitly returns `state: disabled`; no ntfy message or email was sent. Hosted mobile inspection confirms the direct-link résumé target, exact noindex, working privacy disclosure and no console errors.
+
+Preview: https://site-redesign-v2-olsen-automation-v2-preview.brian-dbb.workers.dev/
+
+Remote main remains `0feac3f8376c5110eedfc20f5cdeecd0494f1ed7`. The old live site, DNS, custom domain and production traffic were not changed.

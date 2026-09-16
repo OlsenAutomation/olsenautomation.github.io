@@ -6,7 +6,7 @@
 - Approved portfolio routes and supporting assets now build into preview output, absent from navigation, the public route registry and draft sitemap. Two résumé derivatives use the approved public phone; seven JPEG derivatives remove metadata without changing pixels. Originals and frozen inventories remain intact.
 - Shared notification client, strict same-origin relay, cooldowns and privacy opt-out implemented and tested. Preview gates prevent any actual alert; live activation/delivery remains part of production preparation.
 - Full preservation, HTTP/media/form and alert checks pass; 38 pages checked at desktop/mobile, plus keyboard preference persistence and all three PDF pages. Raw evidence stays local. No new email or notification sent.
-- Preview publication receipt to follow. No main merge, DNS/custom-domain change, paid feature or inventory cleanup.
+- Preview published from `76b0719` as Worker version `9aab3e8f-58c0-4650-b16a-abdc073b0683`: 461 files, three aliases, 17 exclusions, 24 ranges and disabled notification endpoint verified. See `UNLISTED_NOTIFICATIONS.md`. No main merge, DNS/custom-domain change, paid feature or inventory cleanup.
 
 
 Owner: Brian Olsen. Active branch: `site-redesign-v2`.

@@ -59,3 +59,7 @@ Source commit `476e475a93a69c8e3021b58909362817d1a81c98` is pushed to `site-rede
 Version preview: https://cadfe07a-olsen-automation-v2-preview.brian-dbb.workers.dev/
 
 The real test used the unchanged live intake page under its separate one-email authorization. No production build, main merge, DNS change, custom-domain mutation, telemetry-policy change, unlisted upload or duplicate cleanup occurred. Those choices were pending at that historical checkpoint; Brian subsequently approved the direct-link and notification policies above.
+
+## Subsequent approved privacy checkpoint
+
+The direct-link and alert choices above are implemented in source `76b0719` and branch preview version `9aab3e8f-58c0-4650-b16a-abdc073b0683`. Hosted verification passes for all 461 files, three aliases, 17 exclusions and 24 video ranges; the alert endpoint is confirmed disabled on preview. The exact event policy, derivative provenance, desktop/mobile checks and remaining production activation steps are recorded in `UNLISTED_NOTIFICATIONS.md`. The two privacy decisions are resolved. Production artifact preparation, live relay receipt, production-form validation, physical Safari acceptance and final owner go-live review remain.
