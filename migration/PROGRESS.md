@@ -2,6 +2,12 @@
 
 Owner: Brian Olsen. Active branch: `site-redesign-v2`.
 
+## Launch preparation — 2026-09-15
+
+Brian authorized the next steps after the preview checkpoint. Shared metadata now covers all 32 public content pages while preserving existing canonical/social metadata and every noindex boundary. The 35 public HTML bodies match the previous hosted build exactly; six additional home/Whale/workshop desktop/mobile renders pass, with working mobile navigation and atlas filtering. The preserved intake receiver passes new offline contract tests with mocked Google services; no email was sent.
+
+`npm run release:review` passes and prepares an 87-route disposition matrix plus a local-only 32-URL sitemap draft. The four unlisted pages and their assets remain isolated. No inventory was recreated or source item moved/deleted; the original backup/tag remain verified. See LAUNCH_READINESS.md and LAUNCH_ROUTE_REVIEW.csv for the concrete production work and remaining decisions. Brian authorized one synthetic live intake email; it was submitted once and independently verified in the recipient inbox with its JSON attachment. Owner input remains pending for unlisted professional portfolio visibility and existing application-view notifications. Physical-device acceptance, migrated production form/CSP, production artifact/configuration, exact cutover/rollback review and final go-live approval remain outstanding. Metadata-only preview publication is in progress; main and the live domain remain unchanged.
+
 ## Continuous basement exit — 2026-09-14
 
 Brian accepted the Whale clips and reported that basement navigation appears to work, then requested an uninterrupted return through the room/upstairs and removal of the distracting pilot box. Continuing to scroll after the workshop text now drives the existing stair video; the CTA appears at the door. The separate exit decision panel is removed, motion controls are optional, and detailed workshop evidence is tucked into a background disclosure while In planning remains visible.

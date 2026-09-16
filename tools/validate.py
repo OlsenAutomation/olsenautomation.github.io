@@ -6,6 +6,7 @@ from pathlib import Path
 from urllib.parse import urlsplit,unquote
 from html import unescape
 from PIL import Image
+from site_metadata import Head,canonical_url
 ROOT=Path(__file__).resolve().parents[1];DIST=ROOT/'dist';PRIVATE=ROOT/'dist-unlisted';errors=[]
 def check(ok,message):
  if not ok:errors.append(message)
@@ -37,6 +38,17 @@ for file,page in pages.items():
  check(len(ids)==len(set(ids)),f'{name}: duplicate ids')
  check(sum(t=='h1' for t,a in page.tags)==1,f'{name}: one h1 required')
  robots=[a.get('content','') for t,a in page.tags if t=='meta' and a.get('name')=='robots']
+ if not private and name!='404.html' and not name.startswith('preview/'):
+  head=Head(text);origin='https://olsenautomation.com'
+  check(sum(t=='link' and a.get('rel')=='canonical' for t,a in page.tags)==1,f'{name}: one canonical required')
+  check(head.canonical==canonical_url(origin,'/'+name),f'{name}: canonical differs from preserved route')
+  for key in ('og:title','og:description','og:url','og:image','og:image:alt','twitter:card','twitter:title','twitter:description','twitter:image','twitter:image:alt'):
+   check(bool(head.meta.get(key)),f'{name}: missing social metadata {key}')
+   check(sum(t=='meta' and a.get('property',a.get('name'))==key for t,a in page.tags)==1,f'{name}: duplicate metadata {key}')
+  check(head.meta.get('og:url')==head.canonical,f'{name}: social URL differs from canonical')
+  for key in ('og:image','twitter:image'):
+   image=urlsplit(head.meta.get(key,''))
+   check(image.scheme=='https' and image.netloc=='olsenautomation.com' and (DIST/image.path.lstrip('/')).is_file(),f'{name}: missing share image')
  check(len(robots)==1 and 'noindex' in robots[0],f'{name}: one noindex required for local review')
  check('{{status:' not in text and '<!-- PROJECT_ATLAS -->' not in text,f'{name}: unresolved shared content')
  check(not re.search(r'(data:|base64|_codex_handoff|626.{0,8}524)',text),f'{name}: embedded source or old contact')
