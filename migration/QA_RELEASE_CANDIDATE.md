@@ -13,7 +13,7 @@ Environment: Cloudflare version preview, Codex browser at 1440×900 and 390×844
 | Keyboard/navigation | Skip link receives first keyboard focus; phone menu opens and Escape closes it |
 | Basement/stairs | Entrance and workbench controls work; continued scroll reaches stair video at 10s and final CTA, without an exit-choice prompt |
 | Reduced motion | OS preference selects still views, no video plays, workshop content remains available |
-| Whale | 12-second actual build clip reached readyState 4 and its 12s end; assembly clip loads via its separate control |
+| Whale | 12-second actual build clip reached readyState 4 and its 12s end; assembly clip reached readyState 4 and 27.2s/28.9s while playing |
 | Class form | Fictional inputs produce the reviewable email dialog; Close works; no email app or send action invoked |
 | Migrated intake | One authenticated candidate submission showed success; independent Gmail inbox and 2,590-byte JSON attachment verified |
 | Notifications | **Blocked:** visit attempt unavailable, class attempt rejected by ntfy daily quota (HTTP 429), no retry and no résumé send afterward |
@@ -26,3 +26,5 @@ All 72 rendering measurements are in RELEASE_RENDER_QA.csv. Original screenshots
 Commands: `npm run release:build`, production Worker `versions upload --dry-run`, and `node tools/check-hosted-release.mjs <immutable-version-url>`. Browser checks used the Computer Use browser DOM, screenshots, viewport control, media preference emulation, keyboard input and visible controls. Temporary emulation and test cookies were cleared. The delivery-test capability is disabled in the final candidate; previous guarded versions expire independently within one hour.
 
 Remaining: physical Safari touch/scroll/seek acceptance, ntfy provider recovery and real phone delivery, Cloudflare zone readiness, and explicit final go-live approval. A provider 429 is not delivery, and the current no-cache relay may miss subscribers that are offline. No paid service or new notification destination was introduced.
+
+Final immutable candidate: `6356e084-7e77-4541-a766-18c6d9053a34`, from source `31d558e`. Hosted recheck: 466 exact files, 25 excluded routes, 24 MP4 range checks and zero failures. Default test routes return 404. The stable device-review URL is recorded in RELEASE_CANDIDATE.md.

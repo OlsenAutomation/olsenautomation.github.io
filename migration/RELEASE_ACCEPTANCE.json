@@ -1,8 +1,8 @@
 {
   "date": "2026-09-17",
-  "source_commit": "db4db9c",
-  "candidate_version": "92c7d746-8cfb-4f53-a2bc-60d828fe0044",
-  "hosted_files": 468,
+  "source_commit": "31d558eebeb8e413f4c82424b7a247ba450c49e8",
+  "candidate_version": "6356e084-7e77-4541-a766-18c6d9053a34",
+  "hosted_files": 466,
   "html_pages": 36,
   "render_checks": 72,
   "production_public_pages": 32,
@@ -34,5 +34,11 @@
     "Physical iPhone/iPad Safari acceptance",
     "Cloudflare zone readiness and assigned nameservers",
     "Explicit final owner go-live approval"
-  ]
+  ],
+  "excluded_route_checks": 25,
+  "candidate_url": "https://6356e084-olsen-automation-v2-preview.brian-dbb.workers.dev/",
+  "artifact_manifest_sha256": {
+    "production": "c84f2584c7415290a43bcadb5fa2e3e17cc820acf0aa856b2e64e2a5492a1db9",
+    "candidate": "ac19548316390d43a782805e749287f07aa088b34afd778bf7abb2209fc6e62d"
+  }
 }

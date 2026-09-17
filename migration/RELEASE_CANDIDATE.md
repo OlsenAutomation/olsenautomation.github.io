@@ -26,8 +26,8 @@ Production intake permits only the existing Google Apps Script destination and i
 
 ## September 17 acceptance results
 
-- Candidate source `db4db9c`; final silent version `92c7d746-8cfb-4f53-a2bc-60d828fe0044`. Temporary delivery tests used earlier guarded versions. The final version has `RELEASE_QA_EXPIRES=0`; both test routes return 404.
-- Hosted validation passes: 468 exact files, root alias, 23 excluded routes, blocked POST, disabled ordinary alerts, 24 correct MP4 prefix/suffix ranges plus invalid-range rejection.
+- Candidate source `31d558e`; final silent version `6356e084-7e77-4541-a766-18c6d9053a34`. Temporary delivery tests used earlier guarded versions. The final version has `RELEASE_QA_EXPIRES=0`; both test routes return 404.
+- Hosted validation passes: 466 exact files, root alias, 25 excluded routes, blocked POST, disabled ordinary alerts, 24 correct MP4 prefix/suffix ranges plus invalid-range rejection.
 - One migrated intake submission, test `20260917-01`, received the real Google acknowledgement. Independent Gmail verification confirms one matching inbox message and its 2,590-byte JSON attachment, with fictional details, empty public address and no automatic-action permissions. No retry occurred. Raw receipts remain local.
 - Notification delivery is **blocked**: one website test returned unavailable; the subsequent class test confirmed ntfy HTTP 429, daily message quota reached. Neither has a delivery receipt. The résumé test was not sent after the quota rejection. Do not infer real-device delivery from offline relay tests. No paid upgrade, alternate identity, quota bypass, or repeated send was attempted.
 - Squarespace read-only inspection captured all nine configured DNS records, including Google Workspace MX/SPF/DKIM and Domain Connect, and verified DNSSEC disabled. Nothing was changed.
@@ -37,3 +37,9 @@ Provider behavior: [ntfy limits](https://docs.ntfy.sh/publish/#limitations) and 
 ## Acceptance still to complete
 
 Notification provider recovery and actual phone delivery, physical iPhone/iPad acceptance, Cloudflare zone/account readiness with assigned nameservers, and final owner go-live approval. The existing GitHub Pages site remains live.
+
+Stable device-review URL: https://6356e084-olsen-automation-v2-preview.brian-dbb.workers.dev/
+
+Moving candidate alias: https://release-candidate-olsen-automation-v2-preview.brian-dbb.workers.dev/
+
+Latest final-version recheck confirms the two specimen-only media assets return 404, ordinary alerts remain disabled, all 466 served files match local bytes, and all 12 MP4s retain correct range behavior. Both Whale clips decoded and played in the browser. Page bodies did not change between the 72 rendering measurements and this final upload. GitHub Pages still serves the unchanged live site from main/root with HTTPS enforced.
