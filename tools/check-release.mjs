@@ -9,6 +9,7 @@ const walk=async dir=>(await Promise.all((await readdir(dir,{withFileTypes:true}
 const files=await walk('dist-production');
 assert.equal(files.filter(p=>p.endsWith('.html')).length,36);
 assert.ok(!files.some(p=>/preview\/|family-card-chaos-access|family-access\.js|route-registry|_codex|apps-script|migration\//.test(p)));
+assert.ok(!files.some(p=>/\/assets\/media\.(js|css)$/.test(p)));
 for(const route of [...routes,...unlisted,'/404.html']){
   const prod=await read('dist-production'+route),stage=await read('dist-candidate'+route);
   assert.match(prod,/data-site-mode="production"/);assert.match(stage,/data-site-mode="candidate"/);

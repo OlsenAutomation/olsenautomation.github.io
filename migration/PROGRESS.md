@@ -1,6 +1,6 @@
 ## Release candidate preparation — 2026-09-17
 
-Separate production and silent candidate builds are implemented with production indexing and approved direct-link boundaries. Automated release validation passes; hosted and real-delivery acceptance is in progress. DNS is still outside Cloudflare, so the staged cutover requires a complete zone export and owner approval. See RELEASE_CANDIDATE.md and DOMAIN_CUTOVER_PLAN.md. No main, domain or production change occurred.
+Separate production and silent candidate builds preserve 32 public pages, three unlisted portfolios and the excluded family guide. Hosted files/headers/ranges and 72 desktop/mobile page renders pass. One migrated real intake acknowledgement and its matching inbox JSON attachment were verified. Real notifications remain blocked by an ntfy daily-quota rejection; no retry or paid upgrade occurred. Brian opened Squarespace; all nine DNS records and disabled DNSSEC state were captured read-only. Physical Safari, notification delivery, Cloudflare zone readiness and final go-live approval remain open. See RELEASE_CANDIDATE.md, QA_RELEASE_CANDIDATE.md, RELEASE_ACCEPTANCE.json and DOMAIN_CUTOVER_PLAN.md. Main and the live domain remain unchanged.
 
 # Site V2 progress
 

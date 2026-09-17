@@ -1,0 +1,38 @@
+{
+  "date": "2026-09-17",
+  "source_commit": "db4db9c",
+  "candidate_version": "92c7d746-8cfb-4f53-a2bc-60d828fe0044",
+  "hosted_files": 468,
+  "html_pages": 36,
+  "render_checks": 72,
+  "production_public_pages": 32,
+  "unlisted_pages": 3,
+  "source_only_private_pages": 1,
+  "intake": {
+    "test_id": "20260917-01",
+    "submissions": 1,
+    "acknowledged": true,
+    "gmail_inbox_verified": true,
+    "attachment_bytes": 2590,
+    "automatic_actions": []
+  },
+  "notifications": {
+    "website_test": "unavailable; no receipt",
+    "class_test": "HTTP 429 daily message quota reached",
+    "resume_test": "not attempted after quota rejection",
+    "subscriber_delivery_verified": false
+  },
+  "dns": {
+    "provider": "Squarespace Domains",
+    "configured_records_captured": 9,
+    "dnssec_enabled": false,
+    "changed": false
+  },
+  "production_ready": false,
+  "remaining": [
+    "Resolve notification provider quota and verify real phone delivery",
+    "Physical iPhone/iPad Safari acceptance",
+    "Cloudflare zone readiness and assigned nameservers",
+    "Explicit final owner go-live approval"
+  ]
+}

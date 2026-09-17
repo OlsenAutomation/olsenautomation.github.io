@@ -24,6 +24,16 @@ One clearly labeled fictional intake is authorized for this candidate check. Log
 
 Production intake permits only the existing Google Apps Script destination and its response frames in CSP. All other forms remain blocked by default; the workshop prepares an email draft and does not silently subscribe or send.
 
+## September 17 acceptance results
+
+- Candidate source `db4db9c`; final silent version `92c7d746-8cfb-4f53-a2bc-60d828fe0044`. Temporary delivery tests used earlier guarded versions. The final version has `RELEASE_QA_EXPIRES=0`; both test routes return 404.
+- Hosted validation passes: 468 exact files, root alias, 23 excluded routes, blocked POST, disabled ordinary alerts, 24 correct MP4 prefix/suffix ranges plus invalid-range rejection.
+- One migrated intake submission, test `20260917-01`, received the real Google acknowledgement. Independent Gmail verification confirms one matching inbox message and its 2,590-byte JSON attachment, with fictional details, empty public address and no automatic-action permissions. No retry occurred. Raw receipts remain local.
+- Notification delivery is **blocked**: one website test returned unavailable; the subsequent class test confirmed ntfy HTTP 429, daily message quota reached. Neither has a delivery receipt. The résumé test was not sent after the quota rejection. Do not infer real-device delivery from offline relay tests. No paid upgrade, alternate identity, quota bypass, or repeated send was attempted.
+- Squarespace read-only inspection captured all nine configured DNS records, including Google Workspace MX/SPF/DKIM and Domain Connect, and verified DNSSEC disabled. Nothing was changed.
+
+Provider behavior: [ntfy limits](https://docs.ntfy.sh/publish/#limitations) and [message caching](https://docs.ntfy.sh/publish/#message-caching). The current no-cache relay delivers only to connected subscribers and may miss reconnecting clients; actual phone acceptance remains necessary.
+
 ## Acceptance still to complete
 
-Hosted candidate bytes/headers/routes/media, desktop/mobile rendering and interactions; one migrated real-form acknowledgement plus independent mailbox receipt; three synthetic relay provider receipts; physical iPhone/iPad acceptance; complete authoritative DNS export and account access; final owner go-live approval.
+Notification provider recovery and actual phone delivery, physical iPhone/iPad acceptance, Cloudflare zone/account readiness with assigned nameservers, and final owner go-live approval. The existing GitHub Pages site remains live.

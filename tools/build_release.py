@@ -18,6 +18,9 @@ def build():
     shutil.copytree(SOURCE,PRODUCTION)
     shutil.rmtree(PRODUCTION/'preview')
     (PRODUCTION/'route-registry.json').unlink()
+    # These modules belong exclusively to the removed media specimen.
+    for name in ('media.js','media.css'):
+        (PRODUCTION/'assets'/name).unlink()
     public_routes={r['route'] for r in json.loads((SOURCE/'route-registry.json').read_text())}
     unlisted=json.loads((ROOT/'src/_data/unlisted-publication.json').read_text())['approved_routes']
     for path in PRODUCTION.rglob('*.html'):

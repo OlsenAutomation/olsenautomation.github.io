@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Prepare a non-deployable release review; never activates forms or indexing."""
+"""Prepare route proposals; current acceptance receipts live in migration/RELEASE_CANDIDATE.md."""
 import csv
 import hashlib
 import json
@@ -74,17 +74,17 @@ def prepare():
         ET.SubElement(ET.SubElement(urlset, 'url'), 'loc').text = url
     ET.ElementTree(urlset).write(LOCAL / 'sitemap.xml', encoding='utf-8', xml_declaration=True)
     (LOCAL / 'robots.txt').write_text('User-agent: *\nAllow: /\nSitemap: ' + ORIGIN + '/sitemap.xml\n')
-    # These are release blockers, not toggles or implicit approval records.
-    blockers = [
-        'Family guide remains excluded; verify any future access-controlled destination before publication',
-        'Enable and verify approved notification relay only with the production release; preview is intentionally silent',
-        'Migrated production form/CSP acceptance; existing live-form delivery verified in test 20260915-01',
+    # Route analysis alone does not establish launch readiness. Keep acceptance separate.
+    gates = [
+        'Approved unlisted boundaries and excluded private family guide',
+        'Real notification provider and phone delivery',
+        'Migrated form/CSP acknowledgement and independent mailbox receipt',
         'Physical iPhone/iPad Safari acceptance of the exact candidate',
-        'Separate production artifact, route/header/form configuration and hosted pre-cutover validation',
-        'Fresh domain/DNS snapshot, concrete cutover/rollback plan and explicit final owner go-live approval',
+        'Separate production artifact and hosted pre-cutover validation',
+        'Current DNS snapshot, concrete rollback and explicit final go-live approval',
     ]
     summary = {'production_ready': False, 'deployable': False, 'reviewed_routes': len(rows),
-               'sitemap_public_urls': len(sitemap_urls), 'isolated_pages': sum(not (DIST / r.lstrip('/')).exists() for r in private), 'approved_unlisted_pages': sum((DIST / r.lstrip('/')).exists() for r in private), 'blockers': blockers}
+               'sitemap_public_urls': len(sitemap_urls), 'isolated_pages': sum(not (DIST / r.lstrip('/')).exists() for r in private), 'approved_unlisted_pages': sum((DIST / r.lstrip('/')).exists() for r in private), 'scope': 'route proposals only; not a current test-status report', 'acceptance_record': 'migration/RELEASE_CANDIDATE.md', 'launch_gates': gates}
     (LOCAL / 'readiness.json').write_text(json.dumps(summary, indent=2) + '\n')
     assert not (DIST / 'sitemap.xml').exists(), 'Draft sitemap must not enter preview output'
     assert (DIST / 'robots.txt').read_text() == 'User-agent: *\nDisallow: /\n'
