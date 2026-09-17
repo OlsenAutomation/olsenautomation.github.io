@@ -1,8 +1,8 @@
 {
   "date": "2026-09-17",
-  "source_commit": "c9b03eb3d90cb3d1d91592ce18db5a7d1c1db974",
-  "candidate_version": "71783a5b-afe2-46c2-94ab-b515709d0e4b",
-  "hosted_files": 466,
+  "source_commit": "9b7902b9c0ba06eb417090d46f39eb33226c6cf3",
+  "candidate_version": "4b6a726d-2b9d-4076-969c-ab6a4c826811",
+  "hosted_files": 467,
   "html_pages": 36,
   "render_checks": 72,
   "production_public_pages": 32,
@@ -36,15 +36,16 @@
     "Explicit final owner go-live approval"
   ],
   "excluded_route_checks": 25,
-  "candidate_url": "https://71783a5b-olsen-automation-v2-preview.brian-dbb.workers.dev/",
+  "candidate_url": "https://4b6a726d-olsen-automation-v2-preview.brian-dbb.workers.dev/",
   "artifact_manifest_sha256": {
-    "production": "f19d3b663bc04c6f2fe355004002e566f8f625348ad3caf7eb0df37b0b5dba39",
-    "candidate": "18c082d7ffb77ecc7125cc8e149772ebec0469c433453a057a756d4eb20d2f9f"
+    "production": "c7db239bb71e3f7fc3d76cb9853c3cbc2e5adab501cda3bfc2f502f23f7d1814",
+    "candidate": "a41a2ec8aed2d91c5ca7cf5ad50d8e92c66fdb8b2d249f7c69f5866c9ef88fc9"
   },
   "render_baseline": {
     "source_commit": "31d558eebeb8e413f4c82424b7a247ba450c49e8",
     "candidate_version": "6356e084-7e77-4541-a766-18c6d9053a34",
-    "checks": 72
+    "checks": 72,
+    "known_gap": "The prior release omitted workshop media.css; earlier rendering results did not establish correct staircase presentation. Repaired and rechecked in this revision."
   },
   "compact_controls_revision": {
     "date": "2026-09-17",
@@ -61,6 +62,40 @@
     "expand_collapse": true,
     "keyboard_and_focus": true,
     "narrow_workbench_label_contained": true,
+    "new_external_messages": 0
+  },
+  "scroll_staircase_revision": {
+    "date": "2026-09-17",
+    "local_viewports": [
+      [
+        1440,
+        900
+      ],
+      [
+        390,
+        844
+      ],
+      [
+        844,
+        390
+      ]
+    ],
+    "hosted_viewports": [
+      [
+        1440,
+        900
+      ],
+      [
+        390,
+        844
+      ]
+    ],
+    "shared_stylesheet_served": true,
+    "video_fills_stage": true,
+    "wheel_forward_reverse": true,
+    "signup_focus_verified_with_direct_click": true,
+    "still_and_reduced_motion": true,
+    "physical_touch_verified": false,
     "new_external_messages": 0
   }
 }

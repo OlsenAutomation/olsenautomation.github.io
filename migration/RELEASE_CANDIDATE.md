@@ -38,7 +38,7 @@ Provider behavior: [ntfy limits](https://docs.ntfy.sh/publish/#limitations) and 
 
 Notification provider recovery and actual phone delivery, physical iPhone/iPad acceptance, Cloudflare zone/account readiness with assigned nameservers, and final owner go-live approval. The existing GitHub Pages site remains live.
 
-Stable device-review URL: https://71783a5b-olsen-automation-v2-preview.brian-dbb.workers.dev/
+Stable device-review URL: https://4b6a726d-olsen-automation-v2-preview.brian-dbb.workers.dev/
 
 Moving candidate alias: https://release-candidate-olsen-automation-v2-preview.brian-dbb.workers.dev/
 
@@ -47,3 +47,9 @@ The original acceptance-version recheck confirms the two specimen-only media ass
 ## Compact controls revision
 
 Brian requested minimizing the basement panel. Current device-review candidate `71783a5b-afe2-46c2-94ab-b515709d0e4b` comes from source `c9b03eb` and starts with a 58px bar containing chapter, play/pause and an expandable Controls button. Room stops, scrubber and skip link remain available. Only workshop HTML/CSS/JS changed from the prior acceptance artifact. Local 1440/390/320px checks and hosted 1440/390px checks pass, including keyboard focus and the longest label on narrow phones. The 72-page render report and real-delivery receipts above describe the earlier acceptance version; this focused revision has its own workshop recheck. Hosted validation again passes all 466 files, 25 exclusions and 24 range checks. Candidate alerts remain disabled and no new messages were sent. Main, production traffic and DNS are unchanged.
+
+## Staircase presentation and scroll repair
+
+Current candidate `4b6a726d-2b9d-4076-969c-ab6a4c826811` from `9b7902b` supersedes the compact-controls version. The removed media stylesheet was still a workshop dependency; the earlier checks missed the resulting small video/unformatted CTA. Its reusable rules now live in shared `journey.css`, which is present in the release, while specimen files remain excluded. Release validation now checks linked scripts/styles after exclusions and reproduced this exact failure before repair.
+
+Wheel gestures now ease the video toward accumulated destinations, including reverse travel, with cancellation for explicit controls, visibility changes, errors and still views. Hosted desktop 1440×900 and phone 390×844 show the video covering the stage and a fully visible CTA. Forward/reverse sampling, direct-click signup focus, local landscape, keyboard and reduced-motion checks pass; physical touch remains unverified. Hosted verification: 467 exact files, 25 exclusions, 24 correct video ranges, disabled alerts and no failures. No new messages, production deployment, main merge or DNS changes occurred.
