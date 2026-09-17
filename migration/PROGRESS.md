@@ -1,3 +1,7 @@
+## Compact room controls — 2026-09-17
+
+Brian requested minimizing the basement control box. The room controls now start as a 58px bar with chapter, play/pause and a Controls toggle; room stops, seek slider and skip link expand on demand. Keyboard Escape collapses the panel and restores toggle focus. Desktop (1440px), phone (390px) and narrow phone (320px) checks passed without horizontal overflow; still views hide the controls and stop motion. Candidate publication follows this checkpoint; no live-site or DNS action is included.
+
 ## Release candidate preparation — 2026-09-17
 
 Separate production and silent candidate builds preserve 32 public pages, three unlisted portfolios and the excluded family guide. Hosted files/headers/ranges and 72 desktop/mobile page renders pass. One migrated real intake acknowledgement and its matching inbox JSON attachment were verified. Real notifications remain blocked by an ntfy daily-quota rejection; no retry or paid upgrade occurred. Brian opened Squarespace; all nine DNS records and disabled DNSSEC state were captured read-only. Physical Safari, notification delivery, Cloudflare zone readiness and final go-live approval remain open. See RELEASE_CANDIDATE.md, QA_RELEASE_CANDIDATE.md, RELEASE_ACCEPTANCE.json and DOMAIN_CUTOVER_PLAN.md. Main and the live domain remain unchanged.

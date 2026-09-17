@@ -12,6 +12,18 @@ const stairs=$('#stairs'),frame=$('#exit-frame'),doorPoster=frame.src,door=$('.e
 const stairSlider=$('#stair-position'),motion=$('#motion-toggle'),exitStage=$('#door-stage');
 const roomVideos=[$('#movie'),$('#workbench-video')],stairVideo=$('#stair-video');
 const allVideos=[...root.querySelectorAll('video')];
+const roomNavigation=$('#room-navigation'),roomControlsToggle=$('#room-controls-toggle');
+function showRoomControls(open){
+  roomNavigation.hidden=!open;
+  roomControlsToggle.setAttribute('aria-expanded',String(open));
+  roomControlsToggle.setAttribute('aria-label',open?'Hide room controls':'Show room controls');
+}
+roomControlsToggle.addEventListener('click',()=>showRoomControls(roomNavigation.hidden));
+root.querySelector('.room-controls').addEventListener('keydown',event=>{
+  if(event.key==='Escape'&&!roomNavigation.hidden){
+    showRoomControls(false);roomControlsToggle.focus({preventScroll:true});event.stopPropagation();
+  }
+});
 const choose=name=>selectVariant(manifest.videos[name].variants,640);
 function setCopy(p){
   const index=p<.28?0:p<.66?1:2;
@@ -81,6 +93,7 @@ function preparePlayers(){
 function align(section){scrollDriven=false;section.scrollIntoView({behavior:'instant',block:'start'});lastScrollY=scrollY;}
 function beginRoom(){
   if(still||!manifest)return;
+  showRoomControls(false);
   roomEnabled=true;root.classList.remove('static-mode');root.classList.add('motion-enabled');root.querySelector('.room-controls').hidden=false;
   $('#enter-room').hidden=true;align(room);$('#play-room').focus({preventScroll:true});roomPlayer.seek(0,true);
 }
