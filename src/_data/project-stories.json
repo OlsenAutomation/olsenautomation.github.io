@@ -196,17 +196,17 @@
   },
   "mechanical-whale": {
     "headline": "A whale that moves—and teaches through every revision.",
-    "summary": "A hand-cranked skeletal whale, now demonstrated in the v0.4.1 build, with wave supports and assembly details still being refined.",
+    "summary": "A hand-cranked skeletal whale with moving waves, now in the v0.5 display build with a platform and nameplate. Physical tests are refining fit, spacing and assembly.",
     "origin": "The idea was a kit that becomes a moving sculpture: printed parts, a visible skeleton, and a hand crank that brings the whale and its waves to life.",
-    "built": "The v0.4.1 build brings together the braced body, tested collar, two wave supports and numbered hardware. The September 14 photos and videos show Brian assembling and moving the physical model.",
-    "lesson": "Assembly exposed details that a clean digital model could miss. The rear wave could escape its pin channel, some part numbers were hard to read, and fixed connections needed glue and extra bracing.",
-    "next": "A proposed test plate adds a longer rear pin and washer, locking base tabs, hooked brace ends and clearer numbers. Those replacement parts still need a physical fit and motion test.",
-    "evidence": "Physical prototype — motion demonstrated in the supplied September 14, 2026 video. The shown build includes assembly modifications; it does not establish that the revised kit assembles without glue or passes an endurance test.",
+    "built": "The three-card v0.5 build adds a display platform, an Olsen Automation plaque and more body detail. Smaller snap-pin lips and the selected base and brace fits came from physical test pieces. A supplied Bambu Studio screenshot estimates 6 hours 2 minutes and 158.37 grams for the three plates; these are slicer estimates, not a measured production run.",
+    "lesson": "Brian found that tightening the wave stack too far caused the moving panels to collide. Leaving clearance and aligning the two shafts let them pass. Hinge-cover ribs and the end clip still needed small amounts of glue. The useful result is a working adjusted assembly—and a clearer account of what the next builder will need.",
+    "next": "Make shaft spacing and clip retention repeatable, document the cutting and gluing steps, and test whether another person can assemble the kit from the instructions. Packaging and a small evaluation batch are being explored; a public kit release has not been established.",
+    "evidence": "Active physical prototype. September 16, 2026 photos and a close-up recording document the assembled v0.5 build. Brian reports that wave-spacing and shaft-alignment adjustments restored movement, with small amounts of glue used on loose fixed ribs and the end clip. Repeatable kit assembly and durability are still being evaluated.",
     "flow": [
-      "Print the kit",
-      "Assemble and adjust",
-      "Crank the mechanism",
-      "Revise the weak points"
+      "Print and compare fit tests",
+      "Assemble the three cards",
+      "Adjust and test the mechanism",
+      "Document a repeatable build"
     ]
   },
   "easter-tomb": {

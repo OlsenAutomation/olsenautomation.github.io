@@ -1,7 +1,42 @@
 {
   "mechanical-whale": {
-    "teaser": "The v0.4.1 build, demonstrated in motion—with the next corrections still visible.",
+    "teaser": "The v0.5 whale now has a display platform and nameplate, with new photos and close-up mechanism footage.",
     "items": [
+      {
+        "asset": "whale-v05-presentation",
+        "kind": "AI-retouched presentation",
+        "alt": "White v0.5 skeletal whale above blue moving waves on a white display platform with an Olsen Automation plaque, against a cleaned charcoal background",
+        "caption": "September 16 v0.5 display build. AI cleaned the background for presentation; fine details may differ. The original photograph and mechanism footage below are the build evidence.",
+        "fit": "contain"
+      },
+      {
+        "asset": "whale-v05-original",
+        "kind": "Original v0.5 build photo",
+        "alt": "White mechanical whale over blue waves on a white platform labeled Whale in Motion and Olsen Automation, photographed on the workbench",
+        "caption": "Original September 16 v0.5 display photograph. Metadata removed; the model, framing and workshop background remain as photographed.",
+        "fit": "contain"
+      },
+      {
+        "asset": "whale-v05-spacing",
+        "kind": "Original mechanism detail",
+        "alt": "Close view of the blue moving wave panels and white linkage arranged along the whale drive shaft",
+        "caption": "The moving stack after Brian adjusted its spacing. He reports that allowing clearance between the waves stopped their collision. Defined spacers are a proposed next correction.",
+        "fit": "contain"
+      },
+      {
+        "asset": "whale-v05-retention",
+        "kind": "Original retention detail",
+        "alt": "Close view of the blue crank shaft and retaining clip beside the whale wave panels",
+        "caption": "A closer look at shaft retention. Brian reports using a small dab of glue on the end clip after setting the working clearance; improved retention remains under development.",
+        "fit": "contain"
+      },
+      {
+        "asset": "whale-v05-slice",
+        "kind": "Slicer estimate screenshot",
+        "alt": "Bambu Studio summary showing three plates, 6 hours 2 minutes estimated time and 158.37 grams of filament",
+        "caption": "The supplied three-plate slice estimates 6h 2m and 158.37g. This is planning evidence, not actual print duration, production cost or tested durability.",
+        "fit": "contain"
+      },
       {
         "asset": "whale-v041-presentation",
         "kind": "AI-retouched presentation",

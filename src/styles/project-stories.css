@@ -15,6 +15,7 @@
 .project-clip{margin:0;padding:20px;border:1px solid var(--line);border-radius:18px;background:var(--surface)}
 .project-clip h3{font-size:20px;margin:0 0 16px}
 .project-clip video{display:block;width:100%;height:auto;aspect-ratio:910/512;object-fit:contain;background:var(--bg-deep);border-radius:8px}
+.project-clip.portrait video{aspect-ratio:512/910;max-height:520px}
 .clip-actions{display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin:16px 0}
 .clip-actions .btn{font-size:13px;padding:10px 14px}
 .clip-actions a{font-size:13px;color:var(--cyan);text-decoration:underline;text-underline-offset:4px}

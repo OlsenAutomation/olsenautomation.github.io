@@ -2,7 +2,7 @@
 import html,json,re,shutil
 from project_photos import load as load_photos,card as photo_card,gallery as photo_gallery,highlights as photo_highlights
 from project_stories import load as load_stories,story as project_story,videos as project_videos
-from project_photos import figure as photo_figure
+from project_photos import figure as photo_figure,picture as photo_picture
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1];SRC=ROOT/'src';DIST=ROOT/'dist';PRIVATE=ROOT/'dist-unlisted'
 def esc(s):return html.escape(str(s),quote=True)
@@ -57,6 +57,9 @@ def build_site(header,footer,render,media):
   page(item['route'],item['title']+' | Olsen Automation',item['summary'],body,('pages','project-photos','project-stories'),('project-videos',) if clips else ())
  for item in json.loads((SRC/'_data/pages.json').read_text()) if (SRC/'_data/pages.json').exists() else []:
   content=(SRC/item['source']).read_text()
+  if '<!-- WHALE_LATEST_PROOF -->' in content:
+   latest=next(photo for photo in photos['mechanical-whale']['items'] if photo['asset']=='whale-v05-original')
+   content=content.replace('<!-- WHALE_LATEST_PROOF -->','<figure class="proof-card current-build">'+photo_picture(latest,media,compact=True)+'<figcaption class="proof-caption"><strong>3. The v0.5 display build</strong><span>September 16 original photo. Printed, assembled and still being refined.</span></figcaption></figure>')
   for entry in json.loads((SRC/'_data/statuses.json').read_text()):content=content.replace('{{status:'+entry['id']+'}}',esc(entry['label']))
   matching=next((p for p in projects if p['route']==item['route']),None)
   extra_styles=[]

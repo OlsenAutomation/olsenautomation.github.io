@@ -116,3 +116,9 @@ Brian found the expanded room controls distracting and asked to minimize them. K
 ## 2026-09-17 — Shared journey styling and eased scroll seeking
 
 Treat staircase/CTA/return-portal CSS as a production dependency, separate from media-specimen presentation. Do not infer asset safety for removal from its filename; release validation now checks linked styles/scripts after exclusions. Smooth the video destination over wheel bursts without intercepting native page scrolling. Keep the compact room controls, explicit skip, reverse seeking and reduced-motion alternatives. No original inventory asset or source media is removed.
+
+## 2026-09-17 — Whale v0.5 evidence and presentation
+
+Use the September 16 v0.5 display and mechanism material as the current Whale record, preserving prior v0.4.1 photos/video as dated development history. The current physical assembly includes owner-reported spacing/alignment adjustments and glue; do not imply a repeatable released kit, durability validation, independent-builder success or commercial demand. Label 6h 2m and 158.37g as slicer estimates. Keep unrelated personal context local.
+
+Pair the disclosed AI-cleaned lead photo with the original display photo, original spacing/retention details and normal-speed silent footage. Generated presentation details are not inspection evidence. Support per-clip dimensions and selective video regeneration so newly reviewed sources can be added without changing previously published media bytes or URLs. Publish only through the authorized silent candidate path; no production, main or DNS action.

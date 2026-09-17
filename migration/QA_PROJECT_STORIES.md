@@ -1,5 +1,13 @@
 # Project-story and video QA — September 14, 2026
 
+## Whale v0.5 focused revision — September 17, 2026
+
+- `npm run release:build` passes the existing preservation, routes, links, metadata, privacy, offline form/notification, buffered journey, scroll easing and release dependency checks. Both candidate and proposed production artifacts build; only the silent candidate is eligible for the authorized preview upload.
+- Eight focused local renders cover homepage, atlas, Whale record and workshop proof at 1440×900 and 390×844. All have one H1 and no horizontal overflow. Screenshots show the updated image/card/clip layouts and the complete display photo in workshop proof. No unexpected browser warning or error was captured.
+- The new v0.5 clip has no assigned MP4 before explicit Play. Keyboard Enter starts desktop playback with native video focus; it reaches 16 seconds with readyState 4 and no media error. Phone playback selects the 384px derivative and was observed at 12 seconds with readyState 4. Earlier clips remain unloaded until requested. The shared player code is unchanged from the prior intent/retry/reduced-motion checks.
+- Four documentary masters preserve decoded source pixels while removing metadata. The fifth is a disclosed AI presentation edit. Five new masters generate 20 responsive derivatives. The 16-second excerpt retains supplied speed, contains only one silent video stream, and uses 384×682 / 512×910 encodes of 1,584,663 / 1,879,663 bytes. All 14 MP4 variants pass range checks.
+- Full source context, original attachment hashes and browser evidence remain in ignored local storage. No physical iPhone/Safari result, kit durability result, new email or notification delivery is claimed.
+
 ## Local acceptance
 
 - `npm run check` passes the full build, preservation, explicit-route, link, metadata, privacy, isolated form-receiver and buffered journey checks. All 26 atlas records have exactly one shared project-story section and matching evidence text.

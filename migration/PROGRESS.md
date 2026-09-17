@@ -1,3 +1,11 @@
+## Whale v0.5 evidence refresh — 2026-09-17
+
+Brian requested the newer Whale project information and photos. Reviewed 24 recent source-task turns, six source attachments and sampled frames from the new recording. The shared card, project story and workshop proof now include the v0.5 display platform/plaque, original build and mechanism photos, three-plate slicer estimates and a 16-second silent mechanism excerpt. Earlier v0.4.1 media remains labeled development history. Status stays Active prototypes; spacing, glue/retention adjustments and incomplete independent assembly testing remain explicit.
+
+Five metadata-free image masters produce 20 responsive derivatives. The new portrait video has 384px/512px variants of 1.58/1.88 MB, without upscaling. A labeled AI background-cleaned lead image is paired with the original and documentary close-ups; it is not fit evidence. All source attachments and full context stay in ignored local review storage. Existing media URLs and original inventory items remain intact.
+
+The release build and preservation/privacy/route/form/media checks pass. Eight focused local renders cover the home feature, atlas, Whale record and workshop proof at 1440×900 and 390×844; no horizontal overflow or unexpected browser errors. The new clip advances on both sizes and loads only after Play; keyboard activation works. Browser screenshots and source references stay local. Candidate publication receipt follows after hosted verification. No main, live-site, DNS, form submission or notification change.
+
 ## Scroll and staircase repair — 2026-09-17
 
 Brian supplied a recording showing abrupt wheel-driven video movement and a small, unstyled staircase ending. The candidate incorrectly excluded `media.css` while workshop HTML still referenced it. The reusable staircase/door/return-portal rules now live in `journey.css`, loaded by both the workshop and media specimen; specimen-only files stay excluded from release. A new release dependency check reproduced the missing stylesheet before the fix and now passes.

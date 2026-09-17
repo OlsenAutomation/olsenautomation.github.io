@@ -134,9 +134,9 @@
     "slug": "mechanical-whale",
     "route": "/projects/mechanical-whale.html",
     "category": "hardware",
-    "summary": "A hand-cranked skeletal whale, now demonstrated in the v0.4.1 build, with wave supports and assembly details still being refined.",
+    "summary": "A hand-cranked skeletal whale with moving waves, now in the v0.5 display build with a platform and nameplate. Physical tests are refining fit, spacing and assembly.",
     "status": "active prototypes",
-    "evidence": "Physical prototype — motion demonstrated in the supplied September 14, 2026 video. The shown build includes assembly modifications; it does not establish that the revised kit assembles without glue or passes an endurance test.",
+    "evidence": "Active physical prototype. September 16, 2026 photos and a close-up recording document the assembled v0.5 build. Brian reports that wave-spacing and shaft-alignment adjustments restored movement, with small amounts of glue used on loose fixed ribs and the end clip. Repeatable kit assembly and durability are still being evaluated.",
     "source": "Approved project atlas, expanded from owner source-history review, September 2026"
   },
   {
