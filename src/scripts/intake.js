@@ -9,7 +9,7 @@
       const receiverFrame = document.getElementById('intake-receiver-frame');
       const receiverEndpoint = 'https://script.google.com/macros/s/AKfycbwtqcIqB02Q_BT4d5c3z1OCy6rQif5Jeyg897wQLBoY6UA5vHBR8NOcOdh1SAbmFC3FTQ/exec';
       const isLocal = ['127.0.0.1','localhost'].includes(location.hostname);
-      const previewOnly = document.body.dataset.siteMode === 'preview';
+      const previewOnly = document.body.dataset.siteMode !== 'production';
       const localMode = new URLSearchParams(location.search).get('intake-test') || 'accepted';
       const motion = matchMedia('(prefers-reduced-motion: reduce)');
       const formStartedAt = Date.now();

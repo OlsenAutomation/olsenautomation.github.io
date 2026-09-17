@@ -12,7 +12,9 @@
     "check": "npm run build && npm run validate && npm test && node tools/check-media-worker.mjs && node tools/check-buffered-journey.mjs && node tools/check-scroll-journey.mjs && node tools/check-intake-receiver.mjs && node tools/check-notifications.mjs",
     "preview:upload": "node tools/upload-preview.mjs",
     "media:videos": "python3 tools/project_videos.py",
-    "release:review": "npm run check && python3 tools/release_review.py"
+    "release:review": "npm run check && python3 tools/release_review.py",
+    "release:build": "npm run check && python3 tools/build_release.py && node tools/check-release.mjs",
+    "release:upload": "node tools/upload-candidate.mjs"
   },
   "engines": {
     "node": ">=22"

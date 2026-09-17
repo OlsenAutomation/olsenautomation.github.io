@@ -1,3 +1,7 @@
+## Release candidate preparation — 2026-09-17
+
+Separate production and silent candidate builds are implemented with production indexing and approved direct-link boundaries. Automated release validation passes; hosted and real-delivery acceptance is in progress. DNS is still outside Cloudflare, so the staged cutover requires a complete zone export and owner approval. See RELEASE_CANDIDATE.md and DOMAIN_CUTOVER_PLAN.md. No main, domain or production change occurred.
+
 # Site V2 progress
 
 ## Current checkpoint — unlisted portfolios and notification policy, 2026-09-15

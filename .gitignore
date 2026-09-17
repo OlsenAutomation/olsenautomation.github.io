@@ -8,3 +8,7 @@
 /dist-unlisted/
 /node_modules/
 /.wrangler/
+
+# Generated release artifacts; never source repositories.
+/dist-production/
+/dist-candidate/
