@@ -32,7 +32,8 @@ const assets={fetch:async()=>new Response('safe static content')};
 const env={ASSETS:assets,VISIT_NOTIFICATIONS:'disabled',RELEASE_QA_EXPIRES:'0'};
 for(const path of ['/__release-qa','/__release-qa/notification'])assert.equal((await candidate.fetch(new Request('https://candidate.example'+path),env)).status,404);
 const active={...env,RELEASE_QA_TOKEN:'a'.repeat(64),RELEASE_QA_EXPIRES:String(Date.now()+60000)};
-assert.equal((await candidate.fetch(new Request('https://candidate.example/__release-qa'),active)).status,200);
+const qaPage=await candidate.fetch(new Request('https://candidate.example/__release-qa'),active);
+assert.equal(qaPage.status,200);assert.equal(qaPage.headers.get('referrer-policy'),'same-origin');
 for(const [origin,token] of [['https://evil.example','a'.repeat(64)],['https://candidate.example','wrong']]){
   const request=new Request('https://candidate.example/__release-qa',{method:'POST',headers:{Origin:origin},body:new URLSearchParams({token})});
   assert.equal((await candidate.fetch(request,active)).status,403);

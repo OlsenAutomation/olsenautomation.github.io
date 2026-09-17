@@ -7,7 +7,7 @@ const media=mediaWorker(manifest,security);
 const qaPath='/__release-qa';
 const cookieName='__Host-oa-release-qa';
 const hidden={'X-Robots-Tag':'noindex, nofollow, noarchive, nosnippet','Cache-Control':'no-store'};
-const qaHeaders={...security,...hidden,'Content-Security-Policy':security['Content-Security-Policy'].replace("form-action 'none'","form-action 'self'"),'Content-Type':'text/html; charset=utf-8'};
+const qaHeaders={...security,...hidden,'Referrer-Policy':'same-origin','Content-Security-Policy':security['Content-Security-Policy'].replace("form-action 'none'","form-action 'self'"),'Content-Type':'text/html; charset=utf-8'};
 async function equal(a,b){
   const digest=async s=>new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s)));
   const [x,y]=await Promise.all([digest(a),digest(b)]);let difference=0;
