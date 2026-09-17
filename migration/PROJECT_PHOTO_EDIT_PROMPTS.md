@@ -1,5 +1,11 @@
 # Project photo presentation edits
 
+## whale-v05 — September 17, 2026
+
+Source: the September 16 original v0.5 display photograph. Tool: built-in image generation, referenced-image edit. Published master: `assets/project-photos/whale-v05-presentation.png`. The generated image slightly reinterprets framing and fine detail; its caption labels it presentation-only and points to the original photo and video for evidence.
+
+Prompt: Use case: precise-object-edit. Edit target: the supplied real photograph of Brian Olsen's white 3D-printed skeletal whale on blue moving waves, mounted on a white platform with a plaque. Create a website presentation derivative by replacing ONLY the cluttered background (fans, electronics, keyboard and other desk objects) with a restrained dark charcoal studio background and dark tabletop. Preserve the exact photographed whale, blue mechanism, white platform, plaque, pose, colors, ribs, gaps, pins, crank, printing layer texture, imperfections, cropping and camera angle. Do not fix or redesign any connections. Do not add missing geometry beyond the right edge: keep the original framing and any cropped tail exactly as supplied. Preserve the existing plaque lettering 'WHALE IN MOTION' and 'Olsen Automation' as photographed without rewriting it or adding text. Subtle natural contact shadow only. No glow, decorations, logos, badges, watermarks or extra objects. Output a landscape image with the same 4:3 composition. This is a labeled presentation edit; the original remains the engineering evidence.
+
 Brian authorized using the reviewed photos and cleaning messy images on 2026-09-13. These three edits used the built-in image generation tool. They are labeled AI-retouched presentation images, not independent technical evidence. Originals are retained in the ignored local candidate catalog. No private handoff package is copied or committed.
 
 ## cedar

@@ -576,6 +576,166 @@
         "width": 1280,
         "height": 888
       }
+    },
+    "whale-v05-presentation": {
+      "webp": [
+        {
+          "url": "/media/whale-v05-presentation-384.28c3125f063d.webp",
+          "sha256": "28c3125f063dafeeb4ecb00f7efde77424eec304603463a3d025431172b5f64f",
+          "bytes": 9986,
+          "width": 384,
+          "height": 288
+        },
+        {
+          "url": "/media/whale-v05-presentation-768.324f20e846a2.webp",
+          "sha256": "324f20e846a2fbc540b253f431fd51d629e6f54f190b1a08c01b8d6da3972af0",
+          "bytes": 26534,
+          "width": 768,
+          "height": 576
+        },
+        {
+          "url": "/media/whale-v05-presentation-1280.fda18bac3c39.webp",
+          "sha256": "fda18bac3c39b5624be39bf1b39cdb617ad183cc09e38882641b76bd36f002f4",
+          "bytes": 52954,
+          "width": 1280,
+          "height": 960
+        }
+      ],
+      "fallback": {
+        "url": "/media/whale-v05-presentation-1280.6233c3a9ebcd.jpg",
+        "sha256": "6233c3a9ebcd4441739ddcb29cb5c60adc6e0b1428b602acf914dc9e23423b69",
+        "bytes": 118887,
+        "width": 1280,
+        "height": 960
+      }
+    },
+    "whale-v05-original": {
+      "webp": [
+        {
+          "url": "/media/whale-v05-original-384.ca2671156dd5.webp",
+          "sha256": "ca2671156dd55a36b1d57ffcfb7574febea976f5920e08f430016f07362fb4cd",
+          "bytes": 16454,
+          "width": 384,
+          "height": 288
+        },
+        {
+          "url": "/media/whale-v05-original-768.cbd1cc25ef95.webp",
+          "sha256": "cbd1cc25ef95d8c1c6c4655c134a5a09991e9341e959e28b3d14bebcacbb9866",
+          "bytes": 43014,
+          "width": 768,
+          "height": 576
+        },
+        {
+          "url": "/media/whale-v05-original-1280.019ddf28ccd9.webp",
+          "sha256": "019ddf28ccd9d0b651fd363de237f9dad2231d24e32517c1efc7425d441b9669",
+          "bytes": 78470,
+          "width": 1280,
+          "height": 960
+        }
+      ],
+      "fallback": {
+        "url": "/media/whale-v05-original-1280.ff54e22a7d3f.jpg",
+        "sha256": "ff54e22a7d3f8c1c3b3ffe8e9611ef75caf47f9a9872e6a72002143c75f91a47",
+        "bytes": 133633,
+        "width": 1280,
+        "height": 960
+      }
+    },
+    "whale-v05-spacing": {
+      "webp": [
+        {
+          "url": "/media/whale-v05-spacing-384.2f1284f828ba.webp",
+          "sha256": "2f1284f828ba9e53bd1cc5ae3498d3e986e8494deb3890dda5dc8a37b7763eb8",
+          "bytes": 20150,
+          "width": 384,
+          "height": 512
+        },
+        {
+          "url": "/media/whale-v05-spacing-768.1062a3a76c24.webp",
+          "sha256": "1062a3a76c24d7519364716e335c5d9136bf4f7fe1112686e3584ae452bffb7d",
+          "bytes": 48930,
+          "width": 768,
+          "height": 1024
+        },
+        {
+          "url": "/media/whale-v05-spacing-1080.e10219e20bbc.webp",
+          "sha256": "e10219e20bbc37bf62c55ef1996a25f81968ec4a9d7920bc1b1b7290fc00725b",
+          "bytes": 89342,
+          "width": 1080,
+          "height": 1440
+        }
+      ],
+      "fallback": {
+        "url": "/media/whale-v05-spacing-1080.0185736fdc20.jpg",
+        "sha256": "0185736fdc20c1adae9b1d3f897150ac4e5f05396446007b26088737d75ccdac",
+        "bytes": 160208,
+        "width": 1080,
+        "height": 1440
+      }
+    },
+    "whale-v05-retention": {
+      "webp": [
+        {
+          "url": "/media/whale-v05-retention-384.dca6f42d19d9.webp",
+          "sha256": "dca6f42d19d982b6f8b4c410762309d4bcc601d5ff6891ff400a5617d686f2ea",
+          "bytes": 17826,
+          "width": 384,
+          "height": 512
+        },
+        {
+          "url": "/media/whale-v05-retention-768.34188780924f.webp",
+          "sha256": "34188780924f5a166bd5b891ba5c8564fae1463c3560259d5849ee593757fcc4",
+          "bytes": 41644,
+          "width": 768,
+          "height": 1024
+        },
+        {
+          "url": "/media/whale-v05-retention-1080.ca808e7125ef.webp",
+          "sha256": "ca808e7125ef444cd9763a820ba60c9fb7fb644a3bb619c8e83cee20a4129263",
+          "bytes": 81238,
+          "width": 1080,
+          "height": 1440
+        }
+      ],
+      "fallback": {
+        "url": "/media/whale-v05-retention-1080.c0be6974b8fe.jpg",
+        "sha256": "c0be6974b8fee93293dab5f29e4239a9cdf95b9ffa67ccf7de9552e9a42c42ec",
+        "bytes": 152505,
+        "width": 1080,
+        "height": 1440
+      }
+    },
+    "whale-v05-slice": {
+      "webp": [
+        {
+          "url": "/media/whale-v05-slice-384.a8aad5d53ede.webp",
+          "sha256": "a8aad5d53ede05b1f54f9b1a7297cf724bcce5cc126b1853fdc4058d9a74bbb1",
+          "bytes": 5322,
+          "width": 384,
+          "height": 224
+        },
+        {
+          "url": "/media/whale-v05-slice-768.4ecf3fc5f6e2.webp",
+          "sha256": "4ecf3fc5f6e29d683f0190ad809ffe84850cc6c8ff7b06b5497dc2b10990fd5b",
+          "bytes": 15144,
+          "width": 768,
+          "height": 448
+        },
+        {
+          "url": "/media/whale-v05-slice-1280.32627e26f67c.webp",
+          "sha256": "32627e26f67c665615c12bf2c0f8e35bebec2ee9153cfa205da5ddd570d967ef",
+          "bytes": 29544,
+          "width": 1280,
+          "height": 747
+        }
+      ],
+      "fallback": {
+        "url": "/media/whale-v05-slice-1280.f69350ae84b3.jpg",
+        "sha256": "f69350ae84b310dc33273ad975be5255a0f7aa3fb3a8bfe11e75f824f6b0b6fc",
+        "bytes": 82106,
+        "width": 1280,
+        "height": 747
+      }
     }
   }
 }

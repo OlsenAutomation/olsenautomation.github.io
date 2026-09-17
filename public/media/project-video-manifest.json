@@ -72,6 +72,42 @@
           "height": 512
         }
       ]
+    },
+    "whale-v05-mechanism": {
+      "variants": [
+        {
+          "url": "/media/whale-v05-mechanism-384.730d2c48ee5b.mp4",
+          "sha256": "730d2c48ee5b45a187a675c08ca49b9770808232dd1411ba327ba9ef26001616",
+          "bytes": 1584663,
+          "width": 384,
+          "height": 682,
+          "duration": 16.0
+        },
+        {
+          "url": "/media/whale-v05-mechanism-512.c7c9ce5ffd1d.mp4",
+          "sha256": "c7c9ce5ffd1d86d0b7be85f0e0e6196960e9073fdb0b8edb36868fb7affd0dae",
+          "bytes": 1879663,
+          "width": 512,
+          "height": 910,
+          "duration": 16.0
+        }
+      ],
+      "posters": [
+        {
+          "url": "/media/whale-v05-mechanism-poster-384.76aed77b2b85.webp",
+          "sha256": "76aed77b2b852d9e702ed4cd30c4c57488e06247edc54a939837a146c7c2b4e8",
+          "bytes": 21802,
+          "width": 384,
+          "height": 682
+        },
+        {
+          "url": "/media/whale-v05-mechanism-poster-512.d1ec24a60ce3.webp",
+          "sha256": "d1ec24a60ce39e2bfd5041ff71998fed021b513faf821cec68f6cccf61698067",
+          "bytes": 30546,
+          "width": 512,
+          "height": 910
+        }
+      ]
     }
   }
 }

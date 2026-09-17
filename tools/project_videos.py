@@ -23,20 +23,28 @@ def publish(path, stem, width, height):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--source-directory', type=Path, default=ROOT / '.migration-local/project-context-audit/whale-v4.1-2026-09-14/originals')
+    parser.add_argument('--only', action='append', help='Update selected clip IDs while preserving previously reviewed media bytes and URLs')
     args = parser.parse_args()
     sources = json.loads((ROOT / 'src/_data/project-video-sources.json').read_text())
     manifest = {'schema': 1, 'videos': {}}; audit = []
+    if args.only:
+        assert set(args.only) <= {item['id'] for item in sources}, 'Unknown clip ID'
+        manifest = json.loads((OUT / 'project-video-manifest.json').read_text())
+        audit = [item for item in json.loads((ROOT / 'migration/PROJECT_VIDEO_RESULTS.json').read_text()) if item['id'] not in args.only]
+        sources = [item for item in sources if item['id'] in args.only]
     with tempfile.TemporaryDirectory(prefix='whale-video-') as temp:
         temp = Path(temp)
         for item in sources:
             identity, filename = item['id'], item['source_filename']
             start, duration, poster_time = item['start'], item['duration'], item['poster_time']
-            source = args.source_directory / filename
-            assert source.name == filename and source.parent == args.source_directory
+            directory = ROOT / item['source_directory'] if item.get('source_directory') else args.source_directory
+            source = directory / filename
+            assert source.name == filename and source.parent == directory
+            assert source.resolve().is_relative_to(ROOT / '.migration-local') and not source.is_symlink()
             source_hash = hashlib.sha256(source.read_bytes()).hexdigest()
             assert source_hash == item['sha256'], f'Unreviewed source bytes: {filename}'
             variants = []; posters = []
-            for width in (640, 910):
+            for width in item.get('widths', (640, 910)):
                 output = temp / f'{identity}-{width}.mp4'
                 run('ffmpeg', '-nostdin', '-y', '-v', 'error', '-ss', str(start), '-i', str(source), '-t', str(duration), '-map', '0:v:0', '-an', '-sn', '-dn', '-map_metadata', '-1', '-map_chapters', '-1', '-vf', f'scale={width}:-2,setsar=1', '-c:v', 'libx264', '-preset', 'slow', '-crf', '25', '-maxrate', '900k', '-bufsize', '1800k', '-pix_fmt', 'yuv420p', '-g', '30', '-movflags', '+faststart', str(output))
                 probe = json.loads(run('ffprobe', '-v', 'error', '-show_streams', '-show_format', '-of', 'json', str(output)))

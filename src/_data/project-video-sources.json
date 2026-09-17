@@ -14,5 +14,18 @@
     "start": 0,
     "duration": 28.9,
     "poster_time": 15
+  },
+  {
+    "id": "whale-v05-mechanism",
+    "source_filename": "CameraRecording-254B4F83-6C9D-44A7-BE08-C798E1E13930.mp4",
+    "source_directory": ".migration-local/project-context-audit/whale-v05-2026-09-17/originals",
+    "sha256": "9b58df284d2370fe92b83f09702ecf3379bd4959a606032cd2f0a785fbbb517e",
+    "start": 2,
+    "duration": 16,
+    "poster_time": 10,
+    "widths": [
+      384,
+      512
+    ]
   }
 ]
