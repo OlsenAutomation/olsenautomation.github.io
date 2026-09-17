@@ -213,7 +213,7 @@
 .workshop-page .journey-controls-foot a{margin:0;text-underline-offset:4px;color:#9cedf4}
 .workshop-page .room-controls{width:min(380px,calc(100% - 40px));padding:6px 10px;gap:0}
 .workshop-page .room-controls .journey-controls-heading{gap:8px}
-.workshop-page .room-controls .journey-controls-heading strong{margin-right:auto;font-size:12px;white-space:nowrap}
+.workshop-page .room-controls .journey-controls-heading strong{margin-right:auto;font-size:12px;line-height:1.2;min-width:0}
 .workshop-page .room-controls .journey-controls-heading .button{min-width:64px;min-height:44px;padding:8px 12px}
 .workshop-page .room-controls-toggle{display:flex;align-items:center;gap:6px;min-height:44px;padding:8px;border:0;border-radius:8px;background:transparent;color:#c8e6e9;cursor:pointer;font-size:12px}
 .workshop-page .room-controls-toggle[aria-expanded=true] span{transform:rotate(180deg)}
