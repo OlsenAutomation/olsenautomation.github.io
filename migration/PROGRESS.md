@@ -4,7 +4,7 @@ Brian requested the newer Whale project information and photos. Reviewed 24 rece
 
 Five metadata-free image masters produce 20 responsive derivatives. The new portrait video has 384px/512px variants of 1.58/1.88 MB, without upscaling. A labeled AI background-cleaned lead image is paired with the original and documentary close-ups; it is not fit evidence. All source attachments and full context stay in ignored local review storage. Existing media URLs and original inventory items remain intact.
 
-The release build and preservation/privacy/route/form/media checks pass. Eight focused local renders cover the home feature, atlas, Whale record and workshop proof at 1440×900 and 390×844; no horizontal overflow or unexpected browser errors. The new clip advances on both sizes and loads only after Play; keyboard activation works. Browser screenshots and source references stay local. Candidate publication receipt follows after hosted verification. No main, live-site, DNS, form submission or notification change.
+The release build and preservation/privacy/route/form/media checks pass. Eight focused local renders cover the home feature, atlas, Whale record and workshop proof at 1440×900 and 390×844; no horizontal overflow or unexpected browser errors. The new clip advances on both sizes and loads only after Play; keyboard activation works. Browser screenshots and source references stay local. Published from `14ba196` as silent candidate `15f7eccf-e775-4b39-9f04-9b89ce1513b0`. All 491 hosted files, 25 exclusions and 28 media ranges pass. Hosted phone video reaches playable data and advances; desktop workshop proof shows the original v0.5 display. No main, live-site, DNS, form submission or notification change.
 
 ## Scroll and staircase repair — 2026-09-17
 

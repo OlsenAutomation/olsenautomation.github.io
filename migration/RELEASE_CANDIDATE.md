@@ -38,7 +38,7 @@ Provider behavior: [ntfy limits](https://docs.ntfy.sh/publish/#limitations) and 
 
 Notification provider recovery and actual phone delivery, physical iPhone/iPad acceptance, Cloudflare zone/account readiness with assigned nameservers, and final owner go-live approval. The existing GitHub Pages site remains live.
 
-Stable device-review URL: https://4b6a726d-olsen-automation-v2-preview.brian-dbb.workers.dev/
+Stable device-review URL: https://15f7eccf-olsen-automation-v2-preview.brian-dbb.workers.dev/
 
 Moving candidate alias: https://release-candidate-olsen-automation-v2-preview.brian-dbb.workers.dev/
 
@@ -53,3 +53,9 @@ Brian requested minimizing the basement panel. Current device-review candidate `
 Current candidate `4b6a726d-2b9d-4076-969c-ab6a4c826811` from `9b7902b` supersedes the compact-controls version. The removed media stylesheet was still a workshop dependency; the earlier checks missed the resulting small video/unformatted CTA. Its reusable rules now live in shared `journey.css`, which is present in the release, while specimen files remain excluded. Release validation now checks linked scripts/styles after exclusions and reproduced this exact failure before repair.
 
 Wheel gestures now ease the video toward accumulated destinations, including reverse travel, with cancellation for explicit controls, visibility changes, errors and still views. Hosted desktop 1440×900 and phone 390×844 show the video covering the stage and a fully visible CTA. Forward/reverse sampling, direct-click signup focus, local landscape, keyboard and reduced-motion checks pass; physical touch remains unverified. Hosted verification: 467 exact files, 25 exclusions, 24 correct video ranges, disabled alerts and no failures. No new messages, production deployment, main merge or DNS changes occurred.
+
+## Whale v0.5 content and media revision
+
+The current silent candidate is `15f7eccf-e775-4b39-9f04-9b89ce1513b0`, built from `14ba196` after adding reviewed media in `441ec57`. It updates the home/atlas cards, Whale record and workshop proof with September 16 v0.5 material. Five new image masters produce 20 responsive derivatives; a 16-second portrait mechanism excerpt has two variants and posters. Earlier media is retained unchanged. The AI-cleaned presentation is disclosed and paired with original build/detail images. Slicer estimates, owner-reported spacing/glue adjustments and unverified repeatable assembly remain distinct.
+
+Eight local desktop/phone renders pass for the four affected pages. Hosted verification passes all 491 files, 25 exclusions and 28 media range checks. The hosted phone clip advances with readyState 4, and workshop proof loads the current original photo. Notifications and the test window remain disabled. The earlier 72-page report, real intake receipt and remaining launch gates are historical acceptance evidence, not rerun or reauthorized by this content refresh. No real messages, production traffic, main or DNS change occurred.

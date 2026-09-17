@@ -1,8 +1,8 @@
 {
   "date": "2026-09-17",
-  "source_commit": "9b7902b9c0ba06eb417090d46f39eb33226c6cf3",
-  "candidate_version": "4b6a726d-2b9d-4076-969c-ab6a4c826811",
-  "hosted_files": 467,
+  "source_commit": "14ba19683ffddc2bd82644fb01c16ae959e834c1",
+  "candidate_version": "15f7eccf-e775-4b39-9f04-9b89ce1513b0",
+  "hosted_files": 491,
   "html_pages": 36,
   "render_checks": 72,
   "production_public_pages": 32,
@@ -36,10 +36,10 @@
     "Explicit final owner go-live approval"
   ],
   "excluded_route_checks": 25,
-  "candidate_url": "https://4b6a726d-olsen-automation-v2-preview.brian-dbb.workers.dev/",
+  "candidate_url": "https://15f7eccf-olsen-automation-v2-preview.brian-dbb.workers.dev/",
   "artifact_manifest_sha256": {
-    "production": "c7db239bb71e3f7fc3d76cb9853c3cbc2e5adab501cda3bfc2f502f23f7d1814",
-    "candidate": "a41a2ec8aed2d91c5ca7cf5ad50d8e92c66fdb8b2d249f7c69f5866c9ef88fc9"
+    "production": "22eb7e2eac0ec8c9e0864b0fb821bf0ebe702caf4d95ef99c7fca0ac98ecc860",
+    "candidate": "690ee79b1a56ab341e1ce99bba763871995040f885f6a9e925f7794d73c429c2"
   },
   "render_baseline": {
     "source_commit": "31d558eebeb8e413f4c82424b7a247ba450c49e8",
@@ -96,6 +96,40 @@
     "signup_focus_verified_with_direct_click": true,
     "still_and_reduced_motion": true,
     "physical_touch_verified": false,
+    "new_external_messages": 0
+  },
+  "whale_v05_revision": {
+    "date": "2026-09-17",
+    "source_commit": "14ba19683ffddc2bd82644fb01c16ae959e834c1",
+    "source_context_reviewed_through": "2026-09-16",
+    "local_render_checks": 8,
+    "local_viewports": [
+      [
+        1440,
+        900
+      ],
+      [
+        390,
+        844
+      ]
+    ],
+    "affected_pages": [
+      "/",
+      "/projects.html",
+      "/projects/mechanical-whale.html",
+      "/workshop.html"
+    ],
+    "new_image_masters": 5,
+    "new_photo_derivatives": 20,
+    "new_video_variants": 2,
+    "new_video_posters": 2,
+    "earlier_media_preserved": true,
+    "hosted_files": 491,
+    "excluded_route_checks": 25,
+    "hosted_video_range_checks": 28,
+    "hosted_phone_video_plays": true,
+    "hosted_workshop_photo_verified": true,
+    "physical_safari_verified": false,
     "new_external_messages": 0
   }
 }

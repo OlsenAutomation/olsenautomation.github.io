@@ -8,6 +8,8 @@
 - Four documentary masters preserve decoded source pixels while removing metadata. The fifth is a disclosed AI presentation edit. Five new masters generate 20 responsive derivatives. The 16-second excerpt retains supplied speed, contains only one silent video stream, and uses 384×682 / 512×910 encodes of 1,584,663 / 1,879,663 bytes. All 14 MP4 variants pass range checks.
 - Full source context, original attachment hashes and browser evidence remain in ignored local storage. No physical iPhone/Safari result, kit durability result, new email or notification delivery is claimed.
 
+Hosted v0.5 receipt: source `14ba196`, version `15f7eccf-e775-4b39-9f04-9b89ce1513b0`; all 491 files, 25 exclusions and 28 media ranges pass. The 390px player selects the 384px source and was observed at 15.15 seconds with readyState 4 and no media error. Desktop workshop proof loads the original v0.5 photo without overflow. Candidate alerts remain disabled.
+
 ## Local acceptance
 
 - `npm run check` passes the full build, preservation, explicit-route, link, metadata, privacy, isolated form-receiver and buffered journey checks. All 26 atlas records have exactly one shared project-story section and matching evidence text.
