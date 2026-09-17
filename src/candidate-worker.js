@@ -41,8 +41,11 @@ export default {
         let receipt=null;
         const response=await visitNotification(new Request('https://olsenautomation.com/api/visit',{method:'POST',headers:{Origin:'https://olsenautomation.com','Sec-Fetch-Site':'same-origin','Content-Type':'application/json'},body:JSON.stringify({event,route:routes[event]})}),{VISIT_NOTIFICATIONS:'enabled'},async(endpoint,options)=>{
           const headers=new Headers(options.headers);headers.set('Title','SYNTHETIC RELEASE TEST - '+headers.get('Title'));
-          const result=await fetch(endpoint,{...options,headers,body:'Owner-approved test. No real visitor or service request.\n'+options.body});
-          if(result.ok){const data=await result.clone().json();receipt={id:data.id,time:data.time,event:data.event};}
+          let result;
+          try{result=await fetch(endpoint,{...options,headers,body:'Owner-approved test. No real visitor or service request.\n'+options.body});}
+          catch(error){receipt={error:error.name,message:error.message};throw error;}
+          const text=await result.clone().text();let data;try{data=JSON.parse(text);}catch{}
+          receipt=result.ok?{status:result.status,id:data?.id,time:data?.time,event:data?.event}:{status:result.status,error:data?.error||text.slice(0,500)};
           return result;
         });
         return Response.json({...await response.json(),receipt},{status:response.status,headers:hidden});
