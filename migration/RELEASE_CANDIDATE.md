@@ -38,8 +38,12 @@ Provider behavior: [ntfy limits](https://docs.ntfy.sh/publish/#limitations) and 
 
 Notification provider recovery and actual phone delivery, physical iPhone/iPad acceptance, Cloudflare zone/account readiness with assigned nameservers, and final owner go-live approval. The existing GitHub Pages site remains live.
 
-Stable device-review URL: https://6356e084-olsen-automation-v2-preview.brian-dbb.workers.dev/
+Stable device-review URL: https://71783a5b-olsen-automation-v2-preview.brian-dbb.workers.dev/
 
 Moving candidate alias: https://release-candidate-olsen-automation-v2-preview.brian-dbb.workers.dev/
 
-Latest final-version recheck confirms the two specimen-only media assets return 404, ordinary alerts remain disabled, all 466 served files match local bytes, and all 12 MP4s retain correct range behavior. Both Whale clips decoded and played in the browser. Page bodies did not change between the 72 rendering measurements and this final upload. GitHub Pages still serves the unchanged live site from main/root with HTTPS enforced.
+The original acceptance-version recheck confirms the two specimen-only media assets return 404, ordinary alerts remain disabled, all 466 served files match local bytes, and all 12 MP4s retain correct range behavior. Both Whale clips decoded and played in the browser. Page bodies did not change between the 72 rendering measurements and this final upload. GitHub Pages still serves the unchanged live site from main/root with HTTPS enforced.
+
+## Compact controls revision
+
+Brian requested minimizing the basement panel. Current device-review candidate `71783a5b-afe2-46c2-94ab-b515709d0e4b` comes from source `c9b03eb` and starts with a 58px bar containing chapter, play/pause and an expandable Controls button. Room stops, scrubber and skip link remain available. Only workshop HTML/CSS/JS changed from the prior acceptance artifact. Local 1440/390/320px checks and hosted 1440/390px checks pass, including keyboard focus and the longest label on narrow phones. The 72-page render report and real-delivery receipts above describe the earlier acceptance version; this focused revision has its own workshop recheck. Hosted validation again passes all 466 files, 25 exclusions and 24 range checks. Candidate alerts remain disabled and no new messages were sent. Main, production traffic and DNS are unchanged.

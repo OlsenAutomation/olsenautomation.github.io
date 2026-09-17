@@ -1,6 +1,6 @@
 ## Compact room controls — 2026-09-17
 
-Brian requested minimizing the basement control box. The room controls now start as a 58px bar with chapter, play/pause and a Controls toggle; room stops, seek slider and skip link expand on demand. Keyboard Escape collapses the panel and restores toggle focus. Desktop (1440px), phone (390px) and narrow phone (320px) checks passed without horizontal overflow; still views hide the controls and stop motion. Candidate publication follows this checkpoint; no live-site or DNS action is included.
+Brian requested minimizing the basement control box. The room controls now start as a 58px bar with chapter, play/pause and a Controls toggle; room stops, seek slider and skip link expand on demand. Keyboard Escape collapses the panel and restores toggle focus. Desktop (1440px), phone (390px) and narrow phone (320px) checks passed without horizontal overflow; still views hide the controls and stop motion. Published from `c9b03eb` as silent candidate `71783a5b-afe2-46c2-94ab-b515709d0e4b`. Hosted verification passes for 466 files, 25 exclusions and 24 video ranges; phone and desktop compact controls also pass on the hosted version. No live-site or DNS action occurred.
 
 ## Release candidate preparation — 2026-09-17
 

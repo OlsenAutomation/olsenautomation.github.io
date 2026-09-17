@@ -27,8 +27,10 @@ Commands: `npm run release:build`, production Worker `versions upload --dry-run`
 
 Remaining: physical Safari touch/scroll/seek acceptance, ntfy provider recovery and real phone delivery, Cloudflare zone readiness, and explicit final go-live approval. A provider 429 is not delivery, and the current no-cache relay may miss subscribers that are offline. No paid service or new notification destination was introduced.
 
-Final immutable candidate: `6356e084-7e77-4541-a766-18c6d9053a34`, from source `31d558e`. Hosted recheck: 466 exact files, 25 excluded routes, 24 MP4 range checks and zero failures. Default test routes return 404. The stable device-review URL is recorded in RELEASE_CANDIDATE.md.
+Original acceptance candidate: `6356e084-7e77-4541-a766-18c6d9053a34`, from source `31d558e`. Hosted recheck: 466 exact files, 25 excluded routes, 24 MP4 range checks and zero failures. Default test routes return 404. The stable device-review URL is recorded in RELEASE_CANDIDATE.md.
 
 ## Compact room controls follow-up
 
 The room control panel now defaults closed: 58px tall at 1440, 390 and 320px widths (expanded phone panel about 215px). Verified opening/closing, room-stop selection, keyboard slider movement, Escape collapse with focus return, and still-view mode hiding controls/stopping videos. No console errors or horizontal overflow. `npm run release:build` passes. Only workshop HTML/CSS/JS changed; earlier whole-site and delivery receipts remain historical evidence, and physical owner acceptance is still pending for this revision.
+
+Published compact-controls candidate: `71783a5b-afe2-46c2-94ab-b515709d0e4b`, source `c9b03eb`. Hosted recheck passes: 466 exact files, 25 exclusions, 24 ranges, disabled alerts and zero failures. Hosted workshop checks at 390×844 and 1440×900 confirm the 58px collapsed bar, expansion, keyboard Escape/focus return and no console errors or overflow. The longest Workbench label also fits within the bar at 320px after allowing it to wrap. No new messages were sent.

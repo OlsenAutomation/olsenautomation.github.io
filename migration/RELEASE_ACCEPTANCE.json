@@ -1,7 +1,7 @@
 {
   "date": "2026-09-17",
-  "source_commit": "31d558eebeb8e413f4c82424b7a247ba450c49e8",
-  "candidate_version": "6356e084-7e77-4541-a766-18c6d9053a34",
+  "source_commit": "c9b03eb3d90cb3d1d91592ce18db5a7d1c1db974",
+  "candidate_version": "71783a5b-afe2-46c2-94ab-b515709d0e4b",
   "hosted_files": 466,
   "html_pages": 36,
   "render_checks": 72,
@@ -36,9 +36,31 @@
     "Explicit final owner go-live approval"
   ],
   "excluded_route_checks": 25,
-  "candidate_url": "https://6356e084-olsen-automation-v2-preview.brian-dbb.workers.dev/",
+  "candidate_url": "https://71783a5b-olsen-automation-v2-preview.brian-dbb.workers.dev/",
   "artifact_manifest_sha256": {
-    "production": "c84f2584c7415290a43bcadb5fa2e3e17cc820acf0aa856b2e64e2a5492a1db9",
-    "candidate": "ac19548316390d43a782805e749287f07aa088b34afd778bf7abb2209fc6e62d"
+    "production": "f19d3b663bc04c6f2fe355004002e566f8f625348ad3caf7eb0df37b0b5dba39",
+    "candidate": "18c082d7ffb77ecc7125cc8e149772ebec0469c433453a057a756d4eb20d2f9f"
+  },
+  "render_baseline": {
+    "source_commit": "31d558eebeb8e413f4c82424b7a247ba450c49e8",
+    "candidate_version": "6356e084-7e77-4541-a766-18c6d9053a34",
+    "checks": 72
+  },
+  "compact_controls_revision": {
+    "date": "2026-09-17",
+    "local_widths": [
+      1440,
+      390,
+      320
+    ],
+    "hosted_widths": [
+      1440,
+      390
+    ],
+    "collapsed_height_px": 58,
+    "expand_collapse": true,
+    "keyboard_and_focus": true,
+    "narrow_workbench_label_contained": true,
+    "new_external_messages": 0
   }
 }
