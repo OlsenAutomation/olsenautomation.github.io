@@ -2,6 +2,8 @@
 
 Status: this launch-preparation checkpoint is complete on `site-redesign-v2`; production is not ready or authorized. The currently live GitHub Pages site, main branch and domain configuration remain untouched.
 
+Current owner update, September 17: notification provider recovery and real phone-delivery verification are deferred and no longer launch blockers. Preserve the approved alert policy/settings and earlier test evidence. Current remaining items are tracked in `RELEASE_ACCEPTANCE.json`; the sections below record earlier checkpoints.
+
 ## Completed in the metadata checkpoint (historical)
 
 - All 32 public content pages now have a canonical URL, Open Graph and Twitter title/description/image metadata generated from shared sources. Existing authored metadata is preserved. Project imagery retains its evidence label in share-image descriptions; original build photographs are preferred where available.

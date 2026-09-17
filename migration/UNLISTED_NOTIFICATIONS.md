@@ -32,7 +32,7 @@ Cloudflare Workers Free includes 100,000 dynamic requests/day; static assets rem
 
 Both `data-site-mode="production"` and the existing production hostname are required by the client. The server also requires `VISIT_NOTIFICATIONS=enabled` and the production hostname; the preview configuration explicitly sets `disabled`, and the upload guard enforces it. The endpoint returns `state: disabled` on previews without contacting ntfy. No live notification was sent during this checkpoint; transport tests are mocked. Existing GitHub Pages résumé notifications are untouched.
 
-Before approved production cutover, wire production mode and the enabled variable into the separate production artifact, verify the relay and receipt on Brian's existing subscription, preserve unlisted HTTP noindex, and retest the exact candidate. This is technical release work under the selected policy, not another unresolved privacy choice.
+Owner update, September 17: Brian deferred provider recovery and actual subscription-receipt verification; neither is a launch blocker. Keep the approved notification policy and existing settings. Delivery remains best effort and unverified; do not schedule or send another delivery test from this decision. Production activation, unlisted HTTP noindex and the separately approved cutover still follow the existing release plan.
 
 ## Validation
 

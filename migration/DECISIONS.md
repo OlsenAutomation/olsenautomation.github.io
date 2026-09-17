@@ -122,3 +122,7 @@ Treat staircase/CTA/return-portal CSS as a production dependency, separate from 
 Use the September 16 v0.5 display and mechanism material as the current Whale record, preserving prior v0.4.1 photos/video as dated development history. The current physical assembly includes owner-reported spacing/alignment adjustments and glue; do not imply a repeatable released kit, durability validation, independent-builder success or commercial demand. Label 6h 2m and 158.37g as slicer estimates. Keep unrelated personal context local.
 
 Pair the disclosed AI-cleaned lead photo with the original display photo, original spacing/retention details and normal-speed silent footage. Generated presentation details are not inspection evidence. Support per-clip dimensions and selective video regeneration so newly reviewed sources can be added without changing previously published media bytes or URLs. Publish only through the authorized silent candidate path; no production, main or DNS action.
+
+## 2026-09-17 — Skip notification verification as a launch gate
+
+Brian selected the task to resolve provider limits and verify actual phone delivery and said it can be skipped. Defer that work and remove it from the launch blockers without representing failed/unverified delivery as success. Retain the previously approved notification policy and settings; this request does not disable résumé alerts or change visitor privacy choices. Do not send another test or schedule a retry from this decision. Physical Safari acceptance, domain preparation and final go-live approval still apply.

@@ -20,6 +20,8 @@ Web, mail and SPF TTLs observed: 3600 seconds; NS 21600 seconds. Apex AAAA, CAA,
 
 The current Wrangler authorization can upload Workers, but does not grant zone/DNS administration. Safari is at a signed-out Cloudflare profile; no authorization scope was expanded. Squarespace Domains is confirmed as registrar/DNS provider; Google Workspace manages the domain billing. WHOIS privacy and domain lock remain enabled and unchanged. Cloudflare zone creation and its assigned nameservers still require the separately approved domain phase.
 
+Notification acceptance update, September 17: Brian skipped provider recovery and actual phone-delivery verification as a launch gate. Existing alert policy/settings remain approved; delivery is unverified. This deferral does not authorize another message or change the DNS/go-live approval boundary.
+
 ## Staged change, after explicit owner approval
 
 1. Capture the complete existing zone, registrar nameservers, DNSSEC/DS state and GitHub Pages settings. Record the reviewed source commit and exact production artifact hashes. Stop for discrepancies or unknown email records.

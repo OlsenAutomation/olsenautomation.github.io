@@ -20,7 +20,11 @@
     "website_test": "unavailable; no receipt",
     "class_test": "HTTP 429 daily message quota reached",
     "resume_test": "not attempted after quota rejection",
-    "subscriber_delivery_verified": false
+    "subscriber_delivery_verified": false,
+    "launch_blocking": false,
+    "verification_status": "deferred_by_owner",
+    "owner_decision_date": "2026-09-17",
+    "owner_decision": "Skip notification provider recovery and actual phone-delivery verification for launch; retain approved notification policy and existing settings. No further delivery test is scheduled."
   },
   "dns": {
     "provider": "Squarespace Domains",
@@ -30,7 +34,6 @@
   },
   "production_ready": false,
   "remaining": [
-    "Resolve notification provider quota and verify real phone delivery",
     "Physical iPhone/iPad Safari acceptance",
     "Cloudflare zone readiness and assigned nameservers",
     "Explicit final owner go-live approval"

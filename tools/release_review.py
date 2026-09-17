@@ -77,14 +77,14 @@ def prepare():
     # Route analysis alone does not establish launch readiness. Keep acceptance separate.
     gates = [
         'Approved unlisted boundaries and excluded private family guide',
-        'Real notification provider and phone delivery',
         'Migrated form/CSP acknowledgement and independent mailbox receipt',
         'Physical iPhone/iPad Safari acceptance of the exact candidate',
         'Separate production artifact and hosted pre-cutover validation',
         'Current DNS snapshot, concrete rollback and explicit final go-live approval',
     ]
     summary = {'production_ready': False, 'deployable': False, 'reviewed_routes': len(rows),
-               'sitemap_public_urls': len(sitemap_urls), 'isolated_pages': sum(not (DIST / r.lstrip('/')).exists() for r in private), 'approved_unlisted_pages': sum((DIST / r.lstrip('/')).exists() for r in private), 'scope': 'route proposals only; not a current test-status report', 'acceptance_record': 'migration/RELEASE_CANDIDATE.md', 'launch_gates': gates}
+               'sitemap_public_urls': len(sitemap_urls), 'isolated_pages': sum(not (DIST / r.lstrip('/')).exists() for r in private), 'approved_unlisted_pages': sum((DIST / r.lstrip('/')).exists() for r in private), 'scope': 'route proposals only; not a current test-status report', 'acceptance_record': 'migration/RELEASE_CANDIDATE.md', 'launch_gates': gates,
+               'owner_deferred_checks': ['Notification provider recovery and actual phone delivery (2026-09-17)']}
     (LOCAL / 'readiness.json').write_text(json.dumps(summary, indent=2) + '\n')
     assert not (DIST / 'sitemap.xml').exists(), 'Draft sitemap must not enter preview output'
     assert (DIST / 'robots.txt').read_text() == 'User-agent: *\nDisallow: /\n'

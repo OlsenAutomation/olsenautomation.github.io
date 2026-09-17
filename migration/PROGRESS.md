@@ -1,3 +1,7 @@
+## Notification verification deferred by owner — 2026-09-17
+
+Brian explicitly skipped the notification provider recovery and actual phone-delivery task. It is no longer a launch blocker. Earlier unsuccessful test results remain recorded; notification delivery is unverified, not passed. Approved résumé/site/class alert behavior and settings remain unchanged, previews stay silent, and no additional send or test is scheduled. Remaining launch work: exact-candidate physical Safari acceptance, Cloudflare zone/domain preparation, and explicit final owner go-live approval. No site build, deployment, main or DNS change occurred.
+
 ## Whale v0.5 evidence refresh — 2026-09-17
 
 Brian requested the newer Whale project information and photos. Reviewed 24 recent source-task turns, six source attachments and sampled frames from the new recording. The shared card, project story and workshop proof now include the v0.5 display platform/plaque, original build and mechanism photos, three-plate slicer estimates and a 16-second silent mechanism excerpt. Earlier v0.4.1 media remains labeled development history. Status stays Active prototypes; spacing, glue/retention adjustments and incomplete independent assembly testing remain explicit.
