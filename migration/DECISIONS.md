@@ -112,3 +112,7 @@ Brian confirmed Squarespace Domains and opened the account in Safari. Read-only 
 ## 2026-09-17 — Minimize basement controls by default
 
 Brian found the expanded room controls distracting and asked to minimize them. Keep the chapter and play/pause control visible, with a separate accessible Controls disclosure for room-stop shortcuts, slider, scroll instructions and the skip link. No motion timing, assets, page content, notification policy or production routing changes.
+
+## 2026-09-17 — Shared journey styling and eased scroll seeking
+
+Treat staircase/CTA/return-portal CSS as a production dependency, separate from media-specimen presentation. Do not infer asset safety for removal from its filename; release validation now checks linked styles/scripts after exclusions. Smooth the video destination over wheel bursts without intercepting native page scrolling. Keep the compact room controls, explicit skip, reverse seeking and reduced-motion alternatives. No original inventory asset or source media is removed.

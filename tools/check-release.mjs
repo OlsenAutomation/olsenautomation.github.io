@@ -12,6 +12,15 @@ assert.ok(!files.some(p=>/preview\/|family-card-chaos-access|family-access\.js|r
 assert.ok(!files.some(p=>/\/assets\/media\.(js|css)$/.test(p)));
 for(const route of [...routes,...unlisted,'/404.html']){
   const prod=await read('dist-production'+route),stage=await read('dist-candidate'+route);
+  // Validate the release dependency graph, after specimen assets are removed.
+  // A correct HTML hash alone cannot catch a missing runtime stylesheet.
+  for(const tag of prod.matchAll(/<(?:link|script)\b[^>]*>/gi)){
+    const attr=name=>tag[0].match(new RegExp('\\b'+name+'=["\u0027]([^"\u0027]+)["\u0027]','i'))?.[1];
+    if(tag[0].startsWith('<link')&&!/^(stylesheet|modulepreload|preload)$/.test(attr('rel')||''))continue;
+    const resource=attr('src')||attr('href');if(!resource)continue;
+    const url=new URL(resource,'https://olsenautomation.com'+route);
+    if(url.origin==='https://olsenautomation.com')assert.ok(files.includes('dist-production'+url.pathname),route+' requires missing release asset '+url.pathname);
+  }
   assert.match(prod,/data-site-mode="production"/);assert.match(stage,/data-site-mode="candidate"/);
   assert.match(stage,/<meta name="robots" content="noindex/);
   if(routes.includes(route))assert.match(prod,/<meta name="robots" content="index,follow">/);

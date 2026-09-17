@@ -1,3 +1,9 @@
+## Scroll and staircase repair — 2026-09-17
+
+Brian supplied a recording showing abrupt wheel-driven video movement and a small, unstyled staircase ending. The candidate incorrectly excluded `media.css` while workshop HTML still referenced it. The reusable staircase/door/return-portal rules now live in `journey.css`, loaded by both the workshop and media specimen; specimen-only files stay excluded from release. A new release dependency check reproduced the missing stylesheet before the fix and now passes.
+
+Room and stair scrolling ease toward accumulated wheel destinations, preserve reverse travel, and cancel easing for manual controls, still views, hidden tabs, skipped motion or media errors. Copy changes only at chapter boundaries. Local candidate checks cover desktop 1440×900, phone 390×844 and landscape 844×390: video covers its entire stage, CTA fits, keyboard seeking works, signup focuses the first-name field, and reduced motion starts no video. Wheel measurements show intermediate forward/reverse positions. Publication and hosted verification follow this source checkpoint; no live-site, DNS, form submission or notification action is included.
+
 ## Compact room controls — 2026-09-17
 
 Brian requested minimizing the basement control box. The room controls now start as a 58px bar with chapter, play/pause and a Controls toggle; room stops, seek slider and skip link expand on demand. Keyboard Escape collapses the panel and restores toggle focus. Desktop (1440px), phone (390px) and narrow phone (320px) checks passed without horizontal overflow; still views hide the controls and stop motion. Published from `c9b03eb` as silent candidate `71783a5b-afe2-46c2-94ab-b515709d0e4b`. Hosted verification passes for 466 files, 25 exclusions and 24 video ranges; phone and desktop compact controls also pass on the hosted version. No live-site or DNS action occurred.
