@@ -28,6 +28,7 @@ function doGet() {
 }
 
 function doPost(e) {
+  let requestId = "";
   try {
     const parameters = e && e.parameter ? e.parameter : {};
 
@@ -36,13 +37,14 @@ function doPost(e) {
       return postResponse_({ ok: true, accepted: true });
     }
 
-    const formStartedAt = Number(parameters.form_started_at || 0);
-    validateFormAge_(formStartedAt);
-
     const payloadText = String(parameters.payload || '');
     validatePayloadSize_(payloadText);
 
     const intake = JSON.parse(payloadText);
+    if (intake && /^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/i.test(String(intake.request_id || ""))) requestId = intake.request_id;
+    const formStartedAt = Number(parameters.form_started_at || 0);
+    validateFormAge_(formStartedAt);
+    if (intake.intake_type === "olsen_automation_client_conversation") return handleConversation_(intake);
     validateIntake_(intake);
     rejectSecretFields_(intake);
 
@@ -91,9 +93,76 @@ function doPost(e) {
     return postResponse_({
       ok: false,
       accepted: false,
+      request_id: requestId,
       error: safeError_(error)
     });
   }
+}
+
+// The conversation form is a separate, exact allowlisted contract.
+function handleConversation_(intake) {
+  if (intake.source_page !== 'https://olsenautomation.com/conversation/joe-v-7c4e9a/' ||
+      !['initial_call', 'follow_up'].includes(intake.submission_kind) ||
+      !/^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/i.test(String(intake.request_id || ''))) {
+    throw new Error('The conversation form is not recognized.');
+  }
+  if (!intake.client || !intake.confirmations || intake.confirmations.no_secrets_or_private_customer_data !== true) {
+    throw new Error('Required contact information or confirmation is missing.');
+  }
+  ['business_name', 'contact_name', 'contact_email'].forEach(function(key) {
+    if (typeof intake.client[key] !== 'string' || !intake.client[key].trim() || intake.client[key].length > 254) {
+      throw new Error('Required contact information is missing or too long.');
+    }
+  });
+  const email = cleanEmail_(intake.client.contact_email);
+  const answers = intake.answers;
+  if (!answers || typeof answers !== 'object' || Array.isArray(answers) || Object.keys(answers).length > 20) {
+    throw new Error('The answers format is invalid.');
+  }
+  Object.keys(answers).forEach(function(key) {
+    if (!/^[a-z_]{1,60}$/.test(key) || typeof answers[key] !== 'string' || answers[key].length > 4000) {
+      throw new Error('An answer is too long or has an unsupported format.');
+    }
+  });
+  const required = intake.submission_kind === 'initial_call' ? ['goal'] : ['topic', 'question'];
+  required.forEach(function(key) {
+    if (!answers[key] || !answers[key].trim()) throw new Error('Please complete the required answers.');
+  });
+  rejectSecretFields_(intake);
+  const json = JSON.stringify(intake, null, 2) + '\n';
+  const hash = digest_(json);
+  const cache = CacheService.getScriptCache();
+  const key = 'conversation:' + intake.request_id;
+  const lock = LockService.getScriptLock();
+  lock.waitLock(5000);
+  try {
+    const previous = cache.get(key);
+    if (previous) {
+      if (previous !== hash) throw new Error('This submission reference was already used for different answers.');
+      return postResponse_({ok:true, accepted:true, duplicate:true, request_id:intake.request_id, submission_id:hash.slice(0,16)});
+    }
+    const rateKey = 'hour:' + Math.floor(Date.now() / 3600000);
+    const count = Number(cache.get(rateKey) || 0);
+    if (count >= CONFIG.MAX_ACCEPTED_PER_HOUR || MailApp.getRemainingDailyQuota() < 1) {
+      throw new Error('The intake service is temporarily busy. Please contact Brian directly.');
+    }
+    const business = cleanSingleLine_(intake.client.business_name, 120);
+    const label = intake.submission_kind === 'initial_call' ? 'Call preparation' : 'Follow-up question';
+    const filename = slug_(business) + '-' + intake.submission_kind + '-' + dateStamp_() + '.json';
+    const lines = [label + ' submitted through olsenautomation.com.', '',
+      'Business: ' + business, 'Contact: ' + cleanSingleLine_(intake.client.contact_name, 120),
+      'Reply email: ' + email, 'Reference: ' + intake.request_id, ''];
+    Object.keys(answers).forEach(function(answerKey) {
+      lines.push(answerKey.replace(/_/g, ' ').toUpperCase() + ':', answers[answerKey] || '(not supplied)', '');
+    });
+    lines.push('This is a nonbinding marketing conversation, not authorization to publish, bill, or book a call.');
+    MailApp.sendEmail(CONFIG.RECIPIENT, 'Client Conversation — ' + label + ' — ' + business, lines.join('\n'), {
+      attachments:[Utilities.newBlob(json, 'application/json', filename)], name:'Olsen Automation Intake', replyTo:email
+    });
+    cache.put(key, hash, CONFIG.DUPLICATE_TTL_SECONDS);
+    cache.put(rateKey, String(count + 1), 3600);
+    return postResponse_({ok:true, accepted:true, request_id:intake.request_id, submission_id:hash.slice(0,16)});
+  } finally { lock.releaseLock(); }
 }
 
 function validateFormAge_(startedAt) {
