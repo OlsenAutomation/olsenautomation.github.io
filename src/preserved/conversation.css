@@ -1,0 +1,77 @@
+/* Form layout only; the shared shell owns typography, colors and buttons. */
+.conversation-page{max-width:1000px;padding-bottom:48px}
+.conversation-page [hidden]{display:none!important}
+.conversation-page .intro{padding:64px 0 36px}
+.conversation-page h1{font-size:clamp(36px,5.5vw,64px);line-height:1.1;letter-spacing:-.04em;max-width:900px}
+.conversation-page h2{font-size:clamp(26px,3vw,36px);line-height:1.2}
+.conversation-page h3{font-size:22px}
+.conversation-page p{margin:0 0 16px}
+.conversation-page .lede{font-size:clamp(18px,2.2vw,22px);max-width:730px;color:var(--text-soft);margin:24px 0}
+.conversation-page .intro-actions,.conversation-page .contact-links{display:flex;flex-wrap:wrap;align-items:center;gap:18px 24px}
+.conversation-page .small,.conversation-page .hint,.conversation-page .step-help,.conversation-page .section-heading p{color:var(--text-soft);font-size:15px}
+.conversation-page .privacy-line{max-width:730px;margin-top:22px}
+.conversation-page .agenda{border-block:1px solid var(--line);padding:28px 0;display:grid;grid-template-columns:1fr 2.2fr;gap:24px}
+.conversation-page .agenda ol,.conversation-page .step-nav{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:18px;padding:0;margin:0}
+.conversation-page .agenda li{font-size:14px}
+.conversation-page .agenda span{display:block;color:var(--cyan);font-size:13px}
+.conversation-page .form-section{padding-top:56px;scroll-margin-top:calc(var(--header-h) + 20px)}
+.conversation-page .section-heading{display:flex;gap:20px;justify-content:space-between;align-items:start;margin-bottom:22px}
+.conversation-page .section-heading h2{margin:0 0 12px}
+.conversation-page .text-button{background:none;border:0;color:var(--text-soft);text-decoration:underline;white-space:nowrap;padding:4px;cursor:pointer}
+.conversation-page .step-nav{margin-bottom:20px;font-size:14px;color:var(--text-soft)}
+.conversation-page .step-nav li{display:flex;align-items:center;gap:8px}
+.conversation-page .step-nav span{width:28px;height:28px;display:grid;place-items:center;border:1px solid var(--line-strong);border-radius:50%;flex-shrink:0}
+.conversation-page .step-nav [aria-current]{color:var(--cyan);font-weight:700}
+.conversation-page .form-panel{background:var(--surface-solid);border:1px solid var(--line-strong);border-radius:var(--radius);padding:clamp(20px,4vw,40px)}
+.conversation-page fieldset{margin:0;padding:0;border:0;min-width:0}
+.conversation-page legend{font-size:clamp(23px,3vw,29px);line-height:1.25;font-weight:700;margin-bottom:12px}
+.conversation-page .step-help{margin-bottom:28px}
+.conversation-page .field{margin-bottom:26px;min-width:0}
+.conversation-page label{display:block;font-size:16px;font-weight:650;margin-bottom:10px}
+.conversation-page label>span{font-size:13px;font-weight:400;color:var(--text-soft)}
+.conversation-page input:not([type=checkbox]),.conversation-page select,.conversation-page textarea{width:100%;min-height:49px;padding:12px 14px;border:1px solid var(--line-strong);border-radius:10px;color:var(--text);background:var(--bg);font:inherit;font-size:16px}
+.conversation-page textarea{resize:vertical;line-height:1.55}
+.conversation-page .two-col{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.conversation-page .check{display:flex;align-items:flex-start;gap:12px;margin:22px 0 0}
+.conversation-page .check span{font-size:14px;line-height:1.6}
+.conversation-page .check input{width:20px;height:20px;flex-shrink:0;margin-top:3px;accent-color:var(--cyan)}
+.conversation-page .form-controls{display:flex;align-items:center;flex-wrap:wrap;gap:14px;border-top:1px solid var(--line);margin-top:28px;padding-top:24px}
+.conversation-page .step-position{margin-left:auto;font-size:13px;color:var(--text-soft)}
+.conversation-page .scope-note,.conversation-page .notice{padding:20px;border-left:3px solid var(--cyan);background:var(--cyan-dim);margin:24px 0}
+.conversation-page .scope-note p{margin:10px 0 0;font-size:15px}
+.conversation-page .review-details{border-block:1px solid var(--line);padding:18px 0;margin:24px 0}
+.conversation-page summary{cursor:pointer}
+.conversation-page dt{font-weight:700;margin-top:18px}
+.conversation-page dd{margin:6px 0 0;white-space:pre-wrap;overflow-wrap:anywhere;color:var(--text-soft)}
+.conversation-page .form-status{margin:20px 0 0;overflow-wrap:anywhere}
+.conversation-page .form-status:empty{display:none}
+.conversation-page .error{color:#ffb0a1}
+.conversation-page .pending{color:var(--gold)}
+.conversation-page .success{padding:22px;border:1px solid var(--green);border-radius:12px;margin-top:24px}
+.conversation-page .receipt{font-family:monospace;overflow-wrap:anywhere}
+.conversation-page .follow-up .btn{margin-top:24px}
+.conversation-page .closing{padding-top:56px;max-width:750px}
+.conversation-page .contact-links{margin:22px 0}
+.conversation-page .honey{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}
+.conversation-page button:disabled{cursor:wait;opacity:.65}
+@media(max-width:700px){
+ .conversation-page .agenda{grid-template-columns:1fr}
+ .conversation-page .two-col{grid-template-columns:1fr;gap:0}
+ .conversation-page .intro{padding:40px 0 28px}
+ .conversation-page .desktop-break,.conversation-page .print-button{display:none}
+ .conversation-page .step-nav{gap:8px;font-size:12px}
+ .conversation-page .step-nav li{flex-direction:column;align-items:flex-start}
+ .conversation-page .form-section{padding-top:40px}
+}
+@media(max-width:390px){.conversation-page .agenda ol{grid-template-columns:1fr 1fr}.conversation-page .form-controls .btn{font-size:14px;padding-inline:15px}}
+@media print{
+ .site-header,body>.footer,.skip-link,.conversation-page .intro-actions,.conversation-page .print-button,.conversation-page .step-nav,.conversation-page .form-controls,.conversation-page .btn,.conversation-page .form-status,.conversation-page .success,.conversation-page .honey,.conversation-page iframe{display:none!important}
+ body,.conversation-page .form-panel{background:white;color:black}
+ .conversation-page{width:100%;max-width:none}
+ .conversation-page .step,.conversation-page .step[hidden]{display:block!important;break-inside:avoid;margin-top:24px}
+ .conversation-page .form-panel{border:0;padding:0}
+ .conversation-page .field{break-inside:avoid}
+ .conversation-page p,.conversation-page label>span,.conversation-page .hint,.conversation-page .step-help{color:black}
+ .conversation-page input:not([type=checkbox]),.conversation-page select,.conversation-page textarea{background:white;color:black;border-color:#666}
+ .conversation-page .review-details{display:none}
+}

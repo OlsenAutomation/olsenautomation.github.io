@@ -4,7 +4,8 @@ import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
 import vm from 'node:vm';
 
-const source=readFileSync(new URL('../apps-script/Code.gs',import.meta.url),'utf8');
+const source=readFileSync(new URL('../src/receivers/intake.gs',import.meta.url),'utf8');
+const preserved=JSON.parse(readFileSync(new URL('../src/_data/live-intake-preservation.json',import.meta.url),'utf8'));
 const fixture=()=>({
   intake_type:'olsen_automation_ai_visibility',
   source_page:'https://olsenautomation.com/ai-visibility.html',
@@ -67,3 +68,22 @@ const retry=harness({mailFails:true});assert.equal(retry.submit().accepted,false
 const limit=harness();for(let i=0;i<30;i++){const x=fixture();x.client.business_name+=' '+i;assert.equal(limit.submit(x).accepted,true);}
 assert.equal(limit.submit().accepted,false);assert.equal(limit.sent.length,30);
 console.log('PASS: preserved intake contract, fixed recipient, exact attachment, required confirmations, secret-field rejection, size/age limits, honeypot, duplicate/rate limits, quota rejection and retry after mail failure. In-memory services only; no email sent.');
+
+const conversation=(kind='initial_call')=>({intake_type:'olsen_automation_client_conversation',source_page:'https://olsenautomation.com'+preserved.route,request_id:'12345678-abcd-4321-9876-123456789abc',submission_kind:kind,client:{business_name:'SYNTHETIC BUSINESS',contact_name:'Synthetic QA',contact_email:'qa@example.com'},answers:kind==='initial_call'?{goal:'Synthetic form test'}:{topic:'Synthetic topic',question:'Synthetic question'},confirmations:{no_secrets_or_private_customer_data:true}});
+for(const kind of ['initial_call','follow_up']){
+ const h=harness(),payload=conversation(kind),result=h.submit(payload);
+ assert.equal(result.accepted,true);assert.equal(result.request_id,payload.request_id);
+ assert.equal(h.sent.length,1);assert.equal(h.sent[0][0],'brian@olsenautomation.com');
+ assert.deepEqual(JSON.parse(h.sent[0][3].attachments[0].text),payload);
+ assert.equal(h.submit(payload).duplicate,true);assert.equal(h.sent.length,1,'one delivery for a repeated request ID');
+ payload.answers.extra='Changed after delivery';assert.equal(h.submit(payload).accepted,false);assert.equal(h.sent.length,1);
+}
+for(const mutate of [x=>x.source_page='https://example.com/',x=>x.request_id='bad',x=>x.submission_kind='unsupported',x=>x.client.contact_email='bad',x=>x.confirmations.no_secrets_or_private_customer_data=false,x=>x.answers={},x=>x.answers.goal='x'.repeat(4001),x=>x.answers.api_key='SYNTHETIC-NONSECRET',x=>x.answers=Array(2).fill('bad')]){
+ const h=harness(),payload=conversation();mutate(payload);assert.equal(h.submit(payload).accepted,false);assert.equal(h.sent.length,0);
+}
+const correlated=harness(),badAge=conversation();
+assert.equal(correlated.submit(badAge,{form_started_at:String(Date.now())}).request_id,badAge.request_id,'rejection is correlated to the correct form');
+const convQuota=harness({quota:0});assert.equal(convQuota.submit(conversation()).accepted,false);assert.equal(convQuota.sent.length,0);
+const convRetry=harness({mailFails:true});assert.equal(convRetry.submit(conversation()).accepted,false);convRetry.setMailFailure(false);assert.equal(convRetry.submit(conversation()).accepted,true);
+const sharedLimit=harness();for(let i=0;i<30;i++){const x=fixture();x.client.business_name+=' shared '+i;assert.equal(sharedLimit.submit(x).accepted,true);}assert.equal(sharedLimit.submit(conversation()).accepted,false);
+console.log('PASS: both newer conversation forms, exact payload/receiver compatibility, correlated errors, idempotent receipts, changed-payload rejection and shared quota. All services simulated; no real email or receiver deployment.');

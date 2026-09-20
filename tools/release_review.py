@@ -78,7 +78,7 @@ def prepare():
     gates = [
         'Approved unlisted boundaries and excluded private family guide',
         'Migrated form/CSP acknowledgement and independent mailbox receipt',
-        'Physical iPhone/iPad Safari acceptance of the exact candidate',
+        'Owner device acceptance of the exact candidate (recorded in RELEASE_ACCEPTANCE.json)',
         'Separate production artifact and hosted pre-cutover validation',
         'Current DNS snapshot, concrete rollback and explicit final go-live approval',
     ]

@@ -5,9 +5,10 @@ import production from '../src/production-worker.js';
 const read=path=>readFile(new URL('../'+path,import.meta.url),'utf8');
 const routes=JSON.parse(await read('dist/route-registry.json')).map(r=>r.route);
 const unlisted=JSON.parse(await read('src/_data/unlisted-publication.json')).approved_routes;
+const intake=JSON.parse(await read('src/_data/live-intake-preservation.json'));
 const walk=async dir=>(await Promise.all((await readdir(dir,{withFileTypes:true})).map(e=>e.isDirectory()?walk(dir+'/'+e.name):dir+'/'+e.name))).flat();
 const files=await walk('dist-production');
-assert.equal(files.filter(p=>p.endsWith('.html')).length,36);
+assert.equal(files.filter(p=>p.endsWith('.html')).length,37);
 assert.ok(!files.some(p=>/preview\/|family-card-chaos-access|family-access\.js|route-registry|_codex|apps-script|migration\//.test(p)));
 assert.ok(!files.some(p=>/\/assets\/media\.(js|css)$/.test(p)));
 for(const route of [...routes,...unlisted,'/404.html']){
@@ -31,6 +32,18 @@ for(const route of [...routes,...unlisted,'/404.html']){
 const sitemap=await read('dist-production/sitemap.xml');assert.equal((sitemap.match(/<loc>/g)||[]).length,32);
 const sitemapRoutes=[...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map(m=>new URL(m[1]).pathname);
 for(const route of [...unlisted,'/404.html','/preview/','/family-card-chaos-access.html'])assert.ok(!sitemapRoutes.includes(route));
+assert.ok(!sitemap.includes(intake.route),'client intake must not appear in sitemap');
+const intakeHtml=await read('dist-production'+intake.route+'index.html');
+assert.match(intakeHtml,/data-site-mode="unlisted"/,'client intake does not start visitor alerts');
+assert.match(intakeHtml,/<meta[^>]+noindex/);
+assert.equal((intakeHtml.match(/<form method="post" action=/g)||[]).length,2,'no-JavaScript forms never leak answers in a GET URL');
+assert.equal((intakeHtml.match(/<h1\b/g)||[]).length,1);
+assert.ok(intakeHtml.includes('<header class="site-header"'),'shared header');
+assert.ok(intakeHtml.includes('<footer class="footer"'),'shared footer');
+for(const route of routes)assert.ok(!(await read('dist-production'+route)).includes(intake.route),'public page must not link client intake');
+const candidateFiles=await walk('dist-candidate');
+assert.equal(candidateFiles.filter(p=>p.endsWith('.html')).length,36);
+assert.ok(!candidateFiles.some(p=>p.includes(intake.route)),'personalized intake excluded from public candidate');
 assert.match(await read('dist-production/robots.txt'),/Allow: \/\nSitemap: https:\/\/olsenautomation.com\/sitemap.xml/);
 assert.match(await read('dist-candidate/robots.txt'),/Disallow: \//);
 assert.match(await read('dist-production/_headers'),/frame-src https:\/\/script.google.com https:\/\/\*.googleusercontent.com/);
@@ -55,4 +68,13 @@ const silent=await candidate.fetch(new Request('https://candidate.example/api/vi
 const redirect=await production.fetch(new Request('https://www.olsenautomation.com/projects.html?source=test'),env);
 assert.equal(redirect.status,301);assert.equal(redirect.headers.get('location'),'https://olsenautomation.com/projects.html?source=test');
 const staticResponse=await candidate.fetch(new Request('https://candidate.example/'),env);assert.match(staticResponse.headers.get('x-robots-tag'),/noindex/);
-console.log('PASS: 36 release pages, 32 public sitemap entries, production/candidate body equivalence, unlisted/family boundaries, expired/unauthorized QA isolation, silent staging and www canonical redirect. No external messages sent.');
+for(const path of [intake.route,intake.route+'index.html',intake.route+'intake.js']){
+ let assetPath;
+ const r=await production.fetch(new Request('https://olsenautomation.com'+path),{...env,ASSETS:{fetch:async req=>{assetPath=new URL(req.url).pathname;return new Response('local fixture');}}});
+ assert.equal(r.status,200);assert.match(r.headers.get('x-robots-tag'),/noindex/);assert.equal(r.headers.get('cache-control'),'no-store');
+ if(!path.endsWith('.js')){assert.equal(assetPath,intake.route+'index.html');assert.match(r.headers.get('content-security-policy'),/frame-src https:\/\/script.google.com/);}
+}
+const intakeRedirect=await production.fetch(new Request('https://olsenautomation.com'+intake.route.slice(0,-1)+'?source=test'),env);
+assert.equal(intakeRedirect.status,301);assert.equal(intakeRedirect.headers.get('location'),'https://olsenautomation.com'+intake.route+'?source=test');
+assert.equal((await production.fetch(new Request('https://olsenautomation.com'+intake.route,{method:'POST'}),env)).status,405);
+console.log('PASS: 37 local production / 36 public candidate pages, 32 sitemap entries, unchanged shared page bodies, client route excluded from preview/discovery, exact intake routing/CSP, unlisted/family boundaries, silent staging and canonical redirects. No external messages sent.');

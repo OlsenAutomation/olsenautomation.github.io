@@ -10,6 +10,7 @@ LOCAL=ROOT/'.migration-local/release-candidate'
 NOINDEX='noindex, nofollow, noarchive, nosnippet'
 def build():
     from release_review import prepare
+    from live_intake import build as preserve_live_intake
     prepare()
     LOCAL.mkdir(parents=True,exist_ok=True)
     for output in (PRODUCTION,CANDIDATE):
@@ -36,16 +37,23 @@ def build():
         shutil.copyfile(ROOT/relative,target)
     shutil.copyfile(ROOT/'.migration-local/launch-review/sitemap.xml',PRODUCTION/'sitemap.xml')
     shutil.copyfile(ROOT/'.migration-local/launch-review/robots.txt',PRODUCTION/'robots.txt')
+    # This existing client route is prepared only in the local production artifact.
+    # It is deliberately absent from the shared preview, sitemap and public candidate.
+    intake_route=preserve_live_intake(PRODUCTION)
     headers=json.loads((ROOT/'src/_data/production-headers.json').read_text())
     intake_csp=headers['Content-Security-Policy'].replace("form-action 'none'","form-action https://script.google.com https://script.googleusercontent.com; frame-src https://script.google.com https://*.googleusercontent.com")
     rules='/*\n'+''.join(f'  {k}: {v}\n' for k,v in headers.items())
     rules+='/ai-visibility.html\n  ! Content-Security-Policy\n  Content-Security-Policy: '+intake_csp+'\n'
+    client_rules=intake_route+'*\n  X-Robots-Tag: '+NOINDEX+'\n  Cache-Control: no-store\n'
+    for route in (intake_route,intake_route+'index.html'):
+        client_rules+=route+'\n  ! Content-Security-Policy\n  Content-Security-Policy: '+intake_csp+'\n'
     hidden=[*unlisted,'/404.html','/api/*','/assets/territory-execution/*','/assets/visual-ai/*','/unlisted-media/*','/Brian_Olsen_DataAnnotation_Visual_AI_Trainer_Resume.pdf']
     rules+=''.join(path+'\n  X-Robots-Tag: '+NOINDEX+'\n' for path in hidden)
     rules+='/assets/*\n  Cache-Control: no-cache\n/media/*\n  Cache-Control: public, max-age=86400\n'
-    (PRODUCTION/'_headers').write_text(rules)
+    (PRODUCTION/'_headers').write_text(rules+client_rules)
     (PRODUCTION/'_redirects').write_text('/ /index.html 200\n')
     shutil.copytree(PRODUCTION,CANDIDATE)
+    shutil.rmtree(CANDIDATE/intake_route.lstrip('/'))
     for path in CANDIDATE.rglob('*.html'):
         text=path.read_text().replace('data-site-mode="production"','data-site-mode="candidate"')
         text=re.sub(r'<meta\b(?=[^>]*\bname=[\"\']robots[\"\'])[^>]*>',f'<meta name="robots" content="{NOINDEX}">',text)
