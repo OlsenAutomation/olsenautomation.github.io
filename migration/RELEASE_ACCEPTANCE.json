@@ -30,9 +30,9 @@
     "provider": "Squarespace Domains",
     "configured_records_captured": 9,
     "dnssec_enabled": false,
-    "changed": false,
-    "live_dns_changed": false,
-    "registrar_nameservers_changed": false,
+    "changed": true,
+    "live_dns_changed": true,
+    "registrar_nameservers_changed": true,
     "staged_zone_created": true,
     "staging_receipt": "DOMAIN_CUTOVER_PLAN.md",
     "cloudflare_account_id": "2dbb4e55d89cba10d0e21ff338e83fd7",
@@ -49,8 +49,9 @@
     "all_records_match_including_ttl": true,
     "verified_at": "2026-09-20T16:57:27.710185+00:00",
     "owner_approval": "Approve zone preparation only",
-    "final_live_switch_approved": false,
-    "bot_preference_sync": false
+    "final_live_switch_approved": true,
+    "bot_preference_sync": false,
+    "registrar_saved_at": "2026-09-20 11:32 AM America/Los_Angeles"
   },
   "production_ready": false,
   "owner_phone_acceptance": {
@@ -61,7 +62,7 @@
     "scope": "Owner-reported phone review of the scroll-only candidate; phone model and browser unspecified, iPad review not reported. This satisfies the owner device-review gate for this candidate, not final production go-live approval."
   },
   "remaining": [
-    "Explicit final owner approval for Squarespace nameserver switch and production website cutover"
+    "Cloudflare activation, production attachment and live verification (approved, in progress)"
   ],
   "excluded_route_checks": 25,
   "candidate_url": "https://fad13e0e-olsen-automation-v2-preview.brian-dbb.workers.dev/",
@@ -248,5 +249,11 @@
     "full_release_checks": "passed",
     "uploaded": false,
     "deployed": false
+  },
+  "final_go_live_approval": {
+    "date": "2026-09-20",
+    "owner": "Brian Olsen",
+    "evidence": "final approval given",
+    "scope": "Execute the prepared Squarespace nameserver change and publish the reviewed production Worker on olsenautomation.com and www.olsenautomation.com; no main merge, paid feature or new delivery test."
   }
 }
