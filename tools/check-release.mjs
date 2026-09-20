@@ -68,10 +68,15 @@ const silent=await candidate.fetch(new Request('https://candidate.example/api/vi
 const redirect=await production.fetch(new Request('https://www.olsenautomation.com/projects.html?source=test'),env);
 assert.equal(redirect.status,301);assert.equal(redirect.headers.get('location'),'https://olsenautomation.com/projects.html?source=test');
 const staticResponse=await candidate.fetch(new Request('https://candidate.example/'),env);assert.match(staticResponse.headers.get('x-robots-tag'),/noindex/);
+for(const [status,cache] of [[200,'public, max-age=0, must-revalidate'],[404,'no-store'],[200,'public, no-transform']]){
+ const html=await production.fetch(new Request('https://olsenautomation.com/'),{...env,ASSETS:{fetch:async()=>new Response('<h1>Reviewed HTML</h1>',{status,headers:{'Content-Type':'text/html; charset=utf-8','Cache-Control':cache}})}});
+ assert.equal(html.status,status);assert.equal(await html.text(),'<h1>Reviewed HTML</h1>');
+ assert.equal(html.headers.get('cache-control'),cache.includes('no-transform')?cache:cache+', no-transform');
+}
 for(const path of [intake.route,intake.route+'index.html',intake.route+'intake.js']){
  let assetPath;
- const r=await production.fetch(new Request('https://olsenautomation.com'+path),{...env,ASSETS:{fetch:async req=>{assetPath=new URL(req.url).pathname;return new Response('local fixture');}}});
- assert.equal(r.status,200);assert.match(r.headers.get('x-robots-tag'),/noindex/);assert.equal(r.headers.get('cache-control'),'no-store');
+ const r=await production.fetch(new Request('https://olsenautomation.com'+path),{...env,ASSETS:{fetch:async req=>{assetPath=new URL(req.url).pathname;return new Response('local fixture',{headers:{'Content-Type':path.endsWith('.js')?'text/javascript':'text/html'}});}}});
+ assert.equal(r.status,200);assert.match(r.headers.get('x-robots-tag'),/noindex/);assert.equal(r.headers.get('cache-control'),path.endsWith('.js')?'no-store':'no-store, no-transform');
  if(!path.endsWith('.js')){assert.equal(assetPath,intake.route+'index.html');assert.match(r.headers.get('content-security-policy'),/frame-src https:\/\/script.google.com/);}
 }
 const intakeRedirect=await production.fetch(new Request('https://olsenautomation.com'+intake.route.slice(0,-1)+'?source=test'),env);

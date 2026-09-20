@@ -4,7 +4,17 @@ import {mediaWorker} from './media-worker.js';
 import {visitNotification} from './visit-worker.js';
 import intake from './_data/live-intake-preservation.json' with {type:'json'};
 const media=mediaWorker(manifest,security);
+// Keep the reviewed HTML intact at the proxy, including on newly activated
+// zones where Cloudflare may otherwise inject its default RUM analytics script.
 export default {async fetch(request,env){
+ const response=await serve(request,env);
+ if(!response.headers.get('content-type')?.includes('text/html'))return response;
+ const headers=new Headers(response.headers);
+ const cache=headers.get('cache-control');
+ if(!/(?:^|,)\s*no-transform\s*(?:,|$)/i.test(cache||''))headers.set('Cache-Control',[cache,'no-transform'].filter(Boolean).join(', '));
+ return new Response(response.body,{status:response.status,headers});
+}};
+async function serve(request,env){
  const url=new URL(request.url);
  if(url.hostname==='www.olsenautomation.com'){
   url.hostname='olsenautomation.com';return Response.redirect(url,301);
@@ -26,4 +36,4 @@ export default {async fetch(request,env){
   return new Response(response.body,{status:response.status,headers:merged});
  }
  return media.fetch(request,env);
-}};
+}

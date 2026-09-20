@@ -3,6 +3,8 @@ import assert from 'node:assert/strict';
 import {readFile, writeFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import path from 'node:path';
+import https from 'node:https';
+import {isIP} from 'node:net';
 import intake from '../src/_data/live-intake-preservation.json' with {type:'json'};
 import unlisted from '../src/_data/unlisted-publication.json' with {type:'json'};
 
@@ -10,8 +12,26 @@ const root=path.resolve(import.meta.dirname,'..');
 const base=new URL('https://olsenautomation.com');
 const manifest=JSON.parse(await readFile(path.join(root,'.migration-local/release-candidate/artifact-hashes.json'),'utf8')).production;
 const hash=data=>createHash('sha256').update(data).digest('hex');
-const report={base:base.origin,checkedAt:new Date().toISOString(),files:[],aliases:[],excluded:[],ranges:[],failures:[]};
-const get=(route,init={})=>fetch(new URL(route,base),{...init,redirect:'manual',signal:AbortSignal.timeout(30000)});
+// Optional address must come from the current authoritative DNS answer. This
+// avoids stale local resolver caches while retaining the real hostname and TLS
+// certificate verification. Report the override; it does not prove propagation.
+const edge=process.argv.find(arg=>arg.startsWith('--edge-ip='))?.split('=')[1];
+if(edge)assert.equal(isIP(edge),4,'Expected an authoritative IPv4 address');
+const report={base:base.origin,checkedAt:new Date().toISOString(),dnsOverride:edge||null,files:[],aliases:[],excluded:[],ranges:[],failures:[]};
+async function request(url,init={}){
+  if(!edge)return fetch(url,{...init,redirect:'manual',signal:AbortSignal.timeout(30000)});
+  assert.ok(['olsenautomation.com','www.olsenautomation.com'].includes(url.hostname));
+  return new Promise((resolve,reject)=>{
+    const req=https.request(url,{method:'GET',headers:init.headers,lookup:(_host,options,callback)=>options.all?callback(null,[{address:edge,family:4}]):callback(null,edge,4)},response=>{
+      const chunks=[];response.on('data',data=>chunks.push(data));response.on('error',reject);response.on('end',()=>{
+        const headers=new Headers();for(const [key,value] of Object.entries(response.headers))if(value!==undefined)headers.set(key,Array.isArray(value)?value.join(', '):value);
+        resolve(new Response(Buffer.concat(chunks),{status:response.statusCode,headers}));
+      });
+    });
+    req.on('error',reject);req.setTimeout(30000,()=>req.destroy(new Error('HTTPS request timed out')));req.end();
+  });
+}
+const get=(route,init={})=>request(new URL(route,base),init);
 const check=async(route,task)=>{try{await task();}catch(error){report.failures.push({route,error:error.message});}};
 const files=Object.entries(manifest).filter(([name])=>!['_headers','_redirects'].includes(name));
 let cursor=0;
@@ -22,6 +42,7 @@ await Promise.all(Array.from({length:6},async()=>{
       const response=await get(route);const bytes=Buffer.from(await response.arrayBuffer());
       assert.equal(response.status,200);assert.equal(hash(bytes),expected,'File differs from reviewed production artifact');
       if(name.endsWith('.html')){
+        assert.match(response.headers.get('cache-control')||'',/(?:^|,)\s*no-transform\b/,'Reviewed HTML must not receive proxy-injected scripts');
         const privatePage=unlisted.approved_routes.includes(route)||route.startsWith(intake.route)||route==='/404.html';
         if(privatePage)assert.match(response.headers.get('x-robots-tag')||'',/noindex/);
         else {assert.doesNotMatch(response.headers.get('x-robots-tag')||'',/noindex/);assert.match(bytes.toString(),/<meta name="robots" content="index,follow">/);}
@@ -39,7 +60,7 @@ await check(intake.route.slice(0,-1),async()=>{
   const response=await get(intake.route.slice(0,-1)+'?launch-check=1');assert.equal(response.status,301);assert.equal(response.headers.get('location'),new URL(intake.route+'?launch-check=1',base).href);report.aliases.push({route:intake.route.slice(0,-1),status:301});
 });
 for(const route of ['/','/projects.html?launch-check=1',intake.route+'?launch-check=1'])await check('www'+route,async()=>{
-  const response=await fetch('https://www.olsenautomation.com'+route,{redirect:'manual',signal:AbortSignal.timeout(30000)});assert.equal(response.status,301);assert.equal(response.headers.get('location'),base.origin+route);report.aliases.push({route:'www'+route,status:301});
+  const response=await request(new URL('https://www.olsenautomation.com'+route));assert.equal(response.status,301);assert.equal(response.headers.get('location'),base.origin+route);report.aliases.push({route:'www'+route,status:301});
 });
 for(const route of ['/assets/media.js','/assets/media.css','/preview/shell/','/preview/media/','/route-registry.json','/__release-qa','/__release-qa/notification','/apps-script/Code.gs','/missing','/_codex_handoff/approved-pilot/QA-REPORT.md','/.git/config','/migration/CONTENT_MATRIX.csv','/CNAME','/family-card-chaos-access.html','/assets/family-access.js','/unlisted-media/test.png','/src/pages/home.html','/contact','/contact/','/__test/intake-receiver','/_headers','/_redirects','/.migration-local/project-context-audit/PROJECT_CARD_READINESS.md','/src/_data/project-stories.json','/assets/project-photos/whale-v041-original.png',intake.route+'missing'])await check(route,async()=>{
   const response=await get(route);assert.equal(response.status,404);report.excluded.push({route,status:404});

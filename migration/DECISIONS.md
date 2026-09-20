@@ -150,3 +150,7 @@ The prepared Cloudflare zone is Free and pending, all records are DNS-only and b
 ## 2026-09-20 — Final go-live approval
 
 Brian explicitly stated “final approval given” after reviewing the completed preparation. Execute the documented nameserver switch and production website cutover without asking for the same approval again. Keep GitHub main and Pages recoverable, preserve mail records, retain Workers Free, and send no new test messages. Squarespace saved the assigned Cloudflare pair at 11:32 AM Pacific; parent delegation and both public DNS resolvers confirm it. Production attachment follows Cloudflare activation and the successful interim checks.
+
+### 2026-09-20 — preserve reviewed HTML through the production proxy
+
+The approved launch activated the Free zone and both production custom domains. Live byte checks found Cloudflare's default RUM beacon appended to HTML for some user agents; all non-HTML assets matched. The reviewed CSP already blocked that external script. Preserve the approved privacy posture by appending `Cache-Control: no-transform` to production HTML responses, retaining existing cache/no-store directives, status and body bytes. This follows Cloudflare's documented way to prevent automatic beacon injection: https://developers.cloudflare.com/web-analytics/get-started/. No analytics site was added, no paid feature enabled, and no notification/form test was sent. Release checks cover public/error HTML and unlisted no-store responses. Live checks must pass without stripping or normalizing injected content.
