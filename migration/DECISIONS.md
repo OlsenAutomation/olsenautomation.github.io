@@ -136,3 +136,12 @@ Remove the screenshot's quote and version-specific Whale explanation from the wo
 ## 2026-09-20 — Owner accepts the scroll-only candidate on phone
 
 Brian reported, “just checked it on my phone. it looks good,” for candidate `fad13e0e-302a-4b9e-8aa0-7eefa1f69ca4`. Treat this as owner acceptance of the phone experience and close the device-review gate for this candidate. Do not infer a specific phone model/browser, an iPad test, independent physical Safari verification or final production/DNS approval. Preserve the deferred notification decision and the remaining intake reconciliation/domain preparation work.
+
+
+## 2026-09-20 — Preserve newer intake and prepare the Free DNS zone
+
+Brian instructed completion of the remaining intake and rollback work, then explicitly answered “Approve zone preparation only.” That permits creating the inactive Free zone and copying the nine existing records; it does not permit changing registrar nameservers, production deployment, custom domains or main.
+
+Preserve the newer direct-link intake from pinned main Git objects and record hashes. Build the personalized content only into local production output, never public previews or public discovery; retain the existing noindex and silent behavior. Keep the newer receiver as an exact derivative, with mocked contract tests and no Apps Script redeployment or real send. Distinguish the annotated baseline tag object from its peeled baseline commit in source metadata. The accepted public candidate remains byte-for-byte unchanged.
+
+The prepared Cloudflare zone is Free and pending, all records are DNS-only and both assigned nameservers match all nine current records including TTLs. Preserve Domain Connect's authoritative 14400-second value rather than its inconsistent Squarespace UI label. Keep Cloudflare Bot Preference Sync off to preserve the site's robots policy. Do not create another zone, expand CLI authorization or enable paid features. Final owner approval must explicitly cover the live nameserver change, production website switch and any incident rollback authority. Retain both DNS snapshots and GitHub Pages for recovery.

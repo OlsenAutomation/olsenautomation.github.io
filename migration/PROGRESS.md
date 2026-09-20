@@ -1,3 +1,11 @@
+## Intake reconciliation and approved DNS staging — 2026-09-20
+
+Newer intake content and receiver behavior from main `7bbb4c7` are preserved in implementation commit `eff361c`, without merging or modifying main. The direct-link intake is prepared only in the local production artifact; its personalized source is excluded from public previews. The release suite, offline receiver contracts, desktop/phone layout, keyboard, validation, print and no-JavaScript checks pass. All 492 served files of the phone-accepted public candidate remain identical, so no new preview upload or repeated phone review is needed. See LIVE_INTAKE_RECONCILIATION.md.
+
+Brian approved zone preparation only. Created the Cloudflare Free zone and staged all nine existing DNS-only records. Both assigned nameservers pass all twelve name/type/value/priority/TTL query comparisons. Domain Connect's authoritative four-hour TTL is preserved despite Squarespace's one-hour display. Assigned pair: `andronicus.ns.cloudflare.com` and `ara.ns.cloudflare.com`. The zone is pending with no Worker connected; Squarespace nameservers, active DNS, website and email configuration remain unchanged.
+
+The exact two-stage domain switch, stop conditions, artifact hashes and rollback are ready in DOMAIN_CUTOVER_PLAN.md. Existing backup/tag and frozen inventories are intact. Notification delivery testing remains deferred; no new form, email or alert was sent. The remaining owner decision is explicit final approval for the registrar nameserver switch and production website cutover, including any incident rollback authority. Nothing has gone live.
+
 ## Owner phone acceptance — 2026-09-20
 
 Brian checked silent candidate `fad13e0e-302a-4b9e-8aa0-7eefa1f69ca4` on his phone and reported, “just checked it on my phone. it looks good.” The owner device-review gate is satisfied for this candidate. Model/browser were unspecified and no iPad review was reported. Remaining launch work is reconciliation of newer live intake changes, Cloudflare zone readiness and explicit final go-live approval. Notification delivery testing remains deferred. This records acceptance only; no candidate rebuild, production deployment or DNS change occurred.

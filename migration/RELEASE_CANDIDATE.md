@@ -1,12 +1,12 @@
-# Final candidate preparation — September 17, 2026
+# Final candidate preparation — updated September 20, 2026
 
-Brian approved preparing the annotated launch plan, including migrated intake and actual alert-delivery checks. Final production go-live, DNS/custom-domain changes and a main merge remain unauthorized. This checkpoint supersedes the older preparation-only blockers in LAUNCH_READINESS.md; hosted acceptance is recorded below as it completes.
+Brian approved preparing the annotated launch plan and subsequently approved Free zone preparation only. Final production go-live, active DNS/custom-domain changes and a main merge remain unauthorized. This checkpoint supersedes the older preparation-only blockers in LAUNCH_READINESS.md; historical delivery checks and current acceptance are distinguished below.
 
 ## Separate build outputs
 
 - `dist`: existing silent branch preview; noindex throughout.
-- `dist-production`: local launch artifact, 36 HTML pages (32 public, three direct-link portfolios, one 404). Only public routes enter the sitemap. No specimen pages, development registry, private family guide, handoff, receiver source or migration documents.
-- `dist-candidate`: the same page bodies, assets and forms, with candidate mode, noindex headers/meta and robots disallow-all. Ordinary visitors cannot submit intake or send engagement alerts. Canonical metadata retains the eventual production URLs.
+- `dist-production`: local launch artifact, 37 HTML pages (32 public, three direct-link portfolios, the preserved direct-link conversation intake, one 404). Only public routes enter the sitemap. No specimen pages, development registry, private family guide, handoff, receiver source or migration documents.
+- `dist-candidate`: 36 HTML pages, excluding the personalized conversation intake; otherwise the same page bodies, assets and forms, with candidate mode, noindex headers/meta and robots disallow-all. Ordinary visitors cannot submit intake or send engagement alerts. Canonical metadata retains the eventual production URLs.
 
 `npm run release:build` validates the existing site, builds both release outputs, and checks indexing, body equivalence, unlisted boundaries, expired/unauthorized test access, silent previews and the www redirect. Original source content and inventory hashes remain intact. Nine harmless legacy resources keep their URLs and original bytes. Two unused historical WebPs are truncated in the baseline (10,827/58,528 and 19,348/92,316 actual/declared bytes); they remain unreferenced, unchanged and recoverable. No archive cleanup occurred.
 
@@ -36,7 +36,7 @@ Provider behavior: [ntfy limits](https://docs.ntfy.sh/publish/#limitations) and 
 
 ## Acceptance still to complete
 
-Brian accepted the current candidate after checking it on his phone on September 20. Remaining: reconcile newer live-branch intake-route/shared-receiver changes, confirm Cloudflare zone/account readiness with assigned nameservers, and obtain final owner go-live approval. Brian deferred notification provider recovery and actual phone-delivery verification on September 17; they are no longer launch blockers. Prior unsuccessful test results remain historical evidence, and actual notification delivery is still unverified. Existing notification policy/settings remain unchanged. The existing GitHub Pages site remains live.
+Brian accepted the current candidate after checking it on his phone on September 20. The newer live intake is now reconciled locally and the Free Cloudflare zone is staged and verified. Remaining: explicit final owner approval for the registrar nameserver switch and production website cutover. Brian deferred notification provider recovery and actual phone-delivery verification on September 17; they are no longer launch blockers. Prior unsuccessful test results remain historical evidence, and actual notification delivery is still unverified. Existing notification policy/settings remain unchanged. The existing GitHub Pages site remains live.
 
 Stable device-review URL: https://fad13e0e-olsen-automation-v2-preview.brian-dbb.workers.dev/
 
@@ -69,3 +69,12 @@ All 36 candidate pages pass desktop/phone renders (72 records). Additional short
 Brian subsequently reported, “just checked it on my phone. it looks good,” for this exact candidate on September 20. Record this as owner phone acceptance and close its device-review gate. Phone model/browser were not specified and iPad review was not reported; this is not independent Safari verification or final go-live approval.
 
 The read-only remote check found main has advanced to `7bbb4c7` with additional intake-route/shared-receiver changes. Reconcile these against the release before domain cutover; the baseline snapshot alone is no longer the complete current live content. This UI update did not merge, alter or overwrite main. See QA_SCROLL_ONLY_BASEMENT.md and RELEASE_ACCEPTANCE.json.
+
+
+## Completed preparation — September 20
+
+Implementation `eff361c` preserves all four newer intake/receiver files from main `7bbb4c7` by exact hash. The client-specific page is prepared locally with the shared shell, unchanged questions/terms and original submission JavaScript. It remains unlisted, noindex, silent and absent from public previews. Full release and offline receiver tests pass, plus local desktop/phone, form validation, keyboard, reduced-motion, print and no-JavaScript checks. No real submission, email or alert occurred. See LIVE_INTAKE_RECONCILIATION.md.
+
+The 497-file local production artifact has 37 HTML pages; the accepted public candidate still has 36 HTML pages and all 492 served files match its recorded hashes. Its existing source/version and phone acceptance remain the hosted record. No new public preview upload is needed, and production remains unpublished.
+
+With Brian's explicit zone-preparation-only approval, the Free Cloudflare zone now holds all nine unchanged DNS-only records. Twelve comparisons across both assigned nameservers pass, including the exact Domain Connect TTL. The zone remains pending, no Worker is connected, and active DNS and email configuration are unchanged. DOMAIN_CUTOVER_PLAN.md contains the exact nameservers, current artifact/source identifiers, verification sequence and rollback. Final live-switch approval remains the only owner gate; notification delivery remains deferred and unverified.

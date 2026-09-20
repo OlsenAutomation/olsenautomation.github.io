@@ -30,7 +30,27 @@
     "provider": "Squarespace Domains",
     "configured_records_captured": 9,
     "dnssec_enabled": false,
-    "changed": false
+    "changed": false,
+    "live_dns_changed": false,
+    "registrar_nameservers_changed": false,
+    "staged_zone_created": true,
+    "staging_receipt": "DOMAIN_CUTOVER_PLAN.md",
+    "cloudflare_account_id": "2dbb4e55d89cba10d0e21ff338e83fd7",
+    "cloudflare_zone_id": "b32cba28fbc2e5b48bba69e73df77cf2",
+    "cloudflare_plan": "Free",
+    "cloudflare_status": "pending",
+    "assigned_nameservers": [
+      "andronicus.ns.cloudflare.com",
+      "ara.ns.cloudflare.com"
+    ],
+    "staged_records": 9,
+    "all_staged_records_dns_only": true,
+    "authoritative_query_comparisons_passed": 12,
+    "all_records_match_including_ttl": true,
+    "verified_at": "2026-09-20T16:57:27.710185+00:00",
+    "owner_approval": "Approve zone preparation only",
+    "final_live_switch_approved": false,
+    "bot_preference_sync": false
   },
   "production_ready": false,
   "owner_phone_acceptance": {
@@ -41,9 +61,7 @@
     "scope": "Owner-reported phone review of the scroll-only candidate; phone model and browser unspecified, iPad review not reported. This satisfies the owner device-review gate for this candidate, not final production go-live approval."
   },
   "remaining": [
-    "Reconcile newer live-branch intake route and receiver changes before cutover",
-    "Cloudflare zone readiness and assigned nameservers",
-    "Explicit final owner go-live approval"
+    "Explicit final owner approval for Squarespace nameserver switch and production website cutover"
   ],
   "excluded_route_checks": 25,
   "candidate_url": "https://fad13e0e-olsen-automation-v2-preview.brian-dbb.workers.dev/",
@@ -189,7 +207,46 @@
     "observed_on": "2026-09-20",
     "main_commit": "7bbb4c7ed7924c6e6a3309dec5eefe6eef723c42",
     "baseline_commit": "0feac3f8376c5110eedfc20f5cdeecd0494f1ed7",
-    "status": "pending_before_launch",
-    "scope": "Additional intake route and shared Apps Script changes on main after the frozen baseline; preserve route, privacy and receiver behavior before any cutover. No merge performed."
+    "status": "completed_local_launch_artifact",
+    "scope": "Preserved existing direct-link intake and newer receiver contract from pinned main; prepared only in local production output, excluded from both public previews and public discovery. No merge, main change or receiver deployment. Refresh main before cutover.",
+    "implementation_commit": "eff361ce00ed2a2d34185eb195ae0a1bb3acb08f",
+    "source_files_preserved": 4,
+    "live_page_assets_match_pinned_main": true,
+    "receiver_derivative_matches_pinned_main": true,
+    "receiver_deployed": false,
+    "real_messages_sent": 0,
+    "report": "LIVE_INTAKE_RECONCILIATION.md"
+  },
+  "local_launch_artifact": {
+    "prepared_on": "2026-09-20",
+    "implementation_commit": "eff361ce00ed2a2d34185eb195ae0a1bb3acb08f",
+    "production_html_pages": 37,
+    "public_pages": 32,
+    "unlisted_pages": 4,
+    "files_including_platform_control_files": 497,
+    "production_manifest_sha256": "27a339ad0f4baa1c5a22ae66434685a3f12209225f77e77e75febec0dc95efe9",
+    "manifest_hash_format": "SHA-256 of sorted compact JSON path-to-file-SHA256 map",
+    "public_candidate_manifest_unchanged": true,
+    "public_candidate_served_files_unchanged": 492,
+    "owner_accepted_candidate_version": "fad13e0e-302a-4b9e-8aa0-7eefa1f69ca4",
+    "additional_intake_viewports": [
+      [
+        1440,
+        900
+      ],
+      [
+        390,
+        844
+      ],
+      [
+        320,
+        568
+      ]
+    ],
+    "offline_receiver_and_form_checks": "passed; no external messages",
+    "keyboard_reduced_motion_print_no_javascript": "passed",
+    "full_release_checks": "passed",
+    "uploaded": false,
+    "deployed": false
   }
 }
