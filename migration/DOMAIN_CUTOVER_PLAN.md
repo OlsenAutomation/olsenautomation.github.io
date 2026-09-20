@@ -1,6 +1,10 @@
 # Domain cutover and rollback — proposed, not executed
 
-September 17, 2026. GitHub remains canonical. Production must be built from a reviewed commit on `site-redesign-v2`; no main edit or merge is required by this plan. The existing GitHub Pages deployment stays recoverable on main at `0feac3f8376c5110eedfc20f5cdeecd0494f1ed7`. Baseline tag `site-v2-baseline-20260912` and `../site-v2-backup/site-v2-baseline.bundle` are already established; do not recreate them.
+September 17, 2026. GitHub remains canonical. Production must be built from a reviewed commit on `site-redesign-v2`; no main edit or merge is required by this plan. The frozen migration baseline is `0feac3f8376c5110eedfc20f5cdeecd0494f1ed7`; it is recoverable through the baseline tag/bundle. Main has subsequently advanced; see the September 20 reconciliation note below. Baseline tag `site-v2-baseline-20260912` and `../site-v2-backup/site-v2-baseline.bundle` are already established; do not recreate them.
+
+## September 20 live-branch reconciliation
+
+A read-only fetch verified main at `7bbb4c7ed7924c6e6a3309dec5eefe6eef723c42`, with a newer intake route and shared Apps Script changes after the baseline. No merge or main edit occurred. Before cutover, classify/preserve that route and its privacy boundary, reconcile the receiver contract, and capture the then-current live commit/settings for rollback. Do not substitute the older baseline for current live intake behavior. This is required release preparation, not authorization to publish additional intake content.
 
 ## Current read-only observations
 

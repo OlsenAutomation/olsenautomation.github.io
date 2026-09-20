@@ -1,8 +1,8 @@
 {
-  "date": "2026-09-17",
-  "source_commit": "14ba19683ffddc2bd82644fb01c16ae959e834c1",
-  "candidate_version": "15f7eccf-e775-4b39-9f04-9b89ce1513b0",
-  "hosted_files": 491,
+  "date": "2026-09-20",
+  "source_commit": "a4eee2b4756a7cfdc42b334df6a47c8c35f6412e",
+  "candidate_version": "fad13e0e-302a-4b9e-8aa0-7eefa1f69ca4",
+  "hosted_files": 492,
   "html_pages": 36,
   "render_checks": 72,
   "production_public_pages": 32,
@@ -35,14 +35,15 @@
   "production_ready": false,
   "remaining": [
     "Physical iPhone/iPad Safari acceptance",
+    "Reconcile newer live-branch intake route and receiver changes before cutover",
     "Cloudflare zone readiness and assigned nameservers",
     "Explicit final owner go-live approval"
   ],
   "excluded_route_checks": 25,
-  "candidate_url": "https://15f7eccf-olsen-automation-v2-preview.brian-dbb.workers.dev/",
+  "candidate_url": "https://fad13e0e-olsen-automation-v2-preview.brian-dbb.workers.dev/",
   "artifact_manifest_sha256": {
-    "production": "22eb7e2eac0ec8c9e0864b0fb821bf0ebe702caf4d95ef99c7fca0ac98ecc860",
-    "candidate": "690ee79b1a56ab341e1ce99bba763871995040f885f6a9e925f7794d73c429c2"
+    "production": "bd305262e81951c7d081165fb3c0bce07337c84728ac825d96326c1125eee0e4",
+    "candidate": "e9e3ec2fb356919ab4193c93fb8d000bbdcf5b0764e1560aeb47909041e41509"
   },
   "render_baseline": {
     "source_commit": "31d558eebeb8e413f4c82424b7a247ba450c49e8",
@@ -134,5 +135,55 @@
     "hosted_workshop_photo_verified": true,
     "physical_safari_verified": false,
     "new_external_messages": 0
+  },
+  "scroll_only_revision": {
+    "date": "2026-09-20",
+    "source_commit": "a4eee2b4756a7cfdc42b334df6a47c8c35f6412e",
+    "local_page_renders": 72,
+    "viewports": [
+      [
+        1440,
+        900
+      ],
+      [
+        390,
+        844
+      ]
+    ],
+    "additional_workshop_viewports": [
+      [
+        375,
+        667
+      ],
+      [
+        320,
+        568
+      ],
+      [
+        844,
+        390
+      ]
+    ],
+    "direct_entry_no_vortex": true,
+    "room_and_stair_controls_removed": true,
+    "automatic_playback_removed": true,
+    "absolute_scroll_forward_reverse": true,
+    "small_viewport_sticky_stage": true,
+    "slow_decoder_regression_passed": true,
+    "hosted_files": 492,
+    "excluded_route_checks": 25,
+    "media_range_checks": 28,
+    "hosted_phone_scene_paused": true,
+    "hosted_door_and_signup_focus": true,
+    "reduced_motion_and_failed_media": true,
+    "physical_safari_verified": false,
+    "new_external_messages": 0
+  },
+  "live_branch_reconciliation": {
+    "observed_on": "2026-09-20",
+    "main_commit": "7bbb4c7ed7924c6e6a3309dec5eefe6eef723c42",
+    "baseline_commit": "0feac3f8376c5110eedfc20f5cdeecd0494f1ed7",
+    "status": "pending_before_launch",
+    "scope": "Additional intake route and shared Apps Script changes on main after the frozen baseline; preserve route, privacy and receiver behavior before any cutover. No merge performed."
   }
 }

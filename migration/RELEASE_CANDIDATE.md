@@ -38,7 +38,7 @@ Provider behavior: [ntfy limits](https://docs.ntfy.sh/publish/#limitations) and 
 
 Physical iPhone/iPad acceptance, Cloudflare zone/account readiness with assigned nameservers, and final owner go-live approval. Brian deferred notification provider recovery and actual phone-delivery verification on September 17; they are no longer launch blockers. Prior unsuccessful test results remain historical evidence, and actual notification delivery is still unverified. Existing notification policy/settings remain unchanged. The existing GitHub Pages site remains live.
 
-Stable device-review URL: https://15f7eccf-olsen-automation-v2-preview.brian-dbb.workers.dev/
+Stable device-review URL: https://fad13e0e-olsen-automation-v2-preview.brian-dbb.workers.dev/
 
 Moving candidate alias: https://release-candidate-olsen-automation-v2-preview.brian-dbb.workers.dev/
 
@@ -59,3 +59,11 @@ Wheel gestures now ease the video toward accumulated destinations, including rev
 The current silent candidate is `15f7eccf-e775-4b39-9f04-9b89ce1513b0`, built from `14ba196` after adding reviewed media in `441ec57`. It updates the home/atlas cards, Whale record and workshop proof with September 16 v0.5 material. Five new image masters produce 20 responsive derivatives; a 16-second portrait mechanism excerpt has two variants and posters. Earlier media is retained unchanged. The AI-cleaned presentation is disclosed and paired with original build/detail images. Slicer estimates, owner-reported spacing/glue adjustments and unverified repeatable assembly remain distinct.
 
 Eight local desktop/phone renders pass for the four affected pages. Hosted verification passes all 491 files, 25 exclusions and 28 media range checks. The hosted phone clip advances with readyState 4, and workshop proof loads the current original photo. Notifications and the test window remain disabled. The earlier 72-page report, real intake receipt and remaining launch gates are historical acceptance evidence, not rerun or reauthorized by this content refresh. No real messages, production traffic, main or DNS change occurred.
+
+## Direct-entry, scroll-only revision — September 20
+
+Current silent candidate `fad13e0e-302a-4b9e-8aa0-7eefa1f69ca4` is built from `a4eee2b`. The workshop opens directly, without a vortex, second entry gate, automatic walking or room/stair control panels. Native scrolling drives both scenes; workshop text continues into the return upstairs and final invitation. The extra Whale quote/explanation is removed while the full project record remains linked. All original/reference media remains preserved.
+
+All 36 candidate pages pass desktop/phone renders (72 records). Additional short-phone/landscape, rapid/reverse gesture, slow decoder, keyboard, idle, reduced-motion, no-JavaScript and failed-video checks pass. Hosted verification passes 492 exact files, 25 exclusions and 28 video ranges. The hosted phone scene remains paused while scrolling advances it; the final invitation appears at the door and signup focuses the form. Physical Safari acceptance remains unverified. Notifications remain disabled on the candidate, with delivery testing deferred by owner.
+
+The read-only remote check found main has advanced to `7bbb4c7` with additional intake-route/shared-receiver changes. Reconcile these against the release before domain cutover; the baseline snapshot alone is no longer the complete current live content. This UI update did not merge, alter or overwrite main. See QA_SCROLL_ONLY_BASEMENT.md and RELEASE_ACCEPTANCE.json.

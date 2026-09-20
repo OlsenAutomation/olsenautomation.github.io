@@ -32,3 +32,7 @@ Raw 72-render measurements/screenshots and fast-gesture samples are in ignored l
 ## Limits
 
 Physical iPhone/iPad Safari flicking, momentum and toolbar behavior remain owner acceptance items. Emulator/browser evidence does not establish physical-device smoothness. Notification provider recovery/delivery remains deferred by owner; no test retry or paid service was introduced. Main, GitHub Pages, DNS and production traffic remain unchanged.
+
+## Hosted receipt
+
+Source `a4eee2b4756a7cfdc42b334df6a47c8c35f6412e`; Worker version `fad13e0e-302a-4b9e-8aa0-7eefa1f69ca4`. All 492 exact files, 25 exclusions, blocked POST, disabled notification endpoint and 28 video-range checks pass. At 390×844, the home entry link opens workshop directly with no dialog, controls or assigned MP4. Scrolling advances the room while both videos remain paused; the staircase reaches 10 seconds with readyState 4, a visible CTA within the viewport, and signup focuses first-name. Screenshots and measurements remain local. No production or DNS action occurred.
