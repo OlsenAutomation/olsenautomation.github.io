@@ -33,8 +33,14 @@
     "changed": false
   },
   "production_ready": false,
+  "owner_phone_acceptance": {
+    "date": "2026-09-20",
+    "candidate_version": "fad13e0e-302a-4b9e-8aa0-7eefa1f69ca4",
+    "status": "accepted_by_owner",
+    "evidence": "just checked it on my phone. it looks good",
+    "scope": "Owner-reported phone review of the scroll-only candidate; phone model and browser unspecified, iPad review not reported. This satisfies the owner device-review gate for this candidate, not final production go-live approval."
+  },
   "remaining": [
-    "Physical iPhone/iPad Safari acceptance",
     "Reconcile newer live-branch intake route and receiver changes before cutover",
     "Cloudflare zone readiness and assigned nameservers",
     "Explicit final owner go-live approval"

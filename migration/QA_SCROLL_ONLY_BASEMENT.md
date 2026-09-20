@@ -31,7 +31,11 @@ Raw 72-render measurements/screenshots and fast-gesture samples are in ignored l
 
 ## Limits
 
-Physical iPhone/iPad Safari flicking, momentum and toolbar behavior remain owner acceptance items. Emulator/browser evidence does not establish physical-device smoothness. Notification provider recovery/delivery remains deferred by owner; no test retry or paid service was introduced. Main, GitHub Pages, DNS and production traffic remain unchanged.
+Emulator/browser evidence does not independently establish physical-device smoothness. Brian subsequently accepted this candidate after a phone review, as recorded below; model/browser were unspecified and an iPad check was not reported. Notification provider recovery/delivery remains deferred by owner; no test retry or paid service was introduced. Main, GitHub Pages, DNS and production traffic remain unchanged.
+
+## Owner phone acceptance — September 20
+
+Brian reported, “just checked it on my phone. it looks good,” while reviewing version `fad13e0e-302a-4b9e-8aa0-7eefa1f69ca4`. This satisfies owner device acceptance of this exact candidate. It does not approve production go-live or DNS changes, and does not replace the independent test results above.
 
 ## Hosted receipt
 

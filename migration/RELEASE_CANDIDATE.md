@@ -36,7 +36,7 @@ Provider behavior: [ntfy limits](https://docs.ntfy.sh/publish/#limitations) and 
 
 ## Acceptance still to complete
 
-Physical iPhone/iPad acceptance, Cloudflare zone/account readiness with assigned nameservers, and final owner go-live approval. Brian deferred notification provider recovery and actual phone-delivery verification on September 17; they are no longer launch blockers. Prior unsuccessful test results remain historical evidence, and actual notification delivery is still unverified. Existing notification policy/settings remain unchanged. The existing GitHub Pages site remains live.
+Brian accepted the current candidate after checking it on his phone on September 20. Remaining: reconcile newer live-branch intake-route/shared-receiver changes, confirm Cloudflare zone/account readiness with assigned nameservers, and obtain final owner go-live approval. Brian deferred notification provider recovery and actual phone-delivery verification on September 17; they are no longer launch blockers. Prior unsuccessful test results remain historical evidence, and actual notification delivery is still unverified. Existing notification policy/settings remain unchanged. The existing GitHub Pages site remains live.
 
 Stable device-review URL: https://fad13e0e-olsen-automation-v2-preview.brian-dbb.workers.dev/
 
@@ -64,6 +64,8 @@ Eight local desktop/phone renders pass for the four affected pages. Hosted verif
 
 Current silent candidate `fad13e0e-302a-4b9e-8aa0-7eefa1f69ca4` is built from `a4eee2b`. The workshop opens directly, without a vortex, second entry gate, automatic walking or room/stair control panels. Native scrolling drives both scenes; workshop text continues into the return upstairs and final invitation. The extra Whale quote/explanation is removed while the full project record remains linked. All original/reference media remains preserved.
 
-All 36 candidate pages pass desktop/phone renders (72 records). Additional short-phone/landscape, rapid/reverse gesture, slow decoder, keyboard, idle, reduced-motion, no-JavaScript and failed-video checks pass. Hosted verification passes 492 exact files, 25 exclusions and 28 video ranges. The hosted phone scene remains paused while scrolling advances it; the final invitation appears at the door and signup focuses the form. Physical Safari acceptance remains unverified. Notifications remain disabled on the candidate, with delivery testing deferred by owner.
+All 36 candidate pages pass desktop/phone renders (72 records). Additional short-phone/landscape, rapid/reverse gesture, slow decoder, keyboard, idle, reduced-motion, no-JavaScript and failed-video checks pass. Hosted verification passes 492 exact files, 25 exclusions and 28 video ranges. The hosted phone scene remains paused while scrolling advances it; the final invitation appears at the door and signup focuses the form. Notifications remain disabled on the candidate, with delivery testing deferred by owner.
+
+Brian subsequently reported, “just checked it on my phone. it looks good,” for this exact candidate on September 20. Record this as owner phone acceptance and close its device-review gate. Phone model/browser were not specified and iPad review was not reported; this is not independent Safari verification or final go-live approval.
 
 The read-only remote check found main has advanced to `7bbb4c7` with additional intake-route/shared-receiver changes. Reconcile these against the release before domain cutover; the baseline snapshot alone is no longer the complete current live content. This UI update did not merge, alter or overwrite main. See QA_SCROLL_ONLY_BASEMENT.md and RELEASE_ACCEPTANCE.json.

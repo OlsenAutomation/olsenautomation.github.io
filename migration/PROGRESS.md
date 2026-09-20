@@ -1,3 +1,7 @@
+## Owner phone acceptance — 2026-09-20
+
+Brian checked silent candidate `fad13e0e-302a-4b9e-8aa0-7eefa1f69ca4` on his phone and reported, “just checked it on my phone. it looks good.” The owner device-review gate is satisfied for this candidate. Model/browser were unspecified and no iPad review was reported. Remaining launch work is reconciliation of newer live intake changes, Cloudflare zone readiness and explicit final go-live approval. Notification delivery testing remains deferred. This records acceptance only; no candidate rebuild, production deployment or DNS change occurred.
+
 ## Direct entry and scroll-only basement — 2026-09-20
 
 Brian requested immediate room entry, no vortex/control bars/automatic walking, continuous return upstairs and removal of the extra Whale explanation. Shared navigation now opens the workshop directly, including ordinary keyboard/modifier behavior; the return link also opens home directly. The room starts ready for native scrolling, with no second Enter button, play timer, chapter controls, slider, exit choice or stair-control panel. Workshop text flows into the room-to-stairs scene, with the invitation appearing at the door. The removed quote/build explanation is replaced with a simple Whale project link; the full project record remains intact.
