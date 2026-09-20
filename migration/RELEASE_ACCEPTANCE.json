@@ -254,8 +254,9 @@
     "offline_receiver_and_form_checks": "passed; no external messages",
     "keyboard_reduced_motion_print_no_javascript": "passed",
     "full_release_checks": "passed",
-    "uploaded": false,
-    "deployed": false
+    "uploaded": true,
+    "deployed": true,
+    "production_launch_receipt": "PRODUCTION_LAUNCH.json"
   },
   "final_go_live_approval": {
     "date": "2026-09-20",
