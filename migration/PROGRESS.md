@@ -1,3 +1,11 @@
+## Production launch completed — September 20, 2026
+
+Brian gave explicit final approval. Squarespace now delegates to `andronicus.ns.cloudflare.com` and `ara.ns.cloudflare.com`; the Free Cloudflare zone is active. Production Worker `olsen-automation-v2` serves the root domain and redirects www to it, with no default workers.dev or version-preview URL. Final version `2e9d62e4-a39e-42c5-a22e-0c07b262a78b` receives 100% of traffic from branch source `4234fab`. Main remains `7bbb4c7` and GitHub Pages/old DNS are retained for rollback.
+
+Live HTTPS checks pass for all 495 served files, 37 HTML pages, six aliases/redirects, 26 excluded routes, 28 valid video ranges and 14 invalid-range rejections. Every served file matches the reviewed artifact byte-for-byte; public indexing and private noindex/CSP boundaries pass. Sixteen mail/SPF/DKIM/Domain Connect query sets match the backup. Both public resolvers checked return Cloudflare for root/www. This Mac still has cached legacy addresses, so direct live browser rendering is not claimed; prior desktop/mobile checks and Brian’s phone acceptance apply to the identical rendered files.
+
+The launch surfaced Cloudflare’s automatic RUM script injection. Production HTML now carries `no-transform`, preserving cache/no-store policy and preventing that extra script; CSP remains restrictive. No extra analytics site, paid feature, form submission, email or alert test was added. Notification delivery stays owner-deferred/unverified. See PRODUCTION_LAUNCH.json for immutable source/version, counts and evidence hashes; DOMAIN_CUTOVER_PLAN.md retains the exact rollback. Earlier entries below are historical checkpoints.
+
 ## Intake reconciliation and approved DNS staging — 2026-09-20
 
 Newer intake content and receiver behavior from main `7bbb4c7` are preserved in implementation commit `eff361c`, without merging or modifying main. The direct-link intake is prepared only in the local production artifact; its personalized source is excluded from public previews. The release suite, offline receiver contracts, desktop/phone layout, keyboard, validation, print and no-JavaScript checks pass. All 492 served files of the phone-accepted public candidate remain identical, so no new preview upload or repeated phone review is needed. See LIVE_INTAKE_RECONCILIATION.md.

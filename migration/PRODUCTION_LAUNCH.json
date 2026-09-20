@@ -1,0 +1,50 @@
+{
+  "owner_approval": "final approval given",
+  "date": "2026-09-20",
+  "status": "production deployed and verified; resolver caches may still show legacy site",
+  "source_commit": "4234fab777c1fcd0a98d37c16e40b7bcd63d4caf",
+  "branch": "site-redesign-v2",
+  "worker": "olsen-automation-v2",
+  "worker_version": "2e9d62e4-a39e-42c5-a22e-0c07b262a78b",
+  "traffic_percent": 100,
+  "deployed_at": "2026-09-20T18:50:31.073Z",
+  "domains": [
+    "olsenautomation.com",
+    "www.olsenautomation.com"
+  ],
+  "free_plan": true,
+  "workers_dev": false,
+  "preview_urls": false,
+  "production_artifact_manifest_sha256": "27a339ad0f4baa1c5a22ae66434685a3f12209225f77e77e75febec0dc95efe9",
+  "verification": {
+    "checked_at": "2026-09-20T18:51:18.300Z",
+    "served_files_exact": 495,
+    "html_pages": 37,
+    "alias_and_redirect_checks": 6,
+    "excluded_routes": 26,
+    "video_ranges": 28,
+    "invalid_video_ranges": 14,
+    "tls_certificate_validation": true,
+    "authoritative_edge_ip": "104.21.18.112",
+    "failures": 0,
+    "mail_and_domainconnect_query_sets": 16,
+    "all_non_web_records_match": true,
+    "public_resolvers": [
+      "1.1.1.1",
+      "8.8.8.8"
+    ],
+    "new_external_messages": 0
+  },
+  "privacy": "Existing noindex, no-store and CSP retained; no-transform prevents automatic proxy analytics injection.",
+  "browser_verification": "Prelaunch desktop/mobile acceptance retained because all rendered files match exactly. This Mac still resolves cached legacy IPv4 addresses; direct live browser rendering was not claimed as passed.",
+  "notification_delivery": "Deferred by owner; unverified; existing approved behavior retained.",
+  "main_commit_unchanged": "7bbb4c7ed7924c6e6a3309dec5eefe6eef723c42",
+  "rollback_plan": "migration/DOMAIN_CUTOVER_PLAN.md",
+  "evidence_sha256": {
+    "live-production-checks.json": "9e775925d79dbf9e8d4229a4faf51220dcd65e88960f936f9cf6fdf450ca826a",
+    "post-launch-dns.json": "1a92a963161fcc3be503e1d41b725237eb9b140fdfdc3805b16ac6380bf552e8",
+    "production-deployments.txt": "ef70ac8f4a9506d5814eb1438c4d37435595d1cb2eb177e018f370f94ac4c698",
+    "production-domains.txt": "e981d7bb1c069c1acda97defbb0436d38f8f3e6420aa88544641d652ea3abb66",
+    "nameserver-switch-confirmation.txt": "7d06d00e25bd90a754ad89b3539ec41c7a3e931667211186ee5362a65ad079d9"
+  }
+}

@@ -1,6 +1,6 @@
-# Final candidate preparation — updated September 20, 2026
+# Release acceptance — launched September 20, 2026
 
-Brian approved preparing the annotated launch plan and subsequently approved Free zone preparation only. Final production go-live, active DNS/custom-domain changes and a main merge remain unauthorized. This checkpoint supersedes the older preparation-only blockers in LAUNCH_READINESS.md; historical delivery checks and current acceptance are distinguished below.
+Brian subsequently gave final go-live approval. The reviewed production build is now deployed on the active Free zone at https://olsenautomation.com, with www redirecting to the root. PRODUCTION_LAUNCH.json records the exact source, Worker version, successful HTTPS/file/privacy/DNS checks and local DNS-cache limitation. Main remains unchanged and unmerged. Prior preparation and delivery records below are retained as history; notification delivery remains deferred.
 
 ## Separate build outputs
 
@@ -20,7 +20,7 @@ One clearly labeled fictional intake is authorized for this candidate check. Log
 
 ## Proposed production configuration
 
-`wrangler.production.proposed.json` is review material only. It targets a separate `olsen-automation-v2` Worker with Static Assets, root/www custom domains, no workers.dev URL, no preview URLs, and the approved engagement relay. All requests pass through the Worker so www canonical redirects and dynamic headers apply consistently; this uses Workers Free request/CPU allowances. No paid plan or feature is enabled. Deployment remains a final owner action after the gates in DOMAIN_CUTOVER_PLAN.md.
+`wrangler.production.proposed.json` retains its preparation-era filename and is now the active, owner-approved production configuration. It targets a separate `olsen-automation-v2` Worker with Static Assets, root/www custom domains, no workers.dev URL, no preview URLs, and the approved engagement relay. All requests pass through the Worker so www canonical redirects and dynamic headers apply consistently; this uses Workers Free request/CPU allowances. No paid plan or feature is enabled. The approved deployment and verification are recorded in DOMAIN_CUTOVER_PLAN.md and PRODUCTION_LAUNCH.json.
 
 Production intake permits only the existing Google Apps Script destination and its response frames in CSP. All other forms remain blocked by default; the workshop prepares an email draft and does not silently subscribe or send.
 
@@ -34,7 +34,7 @@ Production intake permits only the existing Google Apps Script destination and i
 
 Provider behavior: [ntfy limits](https://docs.ntfy.sh/publish/#limitations) and [message caching](https://docs.ntfy.sh/publish/#message-caching). The current no-cache relay delivers only to connected subscribers and may miss reconnecting clients; actual phone acceptance remains necessary.
 
-## Acceptance still to complete
+## Historical prelaunch acceptance status
 
 Brian accepted the current candidate after checking it on his phone on September 20. The newer live intake is now reconciled locally and the Free Cloudflare zone is staged and verified. Remaining: explicit final owner approval for the registrar nameserver switch and production website cutover. Brian deferred notification provider recovery and actual phone-delivery verification on September 17; they are no longer launch blockers. Prior unsuccessful test results remain historical evidence, and actual notification delivery is still unverified. Existing notification policy/settings remain unchanged. The existing GitHub Pages site remains live.
 

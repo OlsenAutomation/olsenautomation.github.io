@@ -1,4 +1,13 @@
-# Domain cutover and rollback — zone staged; live switch not executed
+# Domain cutover and rollback — production launched September 20, 2026
+
+## Execution receipt — September 20
+
+Brian’s **“final approval given”** authorized the prepared nameserver change and root/www production cutover. Squarespace saved the assigned Cloudflare pair at 11:32 AM Pacific. After zone activation and unchanged-mail checks, the production Worker was uploaded and both custom domains attached. Existing CLI credentials lacked zone lookup permissions; authenticated dashboard controls completed domain attachment without expanding credentials. Exactly four legacy apex A records and the www CNAME were replaced; the other four records were preserved.
+
+Final Worker version `2e9d62e4-a39e-42c5-a22e-0c07b262a78b` was deployed at 18:50:31 UTC (11:50:31 AM Pacific), from `4234fab777c1fcd0a98d37c16e40b7bcd63d4caf`. The HTML-only `no-transform` response directive prevents automatic proxy analytics injection; rendered artifacts are unchanged. Both domains have valid HTTPS certificates. All 495 served bytesets, 37 HTML pages, six aliases/redirects, 26 exclusions and video-range checks pass. MX/SPF/DKIM/Domain Connect remain exact. Both public resolvers checked return the Cloudflare target; local/browser DNS caches can still show the legacy site.
+
+See PRODUCTION_LAUNCH.json for evidence hashes and verification limits. Main, its CNAME, GitHub Pages, old registrar-zone values and the local nine-record restore file remain available. No main merge, receiver redeployment, paid feature or real-message test occurred. Notification delivery verification remains deferred. The original preparation observations and instructions below are retained as history; they do not describe the current live state.
+
 
 Updated September 20, 2026. GitHub remains canonical. Production must be built from a reviewed commit on `site-redesign-v2`; no main edit or merge is required by this plan. The frozen migration baseline is `0feac3f8376c5110eedfc20f5cdeecd0494f1ed7`; it is recoverable through the baseline tag/bundle. Main has subsequently advanced; see the September 20 reconciliation note below. Baseline tag `site-v2-baseline-20260912` and `../site-v2-backup/site-v2-baseline.bundle` are already established; do not recreate them.
 
