@@ -48,6 +48,31 @@ try {
   assert.equal(state, 'error'); assert.equal(player.playing, false);
   fail = false; player.toggle(); await flush();
   assert.equal(videos[1].paused, false, 'failed media can be retried');
+  player.seek(0); await flush();
+  assert.ok(videos.every(video => video.paused), 'scroll-only entry never starts a playback clock');
+  // Simulate a slow decoder during a fast forward/reverse finger gesture.
+  // Only one seek may be outstanding; completed frames stay visible while
+  // the newest destination supersedes intermediate requests.
+  const slow = videos[1]; let writes = 0;
+  Object.defineProperty(slow, 'currentTime', {
+    configurable: true,
+    get() { return this.time; },
+    set(value) { assert.equal(this.seeking, false); this.time=value; this.seeking=true; writes++; }
+  });
+  player.seek(.6); await flush();
+  player.seek(.85); await flush();
+  assert.equal(writes, 1, 'a busy decoder receives no queued intermediate seeks');
+  slow.seeking=false; slow.dispatchEvent(new Event('seeked'));
+  assert.equal(slow.hidden, false, 'show the completed frame even while the target is still moving');
+  assert.equal(videos[0].hidden, true);
+  assert.equal(writes, 2, 'only the latest destination is decoded next');
+  player.seek(.7); await flush();
+  assert.equal(writes, 2);
+  slow.seeking=false; slow.dispatchEvent(new Event('seeked'));
+  slow.seeking=false; slow.dispatchEvent(new Event('seeked'));
+  assert.equal(slow.currentTime, 4, 'reverse scroll converges to the exact newest position');
+  assert.equal(state, 'paused');
+  assert.ok(videos.every(video => video.paused), 'settled scroll frames remain paused');
   player.seek(.1, true); player.stop(); await flush();
   assert.ok(videos.every(video => video.paused && !video.src), 'late work cannot restart motion after still mode');
   console.log('PASS: intent gate, once-per-clip buffering, rapid/reverse seek, replay, clip transition, pause, buffer cleanup, retry and cancellation.');

@@ -126,3 +126,9 @@ Pair the disclosed AI-cleaned lead photo with the original display photo, origin
 ## 2026-09-17 — Skip notification verification as a launch gate
 
 Brian selected the task to resolve provider limits and verify actual phone delivery and said it can be skipped. Defer that work and remove it from the launch blockers without representing failed/unverified delivery as success. Retain the previously approved notification policy and settings; this request does not disable résumé alerts or change visitor privacy choices. Do not send another test or schedule a retry from this decision. Physical Safari acceptance, domain preparation and final go-live approval still apply.
+
+## 2026-09-20 — Native scroll controls the entire basement journey
+
+Brian explicitly removed the vortex, control bars, automatic walking and exit suggestions. Use standard links to enter/leave, make room/stair motion follow native page position, keep the scene pinned across short phones, and expose the final CTA after the stair frame reaches the door. Do not intercept touch scrolling or force completion before accessing text. Preserve keyboard/native anchor access, an unobtrusive still-view preference, reduced-motion/data-saving defaults, and readable failure/no-JavaScript alternatives. Anchor navigation on the workshop jumps directly rather than animating through the journey.
+
+Remove the screenshot's quote and version-specific Whale explanation from the workshop; retain a project link and the complete documented Whale record. Unused portal source/media stays preserved for recovery, but its markup/script is no longer included in the shared public UI. No source inventory deletion or consolidation is performed. Preview publication remains authorized; physical Safari acceptance, production/DNS and final go-live stay separate. Notification verification remains deferred by owner.

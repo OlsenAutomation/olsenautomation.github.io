@@ -48,6 +48,12 @@ with tempfile.TemporaryDirectory(prefix='media-',dir=WORK) as temp:
   poster=temp/f'{name}-poster.png';poster_time=min(duration-.08,9.95) if name=='stairs' else min(duration/3,2)
   run('ffmpeg','-nostdin','-y','-v','error','-ss',str(poster_time),'-i',str(source),'-map','0:v:0','-frames:v','1','-update','1',str(poster))
   record['posters']=[image(poster.read_bytes(),name+'-poster',width) for width in [640,min(w,1280)]]
+  if name=='entry':
+   # The first swipe must continue from the still image, not jump back from a
+   # later promotional poster to the beginning of the room clip.
+   start=temp/'entry-scroll-start.png'
+   run('ffmpeg','-nostdin','-y','-v','error','-i',str(ROOT/'public'/record['variants'][0]['url'].lstrip('/')),'-frames:v','1','-map_metadata','-1','-update','1',str(start))
+   record['scrollPoster']=image(start.read_bytes(),'entry-scroll-start',640)
   manifest['videos'][name]=record
   if name=='stairs':
    manifest['stairs']={'fps':12,'duration':duration,'variants':[]}

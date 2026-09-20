@@ -182,7 +182,14 @@
           "width": 752,
           "height": 416
         }
-      ]
+      ],
+      "scrollPoster": {
+        "url": "/media/entry-scroll-start-640.2d65a2fc0baf.webp",
+        "bytes": 35716,
+        "sha256": "2d65a2fc0bafe9246573e4c18a6cc0294aab46eb9e03db651a92464fa504cde6",
+        "width": 640,
+        "height": 354
+      }
     },
     "workbench": {
       "duration": 10.033333,

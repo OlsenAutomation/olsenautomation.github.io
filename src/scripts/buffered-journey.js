@@ -10,7 +10,7 @@ export class BufferedJourney {
     this.slots = new Map(); this.active = 0; this.target = null;
     videos.forEach((video, index) => {
       video.playbackRate = 1.25;
-      video.addEventListener('seeked', () => this.settle(index));
+      video.addEventListener('seeked', () => this.settle(index, true));
       video.addEventListener('timeupdate', () => {
         if (index !== this.active || !this.playing || this.target !== null || video.seeking) return;
         this.progress = clamp((this.offset(index) + video.currentTime) / this.total);
@@ -76,12 +76,23 @@ export class BufferedJourney {
       this.playing = false; this.target = null; this.onState('error');
     });
   }
-  settle(index) {
+  show(index) {
+    this.videos.forEach((item, i) => { item.hidden = i !== index; });
+    this.onState('frame');
+  }
+  settle(index, decoded = false) {
     const video = this.videos[index];
     if (index !== this.active || video.readyState < 2 || video.seeking || this.target === null) return;
-    if (Math.abs(video.currentTime - this.target) > .04) { video.currentTime = this.target; return; }
+    if (Math.abs(video.currentTime - this.target) > .04) {
+      // A fast swipe can move the destination before decoding finishes. Show
+      // each completed frame, then seek only to the newest destination. Never
+      // hide the scene until a moving target has been caught exactly.
+      if (decoded) this.show(index);
+      video.currentTime = this.target;
+      return;
+    }
     this.target = null;
-    this.videos.forEach((item, i) => { item.hidden = i !== index; });
+    this.show(index);
     this.onState(this.playing ? 'playing' : 'paused');
     if (this.playing) {
       const revision = this.revision;

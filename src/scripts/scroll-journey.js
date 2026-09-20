@@ -28,7 +28,7 @@ export class ScrollSmoother {
   step(time) {
     const elapsed = this.lastTime === null ? 1000 / 60 : Math.min(64, time - this.lastTime);
     this.lastTime = time;
-    this.current += (this.target - this.current) * (1 - Math.exp(-elapsed / 95));
+    this.current += (this.target - this.current) * (1 - Math.exp(-elapsed / 55));
     if (Math.abs(this.target - this.current) < .001) this.current = this.target;
     this.player.seek(this.current);
     this.frame = this.current === this.target ? null : this.schedule(next => this.step(next));

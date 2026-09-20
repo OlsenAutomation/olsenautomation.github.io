@@ -47,7 +47,6 @@ def build():
  (DIST/'media/manifest.json').write_text(json.dumps(runtime,separators=(',',':'))+'\n')
  header=render('_includes/header.html',name=escape(site['name']),navigation=links(site['navigation']))
  footer=render('_includes/footer.html',footer_links=links(site['footer']),email=escape(site['email']),telephone=escape(site['telephone']),phone=escape(site['phone']))
- footer+=render('_includes/portal.html',portal_poster=media['videos']['portal']['posters'][-1]['url'])
  arrow='<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M14 7l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>'
  status_rows=''.join(f'<div class="status-row"><dt class="status-label tone-{escape(s["tone"])}">{escape(s["label"])}</dt><dd>{escape(s["meaning"])}</dd></div>' for s in statuses)
  common=dict(arrow=arrow,hero_picture=picture(media['images']['hero'],'Dark maker workshop with a mechanical whale, camera and floating project displays',eager=True),status_rows=status_rows)
