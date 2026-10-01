@@ -1,0 +1,1 @@
+if ('serviceWorker' in navigator) { window.addEventListener('load', () => { navigator.serviceWorker.register('/foot-explorer-sw.js', {scope:'/foot-explorer.html', updateViaCache:'none'}).catch(() => {}); }); }

@@ -47,8 +47,9 @@ def build():
     client_rules=intake_route+'*\n  X-Robots-Tag: '+NOINDEX+'\n  Cache-Control: no-store\n'
     for route in (intake_route,intake_route+'index.html'):
         client_rules+=route+'\n  ! Content-Security-Policy\n  Content-Security-Policy: '+intake_csp+'\n'
-    hidden=[*unlisted,'/404.html','/api/*','/assets/territory-execution/*','/assets/visual-ai/*','/unlisted-media/*','/Brian_Olsen_DataAnnotation_Visual_AI_Trainer_Resume.pdf']
+    hidden=['/foot-explorer.html',*unlisted,'/404.html','/api/*','/assets/territory-execution/*','/assets/visual-ai/*','/unlisted-media/*','/Brian_Olsen_DataAnnotation_Visual_AI_Trainer_Resume.pdf']
     rules+=''.join(path+'\n  X-Robots-Tag: '+NOINDEX+'\n' for path in hidden)
+    rules+='/foot-explorer-sw.js\n  Cache-Control: no-cache\n'
     rules+='/assets/*\n  Cache-Control: no-cache\n/media/*\n  Cache-Control: public, max-age=86400\n'
     (PRODUCTION/'_headers').write_text(rules+client_rules)
     (PRODUCTION/'_redirects').write_text('/ /index.html 200\n')

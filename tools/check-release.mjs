@@ -8,7 +8,7 @@ const unlisted=JSON.parse(await read('src/_data/unlisted-publication.json')).app
 const intake=JSON.parse(await read('src/_data/live-intake-preservation.json'));
 const walk=async dir=>(await Promise.all((await readdir(dir,{withFileTypes:true})).map(e=>e.isDirectory()?walk(dir+'/'+e.name):dir+'/'+e.name))).flat();
 const files=await walk('dist-production');
-assert.equal(files.filter(p=>p.endsWith('.html')).length,37);
+assert.equal(files.filter(p=>p.endsWith('.html')).length,38);
 assert.ok(!files.some(p=>/preview\/|family-card-chaos-access|family-access\.js|route-registry|_codex|apps-script|migration\//.test(p)));
 assert.ok(!files.some(p=>/\/assets\/media\.(js|css)$/.test(p)));
 for(const route of [...routes,...unlisted,'/404.html']){
@@ -42,7 +42,7 @@ assert.ok(intakeHtml.includes('<header class="site-header"'),'shared header');
 assert.ok(intakeHtml.includes('<footer class="footer"'),'shared footer');
 for(const route of routes)assert.ok(!(await read('dist-production'+route)).includes(intake.route),'public page must not link client intake');
 const candidateFiles=await walk('dist-candidate');
-assert.equal(candidateFiles.filter(p=>p.endsWith('.html')).length,36);
+assert.equal(candidateFiles.filter(p=>p.endsWith('.html')).length,37);
 assert.ok(!candidateFiles.some(p=>p.includes(intake.route)),'personalized intake excluded from public candidate');
 assert.match(await read('dist-production/robots.txt'),/Allow: \/\nSitemap: https:\/\/olsenautomation.com\/sitemap.xml/);
 assert.match(await read('dist-candidate/robots.txt'),/Disallow: \//);
@@ -83,3 +83,5 @@ const intakeRedirect=await production.fetch(new Request('https://olsenautomation
 assert.equal(intakeRedirect.status,301);assert.equal(intakeRedirect.headers.get('location'),'https://olsenautomation.com'+intake.route+'?source=test');
 assert.equal((await production.fetch(new Request('https://olsenautomation.com'+intake.route,{method:'POST'}),env)).status,405);
 console.log('PASS: 37 local production / 36 public candidate pages, 32 sitemap entries, unchanged shared page bodies, client route excluded from preview/discovery, exact intake routing/CSP, unlisted/family boundaries, silent staging and canonical redirects. No external messages sent.');
+
+const foot=await read('dist-production/foot-explorer.html');assert.match(foot, /name="robots" content="noindex,nofollow"/);assert.match(foot,/manifest.webmanifest/);assert.ok(!foot.includes('drive.google.com'));assert.ok(!sitemapRoutes.includes('/foot-explorer.html'));assert.ok(files.includes('dist-production/foot-explorer-sw.js'));

@@ -1,0 +1,25 @@
+{
+  "id": "/foot-explorer.html",
+  "name": "Runner\u2019s Foot \u2014 Growing Runners",
+  "short_name": "Runner\u2019s Foot",
+  "description": "A foot and growing-body guide for grades 6\u20138 cross-country families.",
+  "start_url": "/foot-explorer.html",
+  "scope": "/foot-explorer.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#173e32",
+  "icons": [
+    {
+      "src": "/assets/foot-explorer/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/foot-explorer/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
