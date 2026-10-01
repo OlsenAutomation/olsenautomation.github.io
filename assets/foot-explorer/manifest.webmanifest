@@ -1,8 +1,8 @@
 {
   "id": "/foot-explorer.html",
-  "name": "Runner\u2019s Foot \u2014 Growing Runners",
-  "short_name": "Runner\u2019s Foot",
-  "description": "A foot and growing-body guide for grades 6\u20138 cross-country families.",
+  "name": "Young Runners \u2014 Foot & Ankle Guide",
+  "short_name": "Foot & Ankle",
+  "description": "A parent guide to foot and ankle pain, strength and support for grades 6\u20138 cross-country runners.",
   "start_url": "/foot-explorer.html",
   "scope": "/foot-explorer.html",
   "display": "standalone",
