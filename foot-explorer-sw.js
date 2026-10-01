@@ -1,5 +1,5 @@
-const CACHE='runner-foot-2cf5ed852ccb';
-const FILES=["/foot-explorer.html", "/assets/foot-explorer/foot-side-BbNqi4hR.jpg", "/assets/foot-explorer/foot-sole-hUS9YW2M.jpg", "/assets/foot-explorer/foot-top-DPMYYN6a.jpg", "/assets/foot-explorer/icon-192.png", "/assets/foot-explorer/icon-512.png", "/assets/foot-explorer/index-CYQ9sKqw.css", "/assets/foot-explorer/index-CmnNEwo4.js", "/assets/foot-explorer/install.js", "/assets/foot-explorer/manifest.webmanifest"];
+const CACHE='runner-foot-7c72909487c4';
+const FILES=["/foot-explorer.html", "/assets/foot-explorer/foot-side-BbNqi4hR.jpg", "/assets/foot-explorer/foot-sole-hUS9YW2M.jpg", "/assets/foot-explorer/foot-top-DPMYYN6a.jpg", "/assets/foot-explorer/icon-192.png", "/assets/foot-explorer/icon-512.png", "/assets/foot-explorer/index-B6c5_0n1.js", "/assets/foot-explorer/index-B9fG16QP.css", "/assets/foot-explorer/install.js", "/assets/foot-explorer/manifest.webmanifest"];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(FILES)).then(()=>self.skipWaiting()));});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('runner-foot-')&&k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()));});
 self.addEventListener('fetch',e=>{
