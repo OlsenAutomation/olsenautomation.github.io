@@ -40,6 +40,10 @@ def build():
     # This existing client route is prepared only in the local production artifact.
     # It is deliberately absent from the shared preview, sitemap and public candidate.
     intake_route=preserve_live_intake(PRODUCTION)
+    # Direct-link learning projects are separate from business navigation and sitemap.
+    learning=ROOT/'learn'
+    if learning.exists():
+        shutil.copytree(learning,PRODUCTION/'learn')
     headers=json.loads((ROOT/'src/_data/production-headers.json').read_text())
     intake_csp=headers['Content-Security-Policy'].replace("form-action 'none'","form-action https://script.google.com https://script.googleusercontent.com; frame-src https://script.google.com https://*.googleusercontent.com")
     rules='/*\n'+''.join(f'  {k}: {v}\n' for k,v in headers.items())
@@ -47,7 +51,7 @@ def build():
     client_rules=intake_route+'*\n  X-Robots-Tag: '+NOINDEX+'\n  Cache-Control: no-store\n'
     for route in (intake_route,intake_route+'index.html'):
         client_rules+=route+'\n  ! Content-Security-Policy\n  Content-Security-Policy: '+intake_csp+'\n'
-    hidden=['/foot-explorer.html',*unlisted,'/404.html','/api/*','/assets/territory-execution/*','/assets/visual-ai/*','/unlisted-media/*','/Brian_Olsen_DataAnnotation_Visual_AI_Trainer_Resume.pdf']
+    hidden=['/learn/*','/foot-explorer.html',*unlisted,'/404.html','/api/*','/assets/territory-execution/*','/assets/visual-ai/*','/unlisted-media/*','/Brian_Olsen_DataAnnotation_Visual_AI_Trainer_Resume.pdf']
     rules+=''.join(path+'\n  X-Robots-Tag: '+NOINDEX+'\n' for path in hidden)
     guide_csp=headers['Content-Security-Policy'].replace("script-src 'self'","script-src 'self' https://static.cloudflareinsights.com").replace("connect-src 'self'","connect-src 'self' https://cloudflareinsights.com")
     rules+='/foot-explorer.html\n  ! Content-Security-Policy\n  Content-Security-Policy: '+guide_csp+'\n'
