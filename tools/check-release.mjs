@@ -8,7 +8,8 @@ const unlisted=JSON.parse(await read('src/_data/unlisted-publication.json')).app
 const intake=JSON.parse(await read('src/_data/live-intake-preservation.json'));
 const walk=async dir=>(await Promise.all((await readdir(dir,{withFileTypes:true})).map(e=>e.isDirectory()?walk(dir+'/'+e.name):dir+'/'+e.name))).flat();
 const files=await walk('dist-production');
-assert.equal(files.filter(p=>p.endsWith('.html')).length,38);
+const learningPages=(await walk('dist-production/learn')).filter(p=>p.endsWith('.html'));
+assert.equal(files.filter(p=>p.endsWith('.html')).length,38+learningPages.length);
 assert.ok(!files.some(p=>/preview\/|family-card-chaos-access|family-access\.js|route-registry|_codex|apps-script|migration\//.test(p)));
 assert.ok(!files.some(p=>/\/assets\/media\.(js|css)$/.test(p)));
 for(const route of [...routes,...unlisted,'/404.html']){
@@ -29,7 +30,19 @@ for(const route of [...routes,...unlisted,'/404.html']){
   const normalize=s=>s.replace(/data-site-mode="(?:production|candidate)"/g,'MODE').replace(/<meta\b(?=[^>]*\bname=["']robots["'])[^>]*>/g,'ROBOTS');
   assert.equal(normalize(prod),normalize(stage),route+' equivalent page body');
 }
+for(const path of learningPages){
+  const prod=await read(path),stage=await read(path.replace('dist-production/','dist-candidate/'));
+  assert.match(prod,/<meta name="robots" content="noindex/);
+  assert.match(stage,/<meta name="robots" content="noindex/);
+  for(const tag of prod.matchAll(/<(?:link|script)\b[^>]*>/gi)){
+    const resource=tag[0].match(/\b(?:href|src)=["']([^"']+)["']/i)?.[1];if(!resource)continue;
+    const url=new URL(resource,'https://olsenautomation.com/'+path.replace('dist-production/',''));
+    assert.equal(url.origin,'https://olsenautomation.com');
+    assert.ok(files.includes('dist-production'+url.pathname),'learning asset '+url.pathname);
+  }
+}
 const sitemap=await read('dist-production/sitemap.xml');assert.equal((sitemap.match(/<loc>/g)||[]).length,32);
+assert.ok(!sitemap.includes('/learn/'),'learning hub is absent from business sitemap');
 const sitemapRoutes=[...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map(m=>new URL(m[1]).pathname);
 for(const route of [...unlisted,'/404.html','/preview/','/family-card-chaos-access.html'])assert.ok(!sitemapRoutes.includes(route));
 assert.ok(!sitemap.includes(intake.route),'client intake must not appear in sitemap');
@@ -42,7 +55,7 @@ assert.ok(intakeHtml.includes('<header class="site-header"'),'shared header');
 assert.ok(intakeHtml.includes('<footer class="footer"'),'shared footer');
 for(const route of routes)assert.ok(!(await read('dist-production'+route)).includes(intake.route),'public page must not link client intake');
 const candidateFiles=await walk('dist-candidate');
-assert.equal(candidateFiles.filter(p=>p.endsWith('.html')).length,37);
+assert.equal(candidateFiles.filter(p=>p.endsWith('.html')).length,37+learningPages.length);
 assert.ok(!candidateFiles.some(p=>p.includes(intake.route)),'personalized intake excluded from public candidate');
 assert.match(await read('dist-production/robots.txt'),/Allow: \/\nSitemap: https:\/\/olsenautomation.com\/sitemap.xml/);
 assert.match(await read('dist-candidate/robots.txt'),/Disallow: \//);
@@ -82,6 +95,6 @@ for(const path of [intake.route,intake.route+'index.html',intake.route+'intake.j
 const intakeRedirect=await production.fetch(new Request('https://olsenautomation.com'+intake.route.slice(0,-1)+'?source=test'),env);
 assert.equal(intakeRedirect.status,301);assert.equal(intakeRedirect.headers.get('location'),'https://olsenautomation.com'+intake.route+'?source=test');
 assert.equal((await production.fetch(new Request('https://olsenautomation.com'+intake.route,{method:'POST'}),env)).status,405);
-console.log('PASS: 37 local production / 36 public candidate pages, 32 sitemap entries, unchanged shared page bodies, client route excluded from preview/discovery, exact intake routing/CSP, unlisted/family boundaries, silent staging and canonical redirects. No external messages sent.');
+console.log(`PASS: ${files.filter(p=>p.endsWith('.html')).length} production / ${candidateFiles.filter(p=>p.endsWith('.html')).length} candidate pages, 32 sitemap entries; learning metadata/assets, existing shared bodies, intake boundaries, silent staging and canonical redirects. No external messages sent.`);
 
 const foot=await read('dist-production/foot-explorer.html');assert.match(foot, /name="robots" content="noindex,nofollow"/);assert.match(foot,/manifest.webmanifest/);assert.ok(!foot.includes('drive.google.com'));assert.ok(!sitemapRoutes.includes('/foot-explorer.html'));assert.ok(files.includes('dist-production/foot-explorer-sw.js'));
