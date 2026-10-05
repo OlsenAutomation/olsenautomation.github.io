@@ -19,6 +19,20 @@ async function serve(request,env){
  if(url.hostname==='www.olsenautomation.com'){
   url.hostname='olsenautomation.com';return Response.redirect(url,301);
  }
+ if(url.pathname==='/learn'||url.pathname==='/learn/scale-works'){
+  url.pathname+='/';return Response.redirect(url,301);
+ }
+ if(url.pathname.startsWith('/learn/')){
+  const headers=new Headers(security);
+  headers.set('X-Robots-Tag','noindex, nofollow, noarchive, nosnippet');
+  headers.set('Cache-Control','no-store');
+  if(!['GET','HEAD'].includes(request.method))return new Response('Method not allowed',{status:405,headers});
+  if(url.pathname.endsWith('/'))url.pathname+='index.html';
+  const response=await env.ASSETS.fetch(new Request(url,request));
+  const merged=new Headers(response.headers);
+  for(const [key,value] of headers)merged.set(key,value);
+  return new Response(response.body,{status:response.status,headers:merged});
+ }
  if(url.pathname==='/api/visit')return visitNotification(request,env);
  if(url.pathname===intake.route.slice(0,-1)){
   url.pathname=intake.route;return Response.redirect(url,301);
