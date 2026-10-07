@@ -47,3 +47,11 @@ keeps entered answers visible and offers retry/contact Brian; it does not claim
 success. Brian must review/archive storage before capacity. No automatic retention
 or expanded storage has been added. A rare send-success/final-marker-write-failure
 can resend an email on retry; the reference identifies duplicates.
+
+The optional tree comparison reuses the existing saved original-logo crop and
+proposed transparent raster concept. It is separate from the ten unchanged
+required items and makes no automatic Wix/site change. No choice is preselected.
+Version v2 adds a validated `tree` object (choice and optional notes) to private
+receipts and the complete Brian email. Version v1 remains accepted with its exact
+previous canonical receipt hash, preserving duplicate behavior. Health advertises
+both supported versions while retaining the legacy health marker.

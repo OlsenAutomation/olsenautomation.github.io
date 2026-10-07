@@ -1,7 +1,7 @@
 const items = await fetch('items.json').then(r => r.json());
 const $ = id => document.getElementById(id);
 const labels = {approve:'Approve as written',change:'Needs a change',discuss:'Not sure — discuss with Brian'};
-const VERSION = 'helix-2026-10-07-v1', KEY = 'oa-helix-draft-v1';
+const VERSION = 'helix-2026-10-07-v2', KEY = 'oa-helix-draft-v1';
 let draftId = crypto.randomUUID(), pending = null, busy = false, ready = false;
 const startedAt = Date.now();
 for (const item of items) {
@@ -25,7 +25,10 @@ function updateNotes(id) {
   $(`note-${id}`).required = value === 'change';
   document.querySelector(`label[for="note-${id}"]`).textContent = value === 'change' ? 'What needs to change? (required)' : 'What would you like to discuss? (optional)';
 }
-function answers() { return {name:$('name').value.trim(),email:$('email').value.trim(),extra:$('extra').value.trim(),answers:items.map(item=>({id:item.id,choice:choice(item.id),note:choice(item.id)==='approve'?'':$(`note-${item.id}`).value.trim()}))}; }
+const treeLabels={original:'Keep the original',new:'Use the new version',discuss:'Discuss changes'};
+const treeChoice=()=>document.querySelector('[name="tree-choice"]:checked')?.value||'';
+$('tree').addEventListener('change',()=>{$('tree-notes').hidden=!treeChoice();});
+function answers() { return {tree:{choice:treeChoice(),note:treeChoice()?$('tree-note').value.trim():''},name:$('name').value.trim(),email:$('email').value.trim(),extra:$('extra').value.trim(),answers:items.map(item=>({id:item.id,choice:choice(item.id),note:choice(item.id)==='approve'?'':$(`note-${item.id}`).value.trim()}))}; }
 function save() {
   if (!$('remember').checked) return;
   try { localStorage.setItem(KEY,JSON.stringify({version:VERSION,draftId,values:answers()})); }
@@ -35,9 +38,10 @@ try { $('resume').hidden = !localStorage.getItem(KEY); } catch {}
 $('remember').addEventListener('change',()=>{if($('remember').checked)save();else{try{localStorage.removeItem(KEY);}catch{}$('resume').hidden=true;}});
 $('resume').addEventListener('click',()=>{
   try {
-    const data=JSON.parse(localStorage.getItem(KEY)); if(data.version!==VERSION)throw Error();
+    const data=JSON.parse(localStorage.getItem(KEY)); if(!['helix-2026-10-07-v1',VERSION].includes(data.version))throw Error();
     draftId=data.draftId; const v=data.values; $('name').value=v.name; $('email').value=v.email; $('extra').value=v.extra;
     for(const a of v.answers){const radio=document.querySelector(`[name="choice-${a.id}"][value="${a.choice}"]`);if(radio)radio.checked=true;$(`note-${a.id}`).value=a.note;updateNotes(a.id);}
+    if(v.tree?.choice){const radio=document.querySelector(`[name="tree-choice"][value="${v.tree.choice}"]`);if(radio)radio.checked=true;$('tree-note').value=v.tree.note;$('tree-notes').hidden=false;}
     $('remember').checked=true; $('resume').hidden=true; $('status').textContent='Saved draft restored. Nothing has been sent.';
   } catch { $('status').textContent='The saved draft could not be restored. Please complete this form.'; }
 });
@@ -49,6 +53,7 @@ $('feedback').addEventListener('submit',event=>{
   $('review-content').replaceChildren();
   const contact=document.createElement('p');contact.textContent=`${data.name} · ${data.email}`;$('review-content').append(contact);
   for(const item of items){const a=data.answers.find(a=>a.id===item.id),row=document.createElement('article'),h=document.createElement('h3'),p=document.createElement('p'),note=document.createElement('p');h.textContent=`${item.id}. ${item.title}`;p.textContent=item.text;note.textContent=labels[a.choice]+(a.note?'\n'+a.note:'');row.append(h,p,note);$('review-content').append(row);}
+  const treeRow=document.createElement('article'),treeHeading=document.createElement('h3'),treeText=document.createElement('p');treeHeading.textContent='Optional tree redesign';treeText.textContent=(treeLabels[data.tree.choice]||'No preference selected')+(data.tree.note?'\n'+data.tree.note:'');treeRow.append(treeHeading,treeText);$('review-content').append(treeRow);
   if(data.extra){const p=document.createElement('p');p.textContent='Anything else / materials to send:\n'+data.extra;$('review-content').append(p);}
   $('edit').hidden=true;$('summary').hidden=false;$('summary').focus();$('status').textContent='Review complete. Nothing has been sent yet.';
 });

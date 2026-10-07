@@ -4,8 +4,8 @@ const HELIX_ITEMS = [{"id": 1, "title": "Contact details and hours", "text": "Us
 function handleHelix_(data) {
   const result = {accepted:false,stored:false,emailed:false,request_id:String(data.request_id || '')};
   try {
-    if(data.version !== 'helix-2026-10-07-v1' || !/^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/i.test(result.request_id))throw Error('Unsupported form.');
-    if(Object.keys(data).sort().join(',')!=='answers,email,extra,intake_type,name,request_id,started_at,version')throw Error('Unsupported fields.');
+    if(!['helix-2026-10-07-v1','helix-2026-10-07-v2'].includes(data.version) || !/^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/i.test(result.request_id))throw Error('Unsupported form.');
+    if(Object.keys(data).sort().join(',')!==(data.version==='helix-2026-10-07-v2'?'answers,email,extra,intake_type,name,request_id,started_at,tree,version':'answers,email,extra,intake_type,name,request_id,started_at,version'))throw Error('Unsupported fields.');
     validateFormAge_(Number(data.started_at));
     if(typeof data.name!=='string'||!data.name.trim()||data.name.length>120||typeof data.email!=='string'||data.email.length>254)throw Error('Complete contact information.');
     const email=cleanEmail_(data.email);
@@ -13,7 +13,13 @@ function handleHelix_(data) {
     data.answers.forEach(function(a,i){
       if(!a||Object.keys(a).sort().join(',')!=='choice,id,note'||a.id!==i+1||!['approve','change','discuss'].includes(a.choice)||typeof a.note!=='string'||a.note.length>500||(a.choice==='change'&&!a.note.trim())||(a.choice==='approve'&&a.note!==''))throw Error('Check the checklist answers.');
     });
-    const canonical=JSON.stringify({version:data.version,name:data.name,email:data.email,answers:data.answers,extra:data.extra});
+    const normalized={version:data.version,name:data.name,email:data.email,answers:data.answers,extra:data.extra};
+    if(data.version==='helix-2026-10-07-v2'){
+      const t=data.tree;
+      if(!t||Object.keys(t).sort().join(',')!=='choice,note'||!['','original','new','discuss'].includes(t.choice)||typeof t.note!=='string'||t.note.length>500||(!t.choice&&t.note!==''))throw Error('Check the optional tree preference.');
+      normalized.tree=t;
+    }
+    const canonical=JSON.stringify(normalized);
     if(Utilities.newBlob(canonical).getBytes().length>7600)throw Error('Please shorten your notes.');
     const hash=digest_(canonical),key='helix:'+result.request_id,lock=LockService.getScriptLock();lock.waitLock(10000);
     try {
@@ -35,6 +41,7 @@ function handleHelix_(data) {
       const labels={approve:'Approve as written',change:'Needs a change',discuss:'Not sure — discuss with Brian'};
       const lines=['Helix content confirmation — '+(data.name.indexOf('[TEST]')>=0?'TEST SUBMISSION':'client feedback'),'','From: '+cleanSingleLine_(data.name,120),'Reply email: '+email,'Receipt: '+result.request_id,'Received: '+record.received_at,'Checklist: '+data.version,''];
       HELIX_ITEMS.forEach(function(item,i){const a=data.answers[i];lines.push(item.id+'. '+item.title,item.text,'ANSWER: '+labels[a.choice],a.note?'NOTE: '+a.note:'','');});
+      if(data.version==='helix-2026-10-07-v2'){const treeLabels={original:'Keep the original',new:'Use the new version',discuss:'Discuss changes'};lines.push('Optional tree redesign:',treeLabels[data.tree.choice]||'No preference selected',data.tree.note?'NOTE: '+data.tree.note:'','Original remains on the preview. This preference does not automatically change the website.','');}
       lines.push('Anything else / materials to send:',data.extra||'(none)','', 'Content feedback only. Not a signed contract, payment authorization, or approval to launch. Price and scope remain separate.');
       cache.put(rateKey,String(count+1),3600);
       MailApp.sendEmail('brian@olsenautomation.com','Helix content confirmation'+(data.name.indexOf('[TEST]')>=0?' — TEST':'')+' — '+result.request_id,lines.join('\n'),{name:'Olsen Automation',replyTo:email});

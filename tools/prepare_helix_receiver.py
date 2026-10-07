@@ -13,7 +13,7 @@ def compose(base):
     health="service: 'Olsen Automation AI Visibility Intake',"
     if base.count(marker)!=1 or base.count(health)!=1:raise ValueError('Unknown receiver contract; review current source')
     dispatch="\n  try { const h=JSON.parse(String(e && e.parameter && e.parameter.payload || '{}')); if(h.intake_type === 'olsen_automation_helix_feedback')return handleHelix_(h); } catch(_) {}"
-    version="\n    helix_version: 'helix-2026-10-07-v1',"
+    version="\n    helix_version: 'helix-2026-10-07-v1',\n    helix_versions: ['helix-2026-10-07-v1','helix-2026-10-07-v2'],"
     patched=base.replace(marker,marker+dispatch).replace(health,health+version)
     assert patched.replace(dispatch,'').replace(version,'')==base
     return patched+'\n'+(ROOT/'src/receivers/helix.gs').read_text()
