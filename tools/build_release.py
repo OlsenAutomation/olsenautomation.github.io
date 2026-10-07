@@ -46,6 +46,8 @@ def build():
         shutil.copytree(learning,PRODUCTION/'learn')
     # Public, direct-link setup instructions; no client-specific assets or account evidence.
     shutil.copytree(ROOT/'client-setup',PRODUCTION/'client-setup',ignore=shutil.ignore_patterns('README.md'))
+    # Direct-link blank business checklist; private answers never enter assets.
+    shutil.copytree(ROOT/'feedback/helix',PRODUCTION/'feedback/helix',ignore=shutil.ignore_patterns('README.md'))
     headers=json.loads((ROOT/'src/_data/production-headers.json').read_text())
     intake_csp=headers['Content-Security-Policy'].replace("form-action 'none'","form-action https://script.google.com https://script.googleusercontent.com; frame-src https://script.google.com https://*.googleusercontent.com")
     rules='/*\n'+''.join(f'  {k}: {v}\n' for k,v in headers.items())
@@ -53,7 +55,7 @@ def build():
     client_rules=intake_route+'*\n  X-Robots-Tag: '+NOINDEX+'\n  Cache-Control: no-store\n'
     for route in (intake_route,intake_route+'index.html'):
         client_rules+=route+'\n  ! Content-Security-Policy\n  Content-Security-Policy: '+intake_csp+'\n'
-    hidden=['/client-setup/*','/learn/*','/foot-explorer.html',*unlisted,'/404.html','/api/*','/assets/territory-execution/*','/assets/visual-ai/*','/unlisted-media/*','/Brian_Olsen_DataAnnotation_Visual_AI_Trainer_Resume.pdf']
+    hidden=['/feedback/helix/*','/client-setup/*','/learn/*','/foot-explorer.html',*unlisted,'/404.html','/api/*','/assets/territory-execution/*','/assets/visual-ai/*','/unlisted-media/*','/Brian_Olsen_DataAnnotation_Visual_AI_Trainer_Resume.pdf']
     rules+=''.join(path+'\n  X-Robots-Tag: '+NOINDEX+'\n' for path in hidden)
     guide_csp=headers['Content-Security-Policy'].replace("script-src 'self'","script-src 'self' https://static.cloudflareinsights.com").replace("connect-src 'self'","connect-src 'self' https://cloudflareinsights.com")
     rules+='/foot-explorer.html\n  ! Content-Security-Policy\n  Content-Security-Policy: '+guide_csp+'\n'

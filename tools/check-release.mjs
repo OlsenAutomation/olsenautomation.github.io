@@ -9,7 +9,7 @@ const intake=JSON.parse(await read('src/_data/live-intake-preservation.json'));
 const walk=async dir=>(await Promise.all((await readdir(dir,{withFileTypes:true})).map(e=>e.isDirectory()?walk(dir+'/'+e.name):dir+'/'+e.name))).flat();
 const files=await walk('dist-production');
 const learningPages=(await walk('dist-production/learn')).filter(p=>p.endsWith('.html'));
-assert.equal(files.filter(p=>p.endsWith('.html')).length,39+learningPages.length);
+assert.equal(files.filter(p=>p.endsWith('.html')).length,40+learningPages.length);
 assert.ok(!files.some(p=>/preview\/|family-card-chaos-access|family-access\.js|route-registry|_codex|apps-script|migration\//.test(p)));
 assert.ok(!files.some(p=>/\/assets\/media\.(js|css)$/.test(p)));
 for(const route of [...routes,...unlisted,'/404.html']){
@@ -55,7 +55,7 @@ assert.ok(intakeHtml.includes('<header class="site-header"'),'shared header');
 assert.ok(intakeHtml.includes('<footer class="footer"'),'shared footer');
 for(const route of routes)assert.ok(!(await read('dist-production'+route)).includes(intake.route),'public page must not link client intake');
 const candidateFiles=await walk('dist-candidate');
-assert.equal(candidateFiles.filter(p=>p.endsWith('.html')).length,38+learningPages.length);
+assert.equal(candidateFiles.filter(p=>p.endsWith('.html')).length,39+learningPages.length);
 assert.ok(!candidateFiles.some(p=>p.includes(intake.route)),'personalized intake excluded from public candidate');
 assert.match(await read('dist-production/robots.txt'),/Allow: \/\nSitemap: https:\/\/olsenautomation.com\/sitemap.xml/);
 assert.match(await read('dist-candidate/robots.txt'),/Disallow: \//);
@@ -105,3 +105,15 @@ assert.ok(!sitemap.includes("client-setup"));
 assert.ok(!/Helix|Arney|Private review|account-email-evidence/i.test(setup));
 for(const route of routes)assert.ok(!(await read("dist-production"+route)).includes("client-setup"));
 for(const method of ["GET","POST"]){const response=await production.fetch(new Request("https://olsenautomation.com/client-setup/",{method}),{ASSETS:{fetch:async()=>new Response("setup",{headers:{"Content-Type":"text/html"}})}});assert.equal(response.status,method==="GET"?200:405);assert.match(response.headers.get("X-Robots-Tag"),/noindex/);}
+
+const helix=await read('dist-production/feedback/helix/index.html');
+assert.match(helix,/<meta name="robots" content="noindex,nofollow">/);
+assert.ok(!sitemap.includes('/feedback/helix/'),'feedback stays out of the sitemap');
+for(const file of ['index.html','form.js','form.css','items.json'])assert.equal(await read('dist-production/feedback/helix/'+file),await read('feedback/helix/'+file),'preserve exact deployed form asset '+file);
+assert.ok(!files.includes('dist-production/feedback/helix/README.md'));
+assert.equal(JSON.parse(await read('dist-production/feedback/helix/items.json')).length,10);
+for(const method of ['GET','POST']){
+ const response=await production.fetch(new Request('https://olsenautomation.com/feedback/helix/',{method}),{ASSETS:{fetch:async()=>new Response('synthetic',{headers:{'Content-Type':'text/html'}})}});
+ assert.equal(response.status,method==='GET'?200:405);assert.match(response.headers.get('x-robots-tag'),/noindex/);assert.equal(response.headers.get('cache-control'),'no-store, no-transform');
+}
+console.log('PASS: four exact Helix release assets, ten source items, no README/sitemap exposure, private form headers and POST rejection. No external submissions.');

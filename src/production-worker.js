@@ -1,3 +1,4 @@
+import {feedback} from './helix-feedback.js';
 import manifest from '../dist-production/media/manifest.json' with {type:'json'};
 import security from './_data/production-headers.json' with {type:'json'};
 import {mediaWorker} from './media-worker.js';
@@ -18,6 +19,18 @@ async function serve(request,env){
  const url=new URL(request.url);
  if(url.hostname==='www.olsenautomation.com'){
   url.hostname='olsenautomation.com';return Response.redirect(url,301);
+ }
+ if(url.pathname==='/api/helix-feedback')return feedback(request);
+ if(url.pathname==='/feedback/helix'){url.pathname+='/';return Response.redirect(url,301);}
+ if(url.pathname.startsWith('/feedback/helix/')){
+  const headers=new Headers(security);
+  headers.set('X-Robots-Tag','noindex,nofollow,noarchive,nosnippet');
+  headers.set('Cache-Control','no-store, no-transform');
+  if(!['GET','HEAD'].includes(request.method))return new Response('Method not allowed',{status:405,headers});
+  if(url.pathname==='/feedback/helix/')url.pathname+='index.html';
+  const response=await env.ASSETS.fetch(new Request(url,request));
+  const merged=new Headers(response.headers);for(const [k,v]of headers)merged.set(k,v);
+  return new Response(response.body,{status:response.status,headers:merged});
  }
  if(url.pathname==='/client-setup'){
   url.pathname+='/';return Response.redirect(url,301);
