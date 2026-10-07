@@ -122,7 +122,7 @@ for route in approved_unlisted:
 for row in csv.DictReader((ROOT/'migration/DERIVATIVE_ASSETS.csv').open()):check(hashlib.sha256((PRIVATE/row['replacement'].lstrip('/')).read_bytes()).hexdigest()==row['sha256'],'Embedded extraction changed')
 for p in DIST.rglob('*.js'):
  for relative in re.findall(r'(?:from\s*|import\s*)[\"\'](\.[^\"\']+)[\"\']',p.read_text()):check((p.parent/relative).is_file(),f'Broken module import: {p.name} {relative}')
-check(subprocess.check_output(['git','branch','--show-current'],cwd=ROOT,text=True).strip() in {'site-redesign-v2','feature/foot-explorer'},'Wrong branch')
+check(subprocess.check_output(['git','branch','--show-current'],cwd=ROOT,text=True).strip() in {'site-redesign-v2','feature/foot-explorer','feature/client-setup-guide'},'Wrong branch')
 check(not subprocess.check_output(['git','ls-files','_codex_handoff'],cwd=ROOT),'Tracked handoff')
 check(subprocess.run(['git','check-ignore','-q','_codex_handoff'],cwd=ROOT).returncode==0,'Handoff not ignored')
 manifest=json.loads((ROOT/'public/media/manifest.json').read_text())
